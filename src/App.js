@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { firestore } from './firebase';
 
 function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+  const [data, setData] = useState();
+  useEffect(() => {
+    const test = firestore.collection('test');
+    test
+      .doc('test_item')
+      .get()
+      .then(doc => {
+        setData(doc.data().food);
+      });
+  }, []);
+  return <div className="App">{data}</div>;
 }
 
 export default App;

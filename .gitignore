@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .gitmessage.txt
+firebase.js
 
 # testing
 /coverage
