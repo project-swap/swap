@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { firestore } from './firebase';
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
+import NavBar from './components/common/navBar';
+
+const GlobalStyles = createGlobalStyle`
+    ${reset}
+`;
 
 function App() {
-  const [data, setData] = useState();
-  useEffect(() => {
-    const test = firestore.collection('test');
-    test
-      .doc('test_item')
-      .get()
-      .then(doc => {
-        setData(doc.data().food);
-      });
-  }, []);
-  return <div className="App">{data}</div>;
+  return (
+    <div className="App">
+      <GlobalStyles />
+      <NavBar />
+    </div>
+  );
 }
 
 export default App;
