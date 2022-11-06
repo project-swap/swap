@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // image,icon, font-style
-import Logo from '../../assets/logo/android-icon-48x48.png';
+import Logo from '../../assets/images/logo/android-icon-48x48.png';
 import { linkStyle } from '../../styles/linkStyle';
 import { GoLocation } from 'react-icons/go';
 import { ImSearch } from 'react-icons/im';
