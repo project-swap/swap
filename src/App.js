@@ -1,7 +1,9 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import reset from 'styled-reset';
-import NavBar from './components/common/navBar';
+import Main from './pages/Main.js';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -10,8 +12,12 @@ const GlobalStyles = createGlobalStyle`
 function App() {
   return (
     <div className="App">
-      <GlobalStyles />
-      <NavBar />
+      <BrowserRouter>
+        <GlobalStyles />
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
