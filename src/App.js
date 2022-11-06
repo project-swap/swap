@@ -6,7 +6,9 @@ import Login from './pages/Login';
 import Mypage from './pages/Mypage';
 import NotFound from './pages/NotFound';
 import Pages from './pages/Pages';
+import RegisterProduct from './pages/RegisterProduct';
 import SignUp from './pages/SignUp';
+import Swap from './pages/Swap';
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,8 @@ function App() {
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/swap" element={<Swap />} />
+            <Route path="/register" element={<RegisterProduct />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
