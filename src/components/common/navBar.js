@@ -1,5 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+// image,icon, font-style
+import Logo from '../../assets/logo/android-icon-48x48.png';
+import { linkStyle } from '../../styles/linkStyle';
+import { GoLocation } from 'react-icons/go';
+import { ImSearch } from 'react-icons/im';
 
 const NavContainer = styled.nav``;
 const TopNavBar = styled.div`
@@ -14,15 +21,15 @@ const MainNavBar = styled.div`
   align-items: center;
   width: 100%;
   height: 5rem;
-  border-top: solid black 1px;
-  border-bottom: solid black 1px;
+  border-top: solid black 0.1rem;
+  border-bottom: solid black 0.1rem;
 `;
-const MainLogo = styled.img`
-  width: 3.125rem;
-  height: 3.125rem;
+const MainLogo = styled.div`
+  width: 3rem;
+  height: 3rem;
   margin-left: 6.25rem;
-  border: solid black 1px;
-  border-radius: 50%;
+  background-image: url(${Logo});
+  border: none;
 `;
 const MainLinkBtnContainer = styled.div`
   display: flex;
@@ -30,30 +37,19 @@ const MainLinkBtnContainer = styled.div`
 `;
 const MainLinkBtn = styled.div`
   font-size: 0.875rem;
-  cursor: pointer;
+  text-decoration: none;
 `;
 
-const LocationBox = styled.button`
+const LocationBox = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 22.5rem;
   height: 2.5rem;
-  border: solid black 1px;
+  border: solid black 0.1rem;
   border-radius: 1.25rem;
 `;
-const LocationIcon = styled.img`
-  width: 1rem;
-  height: 1.25rem;
-  margin-right: 1.25rem;
-  background-color: orange;
-`;
-const SearchIcon = styled.div`
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-right: 6.5rem;
-  background-color: green;
-`;
+
 const TopBtnContainer = styled.div`
   display: flex;
   align-items: center;
@@ -68,7 +64,6 @@ const LoginSuccessIconContainer = styled.div`
   width: 9.375rem;
   height: 2rem;
   gap: 3rem;
-  background-color: grey;
 `;
 
 function NavBar() {
@@ -82,18 +77,36 @@ function NavBar() {
           </TopBtnContainer>
         </TopNavBar>
         <MainNavBar>
-          <MainLogo />
+          <Link to="/">
+            <MainLogo />
+          </Link>
           <MainLinkBtnContainer>
-            <MainLinkBtn>교환/나눔</MainLinkBtn>
-            <MainLinkBtn>커뮤니티</MainLinkBtn>
+            <Link to="/" style={linkStyle}>
+              <MainLinkBtn>교환/나눔</MainLinkBtn>
+            </Link>
+            <Link to="/" style={linkStyle}>
+              <MainLinkBtn>커뮤니티</MainLinkBtn>
+            </Link>
           </MainLinkBtnContainer>
           <LocationBox>
-            <LocationIcon />
+            <GoLocation
+              style={{
+                width: '1rem',
+                height: '1.25rem',
+                marginRight: '1.25rem',
+              }}
+            />
           </LocationBox>
           <LoginSuccessIconContainer>
             {/*로그인 성공 시 안쪽에 컴포넌트 추가 생성*/}
           </LoginSuccessIconContainer>
-          <SearchIcon />
+          <ImSearch
+            style={{
+              width: '1.25rem',
+              height: '1.25rem',
+              marginRight: '6.5rem ',
+            }}
+          />
         </MainNavBar>
       </NavContainer>
     </>
