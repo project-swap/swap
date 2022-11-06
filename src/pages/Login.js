@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import NavBar from '../components/common/NavBar';
 import { Link } from 'react-router-dom';
 import { IoClose } from 'react-icons/io5';
 import { TbBrandTwitter } from 'react-icons/tb';
 import { FcGoogle } from 'react-icons/fc';
 
 const LoginPage = styled.section`
-  width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  margin-top: 10rem;
+  position: relative;
   box-sizing: border-box;
+  z-index: 2;
 `;
 
 const LoginBox = styled.section`
@@ -54,9 +57,20 @@ const LoginButton = styled.button`
   cursor: pointer;
 `;
 
+const BackgroundBlur = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+`;
+
 const Login = () => {
   return (
     <>
+      <NavBar />
       <LoginPage>
         <LoginBox>
           <Link to="/">
@@ -85,6 +99,7 @@ const Login = () => {
           </Link>
         </LoginBox>
       </LoginPage>
+      <BackgroundBlur />
     </>
   );
 };
