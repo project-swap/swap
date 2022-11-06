@@ -5,11 +5,6 @@ import { IoClose } from 'react-icons/io5';
 import { TbBrandTwitter } from 'react-icons/tb';
 import { FcGoogle } from 'react-icons/fc';
 
-// const Div = styled.div`
-//   font-size: 20px;
-//   color: red;
-// `;
-
 const LoginPage = styled.section`
   width: 100%;
   height: 100vh;
@@ -33,7 +28,7 @@ const LoginBox = styled.section`
   h2 {
     margin-bottom: 2rem;
   }
-  .sign-in {
+  .sign-up {
     margin-top: 3rem;
     color: #333;
     font-size: 0.8rem;
@@ -61,33 +56,36 @@ const LoginButton = styled.button`
 
 const Login = () => {
   return (
-    <LoginPage>
-      <LoginBox>
-        <Link to="/">
-          <IoClose
-            style={{
-              position: 'absolute',
-              top: '1rem',
-              left: '1rem',
-              fontSize: '2rem',
-              cursor: 'pointer',
-            }}
-          />
-        </Link>
-        <h2>로그인</h2>
-        <LoginButton>
-          <FcGoogle style={{ fontSize: '1.4rem' }} />
-          <span>Login with Google</span>
-        </LoginButton>
-        <LoginButton style={{ backgroundColor: '#3C87F8', color: '#fff' }}>
-          <TbBrandTwitter style={{ fontSize: '1.4rem' }} />
-          <span>Login with Twitter</span>
-        </LoginButton>
-        <Link to="/" className="sign-in">
-          회원가입
-        </Link>
-      </LoginBox>
-    </LoginPage>
+    <>
+      <LoginPage>
+        <LoginBox>
+          <Link to="/">
+            <IoClose
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                left: '1rem',
+                color: '#000',
+                fontSize: '2rem',
+                cursor: 'pointer',
+              }}
+            />
+          </Link>
+          <h2>로그인</h2>
+          <LoginButton>
+            <FcGoogle style={{ fontSize: '1.4rem' }} />
+            <span>Login with Google</span>
+          </LoginButton>
+          <LoginButton style={{ backgroundColor: '#3C87F8', color: '#fff' }}>
+            <TbBrandTwitter style={{ fontSize: '1.4rem' }} />
+            <span>Login with Twitter</span>
+          </LoginButton>
+          <Link to="/signup" className="sign-up">
+            회원가입
+          </Link>
+        </LoginBox>
+      </LoginPage>
+    </>
   );
 };
 
