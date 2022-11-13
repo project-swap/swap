@@ -4,7 +4,7 @@ import { firestore } from '../firebase';
 // components import
 import NavBar from '../components/common/NavBar';
 import Footer from '../components/common/Footer';
-import Carousel from '../components/Carousel';
+// import Carousel from '../components/Carousel';
 
 function Main() {
   const test = firestore.collection('mock-api');
@@ -25,7 +25,7 @@ function Main() {
   return (
     <>
       <NavBar />
-      <Carousel />
+      {/* <Carousel /> */}
       {dataArr.map(el => {
         return <div key={el.id}>{el.title}</div>;
       })}
