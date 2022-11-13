@@ -73,7 +73,9 @@ function NavBar() {
         <TopNavBar>
           <TopBtnContainer>
             <TopLinkBtn>고객센터</TopLinkBtn>
-            <TopLinkBtn>로그인</TopLinkBtn>
+            <Link to="/login" style={linkStyle}>
+              <TopLinkBtn>로그인</TopLinkBtn>
+            </Link>
           </TopBtnContainer>
         </TopNavBar>
         <MainNavBar>
