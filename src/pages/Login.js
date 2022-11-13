@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavBar from '../components/common/NavBar';
+import SocialBtn from '../components/button/SocialBtn';
 import { Link } from 'react-router-dom';
 import { IoClose } from 'react-icons/io5';
 import { TbBrandTwitter } from 'react-icons/tb';
@@ -40,23 +41,6 @@ const LoginBox = styled.section`
   }
 `;
 
-const LoginButton = styled.button`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 13rem;
-  height: 2.6rem;
-  margin: 0.8rem 0;
-  padding: 0 1rem;
-  background-color: #fff;
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.2rem;
-  box-shadow: 0.1rem 0.1rem 0.4rem rgba(0, 0, 0, 0.3);
-  outline: none;
-  cursor: pointer;
-`;
-
 const BackgroundBlur = styled.div`
   width: 100%;
   height: 100vh;
@@ -86,14 +70,20 @@ const Login = () => {
             />
           </Link>
           <h2>로그인</h2>
-          <LoginButton>
-            <FcGoogle style={{ fontSize: '1.4rem' }} />
-            <span>Login with Google</span>
-          </LoginButton>
-          <LoginButton style={{ backgroundColor: '#3C87F8', color: '#fff' }}>
-            <TbBrandTwitter style={{ fontSize: '1.4rem' }} />
-            <span>Login with Twitter</span>
-          </LoginButton>
+          <SocialBtn
+            background={'#fff'}
+            color={'#000'}
+            icon={<FcGoogle style={{ fontSize: '1.6rem' }} />}
+            location={'signup'}
+            name={'Google'}
+          />
+          <SocialBtn
+            background={'#3C87F8'}
+            color={'#fff'}
+            icon={<TbBrandTwitter style={{ fontSize: '1.6rem' }} />}
+            location={'signup'}
+            name={'Twitter'}
+          />
           <Link to="/signup" className="sign-up">
             회원가입
           </Link>
