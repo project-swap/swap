@@ -6,7 +6,14 @@ import styled from 'styled-components';
 
 // dot size 및 색상 추후 변경예정
 const StyledSlider = styled(Slider)`
-  .slick-dots {
+  .slick-track {
+    display: flex;
+  }
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+  }
+  .sl .slick-dots {
     display: flex;
     width: 100px;
     margin: 0;
@@ -40,7 +47,6 @@ const StyledSlider = styled(Slider)`
 `;
 
 const ImgContainer = styled.div`
-  display: flex;
   margin-top: 11.06rem;
   text-align: center;
   border: solid 1 black;
@@ -69,7 +75,7 @@ function Carousel() {
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
   };
   return (
