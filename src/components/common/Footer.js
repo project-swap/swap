@@ -9,7 +9,7 @@ import { linkStyle } from '../../styles/linkStyle';
 
 const FooterContainer = styled.footer`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: fixed;
   width: 100%;
@@ -22,7 +22,6 @@ const EmailAndNameBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.88rem;
-  margin-left: 4rem;
   margin-bottom: 2.69rem;
 `;
 
@@ -41,6 +40,8 @@ const ProjectEmail = styled.span`
 const CreaterContainer = styled.div`
   display: flex;
   gap: 4.5rem;
+  margin-right: 8.13rem;
+  margin-left: 9.38rem;
   margin-bottom: 3rem;
 `;
 
