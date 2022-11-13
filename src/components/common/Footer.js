@@ -104,6 +104,29 @@ function Footer() {
       blogUrl: 'https://haseungdev.vercel.app',
     },
   ];
+
+  const routeList = [
+    {
+      id: 1,
+      name: '교환/나눔',
+    },
+    {
+      id: 2,
+      name: '커뮤니티',
+    },
+    {
+      id: 3,
+      name: '마이페이지',
+    },
+    {
+      id: 4,
+      name: '채팅',
+    },
+    {
+      id: 5,
+      name: '알림',
+    },
+  ];
   return (
     <>
       <FooterContainer>
@@ -115,42 +138,35 @@ function Footer() {
         <CreaterContainer>
           {userData.map(el => {
             return (
-              <>
+              <div key={`unique${el.name}`}>
                 <CreaterBox>
-                  <Creater key={el.id}>{el.name}</Creater>
-                  <CreaterIconsBox key={el.id}>
+                  <Creater>{el.name}</Creater>
+                  <CreaterIconsBox>
                     <BsGithub
-                      key={el.id}
                       style={{ fontSize: '1rem', cursor: 'pointer' }}
                       onClick={() => window.open(`${el.githubUrl}`, '_blank')}
                     />
                     <FaBloggerB
                       style={{ fontSize: '1rem', cursor: 'pointer' }}
                       onClick={() => window.open(`${el.blogUrl}`, '_blank')}
-                    ></FaBloggerB>
+                    />
                   </CreaterIconsBox>
                 </CreaterBox>
-              </>
+              </div>
             );
           })}
         </CreaterContainer>
 
         <LinkBtnList>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>교환/나눔</LinkBtn>
-          </Link>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>커뮤니티</LinkBtn>
-          </Link>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>마이페이지</LinkBtn>
-          </Link>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>채팅</LinkBtn>
-          </Link>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>알림</LinkBtn>
-          </Link>
+          {routeList.map(el => {
+            return (
+              <div key={`unique${el.id}`}>
+                <Link to="/" style={linkStyle}>
+                  <LinkBtn>{el.name}</LinkBtn>
+                </Link>
+              </div>
+            );
+          })}
         </LinkBtnList>
       </FooterContainer>
     </>
