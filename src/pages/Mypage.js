@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import profile from '../assets/logo/android-icon-144x144.png';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import SideBar from '../components/SideBar';
+import LocationSetting from './LocationSetting';
 
-const Main = styled.main`
+export const Main = styled.main`
   box-sizing: border-box;
   background-color: #eaecef;
   width: 50rem;
@@ -122,6 +123,7 @@ const Mypage = () => {
           </SwapAndBookMark>
         </SwapContainer>
       </Main>
+      <LocationSetting />
     </>
   );
 };
