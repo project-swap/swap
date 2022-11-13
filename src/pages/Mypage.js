@@ -2,20 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import profile from '../assets/logo/android-icon-144x144.png';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import SideBar from '../components/SideBar';
 
-const Main = styled.div`
+const Main = styled.main`
   box-sizing: border-box;
   background-color: #eaecef;
   width: 50rem;
   height: 43rem;
   margin: 0 auto;
-  margin-top: 10rem;
+  margin-top: 2rem;
   margin-right: 16rem;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
 `;
-const Profile = styled.div`
+const Profile = styled.section`
   display: flex;
   img {
     width: 5rem;
@@ -25,17 +26,22 @@ const Profile = styled.div`
   }
 `;
 
-const Info = styled.div`
+const Info = styled.section`
+  margin-top: 2rem;
   margin-left: 1rem;
   flex-direction: column;
+  line-height: 1.5rem;
+  h2 {
+    font-weight: 600;
+  }
 `;
 
 const Location = styled.div`
   display: flex;
-  margin: 0 1rem;
+  margin: 1rem 1rem;
   justify-content: space-between;
   h4 {
-    font-weight: 500;
+    font-weight: 600;
   }
 `;
 
@@ -48,7 +54,6 @@ const LocationDataContainer = styled.div`
 
 const LocationData = styled.div`
   width: 33.3%;
-
   height: 8rem;
   background-color: white;
   border: 1px solid black;
@@ -76,44 +81,48 @@ const SwapAndBookMark = styled.div`
   border: 1px solid black;
   justify-content: space-between;
   h4 {
-    font-weight: 500;
+    font-weight: 600;
+    margin: 1rem 1rem;
   }
 `;
 
 const Mypage = () => {
   return (
-    <Main>
-      <Profile>
-        <img src={profile} />
-        <Info>
-          <h2>박미쭈</h2>
-          <h4>팔로잉 59 팔로워 48</h4>
-        </Info>
-      </Profile>
-      <Location>
-        <h4>위치설정</h4>
-        <h4>더보기</h4>
-      </Location>
-      <LocationDataContainer>
-        <LocationData></LocationData>
-        <LocationData>
-          <AiOutlinePlusCircle />
-        </LocationData>
-        <LocationData>
-          <AiOutlinePlusCircle />
-        </LocationData>
-      </LocationDataContainer>
-      <SwapContainer>
-        <SwapAndBookMark>
-          <h4>교환목록</h4>
+    <>
+      <SideBar />
+      <Main>
+        <Profile>
+          <img src={profile} alt="미쭈" />
+          <Info>
+            <h2>박미쭈</h2>
+            <h4>팔로잉 59 팔로워 48</h4>
+          </Info>
+        </Profile>
+        <Location>
+          <h4>위치설정</h4>
           <h4>더보기</h4>
-        </SwapAndBookMark>
-        <SwapAndBookMark>
-          <h4>북마크</h4>
-          <h4>더보기</h4>
-        </SwapAndBookMark>
-      </SwapContainer>
-    </Main>
+        </Location>
+        <LocationDataContainer>
+          <LocationData></LocationData>
+          <LocationData>
+            <AiOutlinePlusCircle />
+          </LocationData>
+          <LocationData>
+            <AiOutlinePlusCircle />
+          </LocationData>
+        </LocationDataContainer>
+        <SwapContainer>
+          <SwapAndBookMark>
+            <h4>교환목록</h4>
+            <h4>더보기</h4>
+          </SwapAndBookMark>
+          <SwapAndBookMark>
+            <h4>북마크</h4>
+            <h4>더보기</h4>
+          </SwapAndBookMark>
+        </SwapContainer>
+      </Main>
+    </>
   );
 };
 
