@@ -26,12 +26,9 @@ function Main() {
     <>
       <NavBar />
       <Carousel />
-<<<<<<< HEAD
-=======
       {dataArr.map(el => {
         return <div key={el.id}>{el.title}</div>;
       })}
->>>>>>> f3a2c4f7b73688bce61440cc715a99abf8b77ce1
       <Footer />
     </>
   );
