@@ -23,11 +23,13 @@ const SocialButton = styled.button`
 const SocialBtn = ({ background, color, icon, name }) => {
   const currentURL = window.location.href.split('/');
   const pathName = currentURL[currentURL.length - 1];
+  const firstLetter = pathName.charAt(0).toUpperCase();
+  const otherLetters = pathName.slice(1);
   return (
     <SocialButton background={background} color={color}>
       {icon}
       <span>
-        {pathName} with {name}
+        {firstLetter + otherLetters} with {name}
       </span>
     </SocialButton>
   );

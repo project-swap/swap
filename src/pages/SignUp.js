@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavBar from '../components/common/NavBar';
+import ModalBox from '../components/ModalBox';
 import SocialBtn from '../components/button/SocialBtn';
 import { Link } from 'react-router-dom';
-import { IoClose } from 'react-icons/io5';
 import { FcGoogle } from 'react-icons/fc';
 import { TbBrandTwitter } from 'react-icons/tb';
+import { linkStyle } from '../styles/linkStyle';
 
 const LoginPage = styled.section`
   display: flex;
@@ -18,27 +19,15 @@ const LoginPage = styled.section`
   z-index: 2;
 `;
 
-const LoginBox = styled.section`
-  width: 30rem;
-  height: 23rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background-color: #fff;
-  border: 0.1rem solid #000;
-  border-radius: 0.5rem;
-  h2 {
-    margin-bottom: 2rem;
-  }
-  .login {
-    margin-top: 3rem;
-    color: #333;
-    font-size: 0.8rem;
-    text-decoration: none;
-    cursor: pointer;
-  }
+const Title = styled.h2`
+  margin-bottom: 2.4rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+`;
+
+const LinkToLogin = styled.div`
+  margin-top: 2rem;
+  font-size: 0.8rem;
 `;
 
 const BackgroundBlur = styled.div`
@@ -56,20 +45,9 @@ const SignUp = () => {
     <>
       <NavBar />
       <LoginPage>
-        <LoginBox>
-          <Link to="/">
-            <IoClose
-              style={{
-                position: 'absolute',
-                top: '1rem',
-                left: '1rem',
-                color: '#000',
-                fontSize: '2rem',
-                cursor: 'pointer',
-              }}
-            />
-          </Link>
-          <h2>회원가입</h2>
+        <ModalBox>
+          <Link to="/"></Link>
+          <Title>회원가입</Title>
           <SocialBtn
             background={'#fff'}
             color={'#000'}
@@ -84,10 +62,10 @@ const SignUp = () => {
             location={'signup'}
             name={'Twitter'}
           />
-          <Link to="/login" className="login">
-            로그인
+          <Link to="/login" style={linkStyle}>
+            <LinkToLogin>로그인</LinkToLogin>
           </Link>
-        </LoginBox>
+        </ModalBox>
       </LoginPage>
       <BackgroundBlur />
     </>
