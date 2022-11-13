@@ -157,16 +157,16 @@ function Footer() {
             <LinkBtn>교환/나눔</LinkBtn>
           </Link>
           <Link to="/" style={linkStyle}>
-            <LinkBtn>교환/나눔</LinkBtn>
+            <LinkBtn>커뮤니티</LinkBtn>
           </Link>
           <Link to="/" style={linkStyle}>
-            <LinkBtn>교환/나눔</LinkBtn>
+            <LinkBtn>마이페이지</LinkBtn>
           </Link>
           <Link to="/" style={linkStyle}>
-            <LinkBtn>교환/나눔</LinkBtn>
+            <LinkBtn>채팅</LinkBtn>
           </Link>
           <Link to="/" style={linkStyle}>
-            <LinkBtn>교환/나눔</LinkBtn>
+            <LinkBtn>알림</LinkBtn>
           </Link>
         </LinkBtnList>
       </FooterContainer>
