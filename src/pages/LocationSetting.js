@@ -4,7 +4,7 @@ import { Main } from './Mypage';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { FiCheckSquare } from 'react-icons/fi';
 
-const Title = styled.h3`
+export const Title = styled.h3`
   font-weight: 600;
   margin: 3rem 5rem;
   font-size: 1.5rem;
