@@ -4,6 +4,7 @@ import ProductCardList from './ProductCardList';
 import ProductListTap from './ProductListTap';
 
 const ProductListComponent = styled.div`
+  margin: 3rem 0;
   width: 80%;
   padding: 2rem 5rem;
   border: 1px solid black;
