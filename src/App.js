@@ -9,7 +9,7 @@ import Mypage from './pages/Mypage';
 import NotFound from './pages/NotFound';
 import SignUp from './pages/SignUp';
 import Main from './pages/Main';
-// import RegisterProduct from './pages/RegisterProduct';
+import Register from './pages/Register';
 import Swap from './pages/Swap';
 
 const GlobalStyles = createGlobalStyle`
@@ -31,7 +31,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
               <Route path="/swap" element={<Swap />} />
-              {/* <Route path="/register" element={<RegisterProduct />} /> */}
+              <Route path="/register" element={<Register />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
