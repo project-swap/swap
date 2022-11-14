@@ -23,3 +23,13 @@ export const Button = styled.button`
 export const Label = styled.label`
   width: 4rem;
 `;
+
+export const RegisterProductGroupComponent = styled.div`
+  width: 40rem;
+  display: flex;
+  flex-direction: ${props => props.flexDirection};
+  align-items: center;
+  border: 1px solid black;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+`;
