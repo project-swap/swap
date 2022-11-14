@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CardFrame = styled.div`
+const SalesProductCardFrame = styled.div`
   width: 25rem;
   height: 35rem;
   border: 2px solid #757575;
@@ -16,9 +16,8 @@ const CardFrame = styled.div`
   }
 `;
 
-const CardImg = styled.div`
-  background: center
-    url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAxMTdfMjYy%2FMDAxNjQyNDAyNTMwMjU5.e0JwiX9I8IjdONKcYqzCYaU8YiFHA0igovXbw_8pMEwg.wbwWHTaYLXUhAMUBgzR_K_8d_uyWFVMR68bCS5sa0Cwg.JPEG.fenergy12%2F14.jpg&type=sc960_832');
+const SalesProductImg = styled.div`
+  background: center url(${props => props.url});
   box-sizing: border-box;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -31,7 +30,7 @@ const CardImg = styled.div`
   }
 `;
 
-const CardInfo = styled.div`
+const SalesProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,8 +43,9 @@ const SummaryInfo = styled.div`
   align-items: center;
 `;
 
-const ProfilePic = styled.div`
-  background-color: #392010;
+const ProfilePicture = styled.div`
+  background: center url(${props => props.url}) no-repeat;
+  background-size: 70px;
   border: 1px solid black;
   height: 3rem;
   width: 3rem;
@@ -56,11 +56,18 @@ const ProfilePic = styled.div`
 const SalesInfo = styled.div``;
 
 const SalesTitle = styled.h3`
-  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 `;
 
-const SellerInfo = styled.span`
+const SellerName = styled.span`
   margin-right: 0.5rem;
+`;
+
+const PostingTime = styled.span`
+  margin-right: 0.5rem;
+  font-size: 0.8rem;
 `;
 
 const ArticlePreview = styled.p`
@@ -69,25 +76,25 @@ const ArticlePreview = styled.p`
   line-height: 1.5rem;
 `;
 
-const ProductCard = () => {
+const SalesProductCard = () => {
   return (
-    <CardFrame>
-      <CardImg />
-      <CardInfo>
+    <SalesProductCardFrame>
+      <SalesProductImg url="https://url.kr/quav97" />
+      <SalesProductInfo>
         <SummaryInfo>
-          <ProfilePic />
+          <ProfilePicture url="https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg" />
           <SalesInfo>
             <SalesTitle>예지 사진... 교환..</SalesTitle>
-            <SellerInfo>작성자</SellerInfo>
-            <SellerInfo>6분 전</SellerInfo>
+            <SellerName>개똥이</SellerName>
+            <PostingTime>6분 전</PostingTime>
           </SalesInfo>
         </SummaryInfo>
         <ArticlePreview>
           저 이거 진짜 교환 안하려고 했는데.. 진짜 가지고 싶은 게 있어요!
         </ArticlePreview>
-      </CardInfo>
-    </CardFrame>
+      </SalesProductInfo>
+    </SalesProductCardFrame>
   );
 };
 
-export default ProductCard;
+export default SalesProductCard;

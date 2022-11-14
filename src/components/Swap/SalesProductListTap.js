@@ -9,6 +9,10 @@ const TapComponent = styled.div`
   margin: 0 1rem 2rem;
 `;
 
+const PageTitle = styled.h1`
+  font-size: 1.5rem;
+`;
+
 const Bar = styled.span`
   display: inline-block;
   margin: 0 0.5rem;
@@ -18,7 +22,12 @@ const Bar = styled.span`
   border: 1px;
 `;
 
-const TapObject = styled.div`
+const FilterGroup = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Filter = styled.div`
   display: flex;
   margin: 0.25rem;
   &:nth-child(5) {
@@ -26,39 +35,32 @@ const TapObject = styled.div`
   cursor: pointer;
 `;
 
-const TapText = styled.span`
+const FilterName = styled.span`
   margin-left: 0.3rem;
 `;
 
-const FunctionTap = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const ProductListTap = () => {
+const SalesProductListTap = () => {
   return (
     <TapComponent>
-      <h1>교환/나눔</h1>
-      <FunctionTap>
-        <TapObject>
+      <PageTitle>교환/나눔</PageTitle>
+      <FilterGroup>
+        <Filter>
           <FiCheckSquare />
-          <TapText>내가 쓴 글</TapText>
-        </TapObject>
-
+          <FilterName>내가 쓴 글</FilterName>
+        </Filter>
         <Bar />
-
-        <TapObject>
+        <Filter>
           <FiSquare />
-          <TapText>최신 순</TapText>
-        </TapObject>
+          <FilterName>최신 순</FilterName>
+        </Filter>
 
-        <TapObject>
+        <Filter>
           <FiCheckSquare />
-          <TapText>오래된 순</TapText>
-        </TapObject>
-      </FunctionTap>
+          <FilterName>오래된 순</FilterName>
+        </Filter>
+      </FilterGroup>
     </TapComponent>
   );
 };
 
-export default ProductListTap;
+export default SalesProductListTap;
