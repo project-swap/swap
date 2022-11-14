@@ -4,7 +4,10 @@ import RegisterProductImageUpload from './RegisterProductImageUpload';
 import RegisterProductInput from './RegisterProductInput';
 import RegisterProductTradeType from './RegisterProductTradeType';
 import { IoMdArrowRoundBack } from 'react-icons/io';
-import { Button, Component } from '../common/public/PublicStyle';
+import {
+  Button,
+  ComponentForCenterAlignment,
+} from '../common/public/PublicStyle';
 
 const RegisterProductComponent = styled.div`
   display: flex;
@@ -35,7 +38,7 @@ const ExitButton = styled.button`
 
 const RegisterProduct = () => {
   return (
-    <Component>
+    <ComponentForCenterAlignment>
       <RegisterProductComponent>
         <ExitButton>
           <IoMdArrowRoundBack />
@@ -45,7 +48,7 @@ const RegisterProduct = () => {
         <RegisterProductTradeType />
         <Button width="4rem">저장</Button>
       </RegisterProductComponent>
-    </Component>
+    </ComponentForCenterAlignment>
   );
 };
 
