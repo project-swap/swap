@@ -4,10 +4,8 @@ import RegisterProductImageUpload from './RegisterProductImageUpload';
 import RegisterProductInput from './RegisterProductInput';
 import RegisterProductTradeType from './RegisterProductTradeType';
 import { IoMdArrowRoundBack } from 'react-icons/io';
-import {
-  Button,
-  ComponentForCenterAlignment,
-} from '../common/public/PublicStyle';
+import { ComponentForCenterAlignment } from '../common/public/PublicStyle';
+import RegisterProductPostBtn from './RegisterProductPostBtn';
 
 const RegisterProductComponent = styled.div`
   display: flex;
@@ -46,7 +44,7 @@ const RegisterProduct = () => {
         <RegisterProductInput />
         <RegisterProductImageUpload />
         <RegisterProductTradeType />
-        <Button width="4rem">저장</Button>
+        <RegisterProductPostBtn />
       </RegisterProductComponent>
     </ComponentForCenterAlignment>
   );
