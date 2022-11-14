@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import RegisterProductImageUpload from './RegisterProductImageUpload';
-import RegisterProductInput from './RegisterProductInput';
-import RegisterProductTradeType from './RegisterProductTradeType';
+import RegisterProductImageUploadGroup from './RegisterProductImageUploadGroup';
+import RegisterProductInputGroup from './RegisterProductInputGroup';
+import RegisterProductTradeTypeGroup from './RegisterProductTradeTypeGroup';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { ComponentForCenterAlignment } from '../common/public/PublicStyle';
 import RegisterProductPostBtn from './RegisterProductPostBtn';
@@ -41,9 +41,9 @@ const RegisterProduct = () => {
         <ExitButton>
           <IoMdArrowRoundBack />
         </ExitButton>
-        <RegisterProductInput />
-        <RegisterProductImageUpload />
-        <RegisterProductTradeType />
+        <RegisterProductInputGroup />
+        <RegisterProductImageUploadGroup />
+        <RegisterProductTradeTypeGroup />
         <RegisterProductPostBtn />
       </RegisterProductComponent>
     </ComponentForCenterAlignment>

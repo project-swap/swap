@@ -1,18 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Label } from '../common/public/PublicStyle';
+import {
+  Button,
+  Label,
+  RegisterProductGroupComponent,
+} from '../common/public/PublicStyle';
 
-const RegisterProductInputComponent = styled.div`
-  width: 40rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid black;
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-`;
-
-const InputComponent = styled.form`
+const InputGroup = styled.form`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,21 +24,21 @@ const Input = styled.input`
   }
 `;
 
-const RegisterProductInput = () => {
+const RegisterProductInputGroup = () => {
   return (
-    <RegisterProductInputComponent>
-      <InputComponent>
+    <RegisterProductGroupComponent flexDirection="column">
+      <InputGroup>
         <Label htmlFor="productName">상품명</Label>
         <Input id="productName" placeholder="상품명"></Input>
         <Button width="4rem">확인</Button>
-      </InputComponent>
-      <InputComponent>
+      </InputGroup>
+      <InputGroup>
         <Label htmlFor="hashTag">해시태그</Label>
         <Input id="hashTag" placeholder="해시태그"></Input>
         <Button width="4rem">확인</Button>
-      </InputComponent>
-    </RegisterProductInputComponent>
+      </InputGroup>
+    </RegisterProductGroupComponent>
   );
 };
 
-export default RegisterProductInput;
+export default RegisterProductInputGroup;
