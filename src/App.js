@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import { RecoilRoot } from 'recoil';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Loader from './components/Loader';
@@ -22,15 +23,17 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <Suspense fallback={<Loader />}>
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/mypage" element={<Mypage />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+          <RecoilRoot>
+            <Suspense fallback={<Loader />}>
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/mypage" element={<Mypage />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </RecoilRoot>
         </QueryClientProvider>
       </BrowserRouter>
     </div>
