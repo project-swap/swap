@@ -1,5 +1,5 @@
 import React from 'react';
-import { userApi } from '../atoms/atoms';
+import { getTest } from '../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 
 // import { firestore } from '../firebase';
@@ -10,7 +10,7 @@ import Footer from '../components/common/Footer';
 import Carousel from '../components/Carousel';
 
 function Main() {
-  const state = useRecoilValue(userApi);
+  const state = useRecoilValue(getTest);
   console.log(state);
 
   // const storageRef = firebaseStorage.ref();
@@ -21,9 +21,9 @@ function Main() {
     <>
       <NavBar />
       <Carousel />
-      {state.map(el => {
+      {/* {state.map(el => {
         return el.title;
-      })}
+      })} */}
       <Footer />
     </>
   );
