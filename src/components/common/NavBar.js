@@ -103,13 +103,15 @@ function NavBar() {
           <LoginSuccessIconContainer>
             {/*로그인 성공 시 안쪽에 컴포넌트 추가 생성*/}
           </LoginSuccessIconContainer>
-          <ImSearch
-            style={{
-              width: '1.25rem',
-              height: '1.25rem',
-              marginLeft: '7.5rem ',
-            }}
-          />
+          <Link to="/search" style={linkStyle}>
+            <ImSearch
+              style={{
+                width: '1.25rem',
+                height: '1.25rem',
+                marginLeft: '7.5rem ',
+              }}
+            />
+          </Link>
         </MainNavBar>
       </NavContainer>
     </>
