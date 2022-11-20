@@ -43,6 +43,8 @@ function App() {
                 <Route path="/mypage" element={<Mypage />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/swap" element={<Swap />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
