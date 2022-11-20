@@ -32,7 +32,6 @@ function App() {
   // }, []);
   return (
     <div className="App">
-      <Mypage />
       <GlobalStyles />
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
