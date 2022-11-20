@@ -1,3 +1,4 @@
+import Mypage from './pages/Mypage';
 import React, { Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
@@ -6,7 +7,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Loader from './components/Loader';
 import Login from './pages/Login';
-import Mypage from './pages/Mypage';
 import NotFound from './pages/NotFound';
 import SignUp from './pages/SignUp';
 import Main from './pages/Main';
@@ -18,8 +18,19 @@ const GlobalStyles = createGlobalStyle`
 const queryClient = new QueryClient();
 
 function App() {
+  // const [data, setData] = useState();
+  // useEffect(() => {
+  //   const test = firestore.collection('test');
+  //   test
+  //     .doc('test_item')
+  //     .get()
+  //     .then(doc => {
+  //       setData(doc.data().food);
+  //     });
+  // }, []);
   return (
     <div className="App">
+      <Mypage />
       <GlobalStyles />
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
