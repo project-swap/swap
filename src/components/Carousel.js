@@ -22,6 +22,9 @@ const StyledSlider = styled(Slider)`
     display: flex;
     justify-content: center;
   }
+  .slick-dots {
+    margin-bottom: 3rem;
+  }
 
   .sl .slick-dots {
     display: flex;
@@ -36,7 +39,7 @@ const StyledSlider = styled(Slider)`
   .slick-dots li {
     width: 6px;
     height: 6px;
-    margin: 0 3.5px;
+    margin: 0 7px;
   }
 
   .slick-dots li button {
