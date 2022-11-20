@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import NavBar from '../components/common/NavBar';
 import ModalBox from '../components/ModalBox';
 import SocialBtn from '../components/button/SocialBtn';
+import BackgroundBlur from '../components/BackgroundBlur';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { TbBrandTwitter } from 'react-icons/tb';
@@ -28,16 +29,6 @@ const Title = styled.h2`
 const LinkToLogin = styled.div`
   margin-top: 2rem;
   font-size: 0.8rem;
-`;
-
-const BackgroundBlur = styled.div`
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1;
 `;
 
 const SignUp = () => {
