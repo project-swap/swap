@@ -11,6 +11,8 @@ import NotFound from './pages/NotFound';
 import SignUp from './pages/SignUp';
 import Main from './pages/Main';
 import Search from './pages/Search';
+import Register from './pages/Register';
+import Swap from './pages/Swap';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -42,6 +44,8 @@ function App() {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/swap" element={<Swap />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
