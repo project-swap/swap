@@ -13,6 +13,9 @@ import Main from './pages/Main';
 import Search from './pages/Search';
 import Register from './pages/Register';
 import Swap from './pages/Swap';
+import LocationSetting from './pages/LocationSetting';
+import SwapList from './pages/SwapList';
+import BookMarkPage from './pages/BookMarkPage';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -41,6 +44,9 @@ function App() {
               <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/mypage" element={<Mypage />} />
+                <Route path="/locationsetting" element={<LocationSetting />} />
+                <Route path="/swaplist" element={<SwapList />} />
+                <Route path="/bookmark" element={<BookMarkPage />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />

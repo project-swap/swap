@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import profile from '../assets/logo/android-icon-144x144.png';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import SideBar from '../components/SideBar';
-import LocationSetting from './LocationSetting';
+import NavBar from '../components/common/NavBar';
 
 export const Main = styled.main`
   box-sizing: border-box;
   background-color: #eaecef;
   width: 50rem;
   height: 43rem;
-  margin: 0 auto;
+  margin: 10rem auto;
   margin-top: 2rem;
   margin-right: 16rem;
   border: 1px solid black;
@@ -87,43 +87,53 @@ const SwapAndBookMark = styled.div`
   }
 `;
 
+const MyPageMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  bottom: 40rem;
+  overflow: hidden;
+`;
+
 const Mypage = () => {
   return (
     <>
-      <SideBar />
-      <Main>
-        <Profile>
-          <img src={profile} alt="미쭈" />
-          <Info>
-            <h2>박미쭈</h2>
-            <h4>팔로잉 59 팔로워 48</h4>
-          </Info>
-        </Profile>
-        <Location>
-          <h4>위치설정</h4>
-          <h4>더보기</h4>
-        </Location>
-        <LocationDataContainer>
-          <LocationData></LocationData>
-          <LocationData>
-            <AiOutlinePlusCircle />
-          </LocationData>
-          <LocationData>
-            <AiOutlinePlusCircle />
-          </LocationData>
-        </LocationDataContainer>
-        <SwapContainer>
-          <SwapAndBookMark>
-            <h4>교환목록</h4>
+      <NavBar />
+      <MyPageMain>
+        <SideBar />
+        <Main>
+          <Profile>
+            <img src={profile} alt="미쭈" />
+            <Info>
+              <h2>박미쭈</h2>
+              <h4>팔로잉 59 팔로워 48</h4>
+            </Info>
+          </Profile>
+          <Location>
+            <h4>위치설정</h4>
             <h4>더보기</h4>
-          </SwapAndBookMark>
-          <SwapAndBookMark>
-            <h4>북마크</h4>
-            <h4>더보기</h4>
-          </SwapAndBookMark>
-        </SwapContainer>
-      </Main>
-      <LocationSetting />
+          </Location>
+          <LocationDataContainer>
+            <LocationData></LocationData>
+            <LocationData>
+              <AiOutlinePlusCircle />
+            </LocationData>
+            <LocationData>
+              <AiOutlinePlusCircle />
+            </LocationData>
+          </LocationDataContainer>
+          <SwapContainer>
+            <SwapAndBookMark>
+              <h4>교환목록</h4>
+              <h4>더보기</h4>
+            </SwapAndBookMark>
+            <SwapAndBookMark>
+              <h4>북마크</h4>
+              <h4>더보기</h4>
+            </SwapAndBookMark>
+          </SwapContainer>
+        </Main>
+      </MyPageMain>
     </>
   );
 };

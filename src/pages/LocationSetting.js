@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Main } from './Mypage';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { FiCheckSquare } from 'react-icons/fi';
+import SideBar from '../components/SideBar';
 
 export const Title = styled.h3`
   font-weight: 600;
@@ -42,27 +43,29 @@ const Select = styled.div`
 
 const LocationSetting = () => {
   return (
-    <Main>
-      <Title>위치설정</Title>
-
-      <div>
-        <Select>
-          <div className="check">
-            <FiCheckSquare />
-            <h3>자취방[main]</h3>
-          </div>
-          <div className="location">
-            <h3>서울특별시 강남구 논현동</h3>
-          </div>
-        </Select>
-        <Select>
-          <AiOutlinePlusCircle />
-        </Select>
-        <Select>
-          <AiOutlinePlusCircle />
-        </Select>
-      </div>
-    </Main>
+    <>
+      <SideBar />
+      <Main>
+        <Title>위치설정</Title>
+        <div>
+          <Select>
+            <div className="check">
+              <FiCheckSquare />
+              <h3>자취방[main]</h3>
+            </div>
+            <div className="location">
+              <h3>서울특별시 강남구 논현동</h3>
+            </div>
+          </Select>
+          <Select>
+            <AiOutlinePlusCircle />
+          </Select>
+          <Select>
+            <AiOutlinePlusCircle />
+          </Select>
+        </div>
+      </Main>
+    </>
   );
 };
 
