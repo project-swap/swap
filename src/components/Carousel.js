@@ -9,10 +9,12 @@ const StyledSlider = styled(Slider)`
   .slick-track {
     display: flex;
   }
+
   .slick-slide {
     display: flex;
     justify-content: center;
   }
+
   .sl .slick-dots {
     display: flex;
     width: 100px;
@@ -68,6 +70,7 @@ function Carousel() {
     { id: 4, color: 'green' },
     { id: 5, color: 'yello' },
   ];
+
   const settings = {
     dots: true,
     infinite: true,
@@ -75,9 +78,10 @@ function Carousel() {
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 5000,
   };
+
   return (
     <StyledSlider {...settings}>
       {background.map(el => {
