@@ -9,7 +9,7 @@ import { linkStyle } from '../../styles/linkStyle';
 
 const FooterContainer = styled.footer`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: fixed;
   width: 100%;
@@ -22,7 +22,6 @@ const EmailAndNameBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.88rem;
-  margin-left: 4rem;
   margin-bottom: 2.69rem;
 `;
 
@@ -41,6 +40,8 @@ const ProjectEmail = styled.span`
 const CreaterContainer = styled.div`
   display: flex;
   gap: 4.5rem;
+  margin-right: 8.13rem;
+  margin-left: 9.38rem;
   margin-bottom: 3rem;
 `;
 
@@ -78,6 +79,55 @@ const LinkBtn = styled.span`
 `;
 
 function Footer() {
+  const userData = [
+    {
+      id: 1,
+      name: '박민주',
+      githubUrl: 'https://github.com/project-mizzu',
+      blogUrl: null,
+    },
+    {
+      id: 2,
+      name: '박소예',
+      githubUrl: 'https://github.com/stardust6653',
+      blogUrl: 'https://velog.io/@stardust6653',
+    },
+    {
+      id: 3,
+      name: '서희원',
+      githubUrl: 'https://github.com/userHWSeo',
+      blogUrl: 'https://velog.io/@userhwseo',
+    },
+    {
+      id: 4,
+      name: '정하승',
+      githubUrl: 'https://github.com/HA-SEUNG-JEONG',
+      blogUrl: 'https://haseungdev.vercel.app',
+    },
+  ];
+
+  const routeList = [
+    {
+      id: 1,
+      name: '교환/나눔',
+    },
+    {
+      id: 2,
+      name: '커뮤니티',
+    },
+    {
+      id: 3,
+      name: '마이페이지',
+    },
+    {
+      id: 4,
+      name: '채팅',
+    },
+    {
+      id: 5,
+      name: '알림',
+    },
+  ];
   return (
     <>
       <FooterContainer>
@@ -87,87 +137,37 @@ function Footer() {
         </EmailAndNameBox>
 
         <CreaterContainer>
-          <CreaterBox>
-            <Creater>박민주</Creater>
-            <CreaterIconsBox>
-              <BsGithub
-                style={{ fontSize: '1rem', cursor: 'pointer' }}
-                onClick={() =>
-                  window.open('https://github.com/project-mizzu', '_blank')
-                }
-              />
-              <FaBloggerB style={{ fontSize: '1rem', cursor: 'pointer' }} />
-            </CreaterIconsBox>
-          </CreaterBox>
-          <CreaterBox>
-            <Creater>박소예</Creater>
-            <CreaterIconsBox>
-              <BsGithub
-                style={{ fontSize: '1rem', cursor: 'pointer' }}
-                onClick={() =>
-                  window.open('https://github.com/stardust6653', '_blank')
-                }
-              />
-              <FaBloggerB
-                style={{ fontSize: '1rem', cursor: 'pointer' }}
-                onClick={() =>
-                  window.open('https://velog.io/@stardust6653', '_blank')
-                }
-              />
-            </CreaterIconsBox>
-          </CreaterBox>
-          <CreaterBox>
-            <Creater>서희원</Creater>
-            <CreaterIconsBox>
-              <BsGithub
-                style={{ fontSize: '1rem', cursor: 'pointer' }}
-                onClick={() =>
-                  window.open('https://github.com/userHWSeo', '_blank')
-                }
-              />
-              <FaBloggerB
-                style={{ fontSize: '1rem', cursor: 'pointer' }}
-                onClick={() =>
-                  window.open('https://velog.io/@userhwseo', '_blank')
-                }
-              />
-            </CreaterIconsBox>
-          </CreaterBox>
-          <CreaterBox>
-            <Creater>정하승</Creater>
-            <CreaterIconsBox>
-              <BsGithub
-                style={{ fontSize: '1rem', cursor: 'pointer' }}
-                onClick={() =>
-                  window.open('https://github.com/HA-SEUNG-JEONG', '_blank')
-                }
-              />
-              <FaBloggerB
-                style={{ fontSize: '1rem', cursor: 'pointer' }}
-                onClick={() =>
-                  window.open('https://haseungdev.vercel.app/', '_blank')
-                }
-              />
-            </CreaterIconsBox>
-          </CreaterBox>
+          {userData.map(el => {
+            return (
+              <div key={`unique${el.name}`}>
+                <CreaterBox>
+                  <Creater>{el.name}</Creater>
+                  <CreaterIconsBox>
+                    <BsGithub
+                      style={{ fontSize: '1rem', cursor: 'pointer' }}
+                      onClick={() => window.open(`${el.githubUrl}`, '_blank')}
+                    />
+                    <FaBloggerB
+                      style={{ fontSize: '1rem', cursor: 'pointer' }}
+                      onClick={() => window.open(`${el.blogUrl}`, '_blank')}
+                    />
+                  </CreaterIconsBox>
+                </CreaterBox>
+              </div>
+            );
+          })}
         </CreaterContainer>
 
         <LinkBtnList>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>교환/나눔</LinkBtn>
-          </Link>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>커뮤니티</LinkBtn>
-          </Link>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>마이페이지</LinkBtn>
-          </Link>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>채팅</LinkBtn>
-          </Link>
-          <Link to="/" style={linkStyle}>
-            <LinkBtn>알림</LinkBtn>
-          </Link>
+          {routeList.map(el => {
+            return (
+              <div key={`unique${el.id}`}>
+                <Link to="/" style={linkStyle}>
+                  <LinkBtn>{el.name}</LinkBtn>
+                </Link>
+              </div>
+            );
+          })}
         </LinkBtnList>
       </FooterContainer>
     </>

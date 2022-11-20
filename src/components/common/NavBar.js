@@ -11,13 +11,13 @@ import { ImSearch } from 'react-icons/im';
 const NavContainer = styled.nav``;
 const TopNavBar = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   width: 100%;
   height: 1.875rem;
 `;
 const MainNavBar = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 5rem;
@@ -27,13 +27,14 @@ const MainNavBar = styled.div`
 const MainLogo = styled.div`
   width: 3rem;
   height: 3rem;
-  margin-left: 6.25rem;
+  margin-right: 5.06rem;
   background-image: url(${Logo});
   border: none;
 `;
 const MainLinkBtnContainer = styled.div`
   display: flex;
   gap: 3.125rem;
+  margin-right: 4.38rem;
 `;
 const MainLinkBtn = styled.div`
   font-size: 0.875rem;
@@ -53,7 +54,7 @@ const LocationBox = styled.div`
 const TopBtnContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 6.25rem;
+  margin-left: 60rem;
   gap: 1.875rem;
 `;
 const TopLinkBtn = styled.div`
@@ -106,7 +107,7 @@ function NavBar() {
             style={{
               width: '1.25rem',
               height: '1.25rem',
-              marginRight: '6.5rem ',
+              marginLeft: '7.5rem ',
             }}
           />
         </MainNavBar>

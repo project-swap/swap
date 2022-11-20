@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { firestore } from '../firebase';
+import React from 'react';
+import { getTest } from '../atoms/atoms';
+import { useRecoilValue } from 'recoil';
+
+// import { firestore } from '../firebase';
 
 // components import
 import NavBar from '../components/common/NavBar';
 import Footer from '../components/common/Footer';
+import Casousel from '../components/Carousel';
+
 
 function Main() {
-  const test = firestore.collection('mock-api');
-  const api_data = test.get();
-  const [dataArr, setDataArr] = useState([]);
+  const state = useRecoilValue(getTest);
+  console.log(state);
 
-  useEffect(() => {
-    api_data
-      .then(docs => {
-        docs.forEach(doc => {
-          if (doc) setDataArr(prev => [...prev, doc.data()]);
-        });
-      })
-      .catch(error => console.log(error));
-  }, []);
-  console.log(dataArr);
+  // const storageRef = firebaseStorage.ref();
+  // const saveRoute = storageRef.child('images/' + '파일명');
+  // const upload = saveRoute.put('업로드 파일');
 
   return (
     <>
       <NavBar />
-      {dataArr.map(el => {
-        return <div key={el.id}>{el.title}</div>;
-      })}
+      <Casousel />
       <Footer />
     </>
   );
