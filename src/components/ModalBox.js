@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { IoClose } from 'react-icons/io5';
 
 const Modal = styled.section`
-  width: 30rem;
-  height: 23rem;
+  width: ${props => props.width};
+  height: ${props => props.height};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,9 +16,9 @@ const Modal = styled.section`
   border-radius: 0.5rem;
 `;
 
-const ModalBox = props => {
+const ModalBox = ({ width, height, children }) => {
   return (
-    <Modal>
+    <Modal width={`${width}rem`} height={`${height}rem`}>
       <Link to="/">
         <IoClose
           style={{
@@ -31,7 +31,7 @@ const ModalBox = props => {
           }}
         />
       </Link>
-      {props.children}
+      {children}
     </Modal>
   );
 };

@@ -36,7 +36,7 @@ const Login = () => {
     <>
       <NavBar />
       <LoginPage>
-        <ModalBox>
+        <ModalBox width={30} height={24}>
           <Title>로그인</Title>
           <SocialBtn
             background={'#fff'}

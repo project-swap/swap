@@ -36,7 +36,7 @@ const SignUp = () => {
     <>
       <NavBar />
       <LoginPage>
-        <ModalBox>
+        <ModalBox width={30} height={24}>
           <Link to="/"></Link>
           <Title>회원가입</Title>
           <SocialBtn
