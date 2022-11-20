@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 // components import
 import NavBar from '../components/common/NavBar';
 import Footer from '../components/common/Footer';
+import Casousel from '../components/Carousel';
 
 function Main() {
   const state = useRecoilValue(getTest);
@@ -19,6 +20,7 @@ function Main() {
   return (
     <>
       <NavBar />
+      <Casousel />
       {/* {state.map(el => {
         return el.title;
       })} */}
