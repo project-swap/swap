@@ -5,9 +5,17 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 
 // dot size 및 색상 추후 변경예정
+
 const StyledSlider = styled(Slider)`
+  display: flex;
+  justify-content: center;
   .slick-track {
     display: flex;
+  }
+  .slick-list {
+    display: flex;
+    width: 67.25rem;
+    padding: 0px 0.1rem;
   }
 
   .slick-slide {
@@ -68,7 +76,7 @@ function Carousel() {
     { id: 2, color: 'red' },
     { id: 3, color: 'pink' },
     { id: 4, color: 'green' },
-    { id: 5, color: 'yello' },
+    { id: 5, color: 'yellow' },
   ];
 
   const settings = {
