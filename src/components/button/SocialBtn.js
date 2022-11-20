@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import propTypes from 'prop-types';
 
 const SocialButton = styled.button`
   display: flex;
@@ -33,13 +32,6 @@ const SocialBtn = ({ background, color, icon, name }) => {
       </span>
     </SocialButton>
   );
-};
-
-SocialBtn.propTypes = {
-  background: propTypes.string,
-  color: propTypes.string,
-  icon: propTypes.any,
-  name: propTypes.string,
 };
 
 export default SocialBtn;

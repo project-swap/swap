@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { IoClose } from 'react-icons/io5';
 
@@ -35,10 +34,6 @@ const ModalBox = props => {
       {props.children}
     </Modal>
   );
-};
-
-ModalBox.propTypes = {
-  children: propTypes.any,
 };
 
 export default ModalBox;
