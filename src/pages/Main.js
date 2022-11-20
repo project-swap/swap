@@ -9,6 +9,7 @@ import NavBar from '../components/common/NavBar';
 import Footer from '../components/common/Footer';
 import Carousel from '../components/Carousel';
 
+
 function Main() {
   const state = useRecoilValue(getTest);
   console.log(state);
