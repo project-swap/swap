@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SalesProductCardFrame = styled.div`
-  width: 25rem;
+const SalesProductCardFrame = styled.li`
+  width: 30%;
   height: 35rem;
   border: 2px solid #757575;
-
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 15px;
-  margin: 0 1rem 2rem;
+  margin: 2rem 1rem;
   transition: border 0.4s ease-in-out;
   :hover {
     cursor: pointer;
     border: 2px solid #000;
   }
+  list-style: none;
 `;
 
 const SalesProductImg = styled.div`
@@ -22,7 +22,7 @@ const SalesProductImg = styled.div`
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   height: 25rem;
-  width: 25rem;
+  width: 100%;
   border-bottom: 1px solid black;
   transition: all 0.2s linear;
   :hover {
@@ -76,22 +76,29 @@ const ArticlePreview = styled.p`
   line-height: 1.5rem;
 `;
 
+const cardInfo = {
+  productImgUrl: 'https://url.kr/quav97',
+  profileImgUrl:
+    'https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg',
+  title: '예지 사진... 교환..',
+  userName: '개똥이',
+  postTime: '6분 전',
+  preview: '저 이거 진짜 교환 안하려고 했는데.. 진짜 가지고 싶은 게 있어요!',
+};
 const SalesProductCard = () => {
   return (
     <SalesProductCardFrame>
-      <SalesProductImg url="https://url.kr/quav97" />
+      <SalesProductImg url={cardInfo.productImgUrl} />
       <SalesProductInfo>
         <SummaryInfo>
-          <ProfilePicture url="https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg" />
+          <ProfilePicture url={cardInfo.profileImgUrl} />
           <SalesInfo>
-            <SalesTitle>예지 사진... 교환..</SalesTitle>
-            <SellerName>개똥이</SellerName>
-            <PostingTime>6분 전</PostingTime>
+            <SalesTitle>{cardInfo.title}</SalesTitle>
+            <SellerName>{cardInfo.userName}</SellerName>
+            <PostingTime>{cardInfo.postTime}</PostingTime>
           </SalesInfo>
         </SummaryInfo>
-        <ArticlePreview>
-          저 이거 진짜 교환 안하려고 했는데.. 진짜 가지고 싶은 게 있어요!
-        </ArticlePreview>
+        <ArticlePreview>{cardInfo.preview}</ArticlePreview>
       </SalesProductInfo>
     </SalesProductCardFrame>
   );
