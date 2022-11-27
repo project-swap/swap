@@ -9,6 +9,7 @@ import styled from 'styled-components';
 const StyledSlider = styled(Slider)`
   display: flex;
   justify-content: center;
+  margin-top: 6.375rem;
   .slick-track {
     display: flex;
   }
@@ -60,7 +61,6 @@ const StyledSlider = styled(Slider)`
 `;
 
 const ImgContainer = styled.div`
-  margin-top: 11.06rem;
   text-align: center;
   border: solid 1 black;
 `;
