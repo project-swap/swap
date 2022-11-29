@@ -28,7 +28,6 @@ const PopularPostItemTitle = styled.span`
 
 const PopularPostList = () => {
   const mockData = useRecoilValue(getTest);
-  console.log(mockData);
   return (
     <>
       <Container>
