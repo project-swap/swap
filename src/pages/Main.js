@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import ExchangeAndShareList from '../components/Main/ExchangeAndShareList';
 import PopularPostList from '../components/Main/PopularPost';
-import WeeklyHashtag from '../components/Main/WeeklyHashtag';
+import PopularHashtag from '../components/Main/PopularHashtag';
+import Banner from '../components/Main/Banner';
 
 // import { firestore } from '../firebase';
 
@@ -12,7 +13,7 @@ import Footer from '../components/common/Footer';
 import Carousel from '../components/Carousel';
 
 const MainContainer = styled.div`
-  height: 100vw;
+  height: 50vw;
 `;
 const MainSectionContainer = styled.div`
   display: flex;
@@ -24,8 +25,7 @@ const SectionContainer = styled.div`
   justify-content: flex-start;
   width: 60.25rem;
   height: 23.19rem;
-  border: solid 1px black;
-  margin-top: 0.88rem;
+  margin-top: 2rem;
   gap: 1rem;
 `;
 
@@ -48,7 +48,8 @@ function Main() {
           <ExchangeAndShareList />
           <PopularPostList />
           <HashtagAndBannerContainer>
-            <WeeklyHashtag />
+            <PopularHashtag />
+            <Banner />
           </HashtagAndBannerContainer>
         </SectionContainer>
       </MainSectionContainer>
