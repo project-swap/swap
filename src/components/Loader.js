@@ -4,6 +4,10 @@ import styled, { keyframes } from 'styled-components';
 const animation = keyframes`
   0% {
     top:0rem;
+    border-radius: 10%;
+  }
+  50%{
+    border-radius: 50%;
   }
   95% {
     width: 15rem;
@@ -16,19 +20,25 @@ const animation = keyframes`
 `;
 
 const LodingAnimation = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   top: 0rem;
   width: 15rem;
   height: 15rem;
   background-color: green;
   border-radius: 50%;
+  font-size: 1.8rem;
+  color: black;
+  font-weight: bold;
   animation: ${animation} 1s ease-in Infinite Alternate;
 `;
 
 const LodingContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 50vw;
+  height: 40vw;
   justify-content: center;
   align-items: center;
 `;
@@ -36,7 +46,7 @@ const LodingContainer = styled.div`
 const Loader = () => {
   return (
     <LodingContainer>
-      <LodingAnimation />
+      <LodingAnimation>Loading...</LodingAnimation>
     </LodingContainer>
   );
 };
