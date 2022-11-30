@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import SectionTitle from './SectionTitle';
 
-import { getTest } from '../../atoms/atoms';
-import { useRecoilValue } from 'recoil';
+// import { getTest } from '../../atoms/atoms';
+// import { useRecoilValue } from 'recoil';
 
 const Container = styled.section`
   width: 22.94rem;
@@ -19,8 +19,8 @@ const ExchangeAndShareListContainer = styled.div`
 // const ExchangeAndShareBtn = styled.div``;
 
 const ExchangeAndShareList = () => {
-  const mockData = useRecoilValue(getTest);
-  console.log(mockData);
+  // const mockData = useRecoilValue(getTest);
+  // console.log(mockData);
   return (
     <>
       <Container>
@@ -31,4 +31,4 @@ const ExchangeAndShareList = () => {
   );
 };
 
-export default ExchangeAndShareList;
+export default React.memo(ExchangeAndShareList);

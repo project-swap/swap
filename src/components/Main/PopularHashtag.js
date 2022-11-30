@@ -62,4 +62,4 @@ const PopularHashTag = () => {
   );
 };
 
-export default PopularHashTag;
+export default React.memo(PopularHashTag);

@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import ExchangeAndShareList from '../components/Main/ExchangeAndShareList';
-import PopularPostList from '../components/Main/PopularPost';
-import PopularHashtag from '../components/Main/PopularHashtag';
-import Banner from '../components/Main/Banner';
+import { useRecoilValue } from 'recoil';
+import { darkMode } from '../atoms/atoms';
+
+// import Components
+import SectionContainer from '../components/Main/SectionContainer';
 
 // import { firestore } from '../firebase';
 
@@ -13,49 +14,34 @@ import Footer from '../components/common/Footer';
 import Carousel from '../components/Carousel';
 
 const MainContainer = styled.div`
-  height: 50vw;
+  height: 80vw;
+  background-color: ${props => (props.themeMode ? '#C6C2C2' : 'white')};
+  transition: all 150ms linear;
 `;
 const MainSectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-const SectionContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  width: 60.25rem;
-  height: 23.19rem;
-  margin-top: 2rem;
-  gap: 1rem;
-`;
 
-const HashtagAndBannerContainer = styled.div``;
-
-function Main() {
+const Main = () => {
   // const storageRef = firebaseStorage.ref();
   // const saveRoute = storageRef.child('images/' + '파일명');
   // const upload = saveRoute.put('업로드 파일');
 
+  const themeMode = useRecoilValue(darkMode);
+  console.log(themeMode);
+
   return (
-    <MainContainer>
+    <MainContainer themeMode={themeMode}>
       <NavBar />
       <MainSectionContainer>
         <Carousel />
-        {/* {state.map(el => {
-        return el.title;
-      })} */}
-        <SectionContainer>
-          <ExchangeAndShareList />
-          <PopularPostList />
-          <HashtagAndBannerContainer>
-            <PopularHashtag />
-            <Banner />
-          </HashtagAndBannerContainer>
-        </SectionContainer>
+        <SectionContainer />
       </MainSectionContainer>
       <Footer />
     </MainContainer>
   );
-}
+};
 
 export default Main;

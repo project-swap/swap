@@ -17,7 +17,7 @@ export const getTest = selector({
   },
 });
 
-export const themeState = atom({
-  key: 'themeState',
+export const darkMode = atom({
+  key: 'darkMode',
   default: false,
 });

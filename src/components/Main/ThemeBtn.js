@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { themeState } from '../../atoms/atoms';
+import { darkMode } from '../../atoms/atoms';
 
 // image,icon, font-style
 
@@ -13,14 +13,11 @@ const SlideThemeBtnContainer = styled.div`
   background-color: black;
   margin-bottom: -2rem;
   border-radius: 1.5rem;
-  transition-property: background-color;
-  transition-duration: 150ms;
-  transition-timing-function: linear;
+  transition: all 150ms linear;
+
   &.active {
     background-color: whitesmoke;
-    transition-property: all;
-    transition-duration: 150ms;
-    transition-timing-function: linear;
+    transition: all 150ms linear;
   }
 `;
 
@@ -32,33 +29,30 @@ const SlideThemeBtn = styled.div`
   border-radius: 50%;
   cursor: pointer;
   transform: translateX(0);
-  transition-property: all;
-  transition-duration: 150ms;
-  transition-timing-function: linear;
+  transition: all 150ms linear;
 
   &.active {
     background-color: black;
     transform: translateX(6.5rem);
-    transition-property: all;
-    transition-duration: 150ms;
-    transition-timing-function: linear;
+    transition: all 150ms linear;
   }
 `;
 
 const ThemeBtn = () => {
-  const [themeToggle, setThemeToggle] = useRecoilState(themeState);
+  const [themeToggle, setThemeToggle] = useRecoilState(darkMode);
+
   return (
     <>
       <SlideThemeBtnContainer className={themeToggle ? 'active' : null}>
         <SlideThemeBtn
           className={themeToggle ? 'active' : null}
-          onClick={() => {
+          onClick={useCallback(() => {
             setThemeToggle(prev => !prev);
-          }}
+          }, [themeToggle])}
         />
       </SlideThemeBtnContainer>
     </>
   );
 };
 
-export default ThemeBtn;
+export default React.memo(ThemeBtn);

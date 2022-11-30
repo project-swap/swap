@@ -59,4 +59,4 @@ const SectionTitle = props => {
   );
 };
 
-export default SectionTitle;
+export default React.memo(SectionTitle);

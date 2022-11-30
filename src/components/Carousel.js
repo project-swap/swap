@@ -43,20 +43,13 @@ const StyledSlider = styled(Slider)`
     margin: 0 7px;
   }
 
-  .slick-dots li button {
-    width: 6px;
-    height: 6px;
-  }
-
-  .slick-dots li button:before {
-    width: 6px;
-    height: 6px;
-    color: black;
-  }
-
   li {
     margin: 0;
     padding: 0;
+  }
+
+  .slick-prev {
+    display: none;
   }
 `;
 
@@ -91,6 +84,7 @@ function Carousel() {
     centerMode: true,
     autoplay: true,
     autoplaySpeed: 5000,
+    arrows: false,
   };
 
   return (
@@ -106,4 +100,4 @@ function Carousel() {
   );
 }
 
-export default Carousel;
+export default React.memo(Carousel);
