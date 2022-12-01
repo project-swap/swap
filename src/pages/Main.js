@@ -6,8 +6,6 @@ import { darkMode } from '../atoms/atoms';
 // import Components
 import SectionContainer from '../components/Main/SectionContainer';
 
-// import { firestore } from '../firebase';
-
 // components import
 import NavBar from '../components/common/NavBar';
 import Footer from '../components/common/Footer';
@@ -24,11 +22,9 @@ const MainSectionContainer = styled.div`
   align-items: center;
 `;
 
-const Main = () => {
-  // const storageRef = firebaseStorage.ref();
-  // const saveRoute = storageRef.child('images/' + '파일명');
-  // const upload = saveRoute.put('업로드 파일');
 
+function Main() {
+const Main = () => {
   const themeMode = useRecoilValue(darkMode);
 
   return (
