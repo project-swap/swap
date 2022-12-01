@@ -12,10 +12,8 @@ const FooterContainer = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
   width: 100%;
   height: 10rem;
-  bottom: 0;
   background-color: #c6c2c2;
 `;
 
