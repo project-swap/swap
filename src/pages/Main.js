@@ -12,18 +12,20 @@ import Footer from '../components/common/Footer';
 import Carousel from '../components/Carousel';
 
 const MainContainer = styled.div`
-  height: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
   background-color: ${props => (props.themeMode ? '#C6C2C2' : 'white')};
   transition: all 150ms linear;
 `;
 const MainSectionContainer = styled.div`
   display: flex;
+  height: 100%;
   flex-direction: column;
   align-items: center;
 `;
 
-
-function Main() {
 const Main = () => {
   const themeMode = useRecoilValue(darkMode);
 
