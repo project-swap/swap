@@ -17,4 +17,4 @@ const HashtagAndBannerContainer = () => {
   );
 };
 
-export default React.memo(HashtagAndBannerContainer);
+export default HashtagAndBannerContainer;

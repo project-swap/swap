@@ -9,6 +9,7 @@ const SectionContainerBox = styled.div`
   display: flex;
   justify-content: flex-start;
   margin-top: 2rem;
+  margin-left: 5rem;
   gap: 1rem;
 `;
 

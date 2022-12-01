@@ -30,7 +30,6 @@ const Main = () => {
   // const upload = saveRoute.put('업로드 파일');
 
   const themeMode = useRecoilValue(darkMode);
-  console.log(themeMode);
 
   return (
     <MainContainer themeMode={themeMode}>

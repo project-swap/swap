@@ -64,4 +64,4 @@ const PopularPostList = () => {
   );
 };
 
-export default React.memo(PopularPostList);
+export default PopularPostList;

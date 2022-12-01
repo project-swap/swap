@@ -1,14 +1,12 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { darkMode } from '../../atoms/atoms';
 
-// image,icon, font-style
-
 const SlideThemeBtnContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 10rem;
+  width: 7rem;
   height: 3rem;
   background-color: black;
   margin-bottom: -2rem;
@@ -22,10 +20,10 @@ const SlideThemeBtnContainer = styled.div`
 `;
 
 const SlideThemeBtn = styled.div`
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 2rem;
+  height: 2rem;
   background-color: white;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   border-radius: 50%;
   cursor: pointer;
   transform: translateX(0);
@@ -33,7 +31,7 @@ const SlideThemeBtn = styled.div`
 
   &.active {
     background-color: black;
-    transform: translateX(6.5rem);
+    transform: translateX(4rem);
     transition: all 150ms linear;
   }
 `;
@@ -46,13 +44,13 @@ const ThemeBtn = () => {
       <SlideThemeBtnContainer className={themeToggle ? 'active' : null}>
         <SlideThemeBtn
           className={themeToggle ? 'active' : null}
-          onClick={useCallback(() => {
+          onClick={() => {
             setThemeToggle(prev => !prev);
-          }, [themeToggle])}
+          }}
         />
       </SlideThemeBtnContainer>
     </>
   );
 };
 
-export default React.memo(ThemeBtn);
+export default ThemeBtn;

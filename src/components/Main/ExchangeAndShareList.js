@@ -31,4 +31,4 @@ const ExchangeAndShareList = () => {
   );
 };
 
-export default React.memo(ExchangeAndShareList);
+export default ExchangeAndShareList;
