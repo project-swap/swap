@@ -5,14 +5,26 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 
 // dot size 및 색상 추후 변경예정
+
 const StyledSlider = styled(Slider)`
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
   .slick-track {
     display: flex;
+  }
+  .slick-list {
+    display: flex;
+    width: 67.25rem;
+    padding: 0px 0.1rem;
   }
 
   .slick-slide {
     display: flex;
     justify-content: center;
+  }
+  .slick-dots {
+    margin-bottom: 3rem;
   }
 
   .sl .slick-dots {
@@ -28,28 +40,20 @@ const StyledSlider = styled(Slider)`
   .slick-dots li {
     width: 6px;
     height: 6px;
-    margin: 0 3.5px;
-  }
-
-  .slick-dots li button {
-    width: 6px;
-    height: 6px;
-  }
-
-  .slick-dots li button:before {
-    width: 6px;
-    height: 6px;
-    color: black;
+    margin: 0 7px;
   }
 
   li {
     margin: 0;
     padding: 0;
   }
+
+  .slick-prev {
+    display: none;
+  }
 `;
 
 const ImgContainer = styled.div`
-  margin-top: 11.06rem;
   text-align: center;
   border: solid 1 black;
 `;
@@ -68,7 +72,7 @@ function Carousel() {
     { id: 2, color: 'red' },
     { id: 3, color: 'pink' },
     { id: 4, color: 'green' },
-    { id: 5, color: 'yello' },
+    { id: 5, color: 'yellow' },
   ];
 
   const settings = {
@@ -80,6 +84,7 @@ function Carousel() {
     centerMode: true,
     autoplay: true,
     autoplaySpeed: 5000,
+    arrows: false,
   };
 
   return (
@@ -95,4 +100,4 @@ function Carousel() {
   );
 }
 
-export default Carousel;
+export default React.memo(Carousel);
