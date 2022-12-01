@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import ThemeBtn from '../Main/ThemeBtn';
 
 // image,icon, font-style
 import { BsGithub } from 'react-icons/bs';
@@ -11,10 +12,8 @@ const FooterContainer = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
   width: 100%;
-  height: 11.56rem;
-  bottom: 0;
+  height: 10rem;
   background-color: #c6c2c2;
 `;
 
@@ -134,6 +133,7 @@ function Footer() {
         <EmailAndNameBox>
           <ProjectName>SWAP</ProjectName>
           <ProjectEmail>Email: noreplyswap@email.org</ProjectEmail>
+          <ThemeBtn />
         </EmailAndNameBox>
 
         <CreaterContainer>
@@ -174,4 +174,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default React.memo(Footer);

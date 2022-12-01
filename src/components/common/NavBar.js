@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // image,icon, font-style
-import Logo from '../../assets/images/logo/android-icon-48x48.png';
+import Logo from '../../assets/logo/android-icon-48x48.png';
 import { linkStyle } from '../../styles/linkStyle';
 import { GoLocation } from 'react-icons/go';
 import { ImSearch } from 'react-icons/im';
@@ -103,17 +103,19 @@ function NavBar() {
           <LoginSuccessIconContainer>
             {/*로그인 성공 시 안쪽에 컴포넌트 추가 생성*/}
           </LoginSuccessIconContainer>
-          <ImSearch
-            style={{
-              width: '1.25rem',
-              height: '1.25rem',
-              marginLeft: '7.5rem ',
-            }}
-          />
+          <Link to="/search" style={linkStyle}>
+            <ImSearch
+              style={{
+                width: '1.25rem',
+                height: '1.25rem',
+                marginLeft: '7.5rem ',
+              }}
+            />
+          </Link>
         </MainNavBar>
       </NavContainer>
     </>
   );
 }
 
-export default NavBar;
+export default React.memo(NavBar);

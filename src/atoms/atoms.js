@@ -1,4 +1,4 @@
-import { selector } from 'recoil';
+import { atom, selector } from 'recoil';
 import isApi from '../apis/api';
 import _ from 'lodash';
 
@@ -15,4 +15,9 @@ export const getTest = selector({
     });
     return dataArr;
   },
+});
+
+export const darkMode = atom({
+  key: 'darkMode',
+  default: false,
 });
