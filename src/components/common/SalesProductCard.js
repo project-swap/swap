@@ -81,7 +81,6 @@ const ArticlePreview = styled.p`
 
 const SalesProductCard = () => {
   const data = useRecoilValue(getTest);
-  console.log(data);
 
   const contents = data.map(content => {
     return {

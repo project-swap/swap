@@ -22,8 +22,14 @@ const MainContainer = styled.div`
 const MainSectionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+  height: 100vh;
+`;
+
+const SectionFlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 const Main = () => {
@@ -34,8 +40,10 @@ const Main = () => {
       <MainContainer themeMode={themeMode}>
         <NavBar />
         <MainSectionContainer>
-          <Carousel />
-          <SectionContainer />
+          <SectionFlexContainer>
+            <Carousel />
+            <SectionContainer />
+          </SectionFlexContainer>
         </MainSectionContainer>
         <Footer />
       </MainContainer>
