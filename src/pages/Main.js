@@ -17,31 +17,29 @@ const MainContainer = styled.div`
   justify-content: space-between;
   height: 100vh;
   background-color: ${props => (props.themeMode ? '#C6C2C2' : 'white')};
-  transition: all 150ms linear;
 `;
 
 const MainSectionContainer = styled.div`
   display: flex;
-  height: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 `;
 
-
-function Main() {
 const Main = () => {
   const themeMode = useRecoilValue(darkMode);
 
   return (
-    <MainContainer themeMode={themeMode}>
-      <NavBar />
-      <MainSectionContainer>
-        <Carousel />
-        <SectionContainer />
-      </MainSectionContainer>
-      <Footer />
-    </MainContainer>
+    <>
+      <MainContainer themeMode={themeMode}>
+        <NavBar />
+        <MainSectionContainer>
+          <Carousel />
+          <SectionContainer />
+        </MainSectionContainer>
+        <Footer />
+      </MainContainer>
+    </>
   );
 };
 
