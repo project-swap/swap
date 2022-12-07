@@ -4,7 +4,7 @@ import {
   Button,
   Label,
   RegisterProductGroupComponent,
-} from '../common/public/PublicStyle';
+} from '../common/PublicStyle';
 import propTypes from 'prop-types';
 
 const RegisterProductImageUploadGroup = () => {

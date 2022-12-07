@@ -1,33 +1,55 @@
 import React from 'react';
-import { getTest } from '../atoms/atoms';
+import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
+import { darkMode } from '../atoms/atoms';
 
-// import { firestore } from '../firebase';
+// import Components
+import SectionContainer from '../components/Main/SectionContainer';
 
 // components import
 import NavBar from '../components/common/NavBar';
 import Footer from '../components/common/Footer';
 import Carousel from '../components/Carousel';
 
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: ${props => (props.themeMode ? '#C6C2C2' : 'white')};
+`;
 
-function Main() {
-  const state = useRecoilValue(getTest);
-  console.log(state);
+const MainSectionContainer = styled.div`
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+`;
 
-  // const storageRef = firebaseStorage.ref();
-  // const saveRoute = storageRef.child('images/' + '파일명');
-  // const upload = saveRoute.put('업로드 파일');
+const SectionFlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
+const Main = () => {
+  const themeMode = useRecoilValue(darkMode);
 
   return (
     <>
-      <NavBar />
-      <Carousel />
-      {/* {state.map(el => {
-        return el.title;
-      })} */}
-      <Footer />
+      <MainContainer themeMode={themeMode}>
+        <NavBar />
+        <MainSectionContainer>
+          <SectionFlexContainer>
+            <Carousel />
+            <SectionContainer />
+          </SectionFlexContainer>
+        </MainSectionContainer>
+        <Footer />
+      </MainContainer>
     </>
   );
-}
+};
 
 export default Main;

@@ -4,7 +4,7 @@ import RegisterProductImageUploadGroup from './RegisterProductImageUploadGroup';
 import RegisterProductInputGroup from './RegisterProductInputGroup';
 import RegisterProductTradeTypeGroup from './RegisterProductTradeTypeGroup';
 import { IoMdArrowRoundBack } from 'react-icons/io';
-import { ComponentForCenterAlignment } from '../common/public/PublicStyle';
+import { ComponentForCenterAlignment } from '../common/PublicStyle';
 import RegisterProductPostBtn from './RegisterProductPostBtn';
 
 const RegisterProductComponent = styled.div`
