@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { darkMode } from '../../atoms/atoms';
+import { darkModeToggle } from '../../atoms/atoms';
 
 const SlideThemeBtnContainer = styled.div`
   display: flex;
@@ -37,7 +37,7 @@ const SlideThemeBtn = styled.div`
 `;
 
 const ThemeBtn = () => {
-  const [themeToggle, setThemeToggle] = useRecoilState(darkMode);
+  const [themeToggle, setThemeToggle] = useRecoilState(darkModeToggle);
 
   return (
     <>
