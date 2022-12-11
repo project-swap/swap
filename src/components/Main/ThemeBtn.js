@@ -11,6 +11,7 @@ const SlideThemeBtnContainer = styled.div`
   background-color: black;
   margin-bottom: -2rem;
   border-radius: 1.5rem;
+  cursor: pointer;
   transition: all 150ms linear;
 
   &.active {
@@ -41,13 +42,13 @@ const ThemeBtn = () => {
 
   return (
     <>
-      <SlideThemeBtnContainer className={themeToggle ? 'active' : null}>
-        <SlideThemeBtn
-          className={themeToggle ? 'active' : null}
-          onClick={() => {
-            setThemeToggle(prev => !prev);
-          }}
-        />
+      <SlideThemeBtnContainer
+        className={themeToggle ? 'active' : null}
+        onClick={() => {
+          setThemeToggle(prev => !prev);
+        }}
+      >
+        <SlideThemeBtn className={themeToggle ? 'active' : null} />
       </SlideThemeBtnContainer>
     </>
   );
