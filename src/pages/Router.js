@@ -15,6 +15,7 @@ import Register from '../pages/Register';
 import Swap from '../pages/Swap';
 import Mypage from '../pages/Mypage';
 import Loader from '../pages/Loader';
+import UserChatting from '../pages/UserChatting';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -38,6 +39,7 @@ const Router = () => {
                 <Route path="/search" element={<Search />} />
                 <Route path="/swap" element={<Swap />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/chat-user:id" element={<UserChatting />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
