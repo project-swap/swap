@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ThemeBtn from '../Main/ThemeBtn';
+import { useRecoilValue } from 'recoil';
+import { themeColor, darkModeToggle } from '../../atoms/atoms';
 
 // image,icon, font-style
 import { BsGithub } from 'react-icons/bs';
@@ -14,7 +16,11 @@ const FooterContainer = styled.footer`
   align-items: center;
   width: 100%;
   height: 10rem;
-  background-color: #c6c2c2;
+  margin-top: 8rem;
+  background-color: ${props =>
+    props.themeMode
+      ? props.themeColorObject.darkNavAndFooter
+      : props.themeColorObject.lightNavAndFooter};
 `;
 
 const EmailAndNameBox = styled.div`
@@ -27,13 +33,12 @@ const EmailAndNameBox = styled.div`
 const ProjectName = styled.span`
   font-size: 1.5rem;
   font-weight: bold;
-  color: #4a4a4a;
+  padding-top: 1rem;
 `;
 
 const ProjectEmail = styled.span`
   font-size: 0.88rem;
   font-weight: bold;
-  color: #7a7575;
 `;
 
 const CreaterContainer = styled.div`
@@ -54,7 +59,6 @@ const CreaterBox = styled.div`
 const Creater = styled.span`
   font-size: 1.25rem;
   font-weight: bold;
-  color: #4a4a4a;
 `;
 
 const CreaterIconsBox = styled.div`
@@ -73,11 +77,17 @@ const LinkBtnList = styled.div`
 const LinkBtn = styled.span`
   font-size: 0.75rem;
   font-weight: 700;
-  color: #ffffff;
   cursor: pointer;
+  color: ${props =>
+    props.themeMode
+      ? props.themeColorObject.darkFont
+      : props.themeColorObject.lightFont};
 `;
 
 function Footer() {
+  const themeMode = useRecoilValue(darkModeToggle);
+  const themeColorObject = useRecoilValue(themeColor);
+
   const userData = [
     {
       id: 1,
@@ -129,13 +139,15 @@ function Footer() {
   ];
   return (
     <>
-      <FooterContainer>
+      <FooterContainer
+        themeMode={themeMode}
+        themeColorObject={themeColorObject}
+      >
         <EmailAndNameBox>
           <ProjectName>SWAP</ProjectName>
           <ProjectEmail>Email: noreplyswap@email.org</ProjectEmail>
           <ThemeBtn />
         </EmailAndNameBox>
-
         <CreaterContainer>
           {userData.map(el => {
             return (
@@ -157,13 +169,17 @@ function Footer() {
             );
           })}
         </CreaterContainer>
-
         <LinkBtnList>
           {routeList.map(el => {
             return (
               <div key={`unique${el.id}`}>
                 <Link to="/" style={linkStyle}>
-                  <LinkBtn>{el.name}</LinkBtn>
+                  <LinkBtn
+                    themeMode={themeMode}
+                    themeColorObject={themeColorObject}
+                  >
+                    {el.name}
+                  </LinkBtn>
                 </Link>
               </div>
             );
@@ -174,4 +190,4 @@ function Footer() {
   );
 }
 
-export default React.memo(Footer);
+export default Footer;
