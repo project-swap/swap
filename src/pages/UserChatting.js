@@ -2,15 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 
 import NavBar from '../components/common/NavBar';
-import UserChattingNameBox from '../components/Chatting/UserChatNameBox';
+import UserChatNameBox from '../components/Chatting/UserChatNameBox';
 import UserAllChatBox from '../components/Chatting/UserChatMessageArea';
+import UserChatInput from '../components/Chatting/UserChatInput';
 
 const UserChattingWrap = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const UserChattingContainer = styled.div`
+const UserChatContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 60rem;
   height: 45rem;
   margin-top: 3rem;
@@ -29,12 +33,13 @@ const UserChatting = () => {
     <>
       <NavBar />
       <UserChattingWrap>
-        <UserChattingContainer>
+        <UserChatContainer>
           <NamingBoxWrap>
-            <UserChattingNameBox />
+            <UserChatNameBox />
           </NamingBoxWrap>
           <UserAllChatBox />
-        </UserChattingContainer>
+          <UserChatInput />
+        </UserChatContainer>
       </UserChattingWrap>
     </>
   );
