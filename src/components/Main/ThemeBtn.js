@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { darkMode } from '../../atoms/atoms';
+import { darkModeToggle } from '../../atoms/atoms';
 
 const SlideThemeBtnContainer = styled.div`
   display: flex;
@@ -11,6 +11,7 @@ const SlideThemeBtnContainer = styled.div`
   background-color: black;
   margin-bottom: -2rem;
   border-radius: 1.5rem;
+  cursor: pointer;
   transition: all 150ms linear;
 
   &.active {
@@ -37,17 +38,17 @@ const SlideThemeBtn = styled.div`
 `;
 
 const ThemeBtn = () => {
-  const [themeToggle, setThemeToggle] = useRecoilState(darkMode);
+  const [themeToggle, setThemeToggle] = useRecoilState(darkModeToggle);
 
   return (
     <>
-      <SlideThemeBtnContainer className={themeToggle ? 'active' : null}>
-        <SlideThemeBtn
-          className={themeToggle ? 'active' : null}
-          onClick={() => {
-            setThemeToggle(prev => !prev);
-          }}
-        />
+      <SlideThemeBtnContainer
+        className={themeToggle ? 'active' : null}
+        onClick={() => {
+          setThemeToggle(prev => !prev);
+        }}
+      >
+        <SlideThemeBtn className={themeToggle ? 'active' : null} />
       </SlideThemeBtnContainer>
     </>
   );
