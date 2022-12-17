@@ -26,13 +26,13 @@ const PopularHashTag = () => {
   const mockData = useRecoilValue(getTest);
   const arrangeHashtag = () => {
     const hashTagList = mockData.map(el => el.hash_tag);
-    let hashTagObj = {};
+    const hashTagObj = {};
     hashTagList.map(items => {
       items.map(el => {
         hashTagObj[el] = (hashTagObj[el] || 0) + 1;
       });
     });
-    let hashTagSortList = Object.entries(hashTagObj).sort((a, b) => {
+    const hashTagSortList = Object.entries(hashTagObj).sort((a, b) => {
       return b[1] - a[1];
     });
     return hashTagSortList;
@@ -50,7 +50,7 @@ const PopularHashTag = () => {
           {arrangeHashtag(mockData).map((el, index) => {
             if (index < 5) {
               return (
-                <PopularHashTagItem key={`unique${index}`}>
+                <PopularHashTagItem key={el[0]}>
                   {index + 1}. {el[0]}
                 </PopularHashTagItem>
               );
