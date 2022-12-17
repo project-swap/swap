@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { darkMode } from '../atoms/atoms';
+import { themeColor, darkModeToggle } from '../atoms/atoms';
 
 // import Components
 import SectionContainer from '../components/Main/SectionContainer';
@@ -16,39 +16,37 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-  background-color: ${props => (props.themeMode ? '#C6C2C2' : 'white')};
+  color: ${props =>
+    props.darkMode
+      ? props.themeColorObject.darkFont
+      : props.themeColorObject.lightFont};
+  background-color: ${props =>
+    props.darkMode
+      ? props.themeColorObject.darkMain
+      : props.themeColorObject.lightMain};
 `;
 
 const MainSectionContainer = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
-  align-items: center;
-  height: 100vh;
-`;
-
-const SectionFlexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
 `;
 
 const Main = () => {
-  const themeMode = useRecoilValue(darkMode);
+  const darkMode = useRecoilValue(darkModeToggle);
+  const themeColorObject = useRecoilValue(themeColor);
 
   return (
-    <>
-      <MainContainer themeMode={themeMode}>
-        <NavBar />
-        <MainSectionContainer>
-          <SectionFlexContainer>
-            <Carousel />
-            <SectionContainer />
-          </SectionFlexContainer>
-        </MainSectionContainer>
-        <Footer />
-      </MainContainer>
-    </>
+    <MainContainer darkMode={darkMode} themeColorObject={themeColorObject}>
+      <NavBar />
+      <MainSectionContainer>
+        <Carousel />
+        <SectionContainer />
+      </MainSectionContainer>
+      <Footer />
+    </MainContainer>
   );
 };
 
