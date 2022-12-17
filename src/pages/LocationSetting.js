@@ -2,7 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Main } from './Mypage';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { FiCheckSquare } from 'react-icons/fi';
+
+import SideBar from '../components/SideBar';
+
+const LocationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: -40rem auto;
+`;
 
 export const Title = styled.h3`
   font-weight: 600;
@@ -10,7 +17,7 @@ export const Title = styled.h3`
   font-size: 1.5rem;
 `;
 
-const Select = styled.div`
+const CheckBox = styled.div`
   display: flex;
   border: 1px solid black;
   width: 30rem;
@@ -23,46 +30,52 @@ const Select = styled.div`
     h3 {
       font-weight: 600;
       margin-left: 1rem;
+      margin-bottom: 1rem;
     }
   }
   &:nth-child(2),
   :nth-child(3) {
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
   }
-  .check {
-    display: flex;
-    padding: 1rem 1rem;
+  .icon {
+    cursor: pointer;
+    :hover {
+      opacity: 0.5;
+    }
   }
-  .location {
-    font-size: 0.7rem;
-    opacity: 0.5;
+  input {
+    display: flex;
+    justify-content: start;
+    margin-top: 1rem;
+    position: relative;
+    right: 13.5rem;
+    width: 100%;
+    height: 15%;
   }
 `;
 
 const LocationSetting = () => {
   return (
-    <Main>
-      <Title>위치설정</Title>
-
-      <div>
-        <Select>
-          <div className="check">
-            <FiCheckSquare />
+    <LocationContainer>
+      <SideBar />
+      <Main>
+        <Title>위치설정</Title>
+        <div>
+          <CheckBox>
+            <input type="checkbox" />
             <h3>자취방[main]</h3>
-          </div>
-          <div className="location">
             <h3>서울특별시 강남구 논현동</h3>
-          </div>
-        </Select>
-        <Select>
-          <AiOutlinePlusCircle />
-        </Select>
-        <Select>
-          <AiOutlinePlusCircle />
-        </Select>
-      </div>
-    </Main>
+          </CheckBox>
+          <CheckBox>
+            <AiOutlinePlusCircle className="icon" size={30} />
+          </CheckBox>
+          <CheckBox>
+            <AiOutlinePlusCircle className="icon" size={30} />
+          </CheckBox>
+        </div>
+      </Main>
+    </LocationContainer>
   );
 };
 
