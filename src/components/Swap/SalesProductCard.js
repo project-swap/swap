@@ -2,6 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import { getTest } from '../../atoms/atoms';
+import ProductImg from '../common/ProductCard/ProductImg';
+import ProfileImg from '../common/ProductCard/ProfileImg';
+import SalesTitle from '../common/ProductCard/SalesTitle';
+import SellerName from '../common/ProductCard/SellerName';
+import PostingTime from '../common/ProductCard/PostingTime';
+import ArticlePreview from '../common/ProductCard/ArticlePreview';
 
 const SalesProductCardFrame = styled.li`
   width: 23%;
@@ -19,18 +25,9 @@ const SalesProductCardFrame = styled.li`
   list-style: none;
 `;
 
-const SalesProductImg = styled.div`
-  background: center url(${props => props.url});
-  box-sizing: border-box;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  height: 25rem;
-  width: 100%;
-  border-bottom: 1px solid black;
-  transition: all 0.2s linear;
-  :hover {
-    transform: scale(1.01);
-  }
+const SummaryInfo = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const SalesProductInfo = styled.div`
@@ -39,44 +36,6 @@ const SalesProductInfo = styled.div`
   justify-content: center;
   height: 10rem;
   padding-left: 1.5rem;
-`;
-
-const SummaryInfo = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const ProfilePicture = styled.div`
-  background: center url(${props => props.url}) no-repeat;
-  background-size: 70px;
-  border: 1px solid black;
-  height: 3rem;
-  width: 3rem;
-  border-radius: 50%;
-  margin-right: 0.8rem;
-`;
-
-const SalesInfo = styled.div``;
-
-const SalesTitle = styled.h3`
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-`;
-
-const SellerName = styled.span`
-  margin-right: 0.5rem;
-`;
-
-const PostingTime = styled.span`
-  margin-right: 0.5rem;
-  font-size: 0.8rem;
-`;
-
-const ArticlePreview = styled.p`
-  margin: 1rem 0 0;
-  padding-right: 1.5rem;
-  line-height: 1.5rem;
 `;
 
 const SalesProductCard = () => {
@@ -101,17 +60,17 @@ const SalesProductCard = () => {
       {contents.map(content => {
         return (
           <SalesProductCardFrame key={content.id}>
-            <SalesProductImg url={content.productImgUrl} />
+            <ProductImg url={content.productImgUrl} />
             <SalesProductInfo>
               <SummaryInfo>
-                <ProfilePicture url={content.profileImgUrl} />
-                <SalesInfo>
-                  <SalesTitle>{content.title}</SalesTitle>
-                  <SellerName>{content.name}</SellerName>
-                  <PostingTime>{content.date}</PostingTime>
-                </SalesInfo>
+                <ProfileImg url={content.profileImgUrl} />
+                <div>
+                  <SalesTitle title={content.title} />
+                  <SellerName name={content.name} />
+                  <PostingTime date={content.date} />
+                </div>
               </SummaryInfo>
-              <ArticlePreview>{content.content}</ArticlePreview>
+              <ArticlePreview content={content.content} />
             </SalesProductInfo>
           </SalesProductCardFrame>
         );
