@@ -6,7 +6,7 @@ import SideBar from '../components/SideBar';
 import NavBar from '../components/common/NavBar';
 import { FaTimes } from 'react-icons/fa';
 
-export const Main = styled.main`
+const Main = styled.main`
   box-sizing: border-box;
   background-color: #eaecef;
   width: 50rem;
