@@ -1,5 +1,4 @@
 import React from 'react';
-import { Title } from './LocationSetting';
 import { FiCheckSquare } from 'react-icons/fi';
 import styled from 'styled-components';
 import SideBar from '../components/SideBar';
@@ -12,20 +11,23 @@ const Select = styled.select`
   height: 2rem;
   margin-top: 2.5rem;
   font-size: 12px;
-`;
-
-const Icon = styled.div`
-  width: 50%;
-  display: flex;
-  h4 {
-    justify-content: space-around;
-  }
+  position: relative;
+  top: -3rem;
 `;
 
 const SwapContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: -40rem auto;
+`;
+
+const Title = styled.h3`
+  font-weight: 600;
+  margin: 2.5rem 5rem;
+  font-size: 1.5rem;
+  display: flex;
+  position: relative;
+  top: -3rem;
 `;
 
 const SwapList = () => {
@@ -35,14 +37,12 @@ const SwapList = () => {
       <MainContainer>
         <ContainerChildren>
           <Title>교환목록</Title>
-          <Icon>
-            <FiCheckSquare className="check" />
-            <h4 className="title">내가 쓴 글</h4>
-            <FiCheckSquare className="check" />
-            <h4 className="title">최신순</h4>
-            <FiCheckSquare className="check" />
-            <h4 className="title">오래된순</h4>
-          </Icon>
+          <FiCheckSquare className="check" />
+          <h4 className="title">내가 쓴 글</h4>
+          <FiCheckSquare className="check" />
+          <h4 className="title">최신순</h4>
+          <FiCheckSquare className="check" />
+          <h4 className="title">오래된순</h4>
           <Select>
             <option className="default" value="">
               1개월
