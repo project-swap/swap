@@ -15,27 +15,44 @@ const PostingTime = ({ date, fontSize, marginRight }) => {
   const krCurrentDate = new Date();
   const postDate = new Date(date);
 
-  const minusDiff = (krCurrentDate.valueOf() - postDate.valueOf()) / 1000;
+  const secondDiff = (krCurrentDate.valueOf() - postDate.valueOf()) / 1000;
+
+  const timeObj = {
+    now: 5,
+    second: 30,
+    min: 90,
+    '10min': 600,
+    hour: 3600,
+    other: 5400,
+  };
+
+  const outputText = () => {
+    if (secondDiff <= timeObj.now) {
+      return '지금';
+    }
+    if (secondDiff <= timeObj.second) {
+      return '몇 초 전';
+    }
+    if (secondDiff <= timeObj.min) {
+      return '1분 전';
+    }
+    if (secondDiff <= timeObj['10min']) {
+      return '몇 분 전';
+    }
+    if (secondDiff > timeObj['10min'] && secondDiff <= timeObj.hour) {
+      return '몇십 분 전';
+    }
+    if (secondDiff > timeObj.hour && secondDiff < timeObj.other) {
+      return '1시간 전';
+    }
+    if (secondDiff > timeObj.other) {
+      return date;
+    }
+  };
 
   return (
     <StyledPostingTime fontSize={fontSize} marginRight={marginRight}>
-      {(function () {
-        if (minusDiff < 10) {
-          return '몇초 전';
-        } else if (minusDiff > 10 && minusDiff < 60) {
-          return '1분 전';
-        } else if (minusDiff > 60 && minusDiff < 600) {
-          return '몇분 전';
-        } else if (minusDiff > 600 && minusDiff < 3600) {
-          return '몇십분 전';
-        } else if (minusDiff > 3600 && minusDiff < 7200) {
-          return '한시간 전';
-        } else if (minusDiff > 7200 && minusDiff < 10800) {
-          return '두시간 전';
-        } else {
-          return date;
-        }
-      })()}
+      {outputText()}
     </StyledPostingTime>
   );
 };
