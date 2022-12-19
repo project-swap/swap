@@ -1,58 +1,63 @@
 import React from 'react';
-import { Main } from './Mypage';
-import { Title } from './LocationSetting';
 import { FiCheckSquare } from 'react-icons/fi';
 import styled from 'styled-components';
-
-const Container = styled.main`
-  display: flex;
-  .check {
-    flex-direction: column;
-    padding: 3rem 1rem;
-    position: relative;
-  }
-  .title {
-    width: 7rem;
-    margin-top: 3rem;
-  }
-  .list {
-    width: 10rem;
-  }
-`;
+import SideBar from '../components/SideBar';
+import ContentChildren from '../components/ContentChildren';
+import ContainerChildren from '../components/ContainerChildren';
+import MainContainer from '../components/common/MainContainer';
 
 const Select = styled.select`
-  width: 10rem;
-  height: 3rem;
-  margin-top: 2rem;
-  margin-right: 1rem;
+  width: 4rem;
+  height: 2rem;
+  margin-top: 2.5rem;
+  font-size: 12px;
+  position: relative;
+  top: -3rem;
 `;
 
-const Content = styled.h4`
-  margin: 12rem auto;
-  opacity: 0.4;
+const SwapContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: -40rem auto;
+`;
+
+const Title = styled.h3`
+  font-weight: 600;
+  margin: 2.5rem 5rem;
+  font-size: 1.5rem;
+  display: flex;
+  position: relative;
+  top: -3rem;
 `;
 
 const SwapList = () => {
   return (
-    <Main>
-      <Container>
-        <Title className="list">교환목록</Title>
-        <FiCheckSquare className="check" />
-        <h4 className="title">내가 쓴 글</h4>
-        <FiCheckSquare className="check" />
-        <h4 className="title">최신순</h4>
-        <FiCheckSquare className="check" />
-        <h4 className="title">오래된순</h4>
-        <Select>
-          <option className="default" value="">
-            6개월
-          </option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </Select>
-      </Container>
-      <Content>교환목록이 없습니다.</Content>
-    </Main>
+    <SwapContainer>
+      <SideBar />
+      <MainContainer>
+        <ContainerChildren>
+          <Title>교환목록</Title>
+          <FiCheckSquare className="check" />
+          <h4 className="title">내가 쓴 글</h4>
+          <FiCheckSquare className="check" />
+          <h4 className="title">최신순</h4>
+          <FiCheckSquare className="check" />
+          <h4 className="title">오래된순</h4>
+          <Select>
+            <option className="default" value="">
+              1개월
+            </option>
+            <option className="default" value="">
+              3개월
+            </option>
+            <option className="default" value="">
+              6개월
+            </option>
+          </Select>
+        </ContainerChildren>
+        <ContentChildren>교환목록이 없습니다.</ContentChildren>
+      </MainContainer>
+    </SwapContainer>
   );
 };
 
