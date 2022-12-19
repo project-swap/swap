@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { FiSend } from 'react-icons/fi';
 
 import { realtimeDatabase } from '../../firebase';
+import { ref, push, set, onValue } from 'firebase/database';
+import { useSetRecoilState } from 'recoil';
+import { getMessage } from '../../atoms/atoms';
 
 const ChatForm = styled.form`
   display: flex;
@@ -32,16 +35,31 @@ const ChatEnterBtn = styled(FiSend)`
 
 const UserChatInput = () => {
   const [chatMessage, setChatMessage] = useState('');
+  const messageData = useSetRecoilState(getMessage);
+  const messageRef = ref(realtimeDatabase, 'Message');
+
   const sendMessage = e => {
     e.preventDefault();
-    const messageRef = realtimeDatabase.ref('Message');
-    messageRef.push(chatMessage);
+    const newMessageRef = push(messageRef);
+    set(newMessageRef, chatMessage);
     setChatMessage('');
-    console.log('실행');
   };
   const handleOnChange = e => {
     setChatMessage(e.target.value);
   };
+
+  useEffect(() => {
+    onValue(ref(realtimeDatabase), snapshot => {
+      const data = snapshot.val();
+      const array = [];
+      Object.values(data).map(el => {
+        for (let key in el) {
+          array.push(el[key]);
+        }
+        messageData(array);
+      });
+    });
+  }, []);
 
   return (
     <>

@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+
+import { getMessage } from '../../atoms/atoms';
+import { useRecoilValue } from 'recoil';
 
 const MyChattingBox = styled.div`
   display: flex;
@@ -32,61 +35,23 @@ const TraderChattingBox = styled.div`
 `;
 
 const UserChatMessage = () => {
-  const myId = 'BTS';
-  const mockData = [
-    {
-      key: 1,
-      id: 'BTS',
-      message: '안녕하세요.',
-    },
-    {
-      key: 2,
-      id: 'BlackPink',
-      message: '안녕하세요 :)',
-    },
-    {
-      key: 3,
-      id: 'BTS',
-      message: '혹시 물품 봐도 될까요 ?',
-    },
-    {
-      key: 4,
-      id: 'BlackPink',
-      message: '네.',
-    },
-    {
-      key: 5,
-      id: 'BlackPink',
-      message: '아 혹시 강남 쪽에서 보는거 맞죠 ?',
-    },
-    {
-      key: 6,
-      id: 'BTS',
-      message: '네네.',
-    },
-    {
-      key: 7,
-      id: 'BTS',
-      message: '나눔 물품이 스티커 맞죠 ?',
-    },
-    {
-      key: 8,
-      id: 'BTS',
-      message: '노트북에 붙이려구요 ㅎㅎ',
-    },
-  ];
+  const messageData = useRecoilValue(getMessage);
+  const testRef = useRef();
+
+  useEffect(() => {
+    testRef.current.scrollIntoView(true);
+  }, [messageData]);
 
   return (
     <>
-      {mockData.map(el => {
-        if (el.id === myId) {
-          return <MyChattingBox key={el.key}>{el.message}</MyChattingBox>;
+      {messageData.map((el, index) => {
+        if (el) {
+          return <MyChattingBox key={index}>{el}</MyChattingBox>;
         } else {
-          return (
-            <TraderChattingBox key={el.key}>{el.message}</TraderChattingBox>
-          );
+          return <TraderChattingBox key={index}>{el}</TraderChattingBox>;
         }
       })}
+      <div ref={testRef}></div>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import UserChatMessage from './UserChatMessage';
@@ -22,13 +22,13 @@ const ChatTextArea = styled.div`
 `;
 
 const UserChatMessageArea = () => {
-  const lastMessageRef = useRef();
+  const areaRef = useRef();
   useEffect(() => {
-    lastMessageRef.current.scrollTop = lastMessageRef.current.scrollHeight;
+    areaRef.current.scrollTop = areaRef.current.scrollHeigt;
   }, []);
   return (
     <>
-      <ChatTextArea ref={lastMessageRef}>
+      <ChatTextArea ref={areaRef}>
         <UserChatMessage />
       </ChatTextArea>
     </>

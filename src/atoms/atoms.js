@@ -35,3 +35,8 @@ export const themeColor = atom({
     lightFont: '#000000',
   },
 });
+
+export const getMessage = atom({
+  key: 'get/realtimeDatabase',
+  default: [],
+});
