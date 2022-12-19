@@ -19,6 +19,7 @@ import UserChatting from '../pages/UserChatting';
 import LocationSetting from './LocationSetting';
 import BookMarkPage from './BookMarkPage';
 import SwapList from './SwapList';
+import ReportHistory from './ReportHistory';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -46,6 +47,7 @@ const Router = () => {
                 <Route path="/locationsetting" element={<LocationSetting />} />
                 <Route path="/bookmark" element={<BookMarkPage />} />
                 <Route path="/swaplist" element={<SwapList />} />
+                <Route path="/report" element={<ReportHistory />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
