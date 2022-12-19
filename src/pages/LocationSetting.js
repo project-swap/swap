@@ -49,11 +49,11 @@ const CheckBox = styled.div`
   input {
     display: flex;
     justify-content: start;
-    margin-top: 1rem;
+    margin: 1rem 0;
     position: relative;
     right: 13.5rem;
     width: 100%;
-    height: 15%;
+    height: 20%;
   }
 `;
 
