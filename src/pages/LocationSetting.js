@@ -11,10 +11,12 @@ const LocationContainer = styled.div`
   margin: -40rem auto;
 `;
 
-export const Title = styled.h3`
+const Title = styled.h3`
   font-weight: 600;
   margin: 2.5rem 5rem;
   font-size: 1.5rem;
+  display: flex;
+  margin-left: 2rem;
 `;
 
 const CheckBox = styled.div`
