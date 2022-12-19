@@ -13,6 +13,7 @@ import Main from './pages/Main';
 import Search from './pages/Search';
 import Register from './pages/Register';
 import Swap from './pages/Swap';
+import CustomerService from './pages/CustomerService';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/search" element={<Search />} />
                 <Route path="/swap" element={<Swap />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/customerservice" element={<CustomerService />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
