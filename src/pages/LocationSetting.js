@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Main } from './Mypage';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 import SideBar from '../components/SideBar';
+import MainContainer from '../components/common/MainContainer';
 
 const LocationContainer = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const LocationContainer = styled.div`
 
 export const Title = styled.h3`
   font-weight: 600;
-  margin: 3rem 5rem;
+  margin: 2.5rem 5rem;
   font-size: 1.5rem;
 `;
 
@@ -59,7 +59,7 @@ const LocationSetting = () => {
   return (
     <LocationContainer>
       <SideBar />
-      <Main>
+      <MainContainer>
         <Title>위치설정</Title>
         <div>
           <CheckBox>
@@ -74,7 +74,7 @@ const LocationSetting = () => {
             <AiOutlinePlusCircle className="icon" size={30} />
           </CheckBox>
         </div>
-      </Main>
+      </MainContainer>
     </LocationContainer>
   );
 };

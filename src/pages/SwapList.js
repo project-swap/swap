@@ -1,11 +1,11 @@
 import React from 'react';
-import { Main } from './Mypage';
 import { Title } from './LocationSetting';
 import { FiCheckSquare } from 'react-icons/fi';
 import styled from 'styled-components';
 import SideBar from '../components/SideBar';
 import ContentChildren from '../components/ContentChildren';
 import ContainerChildren from '../components/ContainerChildren';
+import MainContainer from '../components/common/MainContainer';
 
 const Select = styled.select`
   width: 4rem;
@@ -22,11 +22,17 @@ const Icon = styled.div`
   }
 `;
 
+const SwapContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: -40rem auto;
+`;
+
 const SwapList = () => {
   return (
-    <>
+    <SwapContainer>
       <SideBar />
-      <Main>
+      <MainContainer>
         <ContainerChildren>
           <Title>교환목록</Title>
           <Icon>
@@ -50,8 +56,8 @@ const SwapList = () => {
           </Select>
         </ContainerChildren>
         <ContentChildren>교환목록이 없습니다.</ContentChildren>
-      </Main>
-    </>
+      </MainContainer>
+    </SwapContainer>
   );
 };
 
