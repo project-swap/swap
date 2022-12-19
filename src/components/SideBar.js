@@ -28,7 +28,6 @@ const SideMenu = styled.section`
   right: 10rem;
   line-height: 4rem;
   h3 {
-    border-bottom: 1px solid;
     font-weight: bold;
     &:hover {
       opacity: 0.5;
@@ -42,17 +41,17 @@ const SideBar = () => {
     <SideMain>
       <h2>마이페이지</h2>
       <SideMenu>
-        <Link to="/" style={linkStyle}>
-          <h3>프로필</h3>
+        <Link to="/profile" style={linkStyle}>
+          <h3 className="text">프로필</h3>
         </Link>
         <Link to="/locationsetting" style={linkStyle}>
-          <h3>위치설정</h3>
+          <h3 className="text">위치설정</h3>
         </Link>
         <Link to="/swaplist" style={linkStyle}>
-          <h3>교환목록</h3>
+          <h3 className="text">교환목록</h3>
         </Link>
         <Link to="/bookmark" style={linkStyle}>
-          <h3>북마크</h3>
+          <h3 className="text">북마크</h3>
         </Link>
         <h3>신고내역</h3>
       </SideMenu>
