@@ -53,7 +53,9 @@ const SideBar = () => {
         <Link to="/bookmark" style={linkStyle}>
           <h3 className="text">북마크</h3>
         </Link>
-        <h3>신고내역</h3>
+        <Link to="/report" style={linkStyle}>
+          <h3>신고내역</h3>
+        </Link>
       </SideMenu>
     </SideMain>
   );
