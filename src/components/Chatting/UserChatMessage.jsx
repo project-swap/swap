@@ -36,22 +36,24 @@ const TraderChattingBox = styled.div`
 
 const UserChatMessage = () => {
   const messageData = useRecoilValue(getMessage);
-  const testRef = useRef();
+  const bottomRef = useRef();
 
   useEffect(() => {
-    testRef.current.scrollIntoView(true);
+    bottomRef.current.scrollIntoView();
   }, [messageData]);
 
   return (
     <>
-      {messageData.map((el, index) => {
-        if (el) {
-          return <MyChattingBox key={index}>{el}</MyChattingBox>;
-        } else {
-          return <TraderChattingBox key={index}>{el}</TraderChattingBox>;
-        }
-      })}
-      <div ref={testRef}></div>
+      {messageData
+        ? messageData.map((el, index) => {
+            if (el) {
+              return <MyChattingBox key={index}>{el}</MyChattingBox>;
+            } else {
+              return <TraderChattingBox key={index}>{el}</TraderChattingBox>;
+            }
+          })
+        : null}
+      <div ref={bottomRef}></div>
     </>
   );
 };
