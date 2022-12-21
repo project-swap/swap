@@ -16,6 +16,10 @@ import Swap from '../pages/Swap';
 import Mypage from '../pages/Mypage';
 import Loader from '../pages/Loader';
 import UserChatting from '../pages/UserChatting';
+import LocationSetting from './LocationSetting';
+import BookMarkPage from './BookMarkPage';
+import SwapList from './SwapList';
+import ReportHistory from './ReportHistory';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -37,9 +41,13 @@ const Router = () => {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />
-                <Route path="/swap" element={<Swap />} />
+                <Route path="/product-list" element={<Swap />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/chat-user:id" element={<UserChatting />} />
+                <Route path="/locationsetting" element={<LocationSetting />} />
+                <Route path="/bookmark" element={<BookMarkPage />} />
+                <Route path="/swaplist" element={<SwapList />} />
+                <Route path="/report" element={<ReportHistory />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

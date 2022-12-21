@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SalesProductCard from '../common/SalesProductCard';
+import SalesProductCard from './SalesProductCard';
 
 const SalesProductCardListGroup = styled.ul`
   display: flex;
