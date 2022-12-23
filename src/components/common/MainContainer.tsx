@@ -14,7 +14,11 @@ const MainContainerComponent = styled.div`
   flex-direction: column;
 `;
 
-const MainContainer = ({ children }) => {
+const MainContainer = ({
+  children,
+}: {
+  children: JSX.Element | JSX.Element[];
+}) => {
   return <MainContainerComponent>{children}</MainContainerComponent>;
 };
 

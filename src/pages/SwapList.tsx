@@ -55,7 +55,9 @@ const SwapList = () => {
             </option>
           </Select>
         </ContainerChildren>
-        <ContentChildren>교환목록이 없습니다.</ContentChildren>
+        <ContentChildren>
+          <span>교환목록이 없습니다.</span>
+        </ContentChildren>
       </MainContainer>
     </SwapContainer>
   );
