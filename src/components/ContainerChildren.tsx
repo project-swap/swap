@@ -10,7 +10,11 @@ const Container = styled.main`
   top: 3rem;
 `;
 
-const ContainerChildren = ({ children }) => {
+const ContainerChildren = ({
+  children,
+}: {
+  children: JSX.Element | JSX.Element[];
+}) => {
   return <Container>{children}</Container>;
 };
 
