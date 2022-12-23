@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ExchangeAndShareList from '../Main/ExchangeAndShareList';
-import PopularPostList from '../Main/PopularPost';
+import ExchangeAndShareList from './ExchangeAndShareList';
+import PopularPostList from './PopularPost';
 import HashtagAndBannerContainer from './HashtagAndBannerContainer';
 
 const SectionContainerBox = styled.div`

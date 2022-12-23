@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PopularHashtag from '../Main/PopularHashtag';
-import Banner from '../Main/Banner';
+import PopularHashtag from './PopularHashtag';
+import Banner from './Banner';
 
 const HashtagAndBannerContainerBox = styled.div``;
 
