@@ -11,7 +11,21 @@ import { linkStyle } from '../../styles/linkStyle';
 import { GoLocation } from 'react-icons/go';
 import { ImSearch } from 'react-icons/im';
 
-const NavContainer = styled.nav`
+interface Theme {
+  themeMode: boolean;
+  themeColorObject: {
+    darkMain: string;
+    darkNavAndFooter: string;
+    darkLine: string;
+    darkFont: string;
+    lightMain: string;
+    lightNavAndFooter: string;
+    lightLine: string;
+    lightFont: string;
+  };
+}
+
+const NavContainer = styled.nav<Theme>`
   background-color: ${props =>
     props.themeMode ? props.themeColorObject.darkNavAndFooter : 'white'};
 `;
@@ -21,7 +35,7 @@ const TopNavBar = styled.div`
   width: 100%;
   height: 1.875rem;
 `;
-const MainNavBar = styled.div`
+const MainNavBar = styled.div<Theme>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +62,7 @@ const MainLinkBtnContainer = styled.div`
   gap: 3.125rem;
   margin-right: 4.38rem;
 `;
-const MainLinkBtn = styled.div`
+const MainLinkBtn = styled.div<Theme>`
   font-size: 0.875rem;
   text-decoration: none;
   color: ${props =>
@@ -57,7 +71,7 @@ const MainLinkBtn = styled.div`
       : props.themeColorObject.lightFont};
 `;
 
-const LocationBox = styled.div`
+const LocationBox = styled.div<Theme>`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -76,7 +90,7 @@ const TopBtnContainer = styled.div`
   margin-left: 60rem;
   gap: 1.875rem;
 `;
-const TopLinkBtn = styled.div`
+const TopLinkBtn = styled.div<Theme>`
   font-size: 0.625rem;
   color: ${props =>
     props.themeMode
