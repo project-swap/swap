@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { FiSend } from 'react-icons/fi';
 
 import { realtimeDatabase } from '../../firebase';
-import { ref, push, set, onValue } from 'firebase/database';
+import { ref, push, set } from 'firebase/database';
 import { useSetRecoilState } from 'recoil';
 import { getMessage } from '../../atoms/atoms';
 
@@ -37,6 +37,7 @@ const UserChatInput = () => {
   const [chatMessage, setChatMessage] = useState('');
   const messageData = useSetRecoilState(getMessage);
   const messageRef = ref(realtimeDatabase, 'Message');
+  console.log(messageData);
 
   const sendMessage = e => {
     e.preventDefault();
@@ -47,19 +48,6 @@ const UserChatInput = () => {
   const handleOnChange = e => {
     setChatMessage(e.target.value);
   };
-
-  useEffect(() => {
-    onValue(ref(realtimeDatabase), snapshot => {
-      const data = snapshot.val();
-      const array = [];
-      Object.values(data).map(el => {
-        for (let key in el) {
-          array.push(el[key]);
-        }
-        messageData(array);
-      });
-    });
-  }, []);
 
   return (
     <>
