@@ -34,6 +34,13 @@ const ExitButton = styled.button`
   }
 `;
 
+const RegisterForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const RegisterProduct = () => {
   return (
     <ComponentForCenterAlignment>
@@ -41,10 +48,12 @@ const RegisterProduct = () => {
         <ExitButton>
           <IoMdArrowRoundBack />
         </ExitButton>
-        <RegisterProductInputGroup />
-        <RegisterProductImageUploadGroup />
-        <RegisterProductTradeTypeGroup />
-        <RegisterProductPostBtn />
+        <RegisterForm>
+          <RegisterProductInputGroup />
+          <RegisterProductImageUploadGroup />
+          <RegisterProductTradeTypeGroup />
+          <RegisterProductPostBtn />
+        </RegisterForm>
       </RegisterProductComponent>
     </ComponentForCenterAlignment>
   );
