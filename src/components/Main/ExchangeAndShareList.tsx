@@ -12,7 +12,15 @@ interface IExchangeAndShareItem {
 }
 
 interface IContent {
-  [key: string]: string | number | string[];
+  id: number;
+  title: string;
+  content: string;
+  hash_tag: string[];
+  name: string;
+  date: string;
+  category?: string;
+  productImgUrl?: string;
+  profileImgUrl?: string;
 }
 
 const Container = styled.section`
@@ -48,13 +56,7 @@ const ExchangeAndShareList = () => {
   const data = useRecoilValue(getTest);
   const darkMode = useRecoilValue(darkModeToggle);
 
-  const contents = data.map<IContent>((content: any) => {
-    console.log(typeof content.id);
-    console.log(typeof content.title);
-    console.log(typeof content.content);
-    console.log(typeof content.hash_tag);
-    console.log(typeof content.name);
-    console.log(typeof content.date);
+  const contents = data.map<IContent>(content => {
     return {
       id: content.id,
       title: content.title,

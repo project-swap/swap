@@ -57,7 +57,7 @@ const PopularPostList = () => {
           titleMargin={5}
         />
         <PopularPostListContainer>
-          {mockData.map((el: any, index) => {
+          {mockData.map((el, index: number) => {
             if (index < 7) {
               if (index === 6)
                 return (

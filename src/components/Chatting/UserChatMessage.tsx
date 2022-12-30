@@ -36,7 +36,7 @@ const TraderChattingBox = styled.div`
 
 const UserChatMessage = () => {
   const messageData = useRecoilValue(getMessage);
-  const bottomRef = useRef();
+  const bottomRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
     bottomRef.current.scrollIntoView();

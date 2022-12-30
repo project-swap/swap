@@ -8,20 +8,34 @@ import SectionContainer from '../components/Main/SectionContainer';
 
 // components import
 import NavBar from '../components/common/NavBar';
-import Footer from '../components/common/Footer.tsx';
+import Footer from '../components/common/Footer';
 import Carousel from '../components/Carousel';
 
-const MainContainer = styled.div`
+interface Theme {
+  themeMode: boolean;
+  themeColorObject: {
+    darkMain: string;
+    darkNavAndFooter: string;
+    darkLine: string;
+    darkFont: string;
+    lightMain: string;
+    lightNavAndFooter: string;
+    lightLine: string;
+    lightFont: string;
+  };
+}
+
+const MainContainer = styled.div<Theme>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
   color: ${props =>
-    props.darkMode
+    props.themeMode
       ? props.themeColorObject.darkFont
       : props.themeColorObject.lightFont};
   background-color: ${props =>
-    props.darkMode
+    props.themeMode
       ? props.themeColorObject.darkMain
       : props.themeColorObject.lightMain};
 `;
@@ -35,11 +49,11 @@ const MainSectionContainer = styled.div`
 `;
 
 const Main = () => {
-  const darkMode = useRecoilValue(darkModeToggle);
+  const themeMode = useRecoilValue(darkModeToggle);
   const themeColorObject = useRecoilValue(themeColor);
 
   return (
-    <MainContainer darkMode={darkMode} themeColorObject={themeColorObject}>
+    <MainContainer themeMode={themeMode} themeColorObject={themeColorObject}>
       <NavBar />
       <MainSectionContainer>
         <Carousel />

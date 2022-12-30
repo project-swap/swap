@@ -2,15 +2,24 @@ import { atom, selector } from 'recoil';
 import isApi from '../apis/api';
 import _ from 'lodash';
 
+interface IContent {
+  id: number;
+  title: string;
+  content: string;
+  hash_tag: string[];
+  name: string;
+  date: string;
+}
+
 export const getTest = selector({
   key: 'get/firestore',
   get: async () => {
-    const dataArr: object[] = [];
+    const dataArr: IContent[] = [];
     await isApi().then(dbData => {
       const docs = dbData.docs;
       docs.forEach(doc => {
-        const retunrDoc: object = _.cloneDeep(doc.data());
-        dataArr.push(retunrDoc);
+        const returnDoc: any = _.cloneDeep(doc.data());
+        dataArr.push(returnDoc);
       });
     });
     return dataArr;
@@ -47,7 +56,7 @@ export const themeColor = atom<Test>({
   },
 });
 
-export const getMessage = atom({
+export const getMessage = atom<string[]>({
   key: 'get/realtimeDatabase',
   default: [],
 });
