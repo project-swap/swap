@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledContentInput = styled.textarea`
   width: 40rem;
-  height: 24rem;
+  height: 24.6rem;
   border: 1px solid black;
   border-radius: 0;
   margin-bottom: 1.5rem;
