@@ -6,13 +6,14 @@ import RegisterProductTradeTypeGroup from './RegisterProductTradeTypeGroup';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { ComponentForCenterAlignment } from '../common/PublicStyle';
 import RegisterProductPostBtn from './RegisterProductPostBtn';
+import RegisterProductInputContent from './RegisterProductInputContent';
 
 const RegisterProductComponent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 50rem;
-  height: 53rem;
+  height: 83rem;
   margin: 3rem 0;
   padding: 2rem 5rem;
   border: 1px solid black;
@@ -51,6 +52,7 @@ const RegisterProduct = () => {
         <RegisterForm>
           <RegisterProductInputGroup />
           <RegisterProductImageUploadGroup />
+          <RegisterProductInputContent />
           <RegisterProductTradeTypeGroup />
           <RegisterProductPostBtn />
         </RegisterForm>
