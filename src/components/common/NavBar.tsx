@@ -29,12 +29,14 @@ const NavContainer = styled.nav<Theme>`
   background-color: ${props =>
     props.themeMode ? props.themeColorObject.darkNavAndFooter : 'white'};
 `;
+
 const TopNavBar = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
   height: 1.875rem;
 `;
+
 const MainNavBar = styled.div<Theme>`
   display: flex;
   justify-content: center;
@@ -62,6 +64,7 @@ const MainLinkBtnContainer = styled.div`
   gap: 3.125rem;
   margin-right: 4.38rem;
 `;
+
 const MainLinkBtn = styled.div<Theme>`
   font-size: 0.875rem;
   text-decoration: none;
@@ -90,6 +93,7 @@ const TopBtnContainer = styled.div`
   margin-left: 60rem;
   gap: 1.875rem;
 `;
+
 const TopLinkBtn = styled.div<Theme>`
   font-size: 0.625rem;
   color: ${props =>
