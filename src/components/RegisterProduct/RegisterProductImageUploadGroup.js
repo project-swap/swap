@@ -5,7 +5,6 @@ import {
   Label,
   RegisterProductGroupComponent,
 } from '../common/PublicStyle';
-import propTypes from 'prop-types';
 
 const RegisterProductImageUploadGroup = () => {
   const InputComponent = styled.div`
@@ -46,7 +45,3 @@ const RegisterProductImageUploadGroup = () => {
 };
 
 export default RegisterProductImageUploadGroup;
-
-RegisterProductImageUploadGroup.propTypes = {
-  url: propTypes.node.isRequired,
-};
