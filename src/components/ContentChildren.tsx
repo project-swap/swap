@@ -6,7 +6,11 @@ const Content = styled.h4`
   opacity: 0.4;
 `;
 
-const ContentChildren = ({ children }) => {
+const ContentChildren = ({
+  children,
+}: {
+  children: JSX.Element | JSX.Element[];
+}) => {
   return <Content>{children}</Content>;
 };
 

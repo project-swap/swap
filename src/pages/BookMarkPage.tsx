@@ -37,7 +37,9 @@ const BookMark = () => {
           <FiCheckSquare />
           <h4 className="title">교환 완료</h4>
         </ContainerChildren>
-        <ContentChildren>교환목록이 없습니다.</ContentChildren>
+        <ContentChildren>
+          <span>교환목록이 없습니다.</span>
+        </ContentChildren>
       </MainContainer>
     </BookMarkContainer>
   );

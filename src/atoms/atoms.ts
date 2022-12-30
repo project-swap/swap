@@ -5,7 +5,7 @@ import _ from 'lodash';
 export const getTest = selector({
   key: 'get/firestore',
   get: async () => {
-    const dataArr = [];
+    const dataArr: object[] = [];
     await isApi().then(dbData => {
       const docs = dbData.docs;
       docs.forEach(doc => {
