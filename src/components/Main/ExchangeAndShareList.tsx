@@ -2,10 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import SectionTitle from './SectionTitle';
 import ProductImg from '../common/ProductCard/ProductImg';
-import SalesTitle from '../common/ProductCard/SalesTitle';
+// import SalesTitle from '../common/ProductCard/SalesTitle';
 
 import { useRecoilValue } from 'recoil';
 import { getTest, darkModeToggle } from '../../atoms/atoms';
+
+interface IExchangeAndShareItem {
+  darkMode: boolean;
+}
+
+interface IContent {
+  [key: string]: string | number | string[];
+}
 
 const Container = styled.section`
   width: 22.94rem;
@@ -25,7 +33,7 @@ const ExchangeAndShareItemContents = styled.div`
   margin-left: 0.3rem;
 `;
 
-const ExchangeAndShareItem = styled.div`
+const ExchangeAndShareItem = styled.div<IExchangeAndShareItem>`
   border: ${props => (props.darkMode ? `white solid 1px` : `black solid 1px`)};
   border-radius: 12px;
   cursor: pointer;
@@ -40,12 +48,18 @@ const ExchangeAndShareList = () => {
   const data = useRecoilValue(getTest);
   const darkMode = useRecoilValue(darkModeToggle);
 
-  const contents = data.map(content => {
+  const contents = data.map<IContent>((content: any) => {
+    console.log(typeof content.id);
+    console.log(typeof content.title);
+    console.log(typeof content.content);
+    console.log(typeof content.hash_tag);
+    console.log(typeof content.name);
+    console.log(typeof content.date);
     return {
-      key: content.id,
+      id: content.id,
       title: content.title,
       content: content.content,
-      hash: content.hash_tag,
+      hash_tag: content.hash_tag,
       name: content.name,
       date: content.date,
       category: '교환',
@@ -58,11 +72,15 @@ const ExchangeAndShareList = () => {
   return (
     <>
       <Container>
-        <SectionTitle titleName={'교환/나눔 물품 리스트'} />
+        <SectionTitle
+          titleName={'교환/나눔 물품 리스트'}
+          border={''}
+          titleMargin={0}
+        />
         <ExchangeAndShareListContainer>
-          {contents.map((content, index) => {
+          {contents.map((content, index: number) => {
             return index < 6 ? (
-              <ExchangeAndShareItem darkMode={darkMode} key={content.key}>
+              <ExchangeAndShareItem darkMode={darkMode} key={index}>
                 <ProductImg
                   url={content.productImgUrl}
                   width={'6rem'}
@@ -72,7 +90,7 @@ const ExchangeAndShareList = () => {
                   <ExchangeAndShareItemCategory>
                     {content.category}
                   </ExchangeAndShareItemCategory>
-                  <SalesTitle marginBottom={'0.4rem'} title={content.title} />
+                  {/* <SalesTitle marginBottom={'0.4rem'} title={content.title} /> */}
                 </ExchangeAndShareItemContents>
               </ExchangeAndShareItem>
             ) : null;

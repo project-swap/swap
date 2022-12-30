@@ -4,6 +4,20 @@ import { getTest, themeColor, darkModeToggle } from '../../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 import SectionTitle from './SectionTitle';
 
+interface Theme {
+  themeMode: boolean;
+  themeColorObject: {
+    darkMain: string;
+    darkNavAndFooter: string;
+    darkLine: string;
+    darkFont: string;
+    lightMain: string;
+    lightNavAndFooter: string;
+    lightLine: string;
+    lightFont: string;
+  };
+}
+
 const Container = styled.section`
   width: 17.31rem;
 `;
@@ -12,7 +26,7 @@ const PopularPostListContainer = styled.div`
   height: 17.75rem;
   margin-left: 3.06rem;
 `;
-const PopularPostItemBox = styled.div`
+const PopularPostItemBox = styled.div<Theme>`
   display: flex;
   width: 17.31rem;
   border-bottom: ${props =>
@@ -43,7 +57,7 @@ const PopularPostList = () => {
           titleMargin={5}
         />
         <PopularPostListContainer>
-          {mockData.map((el, index) => {
+          {mockData.map((el: any, index) => {
             if (index < 7) {
               if (index === 6)
                 return (

@@ -8,7 +8,7 @@ import SectionContainer from '../components/Main/SectionContainer';
 
 // components import
 import NavBar from '../components/common/NavBar';
-import Footer from '../components/common/Footer';
+import Footer from '../components/common/Footer.tsx';
 import Carousel from '../components/Carousel';
 
 const MainContainer = styled.div`
