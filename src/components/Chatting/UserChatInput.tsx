@@ -8,6 +8,10 @@ import { ref, push, set, onValue } from 'firebase/database';
 import { useSetRecoilState } from 'recoil';
 import { getMessage } from '../../atoms/atoms';
 
+interface IMessage {
+  [key: string]: string;
+}
+
 const ChatForm = styled.form`
   display: flex;
   position: relative;
@@ -38,22 +42,24 @@ const UserChatInput = () => {
   const messageData = useSetRecoilState(getMessage);
   const messageRef = ref(realtimeDatabase, 'Message');
 
-  const sendMessage = e => {
+  const sendMessage = (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<SVGElement>,
+  ) => {
     e.preventDefault();
     const newMessageRef = push(messageRef);
     set(newMessageRef, chatMessage);
     setChatMessage('');
   };
-  const handleOnChange = e => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChatMessage(e.target.value);
   };
 
   useEffect(() => {
     onValue(ref(realtimeDatabase), snapshot => {
       const data = snapshot.val();
-      const array = [];
-      Object.values(data).map(el => {
-        for (let key in el) {
+      const array: string[] = [];
+      Object.values<IMessage>(data).map(el => {
+        for (const key in el) {
           array.push(el[key]);
         }
         messageData(array);

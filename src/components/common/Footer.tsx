@@ -10,7 +10,21 @@ import { BsGithub } from 'react-icons/bs';
 import { FaBloggerB } from 'react-icons/fa';
 import { linkStyle } from '../../styles/linkStyle';
 
-const FooterContainer = styled.footer`
+interface Theme {
+  themeMode: boolean;
+  themeColorObject: {
+    darkMain: string;
+    darkNavAndFooter: string;
+    darkLine: string;
+    darkFont: string;
+    lightMain: string;
+    lightNavAndFooter: string;
+    lightLine: string;
+    lightFont: string;
+  };
+}
+
+const FooterContainer = styled.footer<Theme>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,7 +88,7 @@ const LinkBtnList = styled.div`
   margin-right: 9.88rem;
 `;
 
-const LinkBtn = styled.span`
+const LinkBtn = styled.span<Theme>`
   font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;

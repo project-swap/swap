@@ -8,10 +8,47 @@ import { themeColor, darkModeToggle } from '../../atoms/atoms';
 import { HiChevronRight } from 'react-icons/hi';
 import { linkStyle } from '../../styles/linkStyle';
 
+interface IPropsStyle {
+  titleName: string;
+  border: string;
+  titleMargin: number;
+}
+
+interface IViewMore {
+  themeMode: boolean;
+  themeColorObject: {
+    darkMain: string;
+    darkNavAndFooter: string;
+    darkLine: string;
+    darkFont: string;
+    lightMain: string;
+    lightNavAndFooter: string;
+    lightLine: string;
+    lightFont: string;
+  };
+}
+interface ISectionName {
+  titleMargin: number;
+}
+interface ITopContainer {
+  themeMode: boolean;
+  themeColorObject: {
+    darkMain: string;
+    darkNavAndFooter: string;
+    darkLine: string;
+    darkFont: string;
+    lightMain: string;
+    lightNavAndFooter: string;
+    lightLine: string;
+    lightFont: string;
+  };
+  border: string;
+}
+
 const Container = styled.section`
   width: 23.13rem;
 `;
-const SectionName = styled.div`
+const SectionName = styled.div<ISectionName>`
   height: 2.63rem;
   font-size: 1.25rem;
   font-weight: bold;
@@ -21,7 +58,7 @@ const SectionName = styled.div`
     ${props.titleMargin}rem`
       : '7.5rem'};
 `;
-const TopContainer = styled.div`
+const TopContainer = styled.div<ITopContainer>`
   display: flex;
   justify-content: center;
   border-bottom: ${props => (props.border ? props.border : 'solid 3px')};
@@ -37,7 +74,7 @@ const ViewMoreContainer = styled.div`
   margin-bottom: 1rem;
 `;
 
-const ViewMore = styled.div`
+const ViewMore = styled.div<IViewMore>`
   font-size: 0.63rem;
   margin-bottom: 0.1rem;
   color: ${props =>
@@ -46,7 +83,7 @@ const ViewMore = styled.div`
       : props.themeColorObject.lightFont};
 `;
 
-const SectionTitle = props => {
+const SectionTitle = (props: IPropsStyle) => {
   const themeMode = useRecoilValue(darkModeToggle);
   const themeColorObject = useRecoilValue(themeColor);
   return (

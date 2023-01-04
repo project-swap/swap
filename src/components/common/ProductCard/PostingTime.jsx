@@ -27,27 +27,19 @@ const PostingTime = ({ date, fontSize, marginRight }) => {
   };
 
   const outputText = () => {
-    if (secondDiff <= timeObj.now) {
-      return '지금';
-    }
-    if (secondDiff <= timeObj.second) {
-      return '몇 초 전';
-    }
-    if (secondDiff <= timeObj.min) {
-      return '1분 전';
-    }
-    if (secondDiff <= timeObj['10min']) {
-      return '몇 분 전';
-    }
-    if (secondDiff > timeObj['10min'] && secondDiff <= timeObj.hour) {
+    if (secondDiff <= timeObj.now) return '지금';
+
+    if (secondDiff <= timeObj.second) return '몇 초 전';
+
+    if (secondDiff <= timeObj.min) return '1분 전';
+
+    if (secondDiff <= timeObj['10min']) return '몇 분 전';
+
+    if (secondDiff > timeObj['10min'] && secondDiff <= timeObj.hour)
       return '몇십 분 전';
-    }
-    if (secondDiff > timeObj.hour && secondDiff < timeObj.other) {
+    if (secondDiff > timeObj.hour && secondDiff < timeObj.other)
       return '1시간 전';
-    }
-    if (secondDiff > timeObj.other) {
-      return date;
-    }
+    if (secondDiff > timeObj.other) return date;
   };
 
   return (

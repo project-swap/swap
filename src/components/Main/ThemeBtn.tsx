@@ -43,12 +43,12 @@ const ThemeBtn = () => {
   return (
     <>
       <SlideThemeBtnContainer
-        className={themeToggle ? 'active' : null}
+        className={themeToggle ? 'active' : 'inactive'}
         onClick={() => {
           setThemeToggle(prev => !prev);
         }}
       >
-        <SlideThemeBtn className={themeToggle ? 'active' : null} />
+        <SlideThemeBtn className={themeToggle ? 'active' : 'inactive'} />
       </SlideThemeBtnContainer>
     </>
   );
