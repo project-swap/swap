@@ -13,7 +13,7 @@ const RegisterProductComponent = styled.div`
   flex-direction: column;
   align-items: center;
   width: 50rem;
-  height: 83rem;
+  height: 62rem;
   margin: 3rem 0;
   padding: 2rem 5rem;
   border: 1px solid black;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Label, RegisterProductGroupComponent } from '../common/PublicStyle';
+import HashtagInput from './HashtagInput';
 
 const InputGroup = styled.div`
   display: flex;
@@ -27,10 +28,7 @@ const RegisterProductInputGroup = () => {
         <Label htmlFor="productName">상품명</Label>
         <Input id="productName" placeholder="상품명"></Input>
       </InputGroup>
-      <InputGroup>
-        <Label htmlFor="hashTag">해시태그</Label>
-        <Input id="hashTag" placeholder="해시태그"></Input>
-      </InputGroup>
+      <HashtagInput />
     </RegisterProductGroupComponent>
   );
 };
