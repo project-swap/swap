@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { getAuth, signOut } from 'firebase/auth';
 
 import { useRecoilValue } from 'recoil';
 import { themeColor, darkModeToggle } from '../../atoms/atoms';
@@ -10,62 +11,46 @@ import Logo from '../../assets/logo/android-icon-48x48.png';
 import { linkStyle } from '../../styles/linkStyle';
 import { GoLocation } from 'react-icons/go';
 import { ImSearch } from 'react-icons/im';
+import { BsPerson, BsChatLeftDots, BsBell } from 'react-icons/bs';
 
-interface Theme {
-  themeMode: boolean;
-  themeColorObject: {
-    darkMain: string;
-    darkNavAndFooter: string;
-    darkLine: string;
-    darkFont: string;
-    lightMain: string;
-    lightNavAndFooter: string;
-    lightLine: string;
-    lightFont: string;
-  };
-}
-
-const NavContainer = styled.nav<Theme>`
-  background-color: ${props =>
-    props.themeMode ? props.themeColorObject.darkNavAndFooter : 'white'};
-`;
-
-const TopNavBar = styled.div`
+const NavContainer = styled.nav`
   display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 1.875rem;
-`;
-
-const MainNavBar = styled.div<Theme>`
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 5rem;
-  border-top: ${props =>
-    props.themeMode
-      ? `solid ${props.themeColorObject.darkLine} 1px`
-      : `solid ${props.themeColorObject.lightLine} 1px`};
+  background-color: ${props =>
+    props.themeMode ? props.themeColorObject.darkNavAndFooter : 'white'};
   border-bottom: ${props =>
     props.themeMode
       ? `solid ${props.themeColorObject.darkLine} 1px`
       : `solid ${props.themeColorObject.lightLine} 1px`};
+  box-sizing: border-box;
+`;
+const TopNavBar = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 60rem;
+  height: 1.875rem;
+`;
+const MainNavBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60rem;
+  height: 5rem;
 `;
 const MainLogo = styled.div`
   width: 3rem;
   height: 3rem;
-  margin-right: 5.06rem;
   background-image: url(${Logo});
   border: none;
 `;
 const MainLinkBtnContainer = styled.div`
   display: flex;
-  gap: 3.125rem;
-  margin-right: 4.38rem;
+  justify-content: space-between;
+  width: 10rem;
 `;
-
-const MainLinkBtn = styled.div<Theme>`
+const MainLinkBtn = styled.div`
   font-size: 0.875rem;
   text-decoration: none;
   color: ${props =>
@@ -73,12 +58,11 @@ const MainLinkBtn = styled.div<Theme>`
       ? props.themeColorObject.darkFont
       : props.themeColorObject.lightFont};
 `;
-
-const LocationBox = styled.div<Theme>`
+const LocationBox = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 22.5rem;
+  width: 20rem;
   height: 2.5rem;
   border: ${props =>
     props.themeMode
@@ -86,15 +70,12 @@ const LocationBox = styled.div<Theme>`
       : `solid ${props.themeColorObject.lightLine} 1px`};
   border-radius: 1.25rem;
 `;
-
 const TopBtnContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 60rem;
   gap: 1.875rem;
 `;
-
-const TopLinkBtn = styled.div<Theme>`
+const TopLinkBtn = styled.div`
   font-size: 0.625rem;
   color: ${props =>
     props.themeMode
@@ -103,14 +84,43 @@ const TopLinkBtn = styled.div<Theme>`
   cursor: pointer;
 `;
 const LoginSuccessIconContainer = styled.div`
-  width: 9.375rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 10rem;
   height: 2rem;
-  gap: 3rem;
 `;
 
-function NavBar() {
+const NavBar = () => {
   const themeMode = useRecoilValue(darkModeToggle);
   const themeColorObject = useRecoilValue(themeColor);
+  const [loginState, setLoginState] = useState(false);
+  const auth = getAuth();
+
+  useEffect(() => {
+    const userData = sessionUserData();
+    if (userData) {
+      setLoginState(true);
+    }
+  }, []);
+
+  const sessionUserData = () => {
+    for (const key of Object.keys(sessionStorage)) {
+      if (key.includes('firebase:authUser:')) {
+        return JSON.parse(sessionStorage.getItem(key));
+      }
+    }
+  };
+
+  const handleGoogleLogout = () => {
+    const isLogout = confirm('로그아웃 하시겠습니까?');
+    if (isLogout) {
+      setLoginState(false);
+      signOut(auth).catch(error => {
+        console.log(error);
+      });
+    }
+  };
 
   return (
     <>
@@ -123,14 +133,19 @@ function NavBar() {
             >
               고객센터
             </TopLinkBtn>
-            <Link to="/login" style={linkStyle}>
-              <TopLinkBtn
-                themeMode={themeMode}
-                themeColorObject={themeColorObject}
-              >
-                로그인
-              </TopLinkBtn>
-            </Link>
+
+            <TopLinkBtn
+              themeMode={themeMode}
+              themeColorObject={themeColorObject}
+            >
+              {loginState ? (
+                <span onClick={handleGoogleLogout}>로그아웃</span>
+              ) : (
+                <Link to="/login" style={linkStyle}>
+                  <span>로그인</span>
+                </Link>
+              )}
+            </TopLinkBtn>
           </TopBtnContainer>
         </TopNavBar>
         <MainNavBar themeMode={themeMode} themeColorObject={themeColorObject}>
@@ -168,18 +183,21 @@ function NavBar() {
             />
           </LocationBox>
           <LoginSuccessIconContainer>
-            {/*로그인 성공 시 안쪽에 컴포넌트 추가 생성*/}
+            {loginState && (
+              <>
+                <BsPerson style={{ fontSize: '1.4rem' }} />
+                <BsChatLeftDots style={{ fontSize: '1.4rem' }} />
+                <BsBell style={{ fontSize: '1.4rem' }} />
+              </>
+            )}
           </LoginSuccessIconContainer>
-          <div
-            style={{
-              marginLeft: '7.5rem ',
-            }}
-          >
+          <div>
             <Link to="/search" style={linkStyle}>
               <ImSearch
                 style={{
                   width: '1.25rem',
                   height: '1.25rem',
+                  marginRight: '0.5rem',
                   color: `${
                     themeMode
                       ? themeColorObject.darkFont
@@ -193,6 +211,6 @@ function NavBar() {
       </NavContainer>
     </>
   );
-}
+};
 
 export default NavBar;
