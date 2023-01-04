@@ -1,11 +1,9 @@
 import React from 'react';
-// import { FiCheckSquare } from 'react-icons/fi';
 import styled from 'styled-components';
 import MainContainer from '../components/common/MainContainer';
-// import ContainerChildren from '../components/ContainerChildren';
-// import ContentChildren from '../components/ContentChildren';
 import SideBar from '../components/SideBar';
 import profile from '../assets/logo/android-icon-144x144.png';
+import { useForm } from 'react-hook-form';
 
 const Info = styled.section`
   margin-top: 2rem;
@@ -23,6 +21,10 @@ const Location = styled.div`
   justify-content: space-between;
   h4 {
     font-weight: 600;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+    }
   }
 `;
 
@@ -31,14 +33,6 @@ const SwapContainer = styled.div`
   flex-direction: column;
   margin: -40rem auto;
 `;
-
-// const Title = styled.h3`
-//   font-weight: 600;
-//   margin: 2.5rem 5rem;
-//   font-size: 1.5rem;
-//   display: flex;
-//   position: relative;
-//   top: -3rem;
 
 const ProfileContainer = styled.section`
   display: flex;
@@ -98,7 +92,33 @@ const StyleContainer = styled.div`
   display: flex;
 `;
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ErrorMessage = styled.p`
+  font-weight: bold;
+  color: red;
+`;
+
+interface NickNameProps {
+  nickName: string;
+}
+
 const Profile = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitted },
+    resetField,
+  } = useForm<NickNameProps>({ mode: 'onChange' }); //mode: 'onChange' => 사용자에게 실시간으로 피드백 제공
+
+  const onValid = (nickName: NickNameProps) => {
+    alert(JSON.stringify(nickName));
+    resetField('nickName');
+  };
+
   return (
     <SwapContainer>
       <SideBar />
@@ -116,25 +136,38 @@ const Profile = () => {
         </Location>
         <Line />
         <InputContainer>
-          <form>
-            <Label htmlFor="">닉네임</Label>
+          <Form onSubmit={handleSubmit(onValid)}>
+            <Label htmlFor="nickname">닉네임</Label>
             <StyleContainer>
-              <input type="text" />
-              <Button>수정</Button>
+              <input
+                type="text"
+                {...register('nickName', {
+                  required: true,
+                  minLength: 2,
+                  maxLength: 15,
+                  pattern: /([^가-힣\x20])/i, //초성 미포함
+                })}
+              />
+              <Button type="submit">수정</Button>
+              {errors ? (
+                <ErrorMessage>{errors.nickName?.message}</ErrorMessage>
+              ) : isSubmitted ? (
+                <p>성공적으로 수정했습니다!</p>
+              ) : null}
             </StyleContainer>
-            <Label htmlFor="">이메일</Label>
+            <Label htmlFor="email">이메일</Label>
             <StyleContainer>
-              <input type="email" disabled />
+              <input type="email" defaultValue="noreply@naver.com" disabled />
             </StyleContainer>
-            <Label htmlFor="">비밀번호</Label>
+            <Label htmlFor="password">비밀번호</Label>
             <StyleContainer>
-              <input type="password" disabled />
+              <input type="password" defaultValue="xsdasdasdaew" disabled />
             </StyleContainer>
-            <Label htmlFor="">소셜</Label>
+            <Label htmlFor="social">소셜</Label>
             <StyleContainer>
-              <input type="text" disabled />
+              <input type="text" defaultValue="구글 가입 회원" disabled />
             </StyleContainer>
-          </form>
+          </Form>
         </InputContainer>
       </MainContainer>
     </SwapContainer>
