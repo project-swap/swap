@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-import { getMessage } from '../../atoms/atoms';
+import { getMessage } from '../../../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 
 const MyChattingBox = styled.div`
