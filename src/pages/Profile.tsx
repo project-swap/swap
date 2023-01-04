@@ -102,6 +102,11 @@ const ErrorMessage = styled.p`
   color: red;
 `;
 
+const SuccessMessage = styled.p`
+  font-weight: bold;
+  color: green;
+`;
+
 interface NickNameProps {
   nickName: string;
 }
@@ -152,7 +157,7 @@ const Profile = () => {
               {errors ? (
                 <ErrorMessage>{errors.nickName?.message}</ErrorMessage>
               ) : isSubmitted ? (
-                <p>성공적으로 수정했습니다!</p>
+                <SuccessMessage>성공적으로 수정했습니다!</SuccessMessage>
               ) : null}
             </StyleContainer>
             <Label htmlFor="email">이메일</Label>
