@@ -59,7 +59,7 @@ const SalesProductCard = () => {
     <>
       {contents.map(content => {
         return (
-          <SalesProductCardFrame key={content.id}>
+          <SalesProductCardFrame key={content.key}>
             <ProductImg url={content.productImgUrl} />
             <SalesProductInfo>
               <SummaryInfo>
