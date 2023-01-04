@@ -13,7 +13,7 @@ import Main from './Main';
 import Search from './Search';
 import Register from './Register';
 import Swap from './Swap';
-import Mypage from './Mypage';
+import Mypage from './mypage/Mypage';
 import Loader from './Loader';
 import UserChatting from './UserChatting';
 import LocationSetting from './LocationSetting';
