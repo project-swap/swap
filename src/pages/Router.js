@@ -17,6 +17,7 @@ import Mypage from '../pages/Mypage';
 import Loader from '../pages/Loader';
 import UserChatting from '../pages/UserChatting';
 import DetailPage from './DetailPage';
+import Follow from './Follow';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -42,6 +43,7 @@ const Router = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/chat-user:id" element={<UserChatting />} />
                 <Route path="/detail" element={<DetailPage />} />
+                <Route path="/follow" element={<Follow />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
