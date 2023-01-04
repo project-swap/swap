@@ -20,7 +20,7 @@ import LocationSetting from './LocationSetting';
 import BookMarkPage from './BookMarkPage';
 import SwapList from './SwapList';
 import ReportHistory from './ReportHistory';
-import Test from './Test';
+import Profile from './Profile';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -49,7 +49,7 @@ const Router = () => {
                 <Route path="/bookmark" element={<BookMarkPage />} />
                 <Route path="/swaplist" element={<SwapList />} />
                 <Route path="/report" element={<ReportHistory />} />
-                <Route path="/test" element={<Test />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
