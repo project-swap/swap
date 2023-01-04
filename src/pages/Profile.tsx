@@ -4,6 +4,7 @@ import MainContainer from '../components/common/MainContainer';
 import SideBar from '../components/SideBar';
 import profile from '../assets/logo/android-icon-144x144.png';
 import { useForm } from 'react-hook-form';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 const Info = styled.section`
   margin-top: 2rem;
@@ -36,23 +37,41 @@ const SwapContainer = styled.div`
 
 const ProfileContainer = styled.section`
   display: flex;
+  z-index: 1;
   img {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 2.5rem;
+    width: 8rem;
+    height: 8rem;
+    margin-left: 1rem;
     margin-top: 1rem;
+    border-radius: 2.5rem;
+    z-index: -1;
+  }
+  > input {
+    display: none;
+  }
+  .plus {
+    position: relative;
+    top: 7rem;
+    right: 2rem;
+    width: 2rem;
+    height: 2rem;
+    color: #5b5656;
+    background-color: white;
+    border-radius: 1rem;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.9;
+    }
   }
 `;
 
 const InputContainer = styled.section`
+  position: relative;
+  top: 2rem;
   input {
-    margin-top: 1rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    margin: 2rem auto;
-    margin-bottom: 1rem;
+    margin: 1rem auto;
     height: 3rem;
     width: 30rem;
   }
@@ -68,7 +87,7 @@ const Label = styled.label`
   display: flex;
   margin-left: 9.5rem;
   position: relative;
-  top: 1rem;
+  top: -0.5rem;
   font-weight: 600;
 `;
 
@@ -80,17 +99,15 @@ const Button = styled.button`
   height: 2rem;
   z-index: 1;
   cursor: pointer;
-  position: absolute;
-  right: 26rem;
-  top: 19rem;
+  position: relative;
+  left: 35.5rem;
+  bottom: 3.6rem;
   &:hover {
     opacity: 0.7;
   }
 `;
 
-const StyleContainer = styled.div`
-  display: flex;
-`;
+const StyleContainer = styled.div``;
 
 const Form = styled.form`
   display: flex;
@@ -124,12 +141,20 @@ const Profile = () => {
     resetField('nickName');
   };
 
+  const handleIconClick = () => {
+    console.log('clicked');
+  };
+
   return (
     <SwapContainer>
       <SideBar />
       <MainContainer>
         <ProfileContainer>
           <img src={profile} alt="미쭈" />
+          <label htmlFor="file-input">
+            <AiOutlinePlusCircle className="plus" onClick={handleIconClick} />
+          </label>
+          <input id="file-input" type="file" />
           <Info>
             <h2>박미쭈</h2>
             <h4>팔로잉 59 팔로워 48</h4>
