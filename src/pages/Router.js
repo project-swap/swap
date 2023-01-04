@@ -18,6 +18,10 @@ import Loader from '../pages/Loader';
 import UserChatting from '../pages/UserChatting';
 import DetailPage from './DetailPage';
 import Follow from './Follow';
+import LocationSetting from './LocationSetting';
+import BookMarkPage from './BookMarkPage';
+import SwapList from './SwapList';
+import ReportHistory from './ReportHistory';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -44,6 +48,10 @@ const Router = () => {
                 <Route path="/chat-user:id" element={<UserChatting />} />
                 <Route path="/detail" element={<DetailPage />} />
                 <Route path="/follow" element={<Follow />} />
+                <Route path="/locationsetting" element={<LocationSetting />} />
+                <Route path="/bookmark" element={<BookMarkPage />} />
+                <Route path="/swaplist" element={<SwapList />} />
+                <Route path="/report" element={<ReportHistory />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

@@ -5,7 +5,7 @@ import _ from 'lodash';
 export const getTest = selector({
   key: 'get/firestore',
   get: async () => {
-    const dataArr = [];
+    const dataArr: object[] = [];
     await isApi().then(dbData => {
       const docs = dbData.docs;
       docs.forEach(doc => {
@@ -34,4 +34,9 @@ export const themeColor = atom({
     lightLine: '#000000',
     lightFont: '#000000',
   },
+});
+
+export const getMessage = atom({
+  key: 'get/realtimeDatabase',
+  default: [],
 });

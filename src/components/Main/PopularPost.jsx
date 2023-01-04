@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getTest } from '../../atoms/atoms';
+import { getTest, themeColor, darkModeToggle } from '../../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 import SectionTitle from './SectionTitle';
-import { themeColor, darkModeToggle } from '../../atoms/atoms';
 
 const Container = styled.section`
   width: 17.31rem;
