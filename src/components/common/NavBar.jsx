@@ -105,7 +105,7 @@ const NavBar = () => {
   }, []);
 
   const sessionUserData = () => {
-    for (let key of Object.keys(sessionStorage)) {
+    for (const key of Object.keys(sessionStorage)) {
       if (key.includes('firebase:authUser:')) {
         return JSON.parse(sessionStorage.getItem(key));
       }
@@ -116,11 +116,9 @@ const NavBar = () => {
     const isLogout = confirm('로그아웃 하시겠습니까?');
     if (isLogout) {
       setLoginState(false);
-      signOut(auth)
-        .then(() => {})
-        .catch(error => {
-          console.log(error);
-        });
+      signOut(auth).catch(error => {
+        console.log(error);
+      });
     }
   };
 

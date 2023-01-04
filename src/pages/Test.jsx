@@ -61,11 +61,9 @@ const Test = () => {
     const isLogout = confirm('로그아웃 하시겠습니까?');
     if (isLogout) {
       setCommonState(false, null);
-      signOut(auth)
-        .then(() => {})
-        .catch(error => {
-          console.log(error);
-        });
+      signOut(auth).catch(error => {
+        console.log(error);
+      });
     }
   };
 
