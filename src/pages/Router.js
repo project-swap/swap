@@ -6,16 +6,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 // import router
-import Login from '../pages/Login';
-import NotFound from '../pages/NotFound';
-import SignUp from '../pages/SignUp';
-import Main from '../pages/Main';
-import Search from '../pages/Search';
-import Register from '../pages/Register';
-import Swap from '../pages/Swap';
-import Mypage from '../pages/Mypage';
-import Loader from '../pages/Loader';
-import UserChatting from '../pages/UserChatting';
+import Login from './Login';
+import NotFound from './NotFound';
+import SignUp from './SignUp';
+import Main from './Main';
+import Search from './Search';
+import Register from './Register';
+import Swap from './Swap';
+import Mypage from './Mypage';
+import Loader from './Loader';
+import UserChatting from './UserChatting';
 import LocationSetting from './LocationSetting';
 import BookMarkPage from './BookMarkPage';
 import SwapList from './SwapList';

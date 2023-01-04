@@ -22,19 +22,31 @@ const PopularHashTagItem = styled.li`
   cursor: pointer;
 `;
 
+interface FirestoreObj {
+  content: string;
+  data: string;
+  hash_tag: string[];
+  id: number;
+  name: string;
+  title: string;
+}
+
+// any 타입 수정 해야함
 const PopularHashTag = () => {
-  const mockData = useRecoilValue(getTest);
-  const arrangeHashtag = () => {
-    const hashTagList = mockData.map(el => el.hash_tag);
-    const hashTagObj = {};
+  const mockData: object[] = useRecoilValue(getTest);
+  const arrangeHashtag = (dataObj: any) => {
+    const hashTagList: any[] = dataObj.map((el: FirestoreObj) => el.hash_tag);
+    const hashTagObj: any = {};
     hashTagList.map(items => {
-      items.map(el => {
+      items.map((el: string) => {
         hashTagObj[el] = (hashTagObj[el] || 0) + 1;
       });
     });
-    const hashTagSortList = Object.entries(hashTagObj).sort((a, b) => {
-      return b[1] - a[1];
-    });
+    const hashTagSortList = Object.entries(hashTagObj).sort(
+      (a: [string, any], b: [string, any]) => {
+        return b[1] - a[1];
+      },
+    );
     return hashTagSortList;
   };
 

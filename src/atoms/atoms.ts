@@ -18,20 +18,31 @@ export const getTest = selector({
     await isApi().then(dbData => {
       const docs = dbData.docs;
       docs.forEach(doc => {
-        const retunrDoc: any = _.cloneDeep(doc.data());
-        dataArr.push(retunrDoc);
+        const returnDoc: any = _.cloneDeep(doc.data());
+        dataArr.push(returnDoc);
       });
     });
     return dataArr;
   },
 });
 
+interface Test {
+  darkMain: string;
+  darkNavAndFooter: string;
+  darkLine: string;
+  darkFont: string;
+  lightMain: string;
+  lightNavAndFooter: string;
+  lightLine: string;
+  lightFont: string;
+}
+
 export const darkModeToggle = atom({
   key: 'darkMode',
   default: false,
 });
 
-export const themeColor = atom({
+export const themeColor = atom<Test>({
   key: 'themeColor',
   default: {
     darkMain: '#0D1117',
@@ -45,7 +56,7 @@ export const themeColor = atom({
   },
 });
 
-export const getMessage = atom({
+export const getMessage = atom<string[]>({
   key: 'get/realtimeDatabase',
   default: [],
 });
