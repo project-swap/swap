@@ -12,7 +12,7 @@ import SignUp from '../pages/SignUp';
 import Main from '../pages/Main';
 import Search from '../pages/Search';
 import Register from '../pages/Register';
-import Swap from '../pages/Swap';
+import SalesProduct from '../pages/SalesProduct';
 import Mypage from '../pages/Mypage';
 import Loader from '../pages/Loader';
 import UserChatting from '../pages/UserChatting';
@@ -43,7 +43,7 @@ const Router = () => {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />
-                <Route path="/product-list" element={<Swap />} />
+                <Route path="/product-list" element={<SalesProduct />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/chat-user:id" element={<UserChatting />} />
                 <Route path="/detail" element={<DetailPage />} />
