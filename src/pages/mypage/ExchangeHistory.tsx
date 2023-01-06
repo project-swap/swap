@@ -1,10 +1,10 @@
 import React from 'react';
 import { FiCheckSquare } from 'react-icons/fi';
 import styled from 'styled-components';
-import SideBar from '../components/SideBar';
-import ContentChildren from '../components/ContentChildren';
-import ContainerChildren from '../components/ContainerChildren';
-import MainContainer from '../components/common/MainContainer';
+import SideBar from '../../components/SideBar';
+import ContentChildren from '../../components/ContentChildren';
+import ContainerChildren from '../../components/ContainerChildren';
+import MainContainer from '../../components/common/MainContainer';
 
 const Select = styled.select`
   width: 4rem;
@@ -30,7 +30,7 @@ const Title = styled.h3`
   top: -3rem;
 `;
 
-const SwapList = () => {
+const ExchangeHistory = () => {
   return (
     <SwapContainer>
       <SideBar />
@@ -63,4 +63,4 @@ const SwapList = () => {
   );
 };
 
-export default SwapList;
+export default ExchangeHistory;
