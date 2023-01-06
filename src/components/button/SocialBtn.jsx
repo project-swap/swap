@@ -4,6 +4,7 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
+  GithubAuthProvider,
   setPersistence,
   browserSessionPersistence,
 } from 'firebase/auth';
@@ -33,6 +34,8 @@ const SocialBtn = ({ background, color, icon, name }) => {
   const otherLetters = pathName.slice(1);
 
   const auth = getAuth();
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   const handleErrorMsg = error => {
     const errorCode = error.code;
@@ -40,10 +43,9 @@ const SocialBtn = ({ background, color, icon, name }) => {
     console.log(errorCode, errorMessage);
   };
 
-  const handleGoogleLogin = () => {
+  const handleLogin = provider => {
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
-        const provider = new GoogleAuthProvider();
         return signInWithPopup(auth, provider)
           .then(() => {
             window.location.href = '/';
@@ -59,7 +61,15 @@ const SocialBtn = ({ background, color, icon, name }) => {
 
   return (
     <SocialButton
-      onClick={handleGoogleLogin}
+      onClick={
+        name === 'Google'
+          ? () => {
+              handleLogin(googleProvider);
+            }
+          : () => {
+              handleLogin(githubProvider);
+            }
+      }
       background={background}
       color={color}
     >

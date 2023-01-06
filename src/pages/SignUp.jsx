@@ -6,7 +6,7 @@ import SocialBtn from '../components/button/SocialBtn';
 import BackgroundBlur from '../components/BackgroundBlur';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import { TbBrandTwitter } from 'react-icons/tb';
+import { BsGithub } from 'react-icons/bs';
 import { linkStyle } from '../styles/linkStyle';
 
 const LoginPage = styled.section`
@@ -47,11 +47,11 @@ const SignUp = () => {
             name={'Google'}
           />
           <SocialBtn
-            background={'#3C87F8'}
+            background={'#303030'}
             color={'#fff'}
-            icon={<TbBrandTwitter style={{ fontSize: '1.6rem' }} />}
+            icon={<BsGithub style={{ fontSize: '1.5rem' }} />}
             location={'signup'}
-            name={'Twitter'}
+            name={'Github'}
           />
           <Link to="/login" style={linkStyle}>
             <LinkToLogin>로그인</LinkToLogin>

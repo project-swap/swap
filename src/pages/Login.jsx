@@ -5,9 +5,9 @@ import ModalBox from '../components/ModalBox';
 import SocialBtn from '../components/button/SocialBtn';
 import BackgroundBlur from '../components/BackgroundBlur';
 import { Link } from 'react-router-dom';
-import { TbBrandTwitter } from 'react-icons/tb';
 import { FcGoogle } from 'react-icons/fc';
 import { linkStyle } from '../styles/linkStyle';
+import { BsGithub } from 'react-icons/bs';
 
 const LoginPage = styled.section`
   display: flex;
@@ -46,11 +46,11 @@ const Login = () => {
             name={'Google'}
           />
           <SocialBtn
-            background={'#3C87F8'}
+            background={'#303030'}
             color={'#fff'}
-            icon={<TbBrandTwitter style={{ fontSize: '1.6rem' }} />}
+            icon={<BsGithub style={{ fontSize: '1.5rem' }} />}
             location={'signup'}
-            name={'Twitter'}
+            name={'Github'}
           />
           <Link to="/signup" style={linkStyle}>
             <LinkToSignUp>회원가입</LinkToSignUp>

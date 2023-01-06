@@ -21,6 +21,7 @@ import BookMarkPage from './BookMarkPage';
 import SwapList from './SwapList';
 import ReportHistory from './ReportHistory';
 import Profile from './Profile';
+import Test from './Test';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -50,6 +51,7 @@ const Router = () => {
                 <Route path="/swaplist" element={<SwapList />} />
                 <Route path="/report" element={<ReportHistory />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/test" element={<Test />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
