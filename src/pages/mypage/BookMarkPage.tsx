@@ -1,9 +1,9 @@
 import { FiCheckSquare } from 'react-icons/fi';
 import React from 'react';
-import ContentChildren from '../components/ContentChildren';
-import ContainerChildren from '../components/ContainerChildren';
-import MainContainer from '../components/common/MainContainer';
-import SideBar from '../components/SideBar';
+import ContentChildren from '../../components/ContentChildren';
+import ContainerChildren from '../../components/ContainerChildren';
+import MainContainer from '../../components/common/MainContainer';
+import SideBar from '../../components/SideBar';
 import styled from 'styled-components';
 
 const BookMarkContainer = styled.div`
