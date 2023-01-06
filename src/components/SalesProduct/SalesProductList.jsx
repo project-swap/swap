@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { ComponentForCenterAlignment } from '../common/PublicStyle';
 import SalesProductCardGroup from './SalesProductCardGroup';
-
 import SalesProductListTap from './SalesProductListTap';
 
 const SalesProductListComponent = styled.div`
