@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import MainContainer from '../components/common/MainContainer';
-import SideBar from '../components/SideBar';
-import profile from '../assets/logo/android-icon-144x144.png';
+import MainContainer from '../../components/common/MainContainer';
+import SideBar from '../../components/SideBar';
+import profile from '../../assets/logo/android-icon-144x144.png';
 import { useForm } from 'react-hook-form';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
@@ -134,7 +134,7 @@ const Profile = () => {
     handleSubmit,
     formState: { errors, isSubmitted },
     resetField,
-  } = useForm<NickNameProps>({ mode: 'onChange' }); //mode: 'onChange' => 사용자에게 실시간으로 피드백 제공
+  } = useForm<NickNameProps>({ mode: 'onChange' }); // mode: 'onChange' => 사용자에게 실시간으로 피드백 제공
 
   const onValid = (nickName: NickNameProps) => {
     alert(JSON.stringify(nickName));

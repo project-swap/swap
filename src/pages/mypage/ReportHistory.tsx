@@ -1,10 +1,10 @@
 import React from 'react';
-import SideBar from '../components/SideBar';
-import ContentChildren from '../components/ContentChildren';
+import SideBar from '../../components/SideBar';
+import ContentChildren from '../../components/ContentChildren';
 
-import MainContainer from '../components/common/MainContainer';
+import MainContainer from '../../components/common/MainContainer';
 import styled from 'styled-components';
-import ContainerChildren from '../components/ContainerChildren';
+import ContainerChildren from '../../components/ContainerChildren';
 
 const SwapContainer = styled.div`
   display: flex;
@@ -30,7 +30,9 @@ const ReportHistory = () => {
         <ContainerChildren>
           <Title>신고내역</Title>
         </ContainerChildren>
-        <ContentChildren>신고 목록이 없습니다.</ContentChildren>
+        <ContentChildren>
+          <span>신고 목록이 없습니다.</span>
+        </ContentChildren>
       </MainContainer>
     </SwapContainer>
   );

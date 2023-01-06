@@ -13,14 +13,15 @@ import Main from './Main';
 import Search from './Search';
 import Register from './Register';
 import Swap from './Swap';
-import Mypage from './Mypage';
+import Mypage from './mypage/Mypage';
 import Loader from './Loader';
 import UserChatting from './UserChatting';
-import LocationSetting from './LocationSetting';
-import BookMarkPage from './BookMarkPage';
-import SwapList from './SwapList';
-import ReportHistory from './ReportHistory';
-import Profile from './Profile';
+import LocationSetting from './mypage/LocationSetting';
+import BookMarkPage from './mypage/BookMarkPage';
+import ReportHistory from './mypage/ReportHistory';
+import Profile from './mypage/Profile';
+import Test from './Test';
+import ExchangeHistory from './mypage/ExchangeHistory';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -47,9 +48,10 @@ const Router = () => {
                 <Route path="/chat-user:id" element={<UserChatting />} />
                 <Route path="/locationsetting" element={<LocationSetting />} />
                 <Route path="/bookmark" element={<BookMarkPage />} />
-                <Route path="/swaplist" element={<SwapList />} />
+                <Route path="/swaplist" element={<ExchangeHistory />} />
                 <Route path="/report" element={<ReportHistory />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/test" element={<Test />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
-import SideBar from '../components/SideBar';
-import MainContainer from '../components/common/MainContainer';
+import SideBar from '../../components/SideBar';
+import MainContainer from '../../components/common/MainContainer';
 
 const LocationContainer = styled.div`
   display: flex;
