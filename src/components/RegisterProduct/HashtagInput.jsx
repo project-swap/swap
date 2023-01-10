@@ -59,7 +59,7 @@ const HashtagInput = () => {
   };
 
   const pressEnterKey = event => {
-    if (event.keyCode === 13) {
+    if (event.key === 'Enter') {
       if (
         hashArr.length >= 3 ||
         hashArr.includes('#' + event.target.value.replaceAll(' ', '_'))
