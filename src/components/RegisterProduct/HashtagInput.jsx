@@ -62,11 +62,11 @@ const HashtagInput = () => {
     if (event.key === 'Enter') {
       if (
         hashArr.length >= 3 ||
-        hashArr.includes('#' + event.target.value.replaceAll(' ', '_'))
+        hashArr.includes('#' + event.target.value.replaceAll(' ', '_')) ||
+        hashtag.length > 16
       ) {
         return;
-      }
-      if (hashtag.length <= 16) {
+      } else {
         setHashArr([...hashArr, hashtag]);
         event.target.value = '';
       }
