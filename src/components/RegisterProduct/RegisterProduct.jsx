@@ -43,13 +43,17 @@ const RegisterForm = styled.form`
 `;
 
 const RegisterProduct = () => {
+  const onSubmit = event => {
+    event.preventDefault();
+  };
+
   return (
     <ComponentForCenterAlignment>
       <RegisterProductComponent>
         <ExitButton>
           <IoMdArrowRoundBack />
         </ExitButton>
-        <RegisterForm>
+        <RegisterForm onSubmit={onSubmit}>
           <RegisterProductInputGroup />
           <RegisterProductImageUploadGroup />
           <RegisterProductInputContent />
