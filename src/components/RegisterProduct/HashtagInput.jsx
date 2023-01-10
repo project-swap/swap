@@ -39,8 +39,14 @@ const StyledHashtagInput = styled.input`
   padding: 0.5rem;
   border: none;
   outline: none;
+  background-color: ${props => props.backColor};
+  text-align: ${props => props.textAlign};
+  border-radius: ${props => props.borderRadius};
   &:active {
     border-color: #f8d3f5;
+  }
+  &::placeholder {
+    color: ${props => props.textColor};
   }
 `;
 
@@ -110,12 +116,26 @@ const HashtagInput = () => {
           );
         })}
 
-        <StyledHashtagInput
-          type="text"
-          placeholder="15자 이하로 입력해주세요! (최대 3개)"
-          onChange={catchHashtag}
-          onKeyDown={pressEnterKey}
-        />
+        {hashArr.length < 3 ? (
+          <StyledHashtagInput
+            type="text"
+            placeholder="15자 이하로 입력해주세요! (최대 3개)"
+            onChange={catchHashtag}
+            onKeyDown={pressEnterKey}
+          />
+        ) : (
+          <StyledHashtagInput
+            disabled
+            backColor="tomato"
+            textColor="white"
+            textAlign="center"
+            borderRadius="5px"
+            type="text"
+            placeholder="3개를 다 채우셨어요!"
+            onChange={catchHashtag}
+            onKeyDown={pressEnterKey}
+          />
+        )}
       </StyledHashtagInputGroup>
     </StyledHashtagGroup>
   );
