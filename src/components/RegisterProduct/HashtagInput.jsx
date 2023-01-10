@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Label } from '../common/PublicStyle';
+import { Label, StyledDeleteBtn } from '../common/PublicStyle';
 import { CgClose } from 'react-icons/cg';
 
 const StyledHashtagGroup = styled.div`
@@ -50,27 +50,6 @@ const StyledHashtagInput = styled.input`
   }
 `;
 
-const StyledDeleteBtn = styled.span`
-  position: absolute;
-  top: -6px;
-  right: -8px;
-  border: 1px solid black;
-  font-size: 0.8rem;
-  width: 0.8rem;
-  height: 0.8rem;
-  text-align: center;
-  line-height: 0.9rem;
-  background-color: white;
-  border-radius: 50%;
-  :hover {
-    background-color: #e88e6b;
-    cursor: pointer;
-  }
-  :active {
-    background-color: #d76c6c;
-  }
-`;
-
 const HashtagInput = () => {
   const [hashtag, setHashtag] = useState('');
   const [hashArr, setHashArr] = useState([]);
@@ -109,7 +88,7 @@ const HashtagInput = () => {
           return (
             <StyledHashtagWrap key={item}>
               {item}
-              <StyledDeleteBtn>
+              <StyledDeleteBtn top="-6px" right="-8px">
                 <CgClose onClick={deleteHashtag} width="1.5rem" />
               </StyledDeleteBtn>
             </StyledHashtagWrap>

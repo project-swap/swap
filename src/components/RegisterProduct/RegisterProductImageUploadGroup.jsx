@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { RegisterProductGroupComponent } from '../common/PublicStyle';
+import {
+  RegisterProductGroupComponent,
+  StyledDeleteBtn,
+} from '../common/PublicStyle';
 import { BsPlusCircle } from 'react-icons/bs';
+import { CgClose } from 'react-icons/cg';
 
 const InputComponent = styled.div`
   display: flex;
@@ -44,27 +48,6 @@ const PreviewImgCard = styled.div`
   margin-right: 1rem;
   background: url(${props => props.url});
   background-size: cover;
-`;
-
-const DeleteImgBtn = styled.button`
-  background-color: #dc143c;
-  position: absolute;
-  top: -4px;
-  right: 12px;
-  border: 1px solid black;
-  border-radius: 50%;
-  width: 0.9rem;
-  height: 0.9rem;
-  :hover {
-    background-color: #ff0000;
-  }
-`;
-
-const CloseMark = styled.span`
-  position: absolute;
-  color: #f5f5dc;
-  top: -0.15rem;
-  right: 0.16rem;
 `;
 
 const RegisterProductImageUploadGroup = () => {
@@ -112,9 +95,9 @@ const RegisterProductImageUploadGroup = () => {
           return (
             <PreviewComponent key="1">
               <PreviewImgCard url={url} />
-              <DeleteImgBtn>
-                <CloseMark>x</CloseMark>
-              </DeleteImgBtn>
+              <StyledDeleteBtn top="-4px" right="10px">
+                <CgClose width="1.5rem" />
+              </StyledDeleteBtn>
             </PreviewComponent>
           );
         })}
