@@ -33,3 +33,29 @@ export const RegisterProductGroupComponent = styled.div`
   padding: 2rem;
   margin-bottom: 1.5rem;
 `;
+
+export const StyledDeleteBtn = styled.span`
+  position: absolute;
+  /* top: -6px;
+  right: -8px; */
+
+  top: ${props => props.top};
+  right: ${props => props.right};
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+  border: 1px solid black;
+  font-size: 0.8rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  text-align: center;
+  line-height: 0.9rem;
+  background-color: white;
+  border-radius: 50%;
+  :hover {
+    background-color: #e88e6b;
+    cursor: pointer;
+  }
+  :active {
+    background-color: #d76c6c;
+  }
+`;
