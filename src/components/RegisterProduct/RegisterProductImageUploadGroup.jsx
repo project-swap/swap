@@ -72,8 +72,6 @@ const RegisterProductImageUploadGroup = () => {
       };
       reader.readAsDataURL(file);
     }
-
-    console.log(fileUrl);
   };
 
   return (
@@ -91,9 +89,9 @@ const RegisterProductImageUploadGroup = () => {
           require
           multiple
         />
-        {fileUrl.map(url => {
+        {fileUrl.map((url, i) => {
           return (
-            <PreviewComponent key="1">
+            <PreviewComponent key={i}>
               <PreviewImgCard url={url} />
               <StyledDeleteBtn top="-4px" right="10px">
                 <CgClose width="1.5rem" />
