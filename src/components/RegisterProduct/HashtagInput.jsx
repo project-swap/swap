@@ -75,7 +75,7 @@ const HashtagInput = () => {
 
   const deleteHashtag = event => {
     const arr = hashArr.filter(
-      e => e !== event.target.parentElement.parentElement.innerText,
+      element => element !== event.target.parentElement.parentElement.innerText,
     );
     setHashArr(arr);
   };

@@ -57,7 +57,6 @@ const RegisterProductImageUploadGroup = () => {
     const fileArr = event.target.files;
 
     let fileUrlArr = [];
-
     let file;
     let fileLength = fileArr.length > 5 ? 5 : fileArr.length;
 
