@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RegisterProductGroupComponent } from '../common/PublicStyle';
 import { BsPlusCircle } from 'react-icons/bs';
@@ -68,6 +68,31 @@ const CloseMark = styled.span`
 `;
 
 const RegisterProductImageUploadGroup = () => {
+  const [fileUrl, setFileUrl] = useState([]);
+
+  const onLoadFile = event => {
+    const fileArr = event.target.files;
+
+    let fileUrlArr = [];
+
+    let file;
+    let fileLength = fileArr.length > 5 ? 5 : fileArr.length;
+
+    for (let i = 0; i < fileLength; i++) {
+      file = fileArr[i];
+
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        fileUrlArr[i] = reader.result;
+        setFileUrl([...fileUrlArr]);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    console.log(fileUrl);
+  };
+
   return (
     <RegisterProductGroupComponent flexDirection="column">
       <InputComponent>
@@ -75,13 +100,24 @@ const RegisterProductImageUploadGroup = () => {
         <AddImgBtnLabel htmlFor="imgUpload">
           <BsPlusCircle />
         </AddImgBtnLabel>
-        <AddImgBtn type="file" id="imgUpload" accept="img/*" require multiple />
-        <PreviewComponent>
-          <PreviewImgCard url="https://url.kr/quav97" />
-          <DeleteImgBtn>
-            <CloseMark>x</CloseMark>
-          </DeleteImgBtn>
-        </PreviewComponent>
+        <AddImgBtn
+          type="file"
+          id="imgUpload"
+          accept="image/*"
+          onChange={onLoadFile}
+          require
+          multiple
+        />
+        {fileUrl.map(url => {
+          return (
+            <PreviewComponent key="1">
+              <PreviewImgCard url={url} />
+              <DeleteImgBtn>
+                <CloseMark>x</CloseMark>
+              </DeleteImgBtn>
+            </PreviewComponent>
+          );
+        })}
       </InputComponent>
     </RegisterProductGroupComponent>
   );
