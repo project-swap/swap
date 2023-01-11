@@ -1,10 +1,10 @@
 import { FiCheckSquare } from 'react-icons/fi';
 import React from 'react';
 import ContentChildren from '../../components/ContentChildren';
-import ContainerChildren from '../../components/ContainerChildren';
 import MainContainer from '../../components/common/MainContainer';
 import SideBar from '../../components/SideBar';
 import styled from 'styled-components';
+import BookMarkContainerChildren from '../../components/BookMarkContainerChildren';
 
 const BookMarkContainer = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const BookMark = () => {
     <BookMarkContainer>
       <SideBar />
       <MainContainer>
-        <ContainerChildren>
+        <BookMarkContainerChildren>
           <Title>북마크</Title>
           <FiCheckSquare className="check" />
           <h4 className="title">최신순</h4>
@@ -36,7 +36,7 @@ const BookMark = () => {
           <h4 className="title">교환중</h4>
           <FiCheckSquare />
           <h4 className="title">교환 완료</h4>
-        </ContainerChildren>
+        </BookMarkContainerChildren>
         <ContentChildren>
           <span>교환목록이 없습니다.</span>
         </ContentChildren>

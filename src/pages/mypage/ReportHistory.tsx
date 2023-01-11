@@ -1,10 +1,9 @@
 import React from 'react';
 import SideBar from '../../components/SideBar';
 import ContentChildren from '../../components/ContentChildren';
-
 import MainContainer from '../../components/common/MainContainer';
 import styled from 'styled-components';
-import ContainerChildren from '../../components/ContainerChildren';
+import ReportHistoryChildren from '../../components/ReportHistoryChildren';
 
 const SwapContainer = styled.div`
   display: flex;
@@ -27,9 +26,9 @@ const ReportHistory = () => {
     <SwapContainer>
       <SideBar />
       <MainContainer>
-        <ContainerChildren>
+        <ReportHistoryChildren>
           <Title>신고내역</Title>
-        </ContainerChildren>
+        </ReportHistoryChildren>
         <ContentChildren>
           <span>신고 목록이 없습니다.</span>
         </ContentChildren>
