@@ -3,18 +3,19 @@ import styled from 'styled-components';
 import NavBar from '../components/common/NavBar';
 import ModalBox from '../components/ModalBox';
 import SocialBtn from '../components/button/SocialBtn';
-import BackgroundBlur from '../components/BackgroundBlur';
+import Footer from '../components/common/Footer';
+import { EntireAreaWrap } from '../components/common/PublicStyle';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
 import { linkStyle } from '../styles/linkStyle';
 
-const LoginPage = styled.section`
+const SignUpPage = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 10rem;
+  margin-top: 7rem;
   position: relative;
   box-sizing: border-box;
   z-index: 2;
@@ -33,9 +34,9 @@ const LinkToLogin = styled.div`
 
 const SignUp = () => {
   return (
-    <>
+    <EntireAreaWrap>
       <NavBar />
-      <LoginPage>
+      <SignUpPage>
         <ModalBox width={30} height={24}>
           <Link to="/"></Link>
           <Title>회원가입</Title>
@@ -57,9 +58,9 @@ const SignUp = () => {
             <LinkToLogin>로그인</LinkToLogin>
           </Link>
         </ModalBox>
-      </LoginPage>
-      <BackgroundBlur />
-    </>
+      </SignUpPage>
+      <Footer />
+    </EntireAreaWrap>
   );
 };
 

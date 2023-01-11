@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import NavBar from '../components/common/NavBar';
 import ModalBox from '../components/ModalBox';
 import SocialBtn from '../components/button/SocialBtn';
-import BackgroundBlur from '../components/BackgroundBlur';
+import Footer from '../components/common/Footer';
+import { EntireAreaWrap } from '../components/common/PublicStyle';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { linkStyle } from '../styles/linkStyle';
@@ -14,7 +15,7 @@ const LoginPage = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 10rem;
+  margin-top: 7rem;
   position: relative;
   box-sizing: border-box;
   z-index: 2;
@@ -33,7 +34,7 @@ const LinkToSignUp = styled.div`
 
 const Login = () => {
   return (
-    <>
+    <EntireAreaWrap>
       <NavBar />
       <LoginPage>
         <ModalBox width={30} height={24}>
@@ -57,8 +58,8 @@ const Login = () => {
           </Link>
         </ModalBox>
       </LoginPage>
-      <BackgroundBlur />
-    </>
+      <Footer />
+    </EntireAreaWrap>
   );
 };
 
