@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import profile from '../assets/logo/android-icon-144x144.png';
-import { AiOutlineUpload } from 'react-icons/ai';
+import { IoMdCloudUpload } from 'react-icons/io';
 
 const ProfileEdit = styled.div`
   display: flex;
@@ -10,7 +10,7 @@ const ProfileEdit = styled.div`
   right: 10rem;
   font-weight: 600;
   font-size: 1rem;
-  bottom: 3rem;
+  bottom: 2rem;
 `;
 
 const Modal = styled.section`
@@ -29,7 +29,7 @@ const Modal = styled.section`
   z-index: 1;
   .hover {
     position: relative;
-    bottom: 4.5rem;
+    bottom: 3.5rem;
     left: 14rem;
     color: #000;
     font-size: 2rem;
@@ -45,18 +45,18 @@ const Lines = styled.div`
   width: 27rem;
   margin: 0 auto;
   position: relative;
-  bottom: 4rem;
+  bottom: 3rem;
 `;
 
 const Label = styled.label`
   position: relative;
-  bottom: 7.3rem;
+  bottom: 6.8rem;
   left: 8.9rem;
   z-index: 1;
   .plus {
     width: 1rem;
     height: 1rem;
-    margin: 1rem;
+    margin: 0.5rem;
   }
 `;
 
@@ -81,8 +81,7 @@ interface ModalCloseProps {
   onClick: () => void;
 }
 
-const ModalClose = ({ width, height, children, onClick }: ModalCloseProps) => {
-  console.log(typeof width, typeof height, typeof children, typeof onClick);
+const ModalClose = ({ children, onClick }: ModalCloseProps) => {
   return (
     <Modal>
       <ProfileEdit>프로필 사진 변경</ProfileEdit>
@@ -92,7 +91,7 @@ const ModalClose = ({ width, height, children, onClick }: ModalCloseProps) => {
       <img src={profile} alt="미쭈" />
       <ImageInputMessage type="text" placeholder="이미지를 업로드하세요." />
       <Label htmlFor="file-input">
-        <AiOutlineUpload className="plus" />
+        <IoMdCloudUpload className="plus" />
       </Label>
       <ImageInputUpload
         id="file-input"
