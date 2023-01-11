@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import MainContainer from '../../components/common/MainContainer';
 import SideBar from '../../components/SideBar';
@@ -6,6 +6,8 @@ import profile from '../../assets/logo/android-icon-144x144.png';
 import { useForm } from 'react-hook-form';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import ModalClose from '../../components/ModalClose';
+import { useRecoilState } from 'recoil';
+import { profileImage } from '../../atoms/atoms';
 
 const Info = styled.section`
   margin-top: 2rem;
@@ -129,7 +131,7 @@ interface NickNameProps {
 }
 
 const Profile = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useRecoilState(profileImage);
   const {
     register,
     handleSubmit,
@@ -143,8 +145,7 @@ const Profile = () => {
   };
 
   const handleIconClick = () => {
-    setIsOpen(!isOpen);
-    // console.log('clicked');
+    setIsOpen(current => !current);
   };
 
   return (

@@ -60,3 +60,8 @@ export const getMessage = atom<string[]>({
   key: 'get/realtimeDatabase',
   default: [],
 });
+
+export const profileImage = atom({
+  key: 'profileImage',
+  default: true,
+});
