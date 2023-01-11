@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import MainContainer from '../../components/common/MainContainer';
 import SideBar from '../../components/SideBar';
 import profile from '../../assets/logo/android-icon-144x144.png';
 import { useForm } from 'react-hook-form';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import ModalClose from '../../components/ModalClose';
 
 const Info = styled.section`
   margin-top: 2rem;
@@ -38,10 +39,10 @@ const SwapContainer = styled.div`
 const ProfileContainer = styled.section`
   display: flex;
   z-index: 1;
+  margin-left: 1rem;
   img {
     width: 8rem;
     height: 8rem;
-    margin-left: 1rem;
     margin-top: 1rem;
     border-radius: 2.5rem;
     z-index: -1;
@@ -97,7 +98,6 @@ const Button = styled.button`
   color: white;
   border-radius: 1rem;
   height: 2rem;
-  z-index: 1;
   cursor: pointer;
   position: relative;
   left: 35.5rem;
@@ -129,6 +129,7 @@ interface NickNameProps {
 }
 
 const Profile = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -142,7 +143,8 @@ const Profile = () => {
   };
 
   const handleIconClick = () => {
-    console.log('clicked');
+    setIsOpen(!isOpen);
+    // console.log('clicked');
   };
 
   return (
@@ -151,10 +153,13 @@ const Profile = () => {
       <MainContainer>
         <ProfileContainer>
           <img src={profile} alt="미쭈" />
-          <label htmlFor="file-input">
+          {isOpen ? (
             <AiOutlinePlusCircle className="plus" onClick={handleIconClick} />
-          </label>
-          <input id="file-input" type="file" />
+          ) : (
+            <ModalClose width={30} height={24} onClick={handleIconClick}>
+              <label htmlFor="file-input"></label>
+            </ModalClose>
+          )}
           <Info>
             <h2>박미쭈</h2>
             <h4>팔로잉 59 팔로워 48</h4>
