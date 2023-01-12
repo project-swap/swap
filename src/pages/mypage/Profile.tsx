@@ -5,9 +5,10 @@ import SideBar from '../../components/SideBar';
 import profile from '../../assets/logo/android-icon-144x144.png';
 import { useForm } from 'react-hook-form';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-import ModalClose from '../../components/ModalClose';
+
 import { useRecoilState } from 'recoil';
 import { profileImage } from '../../atoms/atoms';
+import ModalClose from '../../components/ProfileModal';
 
 const Info = styled.section`
   margin-top: 2rem;

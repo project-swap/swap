@@ -40,7 +40,7 @@ const Modal = styled.section`
   }
 `;
 
-const Lines = styled.div`
+const ProfileDivider = styled.div`
   border: 1px solid #000;
   width: 27rem;
   margin: 0 auto;
@@ -87,7 +87,7 @@ const ModalClose = ({ children, onClick }: ModalCloseProps) => {
       <ProfileEdit>프로필 사진 변경</ProfileEdit>
       <IoClose className="hover" onClick={onClick} />
       {children}
-      <Lines />
+      <ProfileDivider />
       <img src={profile} alt="미쭈" />
       <ImageInputMessage type="text" placeholder="이미지를 업로드하세요." />
       <Label htmlFor="file-input">
