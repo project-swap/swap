@@ -43,11 +43,11 @@ const ProfileContainer = styled.section`
   display: flex;
   z-index: 1;
   margin-left: 1rem;
-  img {
+  .profileImage {
     width: 8rem;
     height: 8rem;
     margin-top: 1rem;
-    border-radius: 2.5rem;
+    border-radius: 0.5rem;
     z-index: -1;
   }
   > input {
@@ -154,7 +154,7 @@ const Profile = () => {
       <SideBar />
       <MainContainer>
         <ProfileContainer>
-          <img src={profile} alt="미쭈" />
+          <img className="profileImage" src={profile} alt="미쭈" />
           {isOpen ? (
             <AiOutlinePlusCircle className="plus" onClick={handleIconClick} />
           ) : (
