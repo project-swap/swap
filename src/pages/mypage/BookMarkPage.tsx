@@ -21,7 +21,7 @@ const Title = styled.h3`
   top: -3rem;
 `;
 
-const BookMark = () => {
+const BookMarkPage = () => {
   return (
     <BookMarkContainer>
       <SideBar />
@@ -45,4 +45,4 @@ const BookMark = () => {
   );
 };
 
-export default BookMark;
+export default BookMarkPage;
