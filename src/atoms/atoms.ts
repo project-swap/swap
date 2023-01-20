@@ -60,3 +60,8 @@ export const getMessage = atom<string[]>({
   key: 'get/realtimeDatabase',
   default: [],
 });
+
+export const userInfo = atom({
+  key: 'userInfo',
+  default: '',
+});
