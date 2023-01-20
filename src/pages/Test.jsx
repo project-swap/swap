@@ -1,86 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import {
-  getAuth,
-  signInWithPopup,
-  signOut,
-  GoogleAuthProvider,
-  setPersistence,
-  browserSessionPersistence,
-} from 'firebase/auth';
+import React from 'react';
+import { getAuth, signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 
 const Test = () => {
-  const [loginState, setLoginState] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
-  const auth = getAuth();
+  const handleTwitterLogin = () => {
+    const auth = getAuth();
+    const provider = new GithubAuthProvider();
+    signInWithPopup(auth, provider)
+      .then(result => {
+        // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+        // You can use these server side with your app's credentials to access the Twitter API.
 
-  useEffect(() => {
-    const userData = sessionUserData();
-    if (userData) {
-      setCommonState(true, userData);
-    }
-  }, []);
-
-  const sessionUserData = () => {
-    for (let key of Object.keys(sessionStorage)) {
-      if (key.includes('firebase:authUser:')) {
-        return JSON.parse(sessionStorage.getItem(key));
-      }
-    }
-  };
-
-  const setCommonState = (boolean, data) => {
-    setLoginState(boolean);
-    setUserInfo(data);
-  };
-
-  const handleErrorMsg = error => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode, errorMessage);
-  };
-
-  const handleGoogleLogin = () => {
-    setPersistence(auth, browserSessionPersistence)
-      .then(() => {
-        const provider = new GoogleAuthProvider();
-        return signInWithPopup(auth, provider)
-          .then(result => {
-            const user = result.user;
-            setCommonState(true, user);
-          })
-          .catch(error => {
-            handleErrorMsg(error);
-          });
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        // ...
       })
       .catch(error => {
-        handleErrorMsg(error);
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ...
       });
   };
-
-  const handleGoogleLogout = () => {
-    const isLogout = confirm('로그아웃 하시겠습니까?');
-    if (isLogout) {
-      setCommonState(false, null);
-      signOut(auth).catch(error => {
-        console.log(error);
-      });
-    }
-  };
-
   return (
     <>
-      <div>
-        {loginState ? (
-          <button onClick={handleGoogleLogout}>로그아웃</button>
-        ) : (
-          <button onClick={handleGoogleLogin}>로그인</button>
-        )}
-      </div>
-      <div>
-        {userInfo
-          ? `${userInfo.displayName}님 환영합니다!`
-          : '로그인을 해주세요'}
-      </div>
+      <button onClick={handleTwitterLogin}>로그인</button>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import { RecoilRoot } from 'recoil';
@@ -6,20 +6,27 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 // import router
+const Main = lazy(() => {
+  return Promise.all([
+    import('./Main'),
+    new Promise(resolve => setTimeout(resolve, 1500)),
+  ]).then(([moduleExports]) => moduleExports);
+});
 import Login from './Login';
 import NotFound from './NotFound';
 import SignUp from './SignUp';
-import Main from './Main';
 import Search from './Search';
 import Register from './Register';
 import Swap from './Swap';
 import Mypage from './mypage/Mypage';
 import Loader from './Loader';
 import UserChatting from './UserChatting';
-import LocationSetting from './mypage/LocationSetting';
-import BookMarkPage from './mypage/BookMarkPage';
-import ReportHistory from './mypage/ReportHistory';
-import Profile from './mypage/Profile';
+
+import LocationSetting from './LocationSetting';
+import BookMarkPage from './BookMarkPage';
+
+import ReportHistory from './ReportHistory';
+import Profile from './Profile';
 import Test from './Test';
 import ExchangeHistory from './mypage/ExchangeHistory';
 
