@@ -21,12 +21,10 @@ import Swap from './Swap';
 import Mypage from './mypage/Mypage';
 import Loader from './Loader';
 import UserChatting from './UserChatting';
-
-import LocationSetting from './LocationSetting';
-import BookMarkPage from './BookMarkPage';
-
-import ReportHistory from './ReportHistory';
-import Profile from './Profile';
+import LocationSetting from './mypage/LocationSetting';
+import ReportHistory from './mypage/ReportHistory';
+import BookMarkPage from './mypage/BookMarkPage';
+import Profile from './mypage/Profile';
 import Test from './Test';
 import ExchangeHistory from './mypage/ExchangeHistory';
 
