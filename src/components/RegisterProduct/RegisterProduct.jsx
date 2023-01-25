@@ -7,6 +7,8 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { ComponentForCenterAlignment } from '../common/PublicStyle';
 import RegisterProductPostBtn from './RegisterProductPostBtn';
 import RegisterProductInputContent from './RegisterProductInputContent';
+import { useRecoilValue } from 'recoil';
+import { hashArrState, ImgUrlArrState } from '../../atoms/atoms';
 
 const RegisterProductComponent = styled.div`
   display: flex;
@@ -43,8 +45,27 @@ const RegisterForm = styled.form`
 `;
 
 const RegisterProduct = () => {
+  const hashArr = useRecoilValue(hashArrState);
+  const imgUrlArr = useRecoilValue(ImgUrlArrState);
+
   const onSubmit = event => {
     event.preventDefault();
+
+    const postedObj = {
+      //게시자의 아이디
+      //게시자의 닉네임
+      //uid
+      //몇번째 게시글
+
+      title: event.target[0].value,
+      hashtag: hashArr,
+      img: imgUrlArr,
+      text: event.target[3].value,
+      swap: event.target[4].checked,
+      share: event.target[5].checked,
+    };
+
+    console.log(postedObj);
   };
 
   return (

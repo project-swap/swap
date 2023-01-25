@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   RegisterProductGroupComponent,
@@ -6,6 +6,8 @@ import {
 } from '../common/PublicStyle';
 import { BsPlusCircle } from 'react-icons/bs';
 import { CgClose } from 'react-icons/cg';
+import { useRecoilState } from 'recoil';
+import { ImgUrlArrState } from '../../atoms/atoms';
 
 const InputComponent = styled.div`
   display: flex;
@@ -51,18 +53,15 @@ const PreviewImgCard = styled.div`
 `;
 
 const RegisterProductImageUploadGroup = () => {
-  const [fileUrl, setFileUrl] = useState([]);
+  const [fileUrl, setFileUrl] = useRecoilState(ImgUrlArrState);
 
   const onLoadFile = event => {
     const fileArr = event.target.files;
-
-    let fileUrlArr = [];
-    let file;
-    let fileLength = fileArr.length > 5 ? 5 : fileArr.length;
+    const fileUrlArr = [];
+    const fileLength = fileArr.length > 5 ? 5 : fileArr.length;
 
     for (let i = 0; i < fileLength; i++) {
-      file = fileArr[i];
-
+      const file = fileArr[i];
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -104,3 +103,7 @@ const RegisterProductImageUploadGroup = () => {
 };
 
 export default RegisterProductImageUploadGroup;
+
+// 파일 base64
+// blob
+// file

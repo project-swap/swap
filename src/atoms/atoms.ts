@@ -40,3 +40,13 @@ export const getMessage = atom({
   key: 'get/realtimeDatabase',
   default: [],
 });
+
+export const hashArrState = atom({
+  key: 'hashArrState',
+  default: [],
+});
+
+export const ImgUrlArrState = atom({
+  key: 'ImgUrlArrState',
+  default: [],
+});

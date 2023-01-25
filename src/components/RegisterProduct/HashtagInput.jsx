@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Label, StyledDeleteBtn } from '../common/PublicStyle';
 import { CgClose } from 'react-icons/cg';
+import { useRecoilState } from 'recoil';
+import { hashArrState } from '../../atoms/atoms';
 
 const StyledHashtagGroup = styled.div`
   width: 40rem;
@@ -52,14 +54,14 @@ const StyledHashtagInput = styled.input`
 
 const HashtagInput = () => {
   const [hashtag, setHashtag] = useState('');
-  const [hashArr, setHashArr] = useState([]);
+  const [hashArr, setHashArr] = useRecoilState(hashArrState);
 
   const catchHashtag = event => {
     setHashtag('#' + event.target.value.replaceAll(' ', '_'));
   };
 
   const pressEnterKey = event => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && event.nativeEvent.isComposing === false) {
       if (
         hashArr.length >= 3 ||
         hashArr.includes('#' + event.target.value.replaceAll(' ', '_')) ||
@@ -121,3 +123,5 @@ const HashtagInput = () => {
 };
 
 export default HashtagInput;
+
+// props로 해결

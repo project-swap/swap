@@ -36,9 +36,6 @@ export const RegisterProductGroupComponent = styled.div`
 
 export const StyledDeleteBtn = styled.span`
   position: absolute;
-  /* top: -6px;
-  right: -8px; */
-
   top: ${props => props.top};
   right: ${props => props.right};
   bottom: ${props => props.bottom};
