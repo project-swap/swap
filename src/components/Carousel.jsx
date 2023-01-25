@@ -7,18 +7,16 @@ import styled from 'styled-components';
 // dot size 및 색상 추후 변경예정
 
 const StyledSlider = styled(Slider)`
-  display: flex;
+  display: flex !important;
   justify-content: center;
-  margin-top: 4rem;
+  width: 100%;
+  .slick-list {
+    display: flex;
+    width: 60rem;
+  }
   .slick-track {
     display: flex;
   }
-  .slick-list {
-    display: flex;
-    width: 67.25rem;
-    padding: 0px 0.1rem;
-  }
-
   .slick-slide {
     display: flex;
     justify-content: center;
@@ -54,16 +52,22 @@ const StyledSlider = styled(Slider)`
 `;
 
 const ImgContainer = styled.div`
+  position: relative;
   text-align: center;
-  border: solid 1 black;
 `;
 
 const Image = styled.div`
   width: 60.25rem;
-  height: 17.25rem;
-  margin: 0 7.5rem;
+  height: 22rem;
   /* max-width: 100%;
   max-height: 100%; */
+`;
+
+const Text = styled.p`
+  position: absolute;
+  top: 1.2rem;
+  left: 2rem;
+  font-size: 5rem;
 `;
 
 function Carousel() {
@@ -83,7 +87,7 @@ function Carousel() {
     slidesToScroll: 1,
     centerMode: true,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     arrows: false,
   };
 
@@ -92,7 +96,8 @@ function Carousel() {
       {background.map(el => {
         return (
           <ImgContainer key={el.id}>
-            <Image style={{ backgroundColor: `${el.color}` }}></Image>
+            <Image style={{ backgroundColor: `${el.color}` }} />
+            <Text>{el.color}</Text>
           </ImgContainer>
         );
       })}

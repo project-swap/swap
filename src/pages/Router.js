@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import { RecoilRoot } from 'recoil';
@@ -6,22 +6,29 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 // import router
-import Login from '../pages/Login';
-import NotFound from '../pages/NotFound';
-import SignUp from '../pages/SignUp';
-import Main from '../pages/Main';
-import Search from '../pages/Search';
-import Register from '../pages/Register';
-import SalesProduct from '../pages/SalesProduct';
-import Mypage from '../pages/Mypage';
-import Loader from '../pages/Loader';
-import UserChatting from '../pages/UserChatting';
-import DetailPage from './DetailPage';
-import Follow from './Follow';
+const Main = lazy(() => {
+  return Promise.all([
+    import('./Main'),
+    new Promise(resolve => setTimeout(resolve, 1500)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+import Login from './Login';
+import NotFound from './NotFound';
+import SignUp from './SignUp';
+import Search from './Search';
+import Register from './Register';
+import Mypage from './Mypage';
+import Loader from './Loader';
+import UserChatting from './UserChatting';
 import LocationSetting from './LocationSetting';
 import BookMarkPage from './BookMarkPage';
 import SwapList from './SwapList';
 import ReportHistory from './ReportHistory';
+import Profile from './Profile';
+import Test from './Test';
+import SalesProduct from './SalesProduct';
+import DetailPage from './DetailPage';
+import Follow from './Follow';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -52,6 +59,8 @@ const Router = () => {
                 <Route path="/bookmark" element={<BookMarkPage />} />
                 <Route path="/swaplist" element={<SwapList />} />
                 <Route path="/report" element={<ReportHistory />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/test" element={<Test />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
