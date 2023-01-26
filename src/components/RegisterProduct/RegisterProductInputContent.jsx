@@ -12,7 +12,13 @@ const StyledContentInput = styled.textarea`
 `;
 
 const RegisterProductInputContent = () => {
-  return <StyledContentInput placeholder="글을 입력하세요!" />;
+  return (
+    <StyledContentInput
+      placeholder="글을 입력하세요! (최소 10자)"
+      required
+      minLength="10"
+    />
+  );
 };
 
 export default RegisterProductInputContent;

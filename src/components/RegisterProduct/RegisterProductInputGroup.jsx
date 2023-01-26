@@ -26,7 +26,13 @@ const RegisterProductInputGroup = () => {
     <RegisterProductGroupComponent flexDirection="column">
       <InputGroup>
         <Label htmlFor="productName">상품명</Label>
-        <Input id="productName" placeholder="상품명"></Input>
+        <Input
+          id="productName"
+          placeholder="상품명"
+          required
+          minLength="5"
+          maxlength="25"
+        ></Input>
       </InputGroup>
       <HashtagInput />
     </RegisterProductGroupComponent>

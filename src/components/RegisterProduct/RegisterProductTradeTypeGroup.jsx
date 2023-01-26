@@ -48,7 +48,7 @@ const RegisterProductTradeTypeGroups = () => {
         <Label htmlFor="swap" class="type">
           교환
         </Label>
-        <RadioBtn type="radio" name="type" id="swap" value="교환" check />
+        <RadioBtn type="radio" name="type" id="swap" value="교환" required />
         <Label htmlFor="share" class="type">
           나눔
         </Label>
