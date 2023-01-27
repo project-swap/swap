@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../components/common/Footer.tsx';
 import NavBar from '../components/common/NavBar';
-import RegisterProduct from '../components/RegisterProduct/RegisterProduct';
+import RegisterProduct from '../components/registerProduct/RegisterProduct';
 
 const Register = () => {
   return (

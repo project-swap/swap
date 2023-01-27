@@ -2,7 +2,7 @@ import React from 'react';
 
 import Footer from '../components/common/Footer.tsx';
 import NavBar from '../components/common/NavBar';
-import SalesProductList from '../components/Swap/SalesProductList';
+import SalesProductList from '../components/swap/SalesProductList';
 
 const Swap = () => {
   return (
