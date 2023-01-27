@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   RegisterProductGroupComponent,
   StyledDeleteBtn,
 } from '../common/PublicStyle';
 import { BsPlusCircle } from 'react-icons/bs';
-import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+} from 'firebase/storage';
 import { useRecoilState } from 'recoil';
 import { ImgUrlArrState } from '../../atoms/atoms';
 import { CgClose } from 'react-icons/cg';
@@ -57,22 +63,34 @@ const PreviewImgCard = styled.div`
 const RegisterProductImageUploadGroupFirebase = () => {
   const storage = getStorage();
 
-  const [imageUpload, setImageUpload] = useState(null);
+  const [imgUpload, setImgUpload] = useState(null);
   const [imgUrl, setImgUrl] = useRecoilState(ImgUrlArrState);
 
   const upload = () => {
-    if (imageUpload === null) return;
+    if (imgUpload === null) return;
 
-    const id = Date.now() / imageUpload.name.length;
+    const id = Date.now() / imgUpload.name.length;
+    const imageRef = ref(storage, `images/${imgUpload.name}_${id}`);
 
-    const imageRef = ref(storage, `images/${imageUpload.name}_${id}`);
-
-    uploadBytes(imageRef, imageUpload).then(snapshot => {
+    uploadBytes(imageRef, imgUpload).then(snapshot => {
       getDownloadURL(snapshot.ref).then(url => {
-        setImgUrl(prev => [...prev, url]);
+        setImgUrl(prev => [
+          ...prev,
+          { url: url, id: `images/${imgUpload.name}_${id}` },
+        ]);
       });
     });
   };
+
+  const deleteImg = event => {
+    const deleteRef = ref(storage, event.target.parentNode.id);
+
+    deleteObject(deleteRef);
+
+    setImgUrl(imgUrl.filter(obj => obj.id !== event.target.parentNode.id));
+  };
+
+  useEffect(upload, [imgUpload]);
 
   return (
     <RegisterProductGroupComponent flexDirection="column">
@@ -84,10 +102,15 @@ const RegisterProductImageUploadGroupFirebase = () => {
 
         {imgUrl.map(item => {
           return (
-            <PreviewComponent key={item}>
-              <PreviewImgCard url={item} />
-              <StyledDeleteBtn top="-4px" right="10px">
-                <CgClose width="1.5rem" />
+            <PreviewComponent key={item.url}>
+              <PreviewImgCard url={item.url} />
+              <StyledDeleteBtn
+                top="-4px"
+                right="10px"
+                id={item.id}
+                onClick={event => deleteImg(event)}
+              >
+                <CgClose width="1.5rem" id={item.id} />
               </StyledDeleteBtn>
             </PreviewComponent>
           );
@@ -97,17 +120,10 @@ const RegisterProductImageUploadGroupFirebase = () => {
           type="file"
           id="imgUpload"
           accept="image/*"
-          onClick={() => {
-            console.log(imgUrl);
-          }}
           onChange={event => {
-            setImageUpload(event.target.files[0]);
+            setImgUpload(event.target.files[0]);
           }}
-          require
-          multiple
         />
-
-        <button onClick={upload}>123</button>
       </InputComponent>
     </RegisterProductGroupComponent>
   );
