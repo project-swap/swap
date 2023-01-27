@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getAuth, signOut } from 'firebase/auth';
 
-import { useRecoilValue } from 'recoil';
-import { themeColor, darkModeToggle } from '../../atoms/atoms';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { themeColor, darkModeToggle, userInfo } from '../../atoms/atoms';
 
 // image,icon, font-style
 import Logo from '../../assets/logo/android-icon-48x48.png';
@@ -94,6 +94,7 @@ const LoginSuccessIconContainer = styled.div`
 const NavBar = () => {
   const themeMode = useRecoilValue(darkModeToggle);
   const themeColorObject = useRecoilValue(themeColor);
+  const setLoginUserData = useSetRecoilState(userInfo);
   const [loginState, setLoginState] = useState(false);
   const auth = getAuth();
 
@@ -101,6 +102,7 @@ const NavBar = () => {
     const userData = sessionUserData();
     if (userData) {
       setLoginState(true);
+      setLoginUserData(userData);
     }
   }, []);
 
@@ -116,6 +118,7 @@ const NavBar = () => {
     const isLogout = confirm('로그아웃 하시겠습니까?');
     if (isLogout) {
       setLoginState(false);
+      window.location.reload();
       signOut(auth).catch(error => {
         console.log(error);
       });
