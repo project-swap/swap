@@ -181,13 +181,21 @@ const Profile = () => {
                 {...register('nickName', {
                   required: true,
                   minLength: 2,
-                  maxLength: 15,
+                  maxLength: 5,
                   pattern: /([^가-힣\x20])/i, //초성 미포함
                 })}
               />
               <Button type="submit">수정</Button>
               {errors ? (
-                <ErrorMessage>{errors.nickName?.message}</ErrorMessage>
+                <ErrorMessage>
+                  {errors.nickName?.type === 'minLength' ? (
+                    <span>최소 2글자 이상 입력해야 합니다.</span>
+                  ) : (
+                    errors.nickName?.type === 'maxLength' && (
+                      <span>최대 5글자 이상 입력해야 합니다.</span>
+                    )
+                  )}
+                </ErrorMessage>
               ) : isSubmitted ? (
                 <SuccessMessage>성공적으로 수정했습니다!</SuccessMessage>
               ) : null}
