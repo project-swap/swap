@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   getAuth,
@@ -33,6 +34,8 @@ const SocialBtn = ({ background, color, icon, name }) => {
   const firstLetter = pathName.charAt(0).toUpperCase();
   const otherLetters = pathName.slice(1);
 
+  const navigate = useNavigate();
+
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -48,7 +51,7 @@ const SocialBtn = ({ background, color, icon, name }) => {
       .then(() => {
         return signInWithPopup(auth, provider)
           .then(() => {
-            window.location.href = '/';
+            navigate(-1);
           })
           .catch(error => {
             handleErrorMsg(error);
