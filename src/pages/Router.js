@@ -17,7 +17,6 @@ import NotFound from './NotFound';
 import SignUp from './SignUp';
 import Search from './Search';
 import Register from './Register';
-
 import Loader from './Loader';
 import UserChatting from './UserChatting';
 import LocationSetting from './mypage/LocationSetting';
