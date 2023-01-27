@@ -2,7 +2,6 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { IoMdCloudUpload } from 'react-icons/io';
-import profile from '../assets/logo/android-icon-192x192.png';
 
 const Form = styled.form`
   display: flex;
@@ -81,11 +80,12 @@ const ImageMessageInput = styled.input`
 const PreviewImageContainer = styled.section`
   width: 8rem;
   height: 8rem;
-  border: 2px solid black;
+  border: 1.5px solid black;
+
   img {
     width: 8rem;
     height: 8rem;
-    filter: blur(1px);
+    border-radius: 4rem;
   }
 `;
 
@@ -109,10 +109,10 @@ const PreviewOuterImage = styled.img`
   width: 8rem;
   height: 8rem;
   position: absolute;
-  z-index: 9999;
+  z-index: -9999;
   left: 11rem;
-  bottom: 9.5rem;
-  border-radius: 4rem;
+  bottom: 9.4rem;
+  filter: contrast(20%);
   border: 1px solid black;
 `;
 
@@ -158,7 +158,7 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
       <IoClose className="hover" onClick={onClick} />
       {children}
       <ProfileDivider />
-      <PreviewOuterImage src={profile} />
+      <PreviewOuterImage src={attachment?.toString()} />
       <PreviewImageContainer>
         <PreviewInnerImage></PreviewInnerImage>
         {attachment ? (
