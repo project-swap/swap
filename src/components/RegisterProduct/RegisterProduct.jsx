@@ -69,12 +69,14 @@ const RegisterProduct = () => {
   const update = async event => {
     event.preventDefault();
 
+    console.log(event);
+
     const data = {
       title: event.target[0].value,
       hash_tag: hashArr,
-      content: event.target[4].value,
-      swap: event.target[5].checked,
-      share: event.target[6].checked,
+      content: event.target[3].value,
+      swap: event.target[4].checked,
+      share: event.target[5].checked,
       name: JSON.parse(userInfo)['displayName'],
       uid: JSON.parse(userInfo)['uid'],
       date: postDate,

@@ -88,6 +88,8 @@ const RegisterProductImageUploadGroupFirebase = () => {
     deleteObject(deleteRef);
 
     setImgUrl(imgUrl.filter(obj => obj.id !== event.target.parentNode.id));
+
+    console.log(imgUrl);
   };
 
   useEffect(upload, [imgUpload]);

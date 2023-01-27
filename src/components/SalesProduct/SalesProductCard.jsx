@@ -44,7 +44,6 @@ const SalesProductCard = () => {
   const data = useRecoilValue(getTest);
 
   const contents = data.map(content => {
-    console.log(content.imgUrl);
     return {
       key: content.id,
       title: content.title,
@@ -53,7 +52,7 @@ const SalesProductCard = () => {
       name: content.name,
       date: content.date,
       convertDate: content.convertDate,
-      productImgUrl: content.imgUrl[0],
+      productImgUrl: content.imgUrl[0].url,
       profileImgUrl:
         'https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg',
     };
