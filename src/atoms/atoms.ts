@@ -65,3 +65,8 @@ export const userInfo = atom({
   key: 'userInfo',
   default: '',
 });
+
+export const profileImage = atom({
+  key: 'profileImage',
+  default: true,
+});

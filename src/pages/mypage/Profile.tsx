@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import MainContainer from '../components/common/MainContainer';
-import SideBar from '../components/SideBar';
-import profile from '../assets/logo/android-icon-144x144.png';
+import MainContainer from '../../components/common/MainContainer';
+import SideBar from '../../components/SideBar';
+import profile from '../../assets/logo/android-icon-144x144.png';
 import { useForm } from 'react-hook-form';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+
+import { useRecoilState } from 'recoil';
+import { profileImage } from '../../atoms/atoms';
+import ModalClose from '../../components/ProfileModal';
 
 const Info = styled.section`
   margin-top: 2rem;
@@ -38,12 +42,12 @@ const SwapContainer = styled.div`
 const ProfileContainer = styled.section`
   display: flex;
   z-index: 1;
-  img {
+  margin-left: 1rem;
+  .profileImage {
     width: 8rem;
     height: 8rem;
-    margin-left: 1rem;
     margin-top: 1rem;
-    border-radius: 2.5rem;
+    border-radius: 0.5rem;
     z-index: -1;
   }
   > input {
@@ -97,7 +101,6 @@ const Button = styled.button`
   color: white;
   border-radius: 1rem;
   height: 2rem;
-  z-index: 1;
   cursor: pointer;
   position: relative;
   left: 35.5rem;
@@ -129,12 +132,13 @@ interface NickNameProps {
 }
 
 const Profile = () => {
+  const [isOpen, setIsOpen] = useRecoilState(profileImage);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitted },
     resetField,
-  } = useForm<NickNameProps>({ mode: 'onChange' }); //mode: 'onChange' => 사용자에게 실시간으로 피드백 제공
+  } = useForm<NickNameProps>({ mode: 'onChange' }); // mode: 'onChange' => 사용자에게 실시간으로 피드백 제공
 
   const onValid = (nickName: NickNameProps) => {
     alert(JSON.stringify(nickName));
@@ -142,7 +146,7 @@ const Profile = () => {
   };
 
   const handleIconClick = () => {
-    console.log('clicked');
+    setIsOpen(current => !current);
   };
 
   return (
@@ -150,11 +154,14 @@ const Profile = () => {
       <SideBar />
       <MainContainer>
         <ProfileContainer>
-          <img src={profile} alt="미쭈" />
-          <label htmlFor="file-input">
+          <img className="profileImage" src={profile} alt="미쭈" />
+          {isOpen ? (
             <AiOutlinePlusCircle className="plus" onClick={handleIconClick} />
-          </label>
-          <input id="file-input" type="file" />
+          ) : (
+            <ModalClose width={30} height={24} onClick={handleIconClick}>
+              <label htmlFor="file-input"></label>
+            </ModalClose>
+          )}
           <Info>
             <h2>박미쭈</h2>
             <h4>팔로잉 59 팔로워 48</h4>
