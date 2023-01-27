@@ -120,6 +120,7 @@ const Form = styled.form`
 const ErrorMessage = styled.p`
   font-weight: bold;
   color: red;
+  margin: -2rem 0 1rem 10rem;
 `;
 
 const SuccessMessage = styled.p`
@@ -192,7 +193,7 @@ const Profile = () => {
                     <span>최소 2글자 이상 입력해야 합니다.</span>
                   ) : (
                     errors.nickName?.type === 'maxLength' && (
-                      <span>최대 5글자 이상 입력해야 합니다.</span>
+                      <span>닉네임은 최대 5글자입니다.</span>
                     )
                   )}
                 </ErrorMessage>
