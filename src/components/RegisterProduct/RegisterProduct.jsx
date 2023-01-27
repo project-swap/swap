@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import RegisterProductImageUploadGroup from './RegisterProductImageUploadGroup';
+// import RegisterProductImageUploadGroup from './RegisterProductImageUploadGroup';
 import RegisterProductInputGroup from './RegisterProductInputGroup';
 import RegisterProductTradeTypeGroup from './RegisterProductTradeTypeGroup';
 import { IoMdArrowRoundBack } from 'react-icons/io';
@@ -9,6 +9,10 @@ import RegisterProductPostBtn from './RegisterProductPostBtn';
 import RegisterProductInputContent from './RegisterProductInputContent';
 import { useRecoilValue } from 'recoil';
 import { hashArrState, ImgUrlArrState } from '../../atoms/atoms';
+import RegisterProductImageUploadGroupFirebase from './RegisterProductImageUploadGroupFirebase';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../firebase';
+import { useNavigate } from 'react-router';
 
 const RegisterProductComponent = styled.div`
   display: flex;
@@ -45,27 +49,46 @@ const RegisterForm = styled.form`
 `;
 
 const RegisterProduct = () => {
+  const postsCollectionRef = collection(db, 'posts');
+
   const hashArr = useRecoilValue(hashArrState);
   const imgUrlArr = useRecoilValue(ImgUrlArrState);
 
-  const onSubmit = event => {
+  const navigate = useNavigate();
+
+  const userInfo = sessionStorage.getItem(
+    'firebase:authUser:AIzaSyDopZC4cfYJSrlMB_QTcAG7nIv59F0PaIg:[DEFAULT]',
+  );
+
+  const date = new Date();
+
+  const postDate = `${date.getFullYear()}-${
+    date.getMonth() + 1
+  }-${date.getDate()}`;
+
+  const update = async event => {
     event.preventDefault();
 
-    const postedObj = {
-      //게시자의 아이디
-      //게시자의 닉네임
-      //uid
-      //몇번째 게시글
-
+    const data = {
       title: event.target[0].value,
-      hashtag: hashArr,
-      img: imgUrlArr,
-      text: event.target[3].value,
-      swap: event.target[4].checked,
-      share: event.target[5].checked,
+      hash_tag: hashArr,
+      content: event.target[4].value,
+      swap: event.target[5].checked,
+      share: event.target[6].checked,
+      name: JSON.parse(userInfo)['displayName'],
+      uid: JSON.parse(userInfo)['uid'],
+      date: postDate,
+      convertDate: `${Date.now()}`,
+      imgUrl: imgUrlArr,
     };
 
-    console.log(postedObj);
+    try {
+      const addData = await addDoc(postsCollectionRef, data);
+      console.log(addData);
+      navigate('/product-list');
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -74,9 +97,10 @@ const RegisterProduct = () => {
         <ExitButton>
           <IoMdArrowRoundBack />
         </ExitButton>
-        <RegisterForm onSubmit={onSubmit}>
+        <RegisterForm onSubmit={update}>
           <RegisterProductInputGroup />
-          <RegisterProductImageUploadGroup />
+          {/* <RegisterProductImageUploadGroup /> */}
+          <RegisterProductImageUploadGroupFirebase />
           <RegisterProductInputContent />
           <RegisterProductTradeTypeGroup />
           <RegisterProductPostBtn />

@@ -8,6 +8,8 @@ import SalesTitle from '../common/ProductCard/SalesTitle';
 import SellerName from '../common/ProductCard/SellerName';
 import PostingTime from '../common/ProductCard/PostingTime';
 import ArticlePreview from '../common/ProductCard/ArticlePreview';
+// import { collection, orderBy, query } from 'firebase/firestore';
+// import { db } from '../../firebase';
 
 const SalesProductCardFrame = styled.li`
   width: 23%;
@@ -42,6 +44,7 @@ const SalesProductCard = () => {
   const data = useRecoilValue(getTest);
 
   const contents = data.map(content => {
+    console.log(content.imgUrl);
     return {
       key: content.id,
       title: content.title,
@@ -49,7 +52,8 @@ const SalesProductCard = () => {
       hash: content.hash_tag,
       name: content.name,
       date: content.date,
-      productImgUrl: 'https://url.kr/quav97',
+      convertDate: content.convertDate,
+      productImgUrl: content.imgUrl[0],
       profileImgUrl:
         'https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg',
     };
@@ -67,7 +71,10 @@ const SalesProductCard = () => {
                 <div>
                   <SalesTitle title={content.title} />
                   <SellerName name={content.name} />
-                  <PostingTime date={content.date} />
+                  <PostingTime
+                    convertDate={content.convertDate}
+                    date={content.date}
+                  />
                 </div>
               </SummaryInfo>
               <ArticlePreview content={content.content} />

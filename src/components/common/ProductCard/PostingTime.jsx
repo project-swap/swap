@@ -11,9 +11,9 @@ StyledPostingTime.defaultProps = {
   marginRight: '0.5rem',
 };
 
-const PostingTime = ({ date, fontSize, marginRight }) => {
+const PostingTime = ({ date, fontSize, marginRight, convertDate }) => {
   const krCurrentDate = new Date();
-  const postDate = new Date(date);
+  const postDate = convertDate;
 
   const secondDiff = (krCurrentDate.valueOf() - postDate.valueOf()) / 1000;
 

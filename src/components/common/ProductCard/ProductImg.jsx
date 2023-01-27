@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledProductImg = styled.div`
-  background: center url(${props => props.url});
+  background: center url('${props => props.url}');
   background-size: cover;
   box-sizing: border-box;
   border-top-left-radius: 12px;

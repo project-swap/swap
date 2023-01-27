@@ -1,6 +1,5 @@
 import React from 'react';
-
-import Footer from '../components/common/Footer.tsx';
+import Footer from '../components/common/Footer';
 import NavBar from '../components/common/NavBar';
 import SalesProductList from '../components/SalesProduct/SalesProductList';
 
