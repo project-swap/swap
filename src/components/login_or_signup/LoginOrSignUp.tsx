@@ -10,6 +10,11 @@ import { FcGoogle } from 'react-icons/fc';
 import { linkStyle } from '../../styles/linkStyle';
 import { BsGithub } from 'react-icons/bs';
 
+interface ILoginOrSignUpProps {
+  title: string;
+  link: string;
+}
+
 const LoginOrSignUpPage = styled.section`
   display: flex;
   justify-content: center;
@@ -32,12 +37,12 @@ const LinkToReverse = styled.div`
   font-size: 0.8rem;
 `;
 
-const LoginOrSignUp = ({ title, link }) => {
+const LoginOrSignUp = ({ title, link }: ILoginOrSignUpProps) => {
   return (
     <EntireAreaWrap>
       <NavBar />
       <LoginOrSignUpPage>
-        <ModalBox width={30} height={24}>
+        <ModalBox width={'30'} height={'24'}>
           <Title>{title}</Title>
           <SocialBtn
             background={'#fff'}
