@@ -8,6 +8,7 @@ import SalesTitle from '../common/ProductCard/SalesTitle';
 import SellerName from '../common/ProductCard/SellerName';
 import PostingTime from '../common/ProductCard/PostingTime';
 import ArticlePreview from '../common/ProductCard/ArticlePreview';
+import { useNavigate } from 'react-router';
 // import { collection, orderBy, query } from 'firebase/firestore';
 // import { db } from '../../firebase';
 
@@ -42,10 +43,11 @@ const SalesProductInfo = styled.div`
 
 const SalesProductCard = () => {
   const data = useRecoilValue(getTest);
+  const navigate = useNavigate();
 
   const contents = data.map(content => {
     return {
-      key: content.id,
+      key: content.postId,
       title: content.title,
       content: content.content,
       hash: content.hash_tag,
@@ -62,7 +64,12 @@ const SalesProductCard = () => {
     <>
       {contents.map(content => {
         return (
-          <SalesProductCardFrame key={content.key}>
+          <SalesProductCardFrame
+            key={content.key}
+            onClick={() => {
+              navigate(`/detail/${content.key}`);
+            }}
+          >
             <ProductImg url={content.productImgUrl} />
             <SalesProductInfo>
               <SummaryInfo>
