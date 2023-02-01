@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledPostingTime = styled.span`
   font-size: ${props => props.fontSize};
-  margin-right: ${props => props.marginRight};
+  margin: ${props => props.margin};
 `;
 
 StyledPostingTime.defaultProps = {
@@ -11,7 +11,7 @@ StyledPostingTime.defaultProps = {
   marginRight: '0.5rem',
 };
 
-const PostingTime = ({ date, fontSize, marginRight, convertDate }) => {
+const PostingTime = ({ date, fontSize, margin, convertDate }) => {
   const krCurrentDate = new Date();
   const postDate = convertDate;
 
@@ -43,7 +43,7 @@ const PostingTime = ({ date, fontSize, marginRight, convertDate }) => {
   };
 
   return (
-    <StyledPostingTime fontSize={fontSize} marginRight={marginRight}>
+    <StyledPostingTime fontSize={fontSize} margin={margin}>
       {outputText()}
     </StyledPostingTime>
   );
