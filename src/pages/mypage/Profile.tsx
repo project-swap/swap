@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import MainContainer from '../../components/common/MainContainer';
 import SideBar from '../../components/SideBar';
@@ -9,6 +9,8 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { useRecoilState } from 'recoil';
 import { profileImage } from '../../atoms/atoms';
 import ModalClose from '../../components/ProfileModal';
+import { getAuth, updateProfile } from 'firebase/auth';
+import { sessionUserData } from '../../components/common/NavBar';
 
 const Info = styled.section`
   margin-top: 2rem;
@@ -128,22 +130,46 @@ const SuccessMessage = styled.p`
   color: green;
 `;
 
+const NickNameInput = styled.input`
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 2rem;
+  font-weight: bold;
+`;
+
 interface NickNameProps {
   nickName: string;
 }
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useRecoilState(profileImage);
+  const userObj = sessionUserData();
+  const [nickName, setNickName] = useState(userObj.displayName);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitted },
-    resetField,
+    setValue,
   } = useForm<NickNameProps>({ mode: 'onChange' }); // mode: 'onChange' => 사용자에게 실시간으로 피드백 제공
 
-  const onValid = (nickName: NickNameProps) => {
-    alert(JSON.stringify(nickName));
-    resetField('nickName');
+  const onValid = async ({ nickName }: NickNameProps) => {
+    const auth = getAuth();
+    if (auth.currentUser) {
+      await updateProfile(auth.currentUser, {
+        displayName: nickName,
+      });
+      setNickName(nickName);
+    }
+  };
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = event;
+    setNickName(value);
+    setValue('nickName', value);
   };
 
   const handleIconClick = () => {
@@ -164,7 +190,8 @@ const Profile = () => {
             </ModalClose>
           )}
           <Info>
-            <h2>박미쭈</h2>
+            <NickNameInput onChange={onChange} type="text" value={nickName} />
+
             <h4>팔로잉 59 팔로워 48</h4>
           </Info>
         </ProfileContainer>
@@ -183,9 +210,13 @@ const Profile = () => {
                   required: true,
                   minLength: 2,
                   maxLength: 5,
-                  pattern: /([^가-힣\x20])/i, //초성 미포함
+                  pattern: /([0-9a-zA-Z가-힣\x20])/i, //초성 미포함
                 })}
               />
+              {errors.nickName?.type === 'pattern' ? (
+                <ErrorMessage>초성은 불가능합니다.</ErrorMessage>
+              ) : null}
+
               <Button type="submit">수정</Button>
               {errors ? (
                 <ErrorMessage>
