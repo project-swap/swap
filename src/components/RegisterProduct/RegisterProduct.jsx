@@ -69,14 +69,22 @@ const RegisterProduct = () => {
   const update = async event => {
     event.preventDefault();
 
-    console.log(event);
+    const type = () => {
+      if (event.target[4].checked) {
+        return 'swap';
+      } else {
+        return 'share';
+      }
+    };
 
     const data = {
+      postId: `${Date.now()}`,
       title: event.target[0].value,
       hash_tag: hashArr,
       content: event.target[3].value,
-      swap: event.target[4].checked,
-      share: event.target[5].checked,
+      // swap: event.target[4].checked,
+      // share: event.target[5].checked,
+      type: type(),
       name: JSON.parse(userInfo)['displayName'],
       uid: JSON.parse(userInfo)['uid'],
       date: postDate,
