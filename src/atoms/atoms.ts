@@ -15,11 +15,10 @@ export const getTest = selector({
   key: 'get/firestore',
   get: async () => {
     const dataArr: IContent[] = [];
-    await isApi().then(dbData => {
-      const docs = dbData.docs;
-      docs.forEach(doc => {
-        const returnDoc: any = _.cloneDeep(doc.data());
-        dataArr.push(returnDoc);
+    await isApi().then(document => {
+      document.forEach(doc => {
+        const copyDb: any = _.cloneDeep(doc.data());
+        dataArr.push(copyDb);
       });
     });
     return dataArr;

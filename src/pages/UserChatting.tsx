@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import NavBar from '../components/common/NavBar';
-import UserChatNameBox from '../components/Chatting/UserChatNameBox';
-import UserAllChatBox from '../components/Chatting/UserChatMessageArea';
-import UserChatInput from '../components/Chatting/UserChatInput';
+import UserChatNameBox from '../components/Chatting/ChattingDetail/UserChatNameBox';
+import UserAllChatBox from '../components/Chatting/ChattingDetail/UserChatMessageArea';
+import UserChatInput from '../components/Chatting/ChattingDetail/UserChatInput';
 
 const UserChattingWrap = styled.div`
   display: flex;
