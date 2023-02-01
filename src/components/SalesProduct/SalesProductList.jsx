@@ -1,8 +1,32 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { ComponentForCenterAlignment } from '../common/PublicStyle';
 import SalesProductCardGroup from './SalesProductCardGroup';
 import SalesProductListTap from './SalesProductListTap';
+
+const ani = keyframes`
+  0%{
+    rotate: 90deg;
+    box-shadow: 0 0 0 1px #e55a66, inset 0 0 0 1px #f3bb10;
+  }
+  100%{
+    rotate: 270deg;
+    box-shadow: 0 0 0 10px #e55a66, inset 0 0 0 10px #f3bb10;
+  }
+`;
+
+const reverseAni = keyframes`
+  to{
+    rotate: 90deg;
+    box-shadow: 0 0 0 1px #e55a66, inset 0 0 0 1px #f3bb10;
+
+  }
+  from{
+    rotate: 270deg;
+    box-shadow: 0 0 0 10px #e55a66, inset 0 0 0 10px #f3bb10;
+
+  }
+`;
 
 const SalesProductListComponent = styled.div`
   margin: 3rem 0;
@@ -14,10 +38,33 @@ const SalesProductListComponent = styled.div`
   justify-content: space-around;
 `;
 
+const AddPostBtn = styled.button`
+  position: fixed;
+  bottom: 18rem;
+  right: 6rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  font-size: 5rem;
+  text-align: center;
+  line-height: 1rem;
+  color: #2c2a2a;
+  border: 3px solid black;
+  box-shadow: 0 0 0 1px #e55a66, inset 0 0 0 1px #f3bb10;
+  animation: ${reverseAni} 0.8s forwards;
+  :hover {
+    animation: ${ani} 0.8s forwards;
+  }
+  :active {
+    color: black;
+  }
+`;
+
 const SalesProductList = () => {
   return (
     <ComponentForCenterAlignment>
       <SalesProductListComponent>
+        <AddPostBtn>+</AddPostBtn>
         <SalesProductListTap />
         <SalesProductCardGroup />
       </SalesProductListComponent>
