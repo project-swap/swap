@@ -15,6 +15,7 @@ const StyledBtn = styled.button`
   width: 50%;
   height: 100%;
   border: 1px solid black;
+  padding: 0.8rem 0;
   :active {
     background-color: #e4e4e4;
   }
@@ -23,7 +24,6 @@ const StyledBtn = styled.button`
 const StyledBookmarkBtn = styled(StyledBtn)`
   line-height: 1.2rem;
   font-size: 2.5rem;
-  border-bottom-left-radius: 0.4rem;
 `;
 
 const StyledChattingBtn = styled(StyledBtn)`

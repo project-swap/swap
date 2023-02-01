@@ -6,6 +6,7 @@ const StyledSellerInfo = styled.div`
   align-items: center;
   height: 5rem;
   border-bottom: 1px solid black;
+  padding: 1.2rem 0;
 `;
 
 const StyledSellerProfileImg = styled.div`
@@ -35,14 +36,16 @@ const StyledSellerGrade = styled.span`
   font-size: 0.8rem;
   margin-left: 1rem;
   margin-top: 0.3rem;
+  width: 85%;
+  text-align: left;
 `;
 
-const SellerInfo = () => {
+const SellerInfo = ({ name }) => {
   return (
     <StyledSellerInfo>
       <StyledSellerProfileImg />
       <StyledSellerInfoBox>
-        <StyledSellerName>개똥</StyledSellerName>
+        <StyledSellerName>{name}</StyledSellerName>
         <StyledSellerGrade>브론즈</StyledSellerGrade>
       </StyledSellerInfoBox>
     </StyledSellerInfo>
