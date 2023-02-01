@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 import React from 'react';
 
-const Container = styled.main`
+const ExchangeContainer = styled.main`
   display: flex;
   width: 90%;
-  left: 5rem;
+  left: 3rem;
   position: relative;
   justify-content: space-evenly;
   top: 3rem;
 `;
 
-const ContainerChildren = ({
+const ExchangeContainerChildren = ({
   children,
 }: {
   children: JSX.Element | JSX.Element[];
 }) => {
-  return <Container>{children}</Container>;
+  return <ExchangeContainer>{children}</ExchangeContainer>;
 };
 
-export default ContainerChildren;
+export default ExchangeContainerChildren;

@@ -1,5 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  setPersistence,
+  browserSessionPersistence,
+} from 'firebase/auth';
 
 const SocialButton = styled.button`
   display: flex;
@@ -24,8 +33,49 @@ const SocialBtn = ({ background, color, icon, name }) => {
   const pathName = currentURL[currentURL.length - 1];
   const firstLetter = pathName.charAt(0).toUpperCase();
   const otherLetters = pathName.slice(1);
+
+  const navigate = useNavigate();
+
+  const auth = getAuth();
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+
+  const handleErrorMsg = error => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+  };
+
+  const handleLogin = provider => {
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        return signInWithPopup(auth, provider)
+          .then(() => {
+            navigate(-1);
+          })
+          .catch(error => {
+            handleErrorMsg(error);
+          });
+      })
+      .catch(error => {
+        handleErrorMsg(error);
+      });
+  };
+
   return (
-    <SocialButton background={background} color={color}>
+    <SocialButton
+      onClick={
+        name === 'Google'
+          ? () => {
+              handleLogin(googleProvider);
+            }
+          : () => {
+              handleLogin(githubProvider);
+            }
+      }
+      background={background}
+      color={color}
+    >
       {icon}
       <span>
         {firstLetter + otherLetters} with {name}

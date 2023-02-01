@@ -3,18 +3,19 @@ import styled from 'styled-components';
 import NavBar from '../components/common/NavBar';
 import ModalBox from '../components/ModalBox';
 import SocialBtn from '../components/button/SocialBtn';
-import BackgroundBlur from '../components/BackgroundBlur';
+import Footer from '../components/common/Footer';
+import { EntireAreaWrap } from '../components/common/PublicStyle';
 import { Link } from 'react-router-dom';
-import { TbBrandTwitter } from 'react-icons/tb';
 import { FcGoogle } from 'react-icons/fc';
 import { linkStyle } from '../styles/linkStyle';
+import { BsGithub } from 'react-icons/bs';
 
 const LoginPage = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 10rem;
+  margin-top: 7rem;
   position: relative;
   box-sizing: border-box;
   z-index: 2;
@@ -33,7 +34,7 @@ const LinkToSignUp = styled.div`
 
 const Login = () => {
   return (
-    <>
+    <EntireAreaWrap>
       <NavBar />
       <LoginPage>
         <ModalBox width={30} height={24}>
@@ -46,19 +47,19 @@ const Login = () => {
             name={'Google'}
           />
           <SocialBtn
-            background={'#3C87F8'}
+            background={'#303030'}
             color={'#fff'}
-            icon={<TbBrandTwitter style={{ fontSize: '1.6rem' }} />}
+            icon={<BsGithub style={{ fontSize: '1.5rem' }} />}
             location={'signup'}
-            name={'Twitter'}
+            name={'Github'}
           />
           <Link to="/signup" style={linkStyle}>
             <LinkToSignUp>회원가입</LinkToSignUp>
           </Link>
         </ModalBox>
       </LoginPage>
-      <BackgroundBlur />
-    </>
+      <Footer />
+    </EntireAreaWrap>
   );
 };
 

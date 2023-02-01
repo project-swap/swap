@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import { RecoilRoot } from 'recoil';
@@ -6,21 +6,28 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 // import router
+const Main = lazy(() => {
+  return Promise.all([
+    import('./Main'),
+    new Promise(resolve => setTimeout(resolve, 1500)),
+  ]).then(([moduleExports]) => moduleExports);
+});
 import Login from './Login';
 import NotFound from './NotFound';
 import SignUp from './SignUp';
-import Main from './Main';
 import Search from './Search';
 import Register from './Register';
 import Swap from './Swap';
-import Mypage from './Mypage';
+import Mypage from './my_page/Mypage';
 import Loader from './Loader';
 import UserChatting from './UserChatting';
-import LocationSetting from './LocationSetting';
-import BookMarkPage from './BookMarkPage';
-import SwapList from './SwapList';
-import ReportHistory from './ReportHistory';
+import ReportHistory from './my_page/ReportHistory';
+import LocationSetting from './my_page/LocationSetting';
+import BookMarkPage from './my_page/BookMarkPage';
+import Profile from './my_page/Profile';
+import Test from './Test';
 import UserChattingList from './UserChattingList';
+import ExchangeHistory from './my_page/ExchangeHistory';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -48,8 +55,10 @@ const Router = () => {
                 <Route path="/chat-list" element={<UserChattingList />} />
                 <Route path="/locationsetting" element={<LocationSetting />} />
                 <Route path="/bookmark" element={<BookMarkPage />} />
-                <Route path="/swaplist" element={<SwapList />} />
+                <Route path="/swaplist" element={<ExchangeHistory />} />
                 <Route path="/report" element={<ReportHistory />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/test" element={<Test />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
