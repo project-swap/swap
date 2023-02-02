@@ -41,7 +41,7 @@ const SalesProductListComponent = styled.div`
 
 const AddPostBtn = styled.button`
   position: fixed;
-  bottom: 18rem;
+  bottom: 4rem;
   right: 6rem;
   width: 4rem;
   height: 4rem;
