@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledContent = styled.article`
   padding: 1rem 3rem 3rem;
-  line-height: 2.5rem;
+  line-height: 2.1rem;
   height: 100%;
   font-size: 1.1rem;
   border-bottom: 1px solid black;
