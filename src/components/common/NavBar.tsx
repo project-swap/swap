@@ -103,6 +103,14 @@ const LoginSuccessIconContainer = styled.div`
   height: 2rem;
 `;
 
+export const sessionUserData = () => {
+  for (const key of Object.keys(sessionStorage)) {
+    if (key.includes('firebase:authUser:')) {
+      return JSON.parse(sessionStorage.getItem(key) || '{}');
+    }
+  }
+};
+
 const NavBar = () => {
   const themeMode = useRecoilValue(darkModeToggle);
   const themeColorObject = useRecoilValue(themeColor);
@@ -117,14 +125,6 @@ const NavBar = () => {
       setLoginUserData(userData);
     }
   }, []);
-
-  const sessionUserData = () => {
-    for (const key of Object.keys(sessionStorage)) {
-      if (key.includes('firebase:authUser:')) {
-        return JSON.parse(sessionStorage.getItem(key) || '{}');
-      }
-    }
-  };
 
   const handleGoogleLogout = () => {
     const isLogout = confirm('로그아웃 하시겠습니까?');

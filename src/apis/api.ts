@@ -1,8 +1,10 @@
 import { firestore } from '../firebase';
+import { collection, query, getDocs } from 'firebase/firestore';
 
-function isApi() {
-  const test = firestore.collection('mock-api');
-  const api_data = test.get();
-  return api_data;
+async function isApi() {
+  const q = query(collection(firestore, 'mock-api'));
+
+  const querySnapshot = await getDocs(q);
+  return querySnapshot;
 }
 export default isApi;
