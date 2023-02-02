@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavBar from '../components/common/NavBar';
-import SearchBar from '../components/Chatting/ChattingList/SearchBar';
-import ChattingList from '../components/Chatting/ChattingList/ChatItem';
+import SearchBar from '../components/chatting/chatting_list/SearchBar';
+import ChattingList from '../components/chatting/chatting_list/ChatItem';
 
 const ChatListContainer = styled.div`
   width: 100%;

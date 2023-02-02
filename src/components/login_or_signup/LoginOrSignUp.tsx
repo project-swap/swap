@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import NavBar from '../components/common/NavBar';
-import ModalBox from '../components/ModalBox';
-import SocialBtn from '../components/button/SocialBtn';
-import Footer from '../components/common/Footer';
-import { EntireAreaWrap } from '../components/common/PublicStyle';
+import NavBar from '../common/NavBar';
+import ModalBox from '../ModalBox';
+import SocialBtn from './SocialBtn';
+import Footer from '../common/Footer';
+import { EntireAreaWrap } from '../common/PublicStyle';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import { linkStyle } from '../styles/linkStyle';
+import { linkStyle } from '../../styles/linkStyle';
 import { BsGithub } from 'react-icons/bs';
 
-const LoginPage = styled.section`
+interface ILoginOrSignUpProps {
+  title: string;
+  link: string;
+}
+
+const LoginOrSignUpPage = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,40 +32,40 @@ const Title = styled.h2`
   font-weight: bold;
 `;
 
-const LinkToSignUp = styled.div`
+const LinkToReverse = styled.div`
   margin-top: 2rem;
   font-size: 0.8rem;
 `;
 
-const Login = () => {
+const LoginOrSignUp = ({ title, link }: ILoginOrSignUpProps) => {
   return (
     <EntireAreaWrap>
       <NavBar />
-      <LoginPage>
-        <ModalBox width={30} height={24}>
-          <Title>로그인</Title>
+      <LoginOrSignUpPage>
+        <ModalBox width={'30'} height={'24'}>
+          <Title>{title}</Title>
           <SocialBtn
             background={'#fff'}
             color={'#000'}
             icon={<FcGoogle style={{ fontSize: '1.6rem' }} />}
-            location={'signup'}
             name={'Google'}
           />
           <SocialBtn
             background={'#303030'}
             color={'#fff'}
             icon={<BsGithub style={{ fontSize: '1.5rem' }} />}
-            location={'signup'}
             name={'Github'}
           />
-          <Link to="/signup" style={linkStyle}>
-            <LinkToSignUp>회원가입</LinkToSignUp>
+          <Link to={link} style={linkStyle}>
+            <LinkToReverse>
+              {title === '로그인' ? '회원가입' : '로그인'}
+            </LinkToReverse>
           </Link>
         </ModalBox>
-      </LoginPage>
+      </LoginOrSignUpPage>
       <Footer />
     </EntireAreaWrap>
   );
 };
 
-export default Login;
+export default LoginOrSignUp;

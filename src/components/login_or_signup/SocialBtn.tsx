@@ -10,7 +10,14 @@ import {
   browserSessionPersistence,
 } from 'firebase/auth';
 
-const SocialButton = styled.button`
+interface ISocialBtn {
+  background: string;
+  color: string;
+  icon: React.ReactElement;
+  name: string;
+}
+
+const SocialButton = styled.button<{ background: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,7 +35,7 @@ const SocialButton = styled.button`
   cursor: pointer;
 `;
 
-const SocialBtn = ({ background, color, icon, name }) => {
+const SocialBtn = ({ background, color, icon, name }: ISocialBtn) => {
   const currentURL = window.location.href.split('/');
   const pathName = currentURL[currentURL.length - 1];
   const firstLetter = pathName.charAt(0).toUpperCase();
@@ -36,17 +43,15 @@ const SocialBtn = ({ background, color, icon, name }) => {
 
   const navigate = useNavigate();
 
-  const auth = getAuth();
-  const googleProvider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider();
+  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const clickTarget = e.currentTarget;
+    const loginType = clickTarget.innerText.split(' ')[2];
+    const auth = getAuth();
 
-  const handleErrorMsg = error => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode, errorMessage);
-  };
-
-  const handleLogin = provider => {
+    const provider =
+      loginType === 'Google'
+        ? new GoogleAuthProvider()
+        : new GithubAuthProvider();
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
         return signInWithPopup(auth, provider)
@@ -54,28 +59,16 @@ const SocialBtn = ({ background, color, icon, name }) => {
             navigate(-1);
           })
           .catch(error => {
-            handleErrorMsg(error);
+            console.log(error);
           });
       })
       .catch(error => {
-        handleErrorMsg(error);
+        console.log(error);
       });
   };
 
   return (
-    <SocialButton
-      onClick={
-        name === 'Google'
-          ? () => {
-              handleLogin(googleProvider);
-            }
-          : () => {
-              handleLogin(githubProvider);
-            }
-      }
-      background={background}
-      color={color}
-    >
+    <SocialButton onClick={handleLogin} background={background} color={color}>
       {icon}
       <span>
         {firstLetter + otherLetters} with {name}
