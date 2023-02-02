@@ -75,7 +75,7 @@ const Search = () => {
     <EntireAreaWrap>
       <NavBar />
       <SearchPage>
-        <ModalBox width={50} height={45}>
+        <ModalBox width={'50'} height={'45'}>
           <SearchForm style={{ position: 'relative' }}>
             <SearchInput placeholder="검색어를 입력해주세요." />
             <ImSearch

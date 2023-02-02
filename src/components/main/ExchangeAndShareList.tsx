@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SectionTitle from './SectionTitle';
-import ProductImg from '../common/ProductCard/ProductImg';
+import ProductImg from '../common/product_card/ProductImg';
 // import SalesTitle from '../common/ProductCard/SalesTitle';
 
 import { useRecoilValue } from 'recoil';

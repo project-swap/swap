@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
-const Modal = styled.section`
+interface IContents {
+  width: string;
+  height: string;
+  children: ReactNode;
+}
+
+const Modal = styled.section<IContents>`
   width: ${props => props.width};
   height: ${props => props.height};
   display: flex;
@@ -14,7 +20,7 @@ const Modal = styled.section`
   border-radius: 0.5rem;
 `;
 
-const ModalBox = ({ width, height, children }) => {
+const ModalBox = ({ width, height, children }: IContents) => {
   return (
     <Modal width={`${width}rem`} height={`${height}rem`}>
       {children}
