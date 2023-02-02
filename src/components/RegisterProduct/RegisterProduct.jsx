@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import RegisterProductImageUploadGroup from './RegisterProductImageUploadGroup';
 import RegisterProductInputGroup from './RegisterProductInputGroup';
 import RegisterProductTradeTypeGroup from './RegisterProductTradeTypeGroup';
 import { IoMdArrowRoundBack } from 'react-icons/io';
@@ -82,8 +81,6 @@ const RegisterProduct = () => {
       title: event.target[0].value,
       hash_tag: hashArr,
       content: event.target[3].value,
-      // swap: event.target[4].checked,
-      // share: event.target[5].checked,
       type: type(),
       name: JSON.parse(userInfo)['displayName'],
       uid: JSON.parse(userInfo)['uid'],
@@ -109,7 +106,6 @@ const RegisterProduct = () => {
         </ExitButton>
         <RegisterForm onSubmit={update}>
           <RegisterProductInputGroup />
-          {/* <RegisterProductImageUploadGroup /> */}
           <RegisterProductImageUploadGroupFirebase />
           <RegisterProductInputContent />
           <RegisterProductTradeTypeGroup />

@@ -64,12 +64,20 @@ const AddPostBtn = styled.button`
 const SalesProductList = () => {
   const navigate = useNavigate();
 
+  const userInfo = sessionStorage.getItem(
+    'firebase:authUser:AIzaSyDopZC4cfYJSrlMB_QTcAG7nIv59F0PaIg:[DEFAULT]',
+  );
+
   return (
     <ComponentForCenterAlignment>
       <SalesProductListComponent>
         <AddPostBtn
           onClick={() => {
-            navigate('/register');
+            if (userInfo) {
+              navigate('/register');
+            } else {
+              navigate('/login');
+            }
           }}
         >
           +
