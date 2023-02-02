@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import styled, { keyframes } from 'styled-components';
 import { ComponentForCenterAlignment } from '../common/PublicStyle';
 import SalesProductCardGroup from './SalesProductCardGroup';
@@ -61,10 +62,18 @@ const AddPostBtn = styled.button`
 `;
 
 const SalesProductList = () => {
+  const navigate = useNavigate();
+
   return (
     <ComponentForCenterAlignment>
       <SalesProductListComponent>
-        <AddPostBtn>+</AddPostBtn>
+        <AddPostBtn
+          onClick={() => {
+            navigate('/register');
+          }}
+        >
+          +
+        </AddPostBtn>
         <SalesProductListTap />
         <SalesProductCardGroup />
       </SalesProductListComponent>

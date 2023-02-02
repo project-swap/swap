@@ -91,7 +91,10 @@ const ProductDetail = () => {
           />
         </StyledTitleField>
         <SellerInfo name={currentData.name} />
-        <Content content={currentData.content} />
+        <Content
+          content={currentData.content}
+          hash_tag={currentData.hash_tag}
+        />
         <BuyerMenuBar />
       </StyledContentField>
     </ProductDetailComponent>

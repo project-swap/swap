@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledContent = styled.article`
-  padding: 3rem 3rem;
+  padding: 1rem 3rem 3rem;
   line-height: 2.5rem;
   height: 100%;
   font-size: 1.1rem;
@@ -10,8 +10,33 @@ const StyledContent = styled.article`
   overflow-y: scroll;
 `;
 
-const Content = ({ content }) => {
-  return <StyledContent>{content}</StyledContent>;
+const StyledHashtagGroup = styled.div`
+  width: 100%;
+  display: flex;
+`;
+
+const StyledHashtag = styled.div`
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 0.5rem 0.5rem 1rem;
+  padding: 0.4rem;
+  line-height: 1.4rem;
+  width: 33%;
+  text-align: center;
+`;
+
+const Content = ({ content, hash_tag }) => {
+  return (
+    <StyledContent>
+      <StyledHashtagGroup>
+        {hash_tag.map(item => {
+          return <StyledHashtag key={item}>{item}</StyledHashtag>;
+        })}
+      </StyledHashtagGroup>
+
+      {content}
+    </StyledContent>
+  );
 };
 
 export default Content;
