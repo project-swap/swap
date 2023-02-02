@@ -13,15 +13,16 @@ const StyledContent = styled.article`
 const StyledHashtagGroup = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
 `;
 
 const StyledHashtag = styled.div`
   border: 1px solid black;
   border-radius: 10px;
   margin: 0.5rem 0.5rem 1rem;
-  padding: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
   line-height: 1.4rem;
-  width: 33%;
   text-align: center;
 `;
 
