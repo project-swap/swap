@@ -10,7 +10,7 @@ const Form = styled.form`
   align-items: center;
 `;
 
-const ImageMessageContainer = styled.div`
+const ImageMessageContainer = styled.section`
   position: relative;
   width: 110%;
   height: 5rem;
@@ -19,7 +19,7 @@ const ImageMessageContainer = styled.div`
   justify-content: center;
 `;
 
-const ProfileEdit = styled.div`
+const ProfileEdit = styled.span`
   display: flex;
   position: relative;
   right: 10rem;
@@ -59,11 +59,6 @@ const Modal = styled.section`
       opacity: 0.4;
     }
   }
-  .previewImage {
-    width: 10rem;
-    height: 8rem;
-    border-radius: 0.5rem;
-  }
 `;
 
 const ProfileDivider = styled.div`
@@ -79,6 +74,18 @@ const ImageMessageInput = styled.input`
   height: 30%;
   &::placeholder {
     opacity: 0.6;
+  }
+`;
+
+const PreviewImageContainer = styled.section`
+  width: 8rem;
+  height: 8rem;
+  border: 1.5px solid black;
+
+  img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 4rem;
   }
 `;
 
@@ -98,11 +105,30 @@ const ImageInputUpload = styled.input`
   display: none;
 `;
 
+const PreviewOuterImage = styled.img`
+  width: 8rem;
+  height: 8rem;
+  position: absolute;
+  z-index: -9999;
+  left: 11rem;
+  bottom: 9.4rem;
+  filter: contrast(20%);
+  border: 1px solid black;
+`;
+
+const PreviewInnerImage = styled.div`
+  background-color: rgb(0, 0, 0, 0.3);
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  z-index: 1;
+  display: none;
+`;
+
 const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
   const [attachment, setAttachment] = useState<string | ArrayBuffer | null>(
     null,
   );
-  // const fileInput = useRef(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     console.log(event);
@@ -132,13 +158,13 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
       <IoClose className="hover" onClick={onClick} />
       {children}
       <ProfileDivider />
-      {attachment ? (
-        <img
-          className="previewImage"
-          src={attachment.toString()}
-          alt={attachment.toString()}
-        />
-      ) : null}
+      <PreviewOuterImage src={attachment?.toString()} />
+      <PreviewImageContainer>
+        <PreviewInnerImage></PreviewInnerImage>
+        {attachment ? (
+          <img src={attachment.toString()} alt={attachment.toString()} />
+        ) : null}
+      </PreviewImageContainer>
       <Form onSubmit={handleSubmit}>
         <ImageMessageContainer>
           <ImageMessageInput type="text" placeholder="이미지를 업로드하세요." />
