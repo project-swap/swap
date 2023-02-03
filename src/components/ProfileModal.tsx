@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { IoMdCloudUpload } from 'react-icons/io';
+import { ChildrenProps } from '../utils/utils';
 
 const Form = styled.form`
   display: flex;
@@ -28,10 +29,9 @@ const ProfileEdit = styled.span`
   bottom: 2rem;
 `;
 
-interface ModalCloseProps {
+interface ModalCloseProps extends ChildrenProps {
   width: number;
   height: number;
-  children?: JSX.Element | JSX.Element[];
   onClick?: () => void;
 }
 const Modal = styled.section`
