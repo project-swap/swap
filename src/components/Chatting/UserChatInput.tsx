@@ -40,14 +40,17 @@ const ChatEnterBtn = styled(FiSend)`
 const UserChatInput = () => {
   const [chatMessage, setChatMessage] = useState('');
   const messageData = useSetRecoilState(getMessage);
+  // Message === 현재 사용자 uid(recoil) + 게시글 uid
   const messageRef = ref(realtimeDatabase, 'Message');
 
   const sendMessage = (
     e: React.FormEvent<HTMLFormElement> | React.MouseEvent<SVGElement>,
   ) => {
     e.preventDefault();
+    // db를 firebase로 보내겠다 = push
     const newMessageRef = push(messageRef);
     set(newMessageRef, chatMessage);
+    // chatMessage => 채팅방에 입장하셨씁니다-
     setChatMessage('');
   };
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
