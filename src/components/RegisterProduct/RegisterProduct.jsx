@@ -7,7 +7,7 @@ import { ComponentForCenterAlignment } from '../common/PublicStyle';
 import RegisterProductPostBtn from './RegisterProductPostBtn';
 import RegisterProductInputContent from './RegisterProductInputContent';
 import { useRecoilValue } from 'recoil';
-import { hashArrState, ImgUrlArrState } from '../../atoms/atoms';
+import { hashArrState, ImgUrlArrState, userInfo } from '../../atoms/atoms';
 import RegisterProductImageUploadGroupFirebase from './RegisterProductImageUploadGroupFirebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase';
@@ -52,12 +52,9 @@ const RegisterProduct = () => {
 
   const hashArr = useRecoilValue(hashArrState);
   const imgUrlArr = useRecoilValue(ImgUrlArrState);
+  const userInformation = useRecoilValue(userInfo);
 
   const navigate = useNavigate();
-
-  const userInfo = sessionStorage.getItem(
-    'firebase:authUser:AIzaSyDopZC4cfYJSrlMB_QTcAG7nIv59F0PaIg:[DEFAULT]',
-  );
 
   const date = new Date();
 
@@ -82,24 +79,23 @@ const RegisterProduct = () => {
       hash_tag: hashArr,
       content: event.target[3].value,
       type: type(),
-      name: JSON.parse(userInfo)['displayName'],
-      uid: JSON.parse(userInfo)['uid'],
+      name: userInformation['displayName'],
+      uid: userInformation['uid'],
       date: postDate,
       convertDate: `${Date.now()}`,
       imgUrl: imgUrlArr,
+      profileImg: userInformation['photoURL'],
     };
 
-    try {
-      const addData = await addDoc(postsCollectionRef, data);
-      console.log(addData);
-      navigate('/product-list');
-    } catch (e) {
-      console.log(e);
-    }
+    const addData = await addDoc(postsCollectionRef, data);
+    console.log(addData);
+
+    navigate(`/detail/${data.postId}`, { replace: true });
   };
 
   return (
     <ComponentForCenterAlignment>
+      <button onClick={() => console.log(userInformation)}>유저인포</button>
       <RegisterProductComponent>
         <ExitButton>
           <IoMdArrowRoundBack />
