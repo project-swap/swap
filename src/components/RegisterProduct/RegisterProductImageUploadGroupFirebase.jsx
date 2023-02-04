@@ -121,6 +121,7 @@ const RegisterProductImageUploadGroupFirebase = () => {
           onChange={event => {
             setImgUpload(event.target.files[0]);
           }}
+          required
         />
       </InputComponent>
     </RegisterProductGroupComponent>
