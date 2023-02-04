@@ -90,7 +90,7 @@ const ProductDetail = () => {
             date={currentData.date}
           />
         </StyledTitleField>
-        <SellerInfo name={currentData.name} />
+        <SellerInfo name={currentData.name} url={currentData.profileImg} />
         <Content
           content={currentData.content}
           hash_tag={currentData.hash_tag}

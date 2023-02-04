@@ -13,9 +13,7 @@ const StyledSellerProfileImg = styled.div`
   width: 3rem;
   height: 3rem;
   margin-left: 3rem;
-  background: center
-    url('https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg')
-    no-repeat;
+  background: center url('${props => props.url}') no-repeat;
   background-size: 100px;
   border: 1px solid black;
   border-radius: 50%;
@@ -40,10 +38,10 @@ const StyledSellerGrade = styled.span`
   text-align: left;
 `;
 
-const SellerInfo = ({ name }) => {
+const SellerInfo = ({ name, url }) => {
   return (
     <StyledSellerInfo>
-      <StyledSellerProfileImg />
+      <StyledSellerProfileImg url={url} />
       <StyledSellerInfoBox>
         <StyledSellerName>{name}</StyledSellerName>
         <StyledSellerGrade>브론즈</StyledSellerGrade>
