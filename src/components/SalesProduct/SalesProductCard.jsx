@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { getTest } from '../../atoms/atoms';
+import { filterData } from '../../atoms/atoms';
 import ProductImg from '../common/ProductCard/ProductImg';
 import ProfileImg from '../common/ProductCard/ProfileImg';
 import SalesTitle from '../common/ProductCard/SalesTitle';
@@ -9,8 +9,6 @@ import SellerName from '../common/ProductCard/SellerName';
 import PostingTime from '../common/ProductCard/PostingTime';
 import ArticlePreview from '../common/ProductCard/ArticlePreview';
 import { useNavigate } from 'react-router';
-// import { collection, orderBy, query } from 'firebase/firestore';
-// import { db } from '../../firebase';
 
 const SalesProductCardFrame = styled.li`
   width: 23%;
@@ -42,21 +40,21 @@ const SalesProductInfo = styled.div`
 `;
 
 const SalesProductCard = () => {
-  const data = useRecoilValue(getTest);
+  const filteredData = useRecoilValue(filterData);
+
   const navigate = useNavigate();
 
-  const contents = data.map(content => {
+  const contents = filteredData.map(content => {
     return {
-      key: content.postId,
-      title: content.title,
-      content: content.content,
-      hash: content.hash_tag,
-      name: content.name,
-      date: content.date,
-      convertDate: content.convertDate,
-      productImgUrl: content.imgUrl[0].url,
-      profileImgUrl:
-        'https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg',
+      key: content.postId.stringValue,
+      title: content.title.stringValue,
+      content: content.content.stringValue,
+      name: content.name.stringValue,
+      date: content.date.stringValue,
+      convertDate: content.convertDate.stringValue,
+      productImgUrl:
+        content.imgUrl.arrayValue.values[0].mapValue.fields.url.stringValue,
+      profileImgUrl: content.profileImg.stringValue,
     };
   });
 
