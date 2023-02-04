@@ -1,6 +1,8 @@
 import { atom, selector } from 'recoil';
 import isApi from '../apis/api';
 import _ from 'lodash';
+import { collection, getDocs, query } from 'firebase/firestore';
+import { db } from '../firebase';
 
 interface IContent {
   id: number;
@@ -21,6 +23,21 @@ export const getTest = selector({
         const returnDoc: any = _.cloneDeep(doc.data());
         dataArr.push(returnDoc);
       });
+    });
+    return dataArr;
+  },
+});
+
+export const data = selector({
+  key: 'defaultData',
+  get: async () => {
+    const postRef = collection(db, 'posts');
+    const q = query(postRef);
+    const querySnapShot = await getDocs(q);
+    const dataArr: any = [];
+
+    querySnapShot.forEach((item: any) => {
+      dataArr.push(item._document.data.value.mapValue.fields);
     });
     return dataArr;
   },
@@ -79,4 +96,9 @@ export const userInfo = atom({
 export const profileImage = atom({
   key: 'profileImage',
   default: true,
+});
+
+export const filterData = atom({
+  key: 'filterData',
+  default: data,
 });
