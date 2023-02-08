@@ -55,7 +55,7 @@ const Router = () => {
                 <Route path="/chat-list" element={<UserChattingList />} />
                 <Route path="/locationsetting" element={<LocationSetting />} />
                 <Route path="/bookmark" element={<BookMarkPage />} />
-                <Route path="/swaplist" element={<ExchangeHistory />} />
+                <Route path="/exchangehistory" element={<ExchangeHistory />} />
                 <Route path="/report" element={<ReportHistory />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/test" element={<Test />} />
