@@ -44,7 +44,7 @@ const SwapContainer = styled.div`
 const ProfileContainer = styled.section`
   display: flex;
   z-index: 1;
-  margin-left: 1rem;
+  margin-left: 10rem;
   .profileImage {
     width: 8rem;
     height: 8rem;
@@ -74,6 +74,7 @@ const ProfileContainer = styled.section`
 const InputContainer = styled.section`
   position: relative;
   top: 2rem;
+  margin-left: 5rem;
   input {
     display: flex;
     justify-content: center;
@@ -105,14 +106,18 @@ const Button = styled.button`
   height: 2rem;
   cursor: pointer;
   position: relative;
-  left: 35.5rem;
+  left: 33rem;
   bottom: 3.6rem;
   &:hover {
     opacity: 0.7;
   }
 `;
 
-const StyleContainer = styled.div``;
+const StyleContainer = styled.div`
+  input {
+    margin-left: 8rem;
+  }
+`;
 
 const Form = styled.form`
   display: flex;
@@ -191,7 +196,6 @@ const Profile = () => {
           )}
           <Info>
             <NickNameInput onChange={onChange} type="text" value={nickName} />
-
             <h4>팔로잉 59 팔로워 48</h4>
           </Info>
         </ProfileContainer>

@@ -5,7 +5,6 @@ import { ChildrenProps } from '../utils/utils';
 const ExchangeContainer = styled.main`
   display: flex;
   width: 90%;
-  left: 3rem;
   position: relative;
   justify-content: space-evenly;
   top: 3rem;
