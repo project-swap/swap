@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { IoMdCloudUpload } from 'react-icons/io';
 import { ChildrenProps } from '../utils/utils';
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from 'firebase/storage';
+// import {
+//   getStorage,
+//   ref,
+//   uploadBytesResumable,
+//   getDownloadURL,
+// } from 'firebase/storage';
 
 const Form = styled.form`
   display: flex;
@@ -137,34 +137,34 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
   );
   const fileRef = useRef<HTMLDivElement | null>(null);
 
-  const storage = getStorage();
-  const uniqueKey = new Date().getTime();
+  // const storage = getStorage();
+  // const uniqueKey = new Date().getTime();
 
-  const saveToFirebaseStorage = (file: File) => {
-    const newName = file.name
-      .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
-      .split(' ')
-      .join('');
+  // const saveToFirebaseStorage = (file: File) => {
+  //   const newName = file.name
+  //     .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
+  //     .split(' ')
+  //     .join('');
 
-    const metaData = {
-      contentType: file.type,
-    };
+  //   const metaData = {
+  //     contentType: file.type,
+  //   };
 
-    const storageRef = ref(storage, `images/${newName + uniqueKey}`);
+  //   const storageRef = ref(storage, `images/${newName + uniqueKey}`);
 
-    const uploadTask = uploadBytesResumable(storageRef, file, metaData);
-    uploadTask.on(
-      'state_changed',
-      snapshot => {
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then(downloadurl => {
-          console.log(`완료:${downloadurl}`);
-        });
-      },
-    );
-  };
+  //   const uploadTask = uploadBytesResumable(storageRef, file, metaData);
+  //   uploadTask.on(
+  //     'state_changed',
+  //     snapshot => {
+  //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //     },
+  //     () => {
+  //       getDownloadURL(uploadTask.snapshot.ref).then(downloadurl => {
+  //         console.log(`완료:${downloadurl}`);
+  //       });
+  //     },
+  //   );
+  // };
 
   // const deleteFile = (file: File) => {
   //   console.log(file.name);
@@ -205,7 +205,7 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
     };
 
     reader.readAsDataURL(theFile);
-    saveToFirebaseStorage(theFile);
+    // saveToFirebaseStorage(theFile);
   };
 
   const handleFileButtonClick = (
