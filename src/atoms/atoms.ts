@@ -36,10 +36,10 @@ export const getTest = selector({
 export const data = selector({
   key: 'defaultData',
   get: async () => {
-    const postRef = collection(db, 'posts');
+    const postRef = await collection(db, 'posts');
     const q = query(postRef);
     const querySnapShot = await getDocs(q);
-    const dataArr: any = [];
+    const dataArr: DataTypes[] = [];
 
     querySnapShot.forEach((item: any) => {
       dataArr.push(item._document.data.value.mapValue.fields);
