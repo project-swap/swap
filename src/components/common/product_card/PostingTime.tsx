@@ -18,7 +18,6 @@ const StyledPostingTime = styled.span<StyledPostingTimeProps>`
 
 StyledPostingTime.defaultProps = {
   fontSize: '0.8rem',
-  margin: '0.5rem',
 };
 
 const PostingTime = ({
