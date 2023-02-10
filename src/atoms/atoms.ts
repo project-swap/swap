@@ -41,9 +41,11 @@ export const data = selector({
     const querySnapShot = await getDocs(q);
     const dataArr: DataTypes[] = [];
 
-    querySnapShot.forEach((item: any) => {
-      dataArr.push(item._document.data.value.mapValue.fields);
+    querySnapShot.forEach(item => {
+      const returnDoc = item.data() as DataTypes;
+      dataArr.push(returnDoc);
     });
+
     return dataArr;
   },
 });
