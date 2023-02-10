@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledSellerName = styled.span`
+interface SellerNameProps {
+  name: string;
+  marginRight?: string | undefined;
+}
+
+const StyledSellerName = styled.span<{ marginRight: string | undefined }>`
   margin-right: ${props => props.marginRight};
 `;
 
@@ -9,7 +14,10 @@ StyledSellerName.defaultProps = {
   marginRight: '0.5rem',
 };
 
-const SellerName = ({ name, marginRight }) => {
+const SellerName = ({
+  name,
+  marginRight,
+}: SellerNameProps): React.ReactNode => {
   return <StyledSellerName marginRight={marginRight}>{name}</StyledSellerName>;
 };
 

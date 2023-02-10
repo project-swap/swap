@@ -1,7 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledProductImg = styled.div`
+interface ProductImgProps {
+  url: string | undefined;
+  height?: string;
+  width?: string;
+}
+
+const StyledProductImg = styled.div<ProductImgProps>`
   background: center url('${props => props.url}');
   background-size: cover;
   box-sizing: border-box;
@@ -21,7 +27,7 @@ StyledProductImg.defaultProps = {
   width: '100%',
 };
 
-const ProductImg = ({ url, height, width }) => {
+const ProductImg = ({ url, height, width }: ProductImgProps) => {
   return <StyledProductImg url={url} height={height} width={width} />;
 };
 

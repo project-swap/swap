@@ -1,7 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledArticlePreview = styled.p`
+interface StyledArticlePreviewProps {
+  margin?: string;
+  paddingRight?: string;
+  lineHeight?: string;
+}
+
+interface ArtriclePreviewProps extends StyledArticlePreviewProps {
+  content: string;
+}
+
+const StyledArticlePreview = styled.p<StyledArticlePreviewProps>`
   white-space: normal;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -18,7 +28,12 @@ StyledArticlePreview.defaultProps = {
   lineHeight: '1.5rem',
 };
 
-const ArticlePreview = ({ content, margin, paddingRight, lineHeight }) => {
+const ArticlePreview = ({
+  content,
+  margin,
+  paddingRight,
+  lineHeight,
+}: ArtriclePreviewProps) => {
   return (
     <StyledArticlePreview
       margin={margin}

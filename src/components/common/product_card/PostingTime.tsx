@@ -1,21 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledPostingTime = styled.span`
+interface StyledPostingTimeProps {
+  fontSize?: string;
+  margin?: string;
+}
+
+interface PostingTimeProps extends StyledPostingTimeProps {
+  date: string;
+  convertDate: string;
+}
+
+const StyledPostingTime = styled.span<StyledPostingTimeProps>`
   font-size: ${props => props.fontSize};
   margin: ${props => props.margin};
 `;
 
 StyledPostingTime.defaultProps = {
   fontSize: '0.8rem',
-  marginRight: '0.5rem',
+  margin: '0.5rem',
 };
 
-const PostingTime = ({ date, fontSize, margin, convertDate }) => {
+const PostingTime = ({
+  date,
+  fontSize,
+  margin,
+  convertDate,
+}: PostingTimeProps): React.ReactNode => {
   const krCurrentDate = new Date();
   const postDate = convertDate;
 
-  const secondDiff = (krCurrentDate.valueOf() - postDate.valueOf()) / 1000;
+  const secondDiff =
+    (Number(krCurrentDate.valueOf()) - Number(postDate.valueOf())) / 1000;
 
   const timeObj = {
     now: 5,

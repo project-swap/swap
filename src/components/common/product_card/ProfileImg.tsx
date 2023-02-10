@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledProfileImg = styled.div`
+interface ProfileImgProps {
+  url: string;
+  backgroundSize?: string;
+  width?: string;
+  height?: string;
+  marginRight?: string;
+}
+
+const StyledProfileImg = styled.div<ProfileImgProps>`
   background: center url('${props => props.url}') no-repeat;
   background-size: ${props => props.backgroundSize};
   border: 1px solid black;
@@ -18,7 +26,13 @@ StyledProfileImg.defaultProps = {
   marginRight: '0.8rem',
 };
 
-const ProfileImg = ({ url, backgroundSize, width, height, marginRight }) => {
+const ProfileImg = ({
+  url,
+  backgroundSize,
+  width,
+  height,
+  marginRight,
+}: ProfileImgProps) => {
   return (
     <StyledProfileImg
       url={url}
