@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface ContentProps {
+  content: string;
+  hash_tag: string[];
+}
+
 const StyledContent = styled.article`
   padding: 1rem 3rem 3rem;
   line-height: 2.1rem;
@@ -26,7 +31,7 @@ const StyledHashtag = styled.div`
   text-align: center;
 `;
 
-const Content = ({ content, hash_tag }) => {
+const Content = ({ content, hash_tag }: ContentProps): JSX.Element => {
   return (
     <StyledContent>
       <StyledHashtagGroup>

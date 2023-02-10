@@ -4,23 +4,28 @@ import _ from 'lodash';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase';
 
-interface IContent {
-  id: number;
+interface DataTypes {
+  postId: string;
   title: string;
   content: string;
   hash_tag: string[];
   name: string;
   date: string;
+  type: string;
+  imgUrl: { url: string; id: string }[];
+  uid: string;
+  convertDate: string;
+  profileImg: string;
 }
 
 export const getTest = selector({
   key: 'get/firestore',
   get: async () => {
-    const dataArr: IContent[] = [];
+    const dataArr: DataTypes[] = [];
     await isApi().then(dbData => {
       const docs = dbData.docs;
       docs.forEach(doc => {
-        const returnDoc = _.cloneDeep(doc.data()) as IContent;
+        const returnDoc = _.cloneDeep(doc.data()) as DataTypes;
         dataArr.push(returnDoc);
       });
     });

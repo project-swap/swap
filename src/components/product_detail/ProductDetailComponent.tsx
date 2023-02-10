@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { ComponentForCenterAlignment } from '../common/PublicStyle';
 
+interface ChildProps {
+  children: React.ReactNode;
+}
+
 const StyledProductDetailComponent = styled.div`
   width: 120rem;
   height: 60rem;
@@ -12,7 +16,7 @@ const StyledProductDetailComponent = styled.div`
   display: flex;
 `;
 
-const ProductDetailComponent = ({ children }) => {
+const ProductDetailComponent = ({ children }: ChildProps): JSX.Element => {
   return (
     <ComponentForCenterAlignment>
       <StyledProductDetailComponent>{children}</StyledProductDetailComponent>

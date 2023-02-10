@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface SellerInfoProps {
+  name?: string;
+  url: string;
+}
+
 const StyledSellerInfo = styled.div`
   display: flex;
   align-items: center;
@@ -9,7 +14,7 @@ const StyledSellerInfo = styled.div`
   padding: 1.2rem 0;
 `;
 
-const StyledSellerProfileImg = styled.div`
+const StyledSellerProfileImg = styled.div<SellerInfoProps>`
   width: 3rem;
   height: 3rem;
   margin-left: 3rem;
@@ -38,7 +43,7 @@ const StyledSellerGrade = styled.span`
   text-align: left;
 `;
 
-const SellerInfo = ({ name, url }) => {
+const SellerInfo = ({ name, url }: SellerInfoProps): JSX.Element => {
   return (
     <StyledSellerInfo>
       <StyledSellerProfileImg url={url} />

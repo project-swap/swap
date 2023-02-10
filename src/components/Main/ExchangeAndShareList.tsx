@@ -11,18 +11,6 @@ interface IExchangeAndShareItem {
   darkMode: boolean;
 }
 
-interface IContent {
-  id: number;
-  title: string;
-  content: string;
-  hash_tag: string[];
-  name: string;
-  date: string;
-  category?: string;
-  productImgUrl?: string;
-  profileImgUrl?: string;
-}
-
 const Container = styled.section`
   width: 22.94rem;
 `;
@@ -56,17 +44,17 @@ const ExchangeAndShareList = () => {
   const data = useRecoilValue(getTest);
   const darkMode = useRecoilValue(darkModeToggle);
 
-  const contents = data.map<IContent>(content => {
+  const contents = data.map(content => {
     return {
-      id: content.id,
+      postId: content.postId,
       title: content.title,
       content: content.content,
       hash_tag: content.hash_tag,
       name: content.name,
       date: content.date,
-      category: '교환',
-      productImgUrl: 'https://url.kr/quav97',
-      profileImgUrl:
+      type: content.type,
+      imgUrl: content.imgUrl[0].url,
+      profileImg:
         'https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg',
     };
   });
@@ -84,13 +72,13 @@ const ExchangeAndShareList = () => {
             return index < 6 ? (
               <ExchangeAndShareItem darkMode={darkMode} key={index}>
                 <ProductImg
-                  url={content.productImgUrl}
+                  url={content.imgUrl}
                   width={'6rem'}
                   height={'5rem'}
                 />
                 <ExchangeAndShareItemContents>
                   <ExchangeAndShareItemCategory>
-                    {content.category}
+                    {content.type}
                   </ExchangeAndShareItemCategory>
                   {/* <SalesTitle marginBottom={'0.4rem'} title={content.title} /> */}
                 </ExchangeAndShareItemContents>

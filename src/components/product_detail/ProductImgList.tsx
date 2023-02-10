@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledProductImgList = styled.div`
+interface ProductImgListProps {
+  url: string;
+  children?: React.ReactNode;
+}
+
+const StyledProductImgList = styled.div<ProductImgListProps>`
   background: center url('${props => props.url}') no-repeat;
   background-size: contain;
   background-color: rgba(0, 0, 0, 0.5);
@@ -13,14 +18,14 @@ const StyledProductImgList = styled.div`
   width: 100%;
 `;
 
-const StyledProductImgBackground = styled.div`
+const StyledProductImgBackground = styled.div<ProductImgListProps>`
   position: relative;
   background: center url('${props => props.url}');
   background-size: cover;
   width: 660rem;
 `;
 
-const ProductImgList = ({ url, children }) => {
+const ProductImgList = ({ url, children }: ProductImgListProps) => {
   return (
     <StyledProductImgBackground url={url}>
       <StyledProductImgList url={url}>{children}</StyledProductImgList>

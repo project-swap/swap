@@ -25,7 +25,7 @@ const PostingTime = ({
   fontSize,
   margin,
   convertDate,
-}: PostingTimeProps): React.ReactNode => {
+}: PostingTimeProps): JSX.Element => {
   const krCurrentDate = new Date();
   const postDate = convertDate;
 

@@ -45,16 +45,10 @@ const ProductDetail = () => {
   const data = useRecoilValue(getTest);
   const { postId } = useParams();
 
-  let currentData;
-
-  data.map(item => {
-    if (item.postId === String(postId)) {
-      return (currentData = item);
-    }
-  });
+  const currentData = data.filter(item => item.postId === String(postId));
 
   const increaseImgIndex = () => {
-    if (imageIndex === currentData.imgUrl.length - 1) {
+    if (imageIndex === currentData[0].imgUrl.length - 1) {
       setImageIndex(0);
     } else {
       setImageIndex(imageIndex + 1);
@@ -65,13 +59,13 @@ const ProductDetail = () => {
     if (imageIndex > 0) {
       setImageIndex(imageIndex - 1);
     } else {
-      setImageIndex(currentData.imgUrl.length - 1);
+      setImageIndex(currentData[0].imgUrl.length - 1);
     }
   };
 
   return (
     <ProductDetailComponent>
-      <ProductImgList url={currentData.imgUrl[imageIndex].url}>
+      <ProductImgList url={currentData[0].imgUrl[imageIndex].url}>
         <StyledBtnBox>
           <StyledBtn onClick={decreaseImgIndex}>
             <AiOutlineArrowLeft />
@@ -84,16 +78,19 @@ const ProductDetail = () => {
 
       <StyledContentField>
         <StyledTitleField>
-          <Title title={currentData.title} />
+          <Title title={currentData[0].title} />
           <PostInfo
-            convertDate={currentData.convertDate}
-            date={currentData.date}
+            convertDate={currentData[0].convertDate}
+            date={currentData[0].date}
           />
         </StyledTitleField>
-        <SellerInfo name={currentData.name} url={currentData.profileImg} />
+        <SellerInfo
+          name={currentData[0].name}
+          url={currentData[0].profileImg}
+        />
         <Content
-          content={currentData.content}
-          hash_tag={currentData.hash_tag}
+          content={currentData[0].content}
+          hash_tag={currentData[0].hash_tag}
         />
         <BuyerMenuBar />
       </StyledContentField>
