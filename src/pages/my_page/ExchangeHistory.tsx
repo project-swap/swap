@@ -6,15 +6,6 @@ import ContentChildren from '../../components/ContentChildren';
 import MainContainer from '../../components/common/MainContainer';
 import ExchangeContainerChildren from '../../components/ExchangeContainerChildren';
 
-const Select = styled.select`
-  width: 4rem;
-  height: 2rem;
-  margin-top: 2.5rem;
-  font-size: 12px;
-  position: relative;
-  top: -3rem;
-`;
-
 const SwapContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,6 +19,7 @@ const Title = styled.h3`
   display: flex;
   position: relative;
   top: -3rem;
+  left: 4rem;
 `;
 
 const ExchangeHistory = () => {
@@ -37,24 +29,39 @@ const ExchangeHistory = () => {
       <MainContainer>
         <ExchangeContainerChildren>
           <Title>교환목록</Title>
-          <FiCheckSquare className="check" />
-          <h4 className="title">내가 쓴 글</h4>
-          <FiCheckSquare className="check" />
-          <h4 className="title">최신순</h4>
-          <FiCheckSquare className="check" />
-          <h4 className="title">오래된순</h4>
-          <Select>
-            <option className="default" value="">
-              1개월
-            </option>
-            <option className="default" value="">
-              3개월
-            </option>
-            <option className="default" value="">
-              6개월
-            </option>
-          </Select>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              gap: '1rem',
+            }}
+          >
+            <FiCheckSquare className="check" />
+            <h4 className="title">내가 쓴 글</h4>
+            <FiCheckSquare className="check" />
+            <h4 className="title">최신순</h4>
+            <FiCheckSquare className="check" />
+            <h4 className="title">오래된순</h4>
+          </div>
         </ExchangeContainerChildren>
+        <select
+          style={{
+            width: '6rem',
+            height: '2rem',
+            position: 'relative',
+            left: '10rem',
+          }}
+        >
+          <option className="default" value="">
+            1개월
+          </option>
+          <option className="default" value="">
+            3개월
+          </option>
+          <option className="default" value="">
+            6개월
+          </option>
+        </select>
         <ContentChildren>
           <span>교환목록이 없습니다.</span>
         </ContentChildren>

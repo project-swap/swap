@@ -49,7 +49,7 @@ const Location = styled.div`
 
 const LocationDataContainer = styled.div`
   display: flex;
-  width: 97%;
+  width: 100%;
   margin-bottom: 2rem;
 `;
 

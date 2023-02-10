@@ -11,14 +11,14 @@ const SwapContainer = styled.div`
   margin: -40rem auto;
 `;
 
-const Title = styled.h3`
+export const Title = styled.h3`
   font-weight: 600;
   margin: 2.5rem 5rem;
   font-size: 1.5rem;
   display: flex;
   position: relative;
   top: -3rem;
-  right: 15rem;
+  right: 8rem;
 `;
 
 const ReportHistory = () => {

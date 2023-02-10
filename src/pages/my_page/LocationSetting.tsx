@@ -24,7 +24,7 @@ const CheckBox = styled.div`
   border: 1px solid black;
   width: 30rem;
   height: 8rem;
-  margin: 2rem auto;
+  margin: 2rem 15rem;
   border-radius: 1rem;
   &:nth-child(1) {
     display: flex;
