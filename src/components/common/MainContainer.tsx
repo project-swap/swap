@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const MainContainerComponent = styled.div`
@@ -14,11 +14,7 @@ const MainContainerComponent = styled.div`
   flex-direction: column;
 `;
 
-const MainContainer = ({
-  children,
-}: {
-  children: JSX.Element | JSX.Element[];
-}) => {
+const MainContainer = ({ children }: { children: ReactNode }) => {
   return <MainContainerComponent>{children}</MainContainerComponent>;
 };
 

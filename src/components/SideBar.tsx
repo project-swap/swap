@@ -47,7 +47,7 @@ const SideBar = () => {
         <Link to="/locationsetting" style={linkStyle}>
           <h3 className="text">위치설정</h3>
         </Link>
-        <Link to="/swaplist" style={linkStyle}>
+        <Link to="/exchangehistory" style={linkStyle}>
           <h3 className="text">교환목록</h3>
         </Link>
         <Link to="/bookmark" style={linkStyle}>

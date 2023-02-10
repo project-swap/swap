@@ -1,7 +1,14 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { IoMdCloudUpload } from 'react-icons/io';
+import { ChildrenProps } from '../utils/utils';
+// import {
+//   getStorage,
+//   ref,
+//   uploadBytesResumable,
+//   getDownloadURL,
+// } from 'firebase/storage';
 
 const Form = styled.form`
   display: flex;
@@ -28,10 +35,9 @@ const ProfileEdit = styled.span`
   bottom: 2rem;
 `;
 
-interface ModalCloseProps {
+interface ModalCloseProps extends ChildrenProps {
   width: number;
   height: number;
-  children?: JSX.Element | JSX.Element[];
   onClick?: () => void;
 }
 const Modal = styled.section`
@@ -80,12 +86,12 @@ const ImageMessageInput = styled.input`
 const PreviewImageContainer = styled.section`
   width: 8rem;
   height: 8rem;
-  border: 1.5px solid black;
-
   img {
     width: 8rem;
     height: 8rem;
     border-radius: 4rem;
+    position: relative;
+    bottom: 0.75rem;
   }
 `;
 
@@ -111,9 +117,9 @@ const PreviewOuterImage = styled.img`
   position: absolute;
   z-index: -9999;
   left: 11rem;
-  bottom: 9.4rem;
+  top: 5rem;
   filter: contrast(20%);
-  border: 1px solid black;
+  border: 2px solid black;
 `;
 
 const PreviewInnerImage = styled.div`
@@ -129,12 +135,59 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
   const [attachment, setAttachment] = useState<string | ArrayBuffer | null>(
     null,
   );
+  const fileRef = useRef<HTMLDivElement | null>(null);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    console.log(event);
-  };
+  // const storage = getStorage();
+  // const uniqueKey = new Date().getTime();
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  // const saveToFirebaseStorage = (file: File) => {
+  //   const newName = file.name
+  //     .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
+  //     .split(' ')
+  //     .join('');
+
+  //   const metaData = {
+  //     contentType: file.type,
+  //   };
+
+  //   const storageRef = ref(storage, `images/${newName + uniqueKey}`);
+
+  //   const uploadTask = uploadBytesResumable(storageRef, file, metaData);
+  //   uploadTask.on(
+  //     'state_changed',
+  //     snapshot => {
+  //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //     },
+  //     () => {
+  //       getDownloadURL(uploadTask.snapshot.ref).then(downloadurl => {
+  //         console.log(`완료:${downloadurl}`);
+  //       });
+  //     },
+  //   );
+  // };
+
+  // const deleteFile = (file: File) => {
+  //   console.log(file.name);
+  //   const newName = file.name
+  //     .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
+  //     .split(' ')
+  //     .join('');
+
+  //   const desertRef = ref(storage, `images/${newName + uniqueKey}`);
+  //   console.log(
+  //     '🚀 ~ file: ProfileModal.tsx:179 ~ deleteFile ~ desertRef',
+  //     desertRef,
+  //   );
+  //   deleteObject(desertRef)
+  //     .then(() => {
+  //       console.log(`delete success`);
+  //     })
+  //     .catch(error => {
+  //       console.log(`delete ${error}`);
+  //     });
+  // };
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const {
       target: { files },
@@ -150,8 +203,18 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
         if (result !== null) setAttachment(result);
       }
     };
+
     reader.readAsDataURL(theFile);
+    // saveToFirebaseStorage(theFile);
   };
+
+  const handleFileButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault();
+    fileRef.current?.click();
+  };
+
   return (
     <Modal>
       <ProfileEdit>프로필 사진 변경</ProfileEdit>
@@ -165,7 +228,7 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
           <img src={attachment.toString()} alt={attachment.toString()} />
         ) : null}
       </PreviewImageContainer>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <ImageMessageContainer>
           <ImageMessageInput type="text" placeholder="이미지를 업로드하세요." />
           <Label htmlFor="file-input">
@@ -178,6 +241,8 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
             accept="image/*" //이미지 파일만 허용
           />
         </ImageMessageContainer>
+        <button onClick={handleFileButtonClick}>Upload</button>
+        {/* <button onClick={deleteFile}>Delete</button> */}
       </Form>
     </Modal>
   );
