@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import { getTest } from '../../atoms/atoms';
-import ProductImg from '../common/ProductCard/ProductImg';
-import ProfileImg from '../common/ProductCard/ProfileImg';
-import SalesTitle from '../common/ProductCard/SalesTitle';
-import SellerName from '../common/ProductCard/SellerName';
-import PostingTime from '../common/ProductCard/PostingTime';
-import ArticlePreview from '../common/ProductCard/ArticlePreview';
+import ProductImg from '../common/product_card/ProductImg';
+import ProfileImg from '../common/product_card/ProfileImg';
+import SalesTitle from '../common/product_card/SalesTitle';
+import SellerName from '../common/product_card/SellerName';
+import PostingTime from '../common/product_card/PostingTime';
+import ArticlePreview from '../common/product_card/ArticlePreview';
 
 const SalesProductCardFrame = styled.li`
   width: 23%;

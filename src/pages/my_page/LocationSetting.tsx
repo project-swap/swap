@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
-import SideBar from '../components/SideBar';
-import MainContainer from '../components/common/MainContainer';
+import SideBar from '../../components/SideBar';
+import MainContainer from '../../components/common/MainContainer';
 
 const LocationContainer = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ const CheckBox = styled.div`
   border: 1px solid black;
   width: 30rem;
   height: 8rem;
-  margin: 2rem auto;
+  margin: 2rem 15rem;
   border-radius: 1rem;
   &:nth-child(1) {
     display: flex;

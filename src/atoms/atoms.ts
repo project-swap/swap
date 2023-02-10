@@ -18,7 +18,7 @@ export const getTest = selector({
     await isApi().then(dbData => {
       const docs = dbData.docs;
       docs.forEach(doc => {
-        const returnDoc: any = _.cloneDeep(doc.data());
+        const returnDoc = _.cloneDeep(doc.data()) as IContent;
         dataArr.push(returnDoc);
       });
     });
@@ -59,4 +59,14 @@ export const themeColor = atom<Test>({
 export const getMessage = atom<string[]>({
   key: 'get/realtimeDatabase',
   default: [],
+});
+
+export const userInfo = atom({
+  key: 'userInfo',
+  default: '',
+});
+
+export const profileImage = atom({
+  key: 'profileImage',
+  default: true,
 });

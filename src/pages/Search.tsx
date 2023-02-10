@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import NavBar from '../components/common/NavBar';
 import ModalBox from '../components/ModalBox';
-import BackgroundBlur from '../components/BackgroundBlur';
+import Footer from '../components/common/Footer';
+import { EntireAreaWrap } from '../components/common/PublicStyle';
 import { ImSearch } from 'react-icons/im';
 
 const SearchPage = styled.section`
@@ -10,7 +11,7 @@ const SearchPage = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 3rem;
+  margin-top: 3.5rem;
   position: relative;
   box-sizing: border-box;
   z-index: 2;
@@ -71,10 +72,10 @@ const HashTagList = styled.div`
 
 const Search = () => {
   return (
-    <>
+    <EntireAreaWrap>
       <NavBar />
       <SearchPage>
-        <ModalBox width={50} height={45}>
+        <ModalBox width={'50'} height={'45'}>
           <SearchForm style={{ position: 'relative' }}>
             <SearchInput placeholder="검색어를 입력해주세요." />
             <ImSearch
@@ -106,8 +107,8 @@ const Search = () => {
           </WeeklyHashTag>
         </ModalBox>
       </SearchPage>
-      <BackgroundBlur />
-    </>
+      <Footer />
+    </EntireAreaWrap>
   );
 };
 

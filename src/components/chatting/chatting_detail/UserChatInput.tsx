@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import { FiSend } from 'react-icons/fi';
 
-import { realtimeDatabase } from '../../firebase';
+import { realtimeDatabase } from '../../../firebase';
 import { ref, push, set, onValue } from 'firebase/database';
 import { useSetRecoilState } from 'recoil';
-import { getMessage } from '../../atoms/atoms';
+import { getMessage } from '../../../atoms/atoms';
 
 interface IMessage {
   [key: string]: string;

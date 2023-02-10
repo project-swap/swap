@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import profile from '../assets/logo/android-icon-144x144.png';
+import profile from '../../assets/logo/android-icon-144x144.png';
 import { AiFillEdit, AiOutlinePlusCircle } from 'react-icons/ai';
-import SideBar from '../components/SideBar';
-import NavBar from '../components/common/NavBar';
+import SideBar from '../../components/SideBar';
+import NavBar from '../../components/common/NavBar';
 import { FaTimes } from 'react-icons/fa';
 
 const Main = styled.main`
@@ -49,7 +49,7 @@ const Location = styled.div`
 
 const LocationDataContainer = styled.div`
   display: flex;
-  width: 97%;
+  width: 100%;
   margin-bottom: 2rem;
 `;
 

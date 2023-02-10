@@ -1,31 +1,60 @@
-import React from 'react';
-import { getAuth, signInWithPopup, GithubAuthProvider } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import NavBar from '../components/common/NavBar';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from '../atoms/atoms';
+
+const TestWarp = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img {
+    border-radius: 50%;
+  }
+  .user-name {
+    margin: 1rem 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0.3rem 0;
+    font-size: 1.2rem;
+  }
+`;
+
+const Title = styled.h2`
+  margin: 3rem 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+`;
 
 const Test = () => {
-  const handleTwitterLogin = () => {
-    const auth = getAuth();
-    const provider = new GithubAuthProvider();
-    signInWithPopup(auth, provider)
-      .then(result => {
-        // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
-        // You can use these server side with your app's credentials to access the Twitter API.
-
-        // The signed-in user info.
-        const user = result.user;
-        console.log(user);
-        // ...
-      })
-      .catch(error => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ...
-      });
-  };
+  const userData = useRecoilValue(userInfo);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (userData) {
+      setLoading(true);
+    }
+  }, [userData]);
   return (
     <>
-      <button onClick={handleTwitterLogin}>로그인</button>
+      <NavBar />
+      <TestWarp>
+        <Title>User Data</Title>
+        {loading ? (
+          <>
+            <img src={userData.photoURL} alt="" />
+            <p className="user-name">{userData.displayName}</p>
+            <p className="user-email">email : {userData.email}</p>
+            <p className="user-uid">uid : {userData.uid}</p>
+          </>
+        ) : (
+          'Please Login First'
+        )}
+      </TestWarp>
     </>
   );
 };

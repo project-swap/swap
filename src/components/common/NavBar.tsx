@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getAuth, signOut } from 'firebase/auth';
 
-import { useRecoilValue } from 'recoil';
-import { themeColor, darkModeToggle } from '../../atoms/atoms';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { themeColor, darkModeToggle, userInfo } from '../../atoms/atoms';
 
 // image,icon, font-style
 import Logo from '../../assets/logo/android-icon-48x48.png';
@@ -13,7 +13,19 @@ import { GoLocation } from 'react-icons/go';
 import { ImSearch } from 'react-icons/im';
 import { BsPerson, BsChatLeftDots, BsBell } from 'react-icons/bs';
 
-const NavContainer = styled.nav`
+interface IProps {
+  themeMode: boolean;
+  themeColorObject: {
+    darkMain: string;
+    darkNavAndFooter: string;
+    darkLine: string;
+    darkFont: string;
+    lightLine: string;
+    lightFont: string;
+  };
+}
+
+const NavContainer = styled.nav<IProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,7 +62,7 @@ const MainLinkBtnContainer = styled.div`
   justify-content: space-between;
   width: 10rem;
 `;
-const MainLinkBtn = styled.div`
+const MainLinkBtn = styled.div<IProps>`
   font-size: 0.875rem;
   text-decoration: none;
   color: ${props =>
@@ -58,7 +70,7 @@ const MainLinkBtn = styled.div`
       ? props.themeColorObject.darkFont
       : props.themeColorObject.lightFont};
 `;
-const LocationBox = styled.div`
+const LocationBox = styled.div<IProps>`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -75,7 +87,7 @@ const TopBtnContainer = styled.div`
   align-items: center;
   gap: 1.875rem;
 `;
-const TopLinkBtn = styled.div`
+const TopLinkBtn = styled.div<IProps>`
   font-size: 0.625rem;
   color: ${props =>
     props.themeMode
@@ -91,9 +103,18 @@ const LoginSuccessIconContainer = styled.div`
   height: 2rem;
 `;
 
+export const sessionUserData = () => {
+  for (const key of Object.keys(sessionStorage)) {
+    if (key.includes('firebase:authUser:')) {
+      return JSON.parse(sessionStorage.getItem(key) || '{}');
+    }
+  }
+};
+
 const NavBar = () => {
   const themeMode = useRecoilValue(darkModeToggle);
   const themeColorObject = useRecoilValue(themeColor);
+  const setLoginUserData = useSetRecoilState(userInfo);
   const [loginState, setLoginState] = useState(false);
   const auth = getAuth();
 
@@ -101,21 +122,15 @@ const NavBar = () => {
     const userData = sessionUserData();
     if (userData) {
       setLoginState(true);
+      setLoginUserData(userData);
     }
   }, []);
-
-  const sessionUserData = () => {
-    for (const key of Object.keys(sessionStorage)) {
-      if (key.includes('firebase:authUser:')) {
-        return JSON.parse(sessionStorage.getItem(key));
-      }
-    }
-  };
 
   const handleGoogleLogout = () => {
     const isLogout = confirm('로그아웃 하시겠습니까?');
     if (isLogout) {
       setLoginState(false);
+      window.location.reload();
       signOut(auth).catch(error => {
         console.log(error);
       });
@@ -142,13 +157,23 @@ const NavBar = () => {
                 <span onClick={handleGoogleLogout}>로그아웃</span>
               ) : (
                 <Link to="/login" style={linkStyle}>
-                  <span>로그인</span>
+                  <span
+                    style={{
+                      color: `${
+                        themeMode
+                          ? themeColorObject.darkFont
+                          : themeColorObject.lightFont
+                      }`,
+                    }}
+                  >
+                    로그인
+                  </span>
                 </Link>
               )}
             </TopLinkBtn>
           </TopBtnContainer>
         </TopNavBar>
-        <MainNavBar themeMode={themeMode} themeColorObject={themeColorObject}>
+        <MainNavBar>
           <Link to="/">
             <MainLogo />
           </Link>
