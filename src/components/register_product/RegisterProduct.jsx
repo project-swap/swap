@@ -95,7 +95,6 @@ const RegisterProduct = () => {
 
   return (
     <ComponentForCenterAlignment>
-      <button onClick={() => console.log(userInformation)}>유저인포</button>
       <RegisterProductComponent>
         <ExitButton>
           <IoMdArrowRoundBack />
