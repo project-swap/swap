@@ -6,6 +6,20 @@ import styled from 'styled-components';
 import { db } from '../../firebase';
 import { filterData } from '../../atoms/atoms';
 
+interface DataTypes {
+  postId: string;
+  title: string;
+  content: string;
+  hash_tag: string[];
+  name: string;
+  date: string;
+  type: string;
+  imgUrl: { url: string; id: string }[];
+  uid: string;
+  convertDate: string;
+  profileImg: string;
+}
+
 const TapComponent = styled.div`
   display: flex;
   justify-content: space-between;
@@ -47,14 +61,15 @@ const SalesProductListTap = () => {
   const [filterType, setFilterType] = useState('');
   const setFilterDataArr = useSetRecoilState(filterData);
 
-  const filter = async type => {
-    const postRef = collection(db, 'posts');
+  const filter = async (type: any) => {
+    const postRef = await collection(db, 'posts');
     const q = query(postRef, orderBy('convertDate', type));
-    const dataArr = [];
     const querySnapShot = await getDocs(q);
+    const dataArr: DataTypes[] = [];
 
     querySnapShot.forEach(item => {
-      dataArr.push(item._document.data.value.mapValue.fields);
+      const returnDoc = item.data() as DataTypes;
+      dataArr.push(returnDoc);
     });
 
     setFilterDataArr(dataArr);

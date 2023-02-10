@@ -14,10 +14,7 @@ StyledSellerName.defaultProps = {
   marginRight: '0.5rem',
 };
 
-const SellerName = ({
-  name,
-  marginRight,
-}: SellerNameProps): React.ReactNode => {
+const SellerName = ({ name, marginRight }: SellerNameProps): JSX.Element => {
   return <StyledSellerName marginRight={marginRight}>{name}</StyledSellerName>;
 };
 

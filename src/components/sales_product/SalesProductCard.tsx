@@ -46,15 +46,14 @@ const SalesProductCard = () => {
 
   const contents = filteredData.map(content => {
     return {
-      key: content.postId.stringValue,
-      title: content.title.stringValue,
-      content: content.content.stringValue,
-      name: content.name.stringValue,
-      date: content.date.stringValue,
-      convertDate: content.convertDate.stringValue,
-      productImgUrl:
-        content.imgUrl.arrayValue.values[0].mapValue.fields.url.stringValue,
-      profileImgUrl: content.profileImg.stringValue,
+      key: content.postId,
+      title: content.title,
+      content: content.content,
+      name: content.name,
+      date: content.date,
+      convertDate: content.convertDate,
+      productImgUrl: content.imgUrl[0].url,
+      profileImgUrl: content.profileImg,
     };
   });
 
