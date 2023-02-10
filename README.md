@@ -17,7 +17,7 @@
 ### [링크]
 
 - [📑 팀 워크스페이스](https://dull-foundation-110.notion.site/swap-a3162998f48642dd88688b1281a692c4)
-- [🎨 플로우 차트](https://www.figma.com/file/QwSWUUZyeJTm6ytIQEHDzO/wireframe?node-id=0%3A1&t=PVywWVSfkGRd4Gkd-1)
+- [🎨 플로우 차트](https://www.figma.com/file/Weu5RxsvhG1gpl7AYW5o6n/flow-chart?node-id=0%3A1&t=MOxWl76OTxoJqzq4-1)
 - [🎨 와이어프레임](https://www.figma.com/file/QwSWUUZyeJTm6ytIQEHDzO/wireframe?node-id=0%3A1&t=PVywWVSfkGRd4Gkd-1)
 
 <br>
