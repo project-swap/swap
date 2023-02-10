@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PostingTime from '../common/ProductCard/PostingTime';
+import PostingTime from '../common/product_card/PostingTime';
 
 const StyledPostInfo = styled.div`
   font-size: 0.8rem;

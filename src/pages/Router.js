@@ -17,18 +17,19 @@ import NotFound from './NotFound';
 import SignUp from './SignUp';
 import Search from './Search';
 import Register from './Register';
+import SalesProduct from './SalesProduct';
+import Mypage from './my_page/Mypage';
 import Loader from './Loader';
 import UserChatting from './UserChatting';
-import LocationSetting from './mypage/LocationSetting';
-import ReportHistory from './mypage/ReportHistory';
-import BookMarkPage from './mypage/BookMarkPage';
-import Profile from './mypage/Profile';
+import ReportHistory from './my_page/ReportHistory';
+import LocationSetting from './my_page/LocationSetting';
+import BookMarkPage from './my_page/BookMarkPage';
+import Profile from './my_page/Profile';
 import Test from './Test';
-import SalesProduct from './SalesProduct';
 import DetailPage from './DetailPage';
 import Follow from './Follow';
-import ExchangeHistory from './mypage/ExchangeHistory';
-import Mypage from './mypage/Mypage';
+import UserChattingList from './UserChattingList';
+import ExchangeHistory from './my_page/ExchangeHistory';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -55,9 +56,10 @@ const Router = () => {
                 <Route path="/chat-user:id" element={<UserChatting />} />
                 <Route path="/detail/:postId" element={<DetailPage />} />
                 <Route path="/follow" element={<Follow />} />
+                <Route path="/chat-list" element={<UserChattingList />} />
                 <Route path="/locationsetting" element={<LocationSetting />} />
                 <Route path="/bookmark" element={<BookMarkPage />} />
-                <Route path="/swaplist" element={<ExchangeHistory />} />
+                <Route path="/exchangehistory" element={<ExchangeHistory />} />
                 <Route path="/report" element={<ReportHistory />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/test" element={<Test />} />

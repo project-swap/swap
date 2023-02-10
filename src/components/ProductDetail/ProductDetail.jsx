@@ -3,14 +3,14 @@ import { useParams } from 'react-router';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getTest } from '../../atoms/atoms';
-import BuyerMenuBar from './BuyerMenuBar';
-import Content from './Content';
-import PostInfo from './PostInfo';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import ProductDetailComponent from './ProductDetailComponent';
 import ProductImgList from './ProductImgList';
-import SellerInfo from './SellerInfo';
 import Title from './Title';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import PostInfo from './PostInfo';
+import SellerInfo from './SellerInfo';
+import Content from './Content';
+import BuyerMenuBar from './BuyerMenuBar';
 
 const StyledContentField = styled.div`
   display: flex;

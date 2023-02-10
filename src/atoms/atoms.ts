@@ -20,7 +20,7 @@ export const getTest = selector({
     await isApi().then(dbData => {
       const docs = dbData.docs;
       docs.forEach(doc => {
-        const returnDoc: any = _.cloneDeep(doc.data());
+        const returnDoc = _.cloneDeep(doc.data()) as IContent;
         dataArr.push(returnDoc);
       });
     });
