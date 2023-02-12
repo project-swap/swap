@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import { Label } from '../common/PublicStyle';
 import HashtagInput from './HashtagInput';
 
+interface Props {
+  // eslint-disable-next-line no-unused-vars
+  getTitleProps: (title: string) => void;
+}
+
 const InputGroup = styled.div`
   display: flex;
   align-items: center;
@@ -31,7 +36,11 @@ const RegisterProductGroupComponent = styled.div<{ flexDirection: string }>`
   margin-bottom: 1.5rem;
 `;
 
-const RegisterProductInputGroup = () => {
+const RegisterProductInputGroup = ({ getTitleProps }: Props) => {
+  const detectedText = (event: React.ChangeEvent<HTMLInputElement>) => {
+    getTitleProps(event.target.value);
+  };
+
   return (
     <RegisterProductGroupComponent flexDirection="column">
       <InputGroup>
@@ -41,6 +50,7 @@ const RegisterProductInputGroup = () => {
           placeholder="상품명"
           minLength={5}
           maxLength={25}
+          onChange={detectedText}
           required
         ></Input>
       </InputGroup>

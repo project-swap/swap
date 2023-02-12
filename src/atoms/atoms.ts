@@ -97,7 +97,7 @@ export const ImgUrlArrState = atom<string[]>({
 
 export const userInfo = atom({
   key: 'userInfo',
-  default: '',
+  default: [],
 });
 
 export const profileImage = atom({

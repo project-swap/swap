@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { RegisterProductGroupComponent } from '../common/PublicStyle';
 
+interface TypeProps {
+  // eslint-disable-next-line no-unused-vars
+  getTypeProps: (type: string) => void;
+}
+
 const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
@@ -40,7 +45,11 @@ const Label = styled.label`
   }
 `;
 
-const RegisterProductTradeTypeGroups = () => {
+const RegisterProductTradeTypeGroups = ({ getTypeProps }: TypeProps) => {
+  const getType = (event: React.ChangeEvent<HTMLInputElement>) => {
+    getTypeProps(event.target.value);
+  };
+
   return (
     <RegisterProductGroupComponent>
       <ButtonGroup>
@@ -48,11 +57,24 @@ const RegisterProductTradeTypeGroups = () => {
         <Label htmlFor="swap" className="type">
           교환
         </Label>
-        <RadioBtn type="radio" name="type" id="swap" value="교환" required />
+        <RadioBtn
+          type="radio"
+          name="type"
+          id="swap"
+          value="교환"
+          onChange={getType}
+          required
+        />
         <Label htmlFor="share" className="type">
           나눔
         </Label>
-        <RadioBtn type="radio" name="type" id="share" value="나눔" />
+        <RadioBtn
+          type="radio"
+          name="type"
+          id="share"
+          value="나눔"
+          onChange={getType}
+        />
       </ButtonGroup>
     </RegisterProductGroupComponent>
   );

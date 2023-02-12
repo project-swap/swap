@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import RegisterProductInputGroup from './RegisterProductInputGroup';
 import RegisterProductTradeTypeGroup from './RegisterProductTradeTypeGroup';
@@ -7,11 +7,26 @@ import { ComponentForCenterAlignment } from '../common/PublicStyle';
 import RegisterProductPostBtn from './RegisterProductPostBtn';
 import RegisterProductInputContent from './RegisterProductInputContent';
 import { useRecoilValue } from 'recoil';
-import { hashArrState, ImgUrlArrState, userInfo } from '../../atoms/atoms';
+import { hashArrState, ImgUrlArrState } from '../../atoms/atoms';
 import RegisterProductImageUploadGroupFirebase from './RegisterProductImageUploadGroupFirebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router';
+import { getAuth } from 'firebase/auth';
+
+interface DataType {
+  postId: string;
+  title: string;
+  hash_tag: string[];
+  content: string;
+  type: string;
+  name?: string | null;
+  uid?: string | null;
+  date: string;
+  convertDate: string;
+  imgUrl: string[];
+  profileImg?: string | null;
+}
 
 const RegisterProductComponent = styled.div`
   display: flex;
@@ -49,12 +64,31 @@ const RegisterForm = styled.form`
 
 const RegisterProduct = () => {
   const postsCollectionRef = collection(db, 'posts');
+  const navigate = useNavigate();
+  const auth = getAuth().currentUser;
 
   const hashArr = useRecoilValue(hashArrState);
   const imgUrlArr = useRecoilValue(ImgUrlArrState);
-  const userInformation = useRecoilValue(userInfo);
 
-  const navigate = useNavigate();
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
+  const [type, setType] = useState<string | undefined>();
+
+  const getTitleProps = (title: string) => {
+    setTitle(title);
+  };
+
+  const getContentProps = (content: string) => {
+    setContent(content);
+  };
+
+  const getTypeProps = (type: string) => {
+    setType(type);
+  };
+
+  const displayName = auth?.displayName;
+  const photoURL = auth?.photoURL;
+  const uid = auth?.uid;
 
   const date = new Date();
 
@@ -62,35 +96,32 @@ const RegisterProduct = () => {
     date.getMonth() + 1
   }-${date.getDate()}`;
 
-  const update = async event => {
+  const checkType = () => {
+    if (type === '교환') {
+      return 'swap';
+    } else {
+      return 'share';
+    }
+  };
+
+  const data: DataType = {
+    postId: `${Date.now()}`,
+    title: title,
+    hash_tag: hashArr,
+    content: content,
+    type: checkType(),
+    name: displayName,
+    uid: uid,
+    date: postDate,
+    convertDate: `${Date.now()}`,
+    imgUrl: imgUrlArr,
+    profileImg: photoURL,
+  };
+
+  const update = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(event.target[0].value);
-
-    const type = () => {
-      if (event.target[4].checked) {
-        return 'swap';
-      } else {
-        return 'share';
-      }
-    };
-
-    const data = {
-      postId: `${Date.now()}`,
-      title: event.target[0].value,
-      hash_tag: hashArr,
-      content: event.target[3].value,
-      type: type(),
-      name: userInformation['displayName'],
-      uid: userInformation['uid'],
-      date: postDate,
-      convertDate: `${Date.now()}`,
-      imgUrl: imgUrlArr,
-      profileImg: userInformation['photoURL'],
-    };
-
-    const addData = await addDoc(postsCollectionRef, data);
-    console.log(addData);
+    await addDoc(postsCollectionRef, data);
 
     navigate(`/detail/${data.postId}`, { replace: true });
   };
@@ -102,10 +133,10 @@ const RegisterProduct = () => {
           <IoMdArrowRoundBack />
         </ExitButton>
         <RegisterForm onSubmit={update}>
-          <RegisterProductInputGroup />
+          <RegisterProductInputGroup getTitleProps={getTitleProps} />
           <RegisterProductImageUploadGroupFirebase />
-          <RegisterProductInputContent />
-          <RegisterProductTradeTypeGroup />
+          <RegisterProductInputContent getContentProps={getContentProps} />
+          <RegisterProductTradeTypeGroup getTypeProps={getTypeProps} />
           <RegisterProductPostBtn />
         </RegisterForm>
       </RegisterProductComponent>
