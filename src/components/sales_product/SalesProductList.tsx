@@ -75,6 +75,7 @@ const SalesProductList = () => {
           onClick={() => {
             if (userInfo) {
               navigate('/register');
+              window.location.reload();
             } else {
               navigate('/login');
             }

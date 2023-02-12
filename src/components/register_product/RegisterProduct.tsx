@@ -124,6 +124,7 @@ const RegisterProduct = () => {
     await addDoc(postsCollectionRef, data);
 
     navigate(`/detail/${data.postId}`, { replace: true });
+    window.location.reload();
   };
 
   return (
