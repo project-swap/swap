@@ -15,7 +15,7 @@ export const ComponentForCenterAlignment = styled.div`
   align-items: center;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ width?: string; margin?: string }>`
   width: ${props => props.width};
   height: 2rem;
   font-size: 1rem;
@@ -33,7 +33,9 @@ export const Label = styled.label`
   width: 4rem;
 `;
 
-export const RegisterProductGroupComponent = styled.div`
+export const RegisterProductGroupComponent: any = styled.div<{
+  flexDirection: string;
+}>`
   width: 40rem;
   display: flex;
   flex-direction: ${props => props.flexDirection};
@@ -43,7 +45,12 @@ export const RegisterProductGroupComponent = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-export const StyledDeleteBtn = styled.span`
+export const StyledDeleteBtn = styled.span<{
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+}>`
   position: absolute;
   top: ${props => props.top};
   right: ${props => props.right};

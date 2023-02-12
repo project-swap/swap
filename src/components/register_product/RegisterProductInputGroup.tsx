@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Label, RegisterProductGroupComponent } from '../common/PublicStyle';
+import { Label } from '../common/PublicStyle';
 import HashtagInput from './HashtagInput';
 
 const InputGroup = styled.div`
@@ -21,6 +21,16 @@ const Input = styled.input`
   }
 `;
 
+const RegisterProductGroupComponent = styled.div<{ flexDirection: string }>`
+  width: 40rem;
+  display: flex;
+  flex-direction: ${props => props.flexDirection};
+  align-items: center;
+  border: 1px solid black;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+`;
+
 const RegisterProductInputGroup = () => {
   return (
     <RegisterProductGroupComponent flexDirection="column">
@@ -29,9 +39,9 @@ const RegisterProductInputGroup = () => {
         <Input
           id="productName"
           placeholder="상품명"
+          minLength={5}
+          maxLength={25}
           required
-          minLength="5"
-          maxlength="25"
         ></Input>
       </InputGroup>
       <HashtagInput />

@@ -16,6 +16,20 @@ import { useRecoilState } from 'recoil';
 import { ImgUrlArrState } from '../../atoms/atoms';
 import { CgClose } from 'react-icons/cg';
 
+// interface FileTypes {
+//   lastModified: number;
+//   lastModifiedDate: string[];
+//   name: string;
+//   size: number;
+//   type: string;
+//   webkitRelativePath: string;
+//   arrayBuffer?: string;
+//   slice?: string;
+//   stream?: string;
+//   text?: string;
+//   prototype?: string[];
+// }
+
 const InputComponent = styled.div`
   display: flex;
   align-items: center;

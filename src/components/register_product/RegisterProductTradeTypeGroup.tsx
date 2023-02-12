@@ -45,11 +45,11 @@ const RegisterProductTradeTypeGroups = () => {
     <RegisterProductGroupComponent>
       <ButtonGroup>
         <Type>거래종류</Type>
-        <Label htmlFor="swap" class="type">
+        <Label htmlFor="swap" className="type">
           교환
         </Label>
         <RadioBtn type="radio" name="type" id="swap" value="교환" required />
-        <Label htmlFor="share" class="type">
+        <Label htmlFor="share" className="type">
           나눔
         </Label>
         <RadioBtn type="radio" name="type" id="share" value="나눔" />

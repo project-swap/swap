@@ -85,12 +85,12 @@ export const getMessage = atom<string[]>({
   default: [],
 });
 
-export const hashArrState = atom({
+export const hashArrState = atom<string[]>({
   key: 'hashArrState',
   default: [],
 });
 
-export const ImgUrlArrState = atom({
+export const ImgUrlArrState = atom<string[]>({
   key: 'ImgUrlArrState',
   default: [],
 });

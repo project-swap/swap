@@ -5,6 +5,13 @@ import { CgClose } from 'react-icons/cg';
 import { useRecoilState } from 'recoil';
 import { hashArrState } from '../../atoms/atoms';
 
+interface StyledHashtagInputType {
+  backColor?: string;
+  textAlign?: string;
+  borderRadius?: string;
+  textColor?: string;
+}
+
 const StyledHashtagGroup = styled.div`
   width: 40rem;
   display: flex;
@@ -36,7 +43,7 @@ const StyledHashtagWrap = styled.li`
   line-height: 1rem;
 `;
 
-const StyledHashtagInput = styled.input`
+const StyledHashtagInput = styled.input<StyledHashtagInputType>`
   width: 86%;
   padding: 0.5rem;
   border: none;
@@ -53,31 +60,31 @@ const StyledHashtagInput = styled.input`
 `;
 
 const HashtagInput = () => {
-  const [hashtag, setHashtag] = useState('');
-  const [hashArr, setHashArr] = useRecoilState(hashArrState);
+  const [hashtag, setHashtag] = useState<string>('');
+  const [hashArr, setHashArr] = useRecoilState<string[]>(hashArrState);
 
-  const catchHashtag = event => {
-    setHashtag('#' + event.target.value.replaceAll(' ', '_'));
+  const catchHashtag = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHashtag('#' + event.target.value.replace(/ /gi, '_'));
   };
 
-  const pressEnterKey = event => {
+  const pressEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && event.nativeEvent.isComposing === false) {
       if (
         hashArr.length >= 3 ||
-        hashArr.includes('#' + event.target.value.replaceAll(' ', '_')) ||
+        hashArr.includes('#' + event.currentTarget.value.replace(/ /gi, '_')) ||
         hashtag.length > 16
       ) {
         return;
       } else {
         setHashArr([...hashArr, hashtag]);
-        event.target.value = '';
+        event.currentTarget.value = '';
       }
     }
   };
 
-  const deleteHashtag = event => {
+  const deleteHashtag = (event: React.MouseEvent<HTMLElement>) => {
     const arr = hashArr.filter(
-      element => element !== event.target.parentElement.parentElement.innerText,
+      element => element !== event.currentTarget.innerText,
     );
     setHashArr(arr);
   };
@@ -88,10 +95,10 @@ const HashtagInput = () => {
       <StyledHashtagInputGroup>
         {hashArr.map(item => {
           return (
-            <StyledHashtagWrap key={item}>
+            <StyledHashtagWrap key={item} onClick={deleteHashtag}>
               {item}
               <StyledDeleteBtn top="-6px" right="-8px">
-                <CgClose onClick={deleteHashtag} width="1.5rem" />
+                <CgClose width="1.5rem" />
               </StyledDeleteBtn>
             </StyledHashtagWrap>
           );

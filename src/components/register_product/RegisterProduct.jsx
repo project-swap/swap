@@ -65,6 +65,8 @@ const RegisterProduct = () => {
   const update = async event => {
     event.preventDefault();
 
+    console.log(event.target[0].value);
+
     const type = () => {
       if (event.target[4].checked) {
         return 'swap';

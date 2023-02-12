@@ -11,12 +11,12 @@ const StyledContentInput = styled.textarea`
   padding: 2rem;
 `;
 
-const RegisterProductInputContent = () => {
+const RegisterProductInputContent = (): React.ReactNode => {
   return (
     <StyledContentInput
       placeholder="글을 입력하세요! (최소 10자)"
+      minLength={10}
       required
-      minLength="10"
     />
   );
 };
