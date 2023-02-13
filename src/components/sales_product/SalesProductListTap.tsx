@@ -89,23 +89,34 @@ const SalesProductListTap = () => {
     filter('desc');
   };
 
+  const filterIcon = (filterType: string, type: string) => {
+    if (filterType === type) return <FiCheckSquare />;
+    return <FiSquare />;
+  };
+
   return (
     <TapComponent>
       <PageTitle>교환/나눔</PageTitle>
       <FilterGroup>
         <Filter onClick={setMineFilter}>
-          {filterType === 'mine' ? <FiCheckSquare /> : <FiSquare />}
-          <FilterName>내가 쓴 글</FilterName>
+          <>
+            {filterIcon(filterType, 'mine')}
+            <FilterName>내가 쓴 글</FilterName>
+          </>
         </Filter>
         <Bar />
         <Filter onClick={setDescFilter}>
-          {filterType === 'desc' ? <FiCheckSquare /> : <FiSquare />}
-          <FilterName>최신 순</FilterName>
+          <>
+            {filterIcon(filterType, 'desc')}
+            <FilterName>최신 순</FilterName>
+          </>
         </Filter>
 
         <Filter onClick={setAscFilter}>
-          {filterType === 'asc' ? <FiCheckSquare /> : <FiSquare />}
-          <FilterName>오래된 순</FilterName>
+          <>
+            {filterIcon(filterType, 'asc')}
+            <FilterName>오래된 순</FilterName>
+          </>
         </Filter>
       </FilterGroup>
     </TapComponent>
