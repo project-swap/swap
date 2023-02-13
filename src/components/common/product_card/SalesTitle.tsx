@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledSalesTitle = styled.h3`
+interface StyleProps {
+  fontSize?: string;
+  marginBottom?: string;
+}
+
+interface SalesTitleProps extends StyleProps {
+  title: string;
+}
+
+const StyledSalesTitle = styled.h3<StyleProps>`
   font-size: ${props => props.fontSize};
   font-weight: 700;
   margin-bottom: ${props => props.marginBottom};
@@ -12,7 +21,7 @@ StyledSalesTitle.defaultProps = {
   marginBottom: '0.5rem',
 };
 
-const SalesTitle = ({ title, fontSize, marginBottom }) => {
+const SalesTitle = ({ title, fontSize, marginBottom }: SalesTitleProps) => {
   return (
     <StyledSalesTitle fontSize={fontSize} marginBottom={marginBottom}>
       {title}

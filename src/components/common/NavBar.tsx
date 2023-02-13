@@ -183,7 +183,9 @@ const NavBar = () => {
                 themeMode={themeMode}
                 themeColorObject={themeColorObject}
               >
-                교환/나눔
+                <Link to="/product-list" style={linkStyle}>
+                  교환/나눔
+                </Link>
               </MainLinkBtn>
             </Link>
             <Link to="/" style={linkStyle}>

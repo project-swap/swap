@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+interface DeleteBtnTypes {
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+}
+
 export const EntireAreaWrap = styled.section`
   display: flex;
   flex-direction: column;
@@ -15,7 +22,7 @@ export const ComponentForCenterAlignment = styled.div`
   align-items: center;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ width?: string; margin?: string }>`
   width: ${props => props.width};
   height: 2rem;
   font-size: 1rem;
@@ -33,7 +40,9 @@ export const Label = styled.label`
   width: 4rem;
 `;
 
-export const RegisterProductGroupComponent = styled.div`
+export const RegisterProductGroupComponent = styled.div<{
+  flexDirection?: string;
+}>`
   width: 40rem;
   display: flex;
   flex-direction: ${props => props.flexDirection};
@@ -41,4 +50,27 @@ export const RegisterProductGroupComponent = styled.div`
   border: 1px solid black;
   padding: 2rem;
   margin-bottom: 1.5rem;
+`;
+
+export const StyledDeleteBtn = styled.span<DeleteBtnTypes>`
+  position: absolute;
+  top: ${props => props.top};
+  right: ${props => props.right};
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+  border: 1px solid black;
+  font-size: 0.8rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  text-align: center;
+  line-height: 0.9rem;
+  background-color: white;
+  border-radius: 50%;
+  :hover {
+    background-color: #e88e6b;
+    cursor: pointer;
+  }
+  :active {
+    background-color: #d76c6c;
+  }
 `;
