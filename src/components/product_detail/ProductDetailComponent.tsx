@@ -16,7 +16,7 @@ const StyledProductDetailComponent = styled.div`
   display: flex;
 `;
 
-const ProductDetailComponent = ({ children }: ChildProps): JSX.Element => {
+const ProductDetailComponent = ({ children }: ChildProps) => {
   return (
     <ComponentForCenterAlignment>
       <StyledProductDetailComponent>{children}</StyledProductDetailComponent>
