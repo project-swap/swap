@@ -63,8 +63,8 @@ const SalesProductListTap = () => {
 
   const filter = async (type: any) => {
     const postRef = await collection(db, 'posts');
-    const q = query(postRef, orderBy('convertDate', type));
-    const querySnapShot = await getDocs(q);
+    const queryData = query(postRef, orderBy('convertDate', type));
+    const querySnapShot = await getDocs(queryData);
     const dataArr: DataTypes[] = [];
 
     querySnapShot.forEach(item => {
