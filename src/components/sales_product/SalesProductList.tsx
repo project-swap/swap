@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import styled, { keyframes } from 'styled-components';
+import { sessionUserData } from '../common/NavBar';
 import { ComponentForCenterAlignment } from '../common/PublicStyle';
 import SalesProductCardGroup from './SalesProductCardGroup';
 import SalesProductListTap from './SalesProductListTap';
@@ -64,9 +65,7 @@ const AddPostBtn = styled.button`
 const SalesProductList = () => {
   const navigate = useNavigate();
 
-  const userInfo = sessionStorage.getItem(
-    'firebase:authUser:AIzaSyDopZC4cfYJSrlMB_QTcAG7nIv59F0PaIg:[DEFAULT]',
-  );
+  const userInfo = sessionUserData();
 
   return (
     <ComponentForCenterAlignment>
