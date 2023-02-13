@@ -24,7 +24,10 @@ interface DataType {
   uid?: string | null;
   date: string;
   convertDate: string;
-  imgUrl: string[];
+  imgUrl: {
+    url: string;
+    id: string;
+  }[];
   profileImg?: string | null;
 }
 

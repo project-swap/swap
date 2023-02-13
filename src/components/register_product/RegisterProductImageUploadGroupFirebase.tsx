@@ -16,19 +16,14 @@ import { useRecoilState } from 'recoil';
 import { ImgUrlArrState } from '../../atoms/atoms';
 import { CgClose } from 'react-icons/cg';
 
-// interface FileTypes {
-//   lastModified: number;
-//   lastModifiedDate: string[];
-//   name: string;
-//   size: number;
-//   type: string;
-//   webkitRelativePath: string;
-//   arrayBuffer?: string;
-//   slice?: string;
-//   stream?: string;
-//   text?: string;
-//   prototype?: string[];
-// }
+interface FileTypes {
+  name: string;
+  lastModified: number;
+  lastModifiedDate?: string[];
+  size: number;
+  type: string;
+  webkitRelativePath: string;
+}
 
 const InputComponent = styled.div`
   display: flex;
@@ -60,7 +55,7 @@ const PreviewComponent = styled.div`
   position: relative;
 `;
 
-const PreviewImgCard = styled.div`
+const PreviewImgCard = styled.div<{ url: string }>`
   border: 1px solid #444;
   border-radius: 10px;
   width: 3rem;
@@ -77,7 +72,7 @@ const PreviewImgCard = styled.div`
 const RegisterProductImageUploadGroupFirebase = () => {
   const storage = getStorage();
 
-  const [imgUpload, setImgUpload] = useState(null);
+  const [imgUpload, setImgUpload] = useState<FileTypes | null>(null);
   const [imgUrl, setImgUrl] = useRecoilState(ImgUrlArrState);
 
   const upload = () => {
@@ -86,7 +81,7 @@ const RegisterProductImageUploadGroupFirebase = () => {
     const id = Date.now() / imgUpload.name.length;
     const imageRef = ref(storage, `images/${imgUpload.name}_${id}`);
 
-    uploadBytes(imageRef, imgUpload).then(snapshot => {
+    uploadBytes(imageRef, imgUpload as any).then(snapshot => {
       getDownloadURL(snapshot.ref).then(url => {
         setImgUrl(prev => [
           ...prev,
@@ -96,10 +91,10 @@ const RegisterProductImageUploadGroupFirebase = () => {
     });
   };
 
-  const deleteImg = event => {
-    const deleteRef = ref(storage, event.target.parentNode.id);
+  const deleteImg = (event: React.MouseEvent<HTMLElement>) => {
+    const deleteRef = ref(storage, event.currentTarget.id);
     deleteObject(deleteRef);
-    setImgUrl(imgUrl.filter(obj => obj.id !== event.target.parentNode.id));
+    setImgUrl(imgUrl.filter(obj => obj.id !== event.currentTarget.id));
   };
 
   useEffect(upload, [imgUpload]);
@@ -107,36 +102,40 @@ const RegisterProductImageUploadGroupFirebase = () => {
   return (
     <RegisterProductGroupComponent flexDirection="column">
       <InputComponent>
-        <Label>이미지</Label>
-        <AddImgBtnLabel htmlFor="imgUpload">
-          <BsPlusCircle />
-        </AddImgBtnLabel>
+        <>
+          <Label>이미지</Label>
+          <AddImgBtnLabel htmlFor="imgUpload">
+            <BsPlusCircle />
+          </AddImgBtnLabel>
 
-        {imgUrl.map(item => {
-          return (
-            <PreviewComponent key={item.url}>
-              <PreviewImgCard url={item.url} />
-              <StyledDeleteBtn
-                top="-4px"
-                right="10px"
-                id={item.id}
-                onClick={event => deleteImg(event)}
-              >
-                <CgClose width="1.5rem" id={item.id} />
-              </StyledDeleteBtn>
-            </PreviewComponent>
-          );
-        })}
+          {imgUrl.map(item => {
+            return (
+              <PreviewComponent key={item.url}>
+                <PreviewImgCard url={item.url} />
+                <StyledDeleteBtn
+                  top="-4px"
+                  right="10px"
+                  id={item.id}
+                  onClick={event => deleteImg(event)}
+                >
+                  <CgClose width="1.5rem" id={item.id} />
+                </StyledDeleteBtn>
+              </PreviewComponent>
+            );
+          })}
 
-        <AddImgBtn
-          type="file"
-          id="imgUpload"
-          accept="image/*"
-          onChange={event => {
-            setImgUpload(event.target.files[0]);
-          }}
-          required
-        />
+          <AddImgBtn
+            type="file"
+            id="imgUpload"
+            accept="image/*"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (event.currentTarget.files !== null) {
+                setImgUpload(event.currentTarget.files[0]);
+              }
+            }}
+            required
+          />
+        </>
       </InputComponent>
     </RegisterProductGroupComponent>
   );

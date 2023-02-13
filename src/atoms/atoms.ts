@@ -90,7 +90,7 @@ export const hashArrState = atom<string[]>({
   default: [],
 });
 
-export const ImgUrlArrState = atom<string[]>({
+export const ImgUrlArrState = atom<{ url: string; id: string }[]>({
   key: 'ImgUrlArrState',
   default: [],
 });
