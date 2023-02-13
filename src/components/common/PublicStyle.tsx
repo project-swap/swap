@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+interface DeleteBtnTypes {
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+}
+
 export const EntireAreaWrap = styled.section`
   display: flex;
   flex-direction: column;
@@ -45,12 +52,7 @@ export const RegisterProductGroupComponent = styled.div<{
   margin-bottom: 1.5rem;
 `;
 
-export const StyledDeleteBtn = styled.span<{
-  top?: string;
-  right?: string;
-  bottom?: string;
-  left?: string;
-}>`
+export const StyledDeleteBtn = styled.span<DeleteBtnTypes>`
   position: absolute;
   top: ${props => props.top};
   right: ${props => props.right};
