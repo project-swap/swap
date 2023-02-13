@@ -8,7 +8,7 @@ interface StyledPostingTimeProps {
 
 interface PostingTimeProps extends StyledPostingTimeProps {
   date: string;
-  convertDate: number;
+  convertDate: string;
 }
 
 const StyledPostingTime = styled.span<StyledPostingTimeProps>`
