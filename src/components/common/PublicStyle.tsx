@@ -33,8 +33,8 @@ export const Label = styled.label`
   width: 4rem;
 `;
 
-export const RegisterProductGroupComponent: any = styled.div<{
-  flexDirection: string;
+export const RegisterProductGroupComponent = styled.div<{
+  flexDirection?: string;
 }>`
   width: 40rem;
   display: flex;
