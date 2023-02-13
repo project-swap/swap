@@ -2,9 +2,7 @@ import React from 'react';
 import { FiCheckSquare } from 'react-icons/fi';
 import styled from 'styled-components';
 import SideBar from '../../components/SideBar';
-import ContentChildren from '../../components/ContentChildren';
 import MainContainer from '../../components/common/MainContainer';
-import ExchangeContainerChildren from '../../components/ExchangeContainerChildren';
 
 const SwapContainer = styled.div`
   display: flex;
@@ -22,12 +20,25 @@ const Title = styled.h3`
   left: 4rem;
 `;
 
+const ExchangeContainer = styled.main`
+  display: flex;
+  width: 90%;
+  position: relative;
+  justify-content: space-evenly;
+  top: 3rem;
+`;
+
+const Content = styled.h4`
+  margin: 12rem auto;
+  opacity: 0.4;
+`;
+
 const ExchangeHistory = () => {
   return (
     <SwapContainer>
       <SideBar />
       <MainContainer>
-        <ExchangeContainerChildren>
+        <ExchangeContainer>
           <Title>교환목록</Title>
           <div
             style={{
@@ -43,7 +54,7 @@ const ExchangeHistory = () => {
             <FiCheckSquare className="check" />
             <h4 className="title">오래된순</h4>
           </div>
-        </ExchangeContainerChildren>
+        </ExchangeContainer>
         <select
           style={{
             width: '6rem',
@@ -62,9 +73,9 @@ const ExchangeHistory = () => {
             6개월
           </option>
         </select>
-        <ContentChildren>
+        <Content>
           <span>교환목록이 없습니다.</span>
-        </ContentChildren>
+        </Content>
       </MainContainer>
     </SwapContainer>
   );
