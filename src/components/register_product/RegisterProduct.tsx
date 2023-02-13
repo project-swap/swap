@@ -100,11 +100,8 @@ const RegisterProduct = () => {
   }-${date.getDate()}`;
 
   const checkType = () => {
-    if (type === '교환') {
-      return 'swap';
-    } else {
-      return 'share';
-    }
+    if (type === '교환') return 'swap';
+    return 'share';
   };
 
   const data: DataType = {
