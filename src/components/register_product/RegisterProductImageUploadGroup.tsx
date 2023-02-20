@@ -69,7 +69,7 @@ const PreviewImgCard = styled.div<{ url: string }>`
   background-position: center;
 `;
 
-const RegisterProductImageUploadGroupFirebase = () => {
+const RegisterProductImageUploadGroup = () => {
   const storage = getStorage();
 
   const itemBeDragged = useRef<number>(0);
@@ -78,11 +78,11 @@ const RegisterProductImageUploadGroupFirebase = () => {
   const [imgUpload, setImgUpload] = useState<FileTypes | null>(null);
   const [imgUrl, setImgUrl] = useRecoilState(ImgUrlArrState);
 
-  const takeTheItem = (index: number) => {
+  const takeItem = (index: number) => {
     itemBeDragged.current = index;
   };
 
-  const enterTheItemInLocationBeDragged = (index: number) => {
+  const enterItemInLocationBeDragged = (index: number) => {
     locationBeDragged.current = index;
   };
 
@@ -137,8 +137,8 @@ const RegisterProductImageUploadGroupFirebase = () => {
               <PreviewComponent
                 key={item.url}
                 onDragOver={e => e.preventDefault()}
-                onDragStart={() => takeTheItem(index)}
-                onDragEnter={() => enterTheItemInLocationBeDragged(index)}
+                onDragStart={() => takeItem(index)}
+                onDragEnter={() => enterItemInLocationBeDragged(index)}
                 onDragEnd={drop}
                 draggable
               >
@@ -172,4 +172,4 @@ const RegisterProductImageUploadGroupFirebase = () => {
   );
 };
 
-export default RegisterProductImageUploadGroupFirebase;
+export default RegisterProductImageUploadGroup;
