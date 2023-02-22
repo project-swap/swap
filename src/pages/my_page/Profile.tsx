@@ -10,7 +10,7 @@ import { useRecoilState } from 'recoil';
 import { profileImage } from '../../atoms/atoms';
 import ProfileModal from '../../components/ProfileModal';
 import { getAuth, updateProfile } from 'firebase/auth';
-import { sessionUserData } from '../../components/common/NavBar';
+import NavBar, { sessionUserData } from '../../components/common/NavBar';
 
 const Info = styled.section`
   margin-top: 2rem;
@@ -182,74 +182,77 @@ const Profile = () => {
   };
 
   return (
-    <SwapContainer>
-      <SideBar />
-      <MainContainer>
-        <ProfileContainer>
-          <img className="profileImage" src={profile} alt="미쭈" />
-          {isOpen ? (
-            <AiOutlinePlusCircle className="plus" onClick={handleIconClick} />
-          ) : (
-            <ProfileModal closeEvent={handleIconClick} />
-          )}
-          <Info>
-            <NickNameInput onChange={onChange} type="text" value={nickName} />
-            <h4>팔로잉 59 팔로워 48</h4>
-          </Info>
-        </ProfileContainer>
-        <Location>
-          <h4>위치설정</h4>
-          <h4>더보기</h4>
-        </Location>
-        <Line />
-        <InputContainer>
-          <Form onSubmit={handleSubmit(onValid)}>
-            <Label htmlFor="nickname">닉네임</Label>
-            <StyleContainer>
-              <input
-                type="text"
-                {...register('nickName', {
-                  required: true,
-                  minLength: 2,
-                  maxLength: 5,
-                  pattern: /([0-9a-zA-Z가-힣\x20])/i, //초성 미포함
-                })}
-              />
-              {errors.nickName?.type === 'pattern' ? (
-                <ErrorMessage>초성은 불가능합니다.</ErrorMessage>
-              ) : null}
+    <>
+      <NavBar />
+      <SwapContainer>
+        <SideBar />
+        <MainContainer>
+          <ProfileContainer>
+            <img className="profileImage" src={profile} alt="미쭈" />
+            {isOpen ? (
+              <AiOutlinePlusCircle className="plus" onClick={handleIconClick} />
+            ) : (
+              <ProfileModal closeEvent={handleIconClick} />
+            )}
+            <Info>
+              <NickNameInput onChange={onChange} type="text" value={nickName} />
+              <h4>팔로잉 59 팔로워 48</h4>
+            </Info>
+          </ProfileContainer>
+          <Location>
+            <h4>위치설정</h4>
+            <h4>더보기</h4>
+          </Location>
+          <Line />
+          <InputContainer>
+            <Form onSubmit={handleSubmit(onValid)}>
+              <Label htmlFor="nickname">닉네임</Label>
+              <StyleContainer>
+                <input
+                  type="text"
+                  {...register('nickName', {
+                    required: true,
+                    minLength: 2,
+                    maxLength: 5,
+                    pattern: /([0-9a-zA-Z가-힣\x20])/i, //초성 미포함
+                  })}
+                />
+                {errors.nickName?.type === 'pattern' ? (
+                  <ErrorMessage>초성은 불가능합니다.</ErrorMessage>
+                ) : null}
 
-              <Button type="submit">수정</Button>
-              {errors ? (
-                <ErrorMessage>
-                  {errors.nickName?.type === 'minLength' ? (
-                    <span>최소 2글자 이상 입력해야 합니다.</span>
-                  ) : (
-                    errors.nickName?.type === 'maxLength' && (
-                      <span>닉네임은 최대 5글자입니다.</span>
-                    )
-                  )}
-                </ErrorMessage>
-              ) : isSubmitted ? (
-                <SuccessMessage>성공적으로 수정했습니다!</SuccessMessage>
-              ) : null}
-            </StyleContainer>
-            <Label htmlFor="email">이메일</Label>
-            <StyleContainer>
-              <input type="email" defaultValue="noreply@naver.com" disabled />
-            </StyleContainer>
-            <Label htmlFor="password">비밀번호</Label>
-            <StyleContainer>
-              <input type="password" defaultValue="xsdasdasdaew" disabled />
-            </StyleContainer>
-            <Label htmlFor="social">소셜</Label>
-            <StyleContainer>
-              <input type="text" defaultValue="구글 가입 회원" disabled />
-            </StyleContainer>
-          </Form>
-        </InputContainer>
-      </MainContainer>
-    </SwapContainer>
+                <Button type="submit">수정</Button>
+                {errors ? (
+                  <ErrorMessage>
+                    {errors.nickName?.type === 'minLength' ? (
+                      <span>최소 2글자 이상 입력해야 합니다.</span>
+                    ) : (
+                      errors.nickName?.type === 'maxLength' && (
+                        <span>닉네임은 최대 5글자입니다.</span>
+                      )
+                    )}
+                  </ErrorMessage>
+                ) : isSubmitted ? (
+                  <SuccessMessage>성공적으로 수정했습니다!</SuccessMessage>
+                ) : null}
+              </StyleContainer>
+              <Label htmlFor="email">이메일</Label>
+              <StyleContainer>
+                <input type="email" defaultValue="noreply@naver.com" disabled />
+              </StyleContainer>
+              <Label htmlFor="password">비밀번호</Label>
+              <StyleContainer>
+                <input type="password" defaultValue="xsdasdasdaew" disabled />
+              </StyleContainer>
+              <Label htmlFor="social">소셜</Label>
+              <StyleContainer>
+                <input type="text" defaultValue="구글 가입 회원" disabled />
+              </StyleContainer>
+            </Form>
+          </InputContainer>
+        </MainContainer>
+      </SwapContainer>
+    </>
   );
 };
 
