@@ -20,6 +20,8 @@ interface DataTypes {
   profileImg: string;
 }
 
+type OrderByDirection = 'desc' | 'asc';
+
 const TapComponent = styled.div`
   display: flex;
   justify-content: space-between;
@@ -61,7 +63,7 @@ const SalesProductListTap = () => {
   const [filterType, setFilterType] = useState('');
   const setFilterDataArr = useSetRecoilState(filterData);
 
-  const filter = async (type: any) => {
+  const filter = async (type: OrderByDirection) => {
     const postRef = await collection(db, 'posts');
     const queryData = query(postRef, orderBy('convertDate', type));
     const querySnapShot = await getDocs(queryData);
