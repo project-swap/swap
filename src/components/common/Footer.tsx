@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import ThemeBtn from '../main/ThemeBtn';
+import ThemeBtn from '../Main/ThemeBtn';
 import { useRecoilValue } from 'recoil';
 import { themeColor, darkModeToggle } from '../../atoms/atoms';
 
