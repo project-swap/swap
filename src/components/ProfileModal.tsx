@@ -2,13 +2,13 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { IoMdCloudUpload } from 'react-icons/io';
-import { ChildrenProps } from '../utils/utils';
-// import {
-//   getStorage,
-//   ref,
-//   uploadBytesResumable,
-//   getDownloadURL,
-// } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 
 const Form = styled.form`
   display: flex;
@@ -35,11 +35,6 @@ const ProfileEdit = styled.span`
   bottom: 2rem;
 `;
 
-interface ModalCloseProps extends ChildrenProps {
-  width: number;
-  height: number;
-  onClick?: () => void;
-}
 const Modal = styled.section`
   width: 30rem;
   height: 24rem;
@@ -131,7 +126,11 @@ const PreviewInnerImage = styled.div`
   display: none;
 `;
 
-const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
+interface CloseProps {
+  closeEvent: () => void;
+}
+
+const ProfileModal = ({ closeEvent }: CloseProps) => {
   const [attachment, setAttachment] = useState<string | ArrayBuffer | null>(
     null,
   );
@@ -218,8 +217,8 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
   return (
     <Modal>
       <ProfileEdit>프로필 사진 변경</ProfileEdit>
-      <IoClose className="hover" onClick={onClick} />
-      {children}
+      {/*여기 onClick 다시 확인.*/}
+      <IoClose className="hover" onClick={closeEvent} />
       <ProfileDivider />
       <PreviewOuterImage src={attachment?.toString()} />
       <PreviewImageContainer>
@@ -241,8 +240,10 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
             accept="image/*" //이미지 파일만 허용
           />
         </ImageMessageContainer>
-        <button onClick={handleFileButtonClick}>Upload</button>
-        {/* <button onClick={deleteFile}>Delete</button> */}
+        <div style={{ display: 'flex' }}>
+          <button onClick={handleFileButtonClick}>Upload</button>
+          {/* <button onClick={deleteFile}>Delete</button> */}
+        </div>
       </Form>
     </Modal>
   );
