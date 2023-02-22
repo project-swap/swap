@@ -8,7 +8,7 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 import { useRecoilState } from 'recoil';
 import { profileImage } from '../../atoms/atoms';
-import ModalClose from '../../components/ProfileModal';
+import ProfileModal from '../../components/ProfileModal';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { sessionUserData } from '../../components/common/NavBar';
 
@@ -190,9 +190,7 @@ const Profile = () => {
           {isOpen ? (
             <AiOutlinePlusCircle className="plus" onClick={handleIconClick} />
           ) : (
-            <ModalClose width={30} height={24} onClick={handleIconClick}>
-              <label htmlFor="file-input"></label>
-            </ModalClose>
+            <ProfileModal closeEvent={handleIconClick} />
           )}
           <Info>
             <NickNameInput onChange={onChange} type="text" value={nickName} />

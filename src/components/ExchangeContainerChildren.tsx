@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import { ChildrenProps } from '../utils/utils';
 
 const ExchangeContainer = styled.main`
   display: flex;
@@ -10,8 +9,8 @@ const ExchangeContainer = styled.main`
   top: 3rem;
 `;
 
-const ExchangeContainerChildren = ({ children }: ChildrenProps) => {
-  return <ExchangeContainer>{children}</ExchangeContainer>;
+const ExchangeContainerChildren = () => {
+  return <ExchangeContainer></ExchangeContainer>;
 };
 
 export default ExchangeContainerChildren;
