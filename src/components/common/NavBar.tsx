@@ -170,6 +170,14 @@ const NavBar = () => {
                   </span>
                 </Link>
               )}
+              {loginState ? (
+                <Link
+                  to="/profile"
+                  style={{ ...{ marginLeft: '1.75rem' }, ...linkStyle }}
+                >
+                  <span>프로필</span>
+                </Link>
+              ) : null}
             </TopLinkBtn>
           </TopBtnContainer>
         </TopNavBar>
