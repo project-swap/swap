@@ -178,16 +178,14 @@ const NavBar = () => {
             <MainLogo />
           </Link>
           <MainLinkBtnContainer>
-            <Link to="/" style={linkStyle}>
-              <MainLinkBtn
-                themeMode={themeMode}
-                themeColorObject={themeColorObject}
-              >
-                <Link to="/product-list" style={linkStyle}>
-                  교환/나눔
-                </Link>
-              </MainLinkBtn>
-            </Link>
+            <MainLinkBtn
+              themeMode={themeMode}
+              themeColorObject={themeColorObject}
+            >
+              <Link to="/product-list" style={linkStyle}>
+                교환/나눔
+              </Link>
+            </MainLinkBtn>
             <Link to="/" style={linkStyle}>
               <MainLinkBtn
                 themeMode={themeMode}
