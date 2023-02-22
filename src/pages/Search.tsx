@@ -3,8 +3,12 @@ import styled from 'styled-components';
 import NavBar from '../components/common/NavBar';
 import ModalBox from '../components/ModalBox';
 import Footer from '../components/common/Footer';
+
 import { EntireAreaWrap } from '../components/common/PublicStyle';
 import { ImSearch } from 'react-icons/im';
+
+import { useRecoilValue } from 'recoil';
+import { themeColor, darkModeToggle } from '../atoms/atoms';
 
 const SearchPage = styled.section`
   display: flex;
@@ -71,11 +75,19 @@ const HashTagList = styled.div`
 `;
 
 const Search = () => {
+  const themeMode = useRecoilValue(darkModeToggle);
+  const themeColorObject = useRecoilValue(themeColor);
+
   return (
-    <EntireAreaWrap>
+    <EntireAreaWrap themeMode={themeMode} themeColorObject={themeColorObject}>
       <NavBar />
       <SearchPage>
-        <ModalBox width={'50'} height={'45'}>
+        <ModalBox
+          width={'50'}
+          height={'45'}
+          themeMode={themeMode}
+          themeColorObject={themeColorObject}
+        >
           <SearchForm style={{ position: 'relative' }}>
             <SearchInput placeholder="검색어를 입력해주세요." />
             <ImSearch
