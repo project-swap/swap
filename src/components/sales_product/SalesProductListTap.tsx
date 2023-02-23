@@ -1,4 +1,4 @@
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { FiCheckSquare, FiSquare } from 'react-icons/fi';
 import { useSetRecoilState } from 'recoil';
@@ -65,7 +65,7 @@ const SalesProductListTap = () => {
 
   const filter = async (type: OrderByDirection) => {
     const postRef = await collection(db, 'posts');
-    const queryData = query(postRef, orderBy('convertDate', type));
+    const queryData = query(postRef, orderBy('convertDate', type), limit(12));
     const querySnapShot = await getDocs(queryData);
     const dataArr: DataTypes[] = [];
 

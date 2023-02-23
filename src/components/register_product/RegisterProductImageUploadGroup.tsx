@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import {
   RegisterProductGroupComponent,
@@ -69,11 +69,35 @@ const PreviewImgCard = styled.div<{ url: string }>`
   background-position: center;
 `;
 
-const RegisterProductImageUploadGroupFirebase = () => {
+const RegisterProductImageUploadGroup = () => {
   const storage = getStorage();
+
+  const itemBeDragged = useRef<number>(0);
+  const locationBeDragged = useRef<number>(0);
 
   const [imgUpload, setImgUpload] = useState<FileTypes | null>(null);
   const [imgUrl, setImgUrl] = useRecoilState(ImgUrlArrState);
+
+  const takeItem = (index: number) => {
+    itemBeDragged.current = index;
+  };
+
+  const enterItemInLocationBeDragged = (index: number) => {
+    locationBeDragged.current = index;
+  };
+
+  const drop = () => {
+    const copyListItems = [...imgUrl];
+    const itemBeDraggedContent = copyListItems[itemBeDragged.current];
+
+    copyListItems.splice(itemBeDragged.current, 1);
+    copyListItems.splice(locationBeDragged.current, 0, itemBeDraggedContent);
+
+    itemBeDragged.current = 0;
+    locationBeDragged.current = 0;
+
+    setImgUrl(copyListItems);
+  };
 
   const upload = () => {
     if (imgUpload === null) return;
@@ -108,9 +132,16 @@ const RegisterProductImageUploadGroupFirebase = () => {
             <BsPlusCircle />
           </AddImgBtnLabel>
 
-          {imgUrl.map(item => {
+          {imgUrl.map((item, index) => {
             return (
-              <PreviewComponent key={item.url}>
+              <PreviewComponent
+                key={item.url}
+                onDragOver={e => e.preventDefault()}
+                onDragStart={() => takeItem(index)}
+                onDragEnter={() => enterItemInLocationBeDragged(index)}
+                onDragEnd={drop}
+                draggable
+              >
                 <PreviewImgCard url={item.url} />
                 <StyledDeleteBtn
                   top="-4px"
@@ -141,4 +172,4 @@ const RegisterProductImageUploadGroupFirebase = () => {
   );
 };
 
-export default RegisterProductImageUploadGroupFirebase;
+export default RegisterProductImageUploadGroup;
