@@ -22,38 +22,28 @@ const PopularHashTagItem = styled.li`
   cursor: pointer;
 `;
 
-interface DataTypes {
-  postId: string;
-  title: string;
+interface FirestoreObj {
   content: string;
+  data: string;
   hash_tag: string[];
+  id: number;
   name: string;
-  date: string;
-  type: string;
-  imgUrl: { url: string; id: string }[];
-  uid: string;
-  convertDate: string;
-  profileImg: string;
+  title: string;
 }
 
-interface HashTag {
-  [hashtag: string]: number;
-}
-
+// any 타입 수정 해야함
 const PopularHashTag = () => {
-  const mockData: DataTypes[] = useRecoilValue(getTest);
-  const arrangeHashtag = (dataObj: DataTypes[]) => {
-    const hashTagList: string[][] = dataObj.map((el: DataTypes) => el.hash_tag);
-    const hashTagObj: HashTag = {};
+  const mockData: object[] = useRecoilValue(getTest);
+  const arrangeHashtag = (dataObj: any) => {
+    const hashTagList: any[] = dataObj.map((el: FirestoreObj) => el.hash_tag);
+    const hashTagObj: any = {};
     hashTagList.map(items => {
       items.map((el: string) => {
         hashTagObj[el] = (hashTagObj[el] || 0) + 1;
-        console.log(hashTagObj);
       });
     });
-    console.log(hashTagObj);
     const hashTagSortList = Object.entries(hashTagObj).sort(
-      (a: [string, number], b: [string, number]) => {
+      (a: [string, any], b: [string, any]) => {
         return b[1] - a[1];
       },
     );

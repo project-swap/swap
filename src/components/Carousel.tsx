@@ -3,8 +3,9 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
-
-// dot size 및 색상 추후 변경예정
+import banner_01 from '../assets/banner/banner_01.jpg';
+import banner_02 from '../assets/banner/banner_02.jpg';
+import banner_03 from '../assets/banner/banner_03.jpg';
 
 const StyledSlider = styled(Slider)`
   display: flex !important;
@@ -59,24 +60,17 @@ const ImgContainer = styled.div`
 const Image = styled.div`
   width: 60.25rem;
   height: 22rem;
-  /* max-width: 100%;
-  max-height: 100%; */
+  img {
+    width: inherit;
+    height: inherit;
+  }
 `;
 
-const Text = styled.p`
-  position: absolute;
-  top: 1.2rem;
-  left: 2rem;
-  font-size: 5rem;
-`;
-
-function Carousel() {
+const Carousel = () => {
   const background = [
-    { id: 1, color: 'blue' },
-    { id: 2, color: 'red' },
-    { id: 3, color: 'pink' },
-    { id: 4, color: 'green' },
-    { id: 5, color: 'yellow' },
+    { id: 'swap 시작하기', img: banner_01 },
+    { id: 'swap 교환/나눔', img: banner_02 },
+    { id: 'swap 커뮤니티', img: banner_03 },
   ];
 
   const settings = {
@@ -96,13 +90,14 @@ function Carousel() {
       {background.map(el => {
         return (
           <ImgContainer key={el.id}>
-            <Image style={{ backgroundColor: `${el.color}` }} />
-            <Text>{el.color}</Text>
+            <Image>
+              <img src={el.img} alt={el.id} />
+            </Image>
           </ImgContainer>
         );
       })}
     </StyledSlider>
   );
-}
+};
 
 export default React.memo(Carousel);
