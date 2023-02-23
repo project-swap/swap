@@ -73,9 +73,9 @@ export const themeColor = atom<Test>({
     darkNavAndFooter: '#161B22',
     darkLine: '#8B949E',
     darkFont: '#E5E7EE',
-    lightMain: '#F5F5F5',
-    lightNavAndFooter: '#C6C2C2',
-    lightLine: '#000000',
+    lightMain: '#FFFFFF',
+    lightNavAndFooter: '#FFFFFF',
+    lightLine: '#999999',
     lightFont: '#000000',
   },
 });

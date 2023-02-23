@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+interface Theme {
+  themeMode: boolean;
+  themeColorObject: {
+    darkNavAndFooter: string;
+    darkFont: string;
+    lightNavAndFooter: string;
+    lightFont: string;
+  };
+}
+
 interface DeleteBtnTypes {
   top?: string;
   right?: string;
@@ -7,13 +17,21 @@ interface DeleteBtnTypes {
   left?: string;
 }
 
-export const EntireAreaWrap = styled.section`
+export const EntireAreaWrap = styled.section<Theme>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100vh;
+  background-color: ${props =>
+    props.themeMode
+      ? props.themeColorObject.darkNavAndFooter
+      : props.themeColorObject.lightNavAndFooter};
+  color: ${props =>
+    props.themeMode
+      ? props.themeColorObject.darkFont
+      : props.themeColorObject.lightFont};
 `;
 
 export const ComponentForCenterAlignment = styled.div`
