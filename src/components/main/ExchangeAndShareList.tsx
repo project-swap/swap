@@ -38,6 +38,8 @@ const ExchangeAndShareItem = styled.div<IExchangeAndShareItem>`
 const ExchangeAndShareItemCategory = styled.div`
   margin-top: 0.5rem;
   margin-bottom: 0.3rem;
+  text-align: center;
+  font-weight: 600;
 `;
 
 const ExchangeAndShareList = () => {
@@ -66,6 +68,7 @@ const ExchangeAndShareList = () => {
           titleName={'교환/나눔 물품 리스트'}
           border={''}
           titleMargin={0}
+          href={'/product-list'}
         />
         <ExchangeAndShareListContainer>
           {contents.map((content, index: number) => {
