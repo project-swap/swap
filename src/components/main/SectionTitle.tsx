@@ -12,6 +12,7 @@ interface IPropsStyle {
   titleName: string;
   border: string;
   titleMargin: number;
+  href?: string;
 }
 
 interface IViewMore {
@@ -98,7 +99,7 @@ const SectionTitle = (props: IPropsStyle) => {
             {props.titleName}
           </SectionName>
           <ViewMoreContainer>
-            <Link to="/" style={linkStyle}>
+            <Link to={props.href ? props.href : '/'} style={linkStyle}>
               <ViewMore
                 themeMode={themeMode}
                 themeColorObject={themeColorObject}
