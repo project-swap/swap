@@ -8,7 +8,7 @@ import RegisterProductPostBtn from './RegisterProductPostBtn';
 import RegisterProductInputContent from './RegisterProductInputContent';
 import { useRecoilValue } from 'recoil';
 import { hashArrState, ImgUrlArrState } from '../../atoms/atoms';
-import RegisterProductImageUploadGroupFirebase from './RegisterProductImageUploadGroupFirebase';
+import RegisterProductImageUploadGroup from './RegisterProductImageUploadGroup';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router';
@@ -135,7 +135,7 @@ const RegisterProduct = () => {
         </ExitButton>
         <RegisterForm onSubmit={update}>
           <RegisterProductInputGroup getTitleProps={getTitleProps} />
-          <RegisterProductImageUploadGroupFirebase />
+          <RegisterProductImageUploadGroup />
           <RegisterProductInputContent getContentProps={getContentProps} />
           <RegisterProductTradeTypeGroup getTypeProps={getTypeProps} />
           <RegisterProductPostBtn />
