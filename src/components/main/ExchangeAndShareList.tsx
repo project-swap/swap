@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SectionTitle from './SectionTitle';
 import ProductImg from '../common/product_card/ProductImg';
+import { linkStyle } from '../../styles/linkStyle';
 // import SalesTitle from '../common/ProductCard/SalesTitle';
 
 import { useRecoilValue } from 'recoil';
@@ -75,10 +76,7 @@ const ExchangeAndShareList = () => {
         <ExchangeAndShareListContainer>
           {contents.map((content, index: number) => {
             return index < 6 ? (
-              <Link
-                to={`/detail/${content.postId}`}
-                style={{ textDecoration: 'none' }}
-              >
+              <Link to={`/detail/${content.postId}`} style={linkStyle}>
                 <ExchangeAndShareItem darkMode={darkMode} key={index}>
                   <ProductImg
                     url={content.imgUrl}
