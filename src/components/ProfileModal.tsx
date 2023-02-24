@@ -10,6 +10,15 @@ import {
   deleteObject,
 } from 'firebase/storage';
 
+import BackgroundBlur from './BackgroundBlur';
+// import {
+//   getStorage,
+//   ref,
+//   uploadBytesResumable,
+//   getDownloadURL,
+//   deleteObject,
+// } from 'firebase/storage';
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -18,7 +27,6 @@ const Form = styled.form`
 `;
 
 const ImageMessageContainer = styled.section`
-  position: relative;
   width: 110%;
   height: 5rem;
   margin-top: 1rem;
@@ -28,46 +36,31 @@ const ImageMessageContainer = styled.section`
 
 const ProfileEdit = styled.span`
   display: flex;
-  position: relative;
-  right: 10rem;
+  align-items: center;
+  justify-content: center;
   font-weight: 600;
   font-size: 1rem;
-  bottom: 2rem;
 `;
 
 const Modal = styled.section`
   width: 30rem;
   height: 24rem;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  right: 1rem;
   background-color: #fff;
   border: 0.1rem solid #000;
   border-radius: 0.5rem;
-  margin: 5rem 26rem;
   z-index: 1;
-  .hover {
-    position: relative;
-    bottom: 3.5rem;
-    left: 14rem;
-    color: #000;
-    font-size: 2rem;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.4;
-    }
-  }
+  position: fixed;
 `;
 
-const ProfileDivider = styled.div`
-  border: 1px solid #000;
-  width: 27rem;
-  margin: 0 auto;
-  position: relative;
-  bottom: 3rem;
+const ProfileWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ImageMessageInput = styled.input`
@@ -85,16 +78,15 @@ const PreviewImageContainer = styled.section`
     width: 8rem;
     height: 8rem;
     border-radius: 4rem;
-    position: relative;
-    bottom: 0.75rem;
   }
+`;
+
+const PreviewImgPositionWrap = styled.div`
+  position: relative;
 `;
 
 const Label = styled.label`
   .cloud {
-    position: absolute;
-    top: 0;
-    right: 0.5rem;
     z-index: 1;
     width: 1.5rem;
     height: 1.5rem;
@@ -107,25 +99,44 @@ const ImageInputUpload = styled.input`
 `;
 
 const PreviewOuterImage = styled.img`
+  position: absolute;
   width: 8rem;
   height: 8rem;
-  position: absolute;
   z-index: -9999;
-  left: 11rem;
-  top: 5rem;
   filter: contrast(20%);
   border: 2px solid black;
 `;
 
 const PreviewInnerImage = styled.div`
   background-color: rgb(0, 0, 0, 0.3);
-  position: relative;
   width: 8rem;
   height: 8rem;
   z-index: 1;
   display: none;
 `;
 
+const ModalContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2rem 0;
+`;
+
+const CloseButton = styled(IoClose)`
+  cursor: pointer;
+  &:hover {
+    opacity: 0.3;
+  }
+  font-size: x-large;
+`;
+
+const Separator = styled.div`
+  width: 80%;
+  height: 1px;
+  background-color: #000;
+  display: block;
+  margin: 1rem auto;
+`;
 interface CloseProps {
   closeEvent: () => void;
 }
@@ -212,39 +223,71 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
   };
 
   return (
-    <Modal>
-      <ProfileEdit>프로필 사진 변경</ProfileEdit>
-      {/*여기 onClick 다시 확인.*/}
-      <IoClose className="hover" onClick={closeEvent} />
-      <ProfileDivider />
-      <PreviewOuterImage src={attachment?.toString()} />
-      <PreviewImageContainer>
-        <PreviewInnerImage></PreviewInnerImage>
-        {attachment ? (
-          <img src={attachment.toString()} alt={attachment.toString()} />
-        ) : null}
-      </PreviewImageContainer>
-      <Form>
-        <ImageMessageContainer>
-          <ImageMessageInput type="text" placeholder="이미지를 업로드하세요." />
-          <Label htmlFor="file-input">
-            <IoMdCloudUpload className="cloud" />
-          </Label>
-          <ImageInputUpload
-            onChange={onChange}
-            id="file-input"
-            type="file"
-            accept="image/*" //이미지 파일만 허용
-          />
-        </ImageMessageContainer>
-        <div style={{ display: 'flex' }}>
-          <button onClick={handleFileButtonClick}>Upload</button>
-          <button type="button" onClick={() => deleteFile(file)}>
-            Delete
-          </button>
-        </div>
-      </Form>
-    </Modal>
+    <>
+      <Modal>
+        <ModalContainer>
+          <ProfileEdit>프로필 사진 변경</ProfileEdit>
+          {/*여기 onClick 다시 확인.*/}
+          <CloseButton onClick={closeEvent} />
+        </ModalContainer>
+        <Separator />
+        <ProfileWrap>
+          <PreviewImgPositionWrap>
+            <PreviewOuterImage src={attachment?.toString()} />
+            <PreviewImageContainer>
+              <PreviewInnerImage />
+              {attachment ? (
+                <img src={attachment.toString()} alt={attachment.toString()} />
+              ) : null}
+            </PreviewImageContainer>
+          </PreviewImgPositionWrap>
+          <Form>
+            <ImageMessageContainer>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  gap: '1rem',
+                }}
+              >
+                <ImageMessageInput
+                  type="text"
+                  placeholder="이미지를 업로드하세요."
+                />
+                <Label htmlFor="file-input">
+                  <IoMdCloudUpload className="cloud" />
+                </Label>
+              </div>
+
+              <ImageInputUpload
+                onChange={onChange}
+                id="file-input"
+                type="file"
+                accept="image/*" //이미지 파일만 허용
+              />
+            </ImageMessageContainer>
+
+            <div>
+              <button
+                onClick={handleFileButtonClick}
+                style={{ marginRight: '0.5rem' }}
+              >
+                Upload
+              </button>
+              <button
+                style={{ marginLeft: '0.5rem' }}
+                type="button"
+                onClick={() => deleteFile(file)}
+              >
+                Delete
+              </button>
+            </div>
+          </Form>
+        </ProfileWrap>
+      </Modal>
+
+      <BackgroundBlur />
+    </>
   );
 };
 

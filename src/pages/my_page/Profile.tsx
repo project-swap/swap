@@ -12,6 +12,13 @@ import ProfileModal from '../../components/ProfileModal';
 import { getAuth, updateProfile } from 'firebase/auth';
 import NavBar, { sessionUserData } from '../../components/common/NavBar';
 
+export const PageWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Info = styled.section`
   margin-top: 2rem;
   margin-left: 1rem;
@@ -37,18 +44,20 @@ const Location = styled.div`
 
 const SwapContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: -40rem auto;
+  justify-content: center;
+  align-items: center;
+  width: 70rem;
+  margin-top: 2rem;
+  border: 1px solid black;
 `;
 
 const ProfileContainer = styled.section`
   display: flex;
   z-index: 1;
-  margin-left: 10rem;
+  padding-left: 1rem;
   .profileImage {
     width: 8rem;
     height: 8rem;
-    margin-top: 1rem;
     border-radius: 0.5rem;
     z-index: -1;
   }
@@ -78,7 +87,6 @@ const InputContainer = styled.section`
   input {
     display: flex;
     justify-content: center;
-    margin: 1rem auto;
     height: 3rem;
     width: 30rem;
   }
@@ -86,16 +94,22 @@ const InputContainer = styled.section`
 
 const Line = styled.div`
   border: 1px solid black;
-  width: 45rem;
+  width: 90%;
   margin: 0 auto;
 `;
 
 const Label = styled.label`
   display: flex;
-  margin-left: 9.5rem;
-  position: relative;
-  top: -0.5rem;
+  justify-content: start;
   font-weight: 600;
+`;
+
+const StyleContainer = styled.div`
+  display: flex;
+  input {
+    display: flex;
+  }
+  position: relative;
 `;
 
 const Button = styled.button`
@@ -105,17 +119,11 @@ const Button = styled.button`
   border-radius: 1rem;
   height: 2rem;
   cursor: pointer;
-  position: relative;
-  left: 33rem;
-  bottom: 3.6rem;
+  position: absolute;
+  right: 15rem;
+  top: 0.7rem;
   &:hover {
     opacity: 0.7;
-  }
-`;
-
-const StyleContainer = styled.div`
-  input {
-    margin-left: 8rem;
   }
 `;
 
@@ -135,12 +143,19 @@ const SuccessMessage = styled.p`
   color: green;
 `;
 
-const NickNameInput = styled.input`
+const NickNameInput = styled.div`
   border: none;
   outline: none;
   background-color: transparent;
   font-size: 2rem;
   font-weight: bold;
+`;
+
+const UserInformationForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  row-gap: 1rem;
 `;
 
 interface NickNameProps {
@@ -182,7 +197,7 @@ const Profile = () => {
   };
 
   return (
-    <>
+    <PageWrap>
       <NavBar />
       <SwapContainer>
         <SideBar />
@@ -195,7 +210,7 @@ const Profile = () => {
               <ProfileModal closeEvent={handleIconClick} />
             )}
             <Info>
-              <NickNameInput onChange={onChange} type="text" value={nickName} />
+              <NickNameInput onChange={onChange}>{nickName}</NickNameInput>
               <h4>팔로잉 59 팔로워 48</h4>
             </Info>
           </ProfileContainer>
@@ -206,22 +221,23 @@ const Profile = () => {
           <Line />
           <InputContainer>
             <Form onSubmit={handleSubmit(onValid)}>
-              <Label htmlFor="nickname">닉네임</Label>
-              <StyleContainer>
-                <input
-                  type="text"
-                  {...register('nickName', {
-                    required: true,
-                    minLength: 2,
-                    maxLength: 5,
-                    pattern: /([0-9a-zA-Z가-힣\x20])/i, //초성 미포함
-                  })}
-                />
-                {errors.nickName?.type === 'pattern' ? (
-                  <ErrorMessage>초성은 불가능합니다.</ErrorMessage>
-                ) : null}
-
-                <Button type="submit">수정</Button>
+              <UserInformationForm>
+                <Label htmlFor="nickname">닉네임</Label>
+                <StyleContainer>
+                  <input
+                    type="text"
+                    {...register('nickName', {
+                      required: true,
+                      minLength: 2,
+                      maxLength: 5,
+                      pattern: /([0-9a-zA-Z가-힣\x20])/i, //초성 미포함
+                    })}
+                  />
+                  {errors.nickName?.type === 'pattern' ? (
+                    <ErrorMessage>초성은 불가능합니다.</ErrorMessage>
+                  ) : null}
+                  <Button type="submit">수정</Button>
+                </StyleContainer>
                 {errors ? (
                   <ErrorMessage>
                     {errors.nickName?.type === 'minLength' ? (
@@ -235,24 +251,28 @@ const Profile = () => {
                 ) : isSubmitted ? (
                   <SuccessMessage>성공적으로 수정했습니다!</SuccessMessage>
                 ) : null}
-              </StyleContainer>
-              <Label htmlFor="email">이메일</Label>
-              <StyleContainer>
-                <input type="email" defaultValue="noreply@naver.com" disabled />
-              </StyleContainer>
-              <Label htmlFor="password">비밀번호</Label>
-              <StyleContainer>
-                <input type="password" defaultValue="xsdasdasdaew" disabled />
-              </StyleContainer>
-              <Label htmlFor="social">소셜</Label>
-              <StyleContainer>
-                <input type="text" defaultValue="구글 가입 회원" disabled />
-              </StyleContainer>
+                <Label htmlFor="email">이메일</Label>
+                <StyleContainer>
+                  <input
+                    type="email"
+                    defaultValue="noreply@naver.com"
+                    disabled
+                  />
+                </StyleContainer>
+                <Label htmlFor="password">비밀번호</Label>
+                <StyleContainer>
+                  <input type="password" defaultValue="xsdasdasdaew" disabled />
+                </StyleContainer>
+                <Label htmlFor="social">소셜</Label>
+                <StyleContainer>
+                  <input type="text" defaultValue="구글 가입 회원" disabled />
+                </StyleContainer>
+              </UserInformationForm>
             </Form>
           </InputContainer>
         </MainContainer>
       </SwapContainer>
-    </>
+    </PageWrap>
   );
 };
 

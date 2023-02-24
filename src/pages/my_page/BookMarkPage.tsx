@@ -4,13 +4,15 @@ import MainContainer from '../../components/common/MainContainer';
 import SideBar from '../../components/SideBar';
 import styled from 'styled-components';
 import NavBar from '../../components/common/NavBar';
+import { PageWrap } from './Profile';
 
 const BookMarkContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: -40rem auto;
-  font-weight: 300;
-  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 70rem;
+  margin-top: 2rem;
+  border: 1px solid black;
 `;
 
 const Title = styled.h3`
@@ -39,7 +41,7 @@ const BookMarkFilter = styled.div`
 
 const BookMarkPage = () => {
   return (
-    <>
+    <PageWrap>
       <NavBar />
       <BookMarkContainer>
         <SideBar />
@@ -62,7 +64,7 @@ const BookMarkPage = () => {
           </Content>
         </MainContainer>
       </BookMarkContainer>
-    </>
+    </PageWrap>
   );
 };
 

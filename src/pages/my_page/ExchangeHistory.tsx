@@ -4,11 +4,15 @@ import styled from 'styled-components';
 import SideBar from '../../components/SideBar';
 import MainContainer from '../../components/common/MainContainer';
 import NavBar from '../../components/common/NavBar';
+import { PageWrap } from './Profile';
 
 const SwapContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: -40rem auto;
+  justify-content: center;
+  align-items: center;
+  width: 70rem;
+  margin-top: 2rem;
+  border: 1px solid black;
 `;
 
 const Title = styled.h3`
@@ -46,7 +50,7 @@ const SelectFilter = styled.select`
 
 const ExchangeHistory = () => {
   return (
-    <>
+    <PageWrap>
       <NavBar />
       <SwapContainer>
         <SideBar />
@@ -79,7 +83,7 @@ const ExchangeHistory = () => {
           </Content>
         </MainContainer>
       </SwapContainer>
-    </>
+    </PageWrap>
   );
 };
 
