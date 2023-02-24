@@ -135,56 +135,52 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
     null,
   );
   const fileRef = useRef<HTMLDivElement | null>(null);
+  const [file, setFile] = useState<FileList | null>();
 
-  // const storage = getStorage();
-  // const uniqueKey = new Date().getTime();
+  const storage = getStorage();
+  const uniqueKey = new Date().getTime();
 
-  // const saveToFirebaseStorage = (file: File) => {
-  //   const newName = file.name
-  //     .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
-  //     .split(' ')
-  //     .join('');
+  const saveToFirebaseStorage = (file: File) => {
+    const newName = file.name
+      .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
+      .split(' ')
+      .join('');
 
-  //   const metaData = {
-  //     contentType: file.type,
-  //   };
+    const metaData = {
+      contentType: file.type,
+    };
 
-  //   const storageRef = ref(storage, `images/${newName + uniqueKey}`);
+    const storageRef = ref(storage, `images/${newName + uniqueKey}`);
 
-  //   const uploadTask = uploadBytesResumable(storageRef, file, metaData);
-  //   uploadTask.on(
-  //     'state_changed',
-  //     snapshot => {
-  //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //     },
-  //     () => {
-  //       getDownloadURL(uploadTask.snapshot.ref).then(downloadurl => {
-  //         console.log(`완료:${downloadurl}`);
-  //       });
-  //     },
-  //   );
-  // };
+    const uploadTask = uploadBytesResumable(storageRef, file, metaData);
+    uploadTask.on(
+      'state_changed',
+      snapshot => {
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(downloadurl => {
+          console.log(`완료:${downloadurl}`);
+        });
+      },
+    );
+  };
 
-  // const deleteFile = (file: File) => {
-  //   console.log(file.name);
-  //   const newName = file.name
-  //     .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
-  //     .split(' ')
-  //     .join('');
+  const deleteFile = (file: any) => {
+    const newName = file.name
+      .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
+      .split(' ')
+      .join('');
 
-  //   const desertRef = ref(storage, `images/${newName + uniqueKey}`);
-  //   console.log(
-  //     '🚀 ~ file: ProfileModal.tsx:179 ~ deleteFile ~ desertRef',
-  //     desertRef,
-  //   );
-  //   deleteObject(desertRef)
-  //     .then(() => {
-  //       console.log(`delete success`);
-  //     })
-  //     .catch(error => {
-  //       console.log(`delete ${error}`);
-  //     });
-  // };
+    const desertRef = ref(storage, `images/${newName + uniqueKey}`);
+    deleteObject(desertRef)
+      .then(() => {
+        console.log(`delete success`);
+      })
+      .catch(error => {
+        console.log(`delete ${error}`);
+      });
+  };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -192,6 +188,7 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
       target: { files },
     } = event;
 
+    setFile(files);
     if (!files) return null;
     const theFile = files[0];
     const reader = new FileReader();
@@ -204,7 +201,7 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
     };
 
     reader.readAsDataURL(theFile);
-    // saveToFirebaseStorage(theFile);
+    saveToFirebaseStorage(theFile);
   };
 
   const handleFileButtonClick = (
@@ -242,7 +239,9 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
         </ImageMessageContainer>
         <div style={{ display: 'flex' }}>
           <button onClick={handleFileButtonClick}>Upload</button>
-          {/* <button onClick={deleteFile}>Delete</button> */}
+          <button type="button" onClick={() => deleteFile(file)}>
+            Delete
+          </button>
         </div>
       </Form>
     </Modal>
