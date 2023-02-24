@@ -191,7 +191,7 @@ const NavBar = () => {
                 교환/나눔
               </MainLinkBtn>
             </Link>
-            <Link to="/" style={linkStyle}>
+            <Link to="/WIP" style={linkStyle}>
               <MainLinkBtn
                 themeMode={themeMode}
                 themeColorObject={themeColorObject}
