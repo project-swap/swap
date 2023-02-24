@@ -2,13 +2,13 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { IoMdCloudUpload } from 'react-icons/io';
-// import {
-//   getStorage,
-//   ref,
-//   uploadBytesResumable,
-//   getDownloadURL,
-//   deleteObject,
-// } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 
 const Form = styled.form`
   display: flex;
