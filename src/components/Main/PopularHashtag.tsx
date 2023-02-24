@@ -48,15 +48,11 @@ const PopularHashTag = () => {
     hashTagList.map(items => {
       items.map((el: string) => {
         hashTagObj[el] = (hashTagObj[el] || 0) + 1;
-        console.log(hashTagObj);
       });
     });
-    console.log(hashTagObj);
-    const hashTagSortList = Object.entries(hashTagObj).sort(
-      (a: [string, number], b: [string, number]) => {
-        return b[1] - a[1];
-      },
-    );
+    const hashTagSortList = Object.entries(hashTagObj).sort((a, b) => {
+      return b[1] - a[1];
+    });
     return hashTagSortList;
   };
 

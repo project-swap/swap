@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { linkStyle } from '../styles/linkStyle';
 
-const SideMain = styled.main`
+const SideMain = styled.div`
   display: flex;
   background-color: #eaecef;
-  border: 1px solid black;
+  border-right: 1px solid black;
   width: 20rem;
   height: 43rem;
-  margin-left: 19.5rem;
-  position: relative;
-  top: 45rem;
+  flex-direction: column;
+  align-items: baseline;
   h2 {
     font-weight: 600;
     font-size: 1.5rem;
@@ -20,10 +19,6 @@ const SideMain = styled.main`
 `;
 
 const SideMenu = styled.section`
-  flex-direction: column;
-  margin-top: 7rem;
-  align-items: center;
-  position: absolute;
   width: 8rem;
   right: 10rem;
   line-height: 4rem;

@@ -67,7 +67,7 @@ const PopularPostList = () => {
                     key={el.postId}
                     style={{ borderBottom: 'none' }}
                   >
-                    <PopularPostItemId>{el.postId}</PopularPostItemId>
+                    <PopularPostItemId>{index + 1}</PopularPostItemId>
                     <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
                   </PopularPostItemBox>
                 );
@@ -78,7 +78,7 @@ const PopularPostList = () => {
                     themeColorObject={themeColorObject}
                     key={el.postId}
                   >
-                    <PopularPostItemId>{el.postId}</PopularPostItemId>
+                    <PopularPostItemId>{index + 1}</PopularPostItemId>
                     <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
                   </PopularPostItemBox>
                 );
