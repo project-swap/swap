@@ -13,7 +13,7 @@ const TypeComponent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 6x00;
+  font-weight: 600;
 `;
 
 const Type = ({ type }: propsType) => {
