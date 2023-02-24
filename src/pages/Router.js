@@ -17,7 +17,7 @@ import NotFound from './NotFound';
 import SignUp from './SignUp';
 import Search from './Search';
 import Register from './Register';
-import Swap from './Swap';
+import SalesProduct from './SalesProduct';
 import Mypage from './my_page/Mypage';
 import Loader from './Loader';
 import UserChatting from './UserChatting';
@@ -26,6 +26,8 @@ import LocationSetting from './my_page/LocationSetting';
 import BookMarkPage from './my_page/BookMarkPage';
 import Profile from './my_page/Profile';
 import Test from './Test';
+import DetailPage from './DetailPage';
+import Follow from './Follow';
 import UserChattingList from './UserChattingList';
 import ExchangeHistory from './my_page/ExchangeHistory';
 
@@ -49,9 +51,11 @@ const Router = () => {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />
-                <Route path="/product-list" element={<Swap />} />
+                <Route path="/product-list" element={<SalesProduct />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/chat-user:id" element={<UserChatting />} />
+                <Route path="/chat-user/:id" element={<UserChatting />} />
+                <Route path="/detail/:postId" element={<DetailPage />} />
+                <Route path="/follow" element={<Follow />} />
                 <Route path="/chat-list" element={<UserChattingList />} />
                 <Route path="/locationsetting" element={<LocationSetting />} />
                 <Route path="/bookmark" element={<BookMarkPage />} />

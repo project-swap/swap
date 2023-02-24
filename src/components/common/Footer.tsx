@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import ThemeBtn from '../main/ThemeBtn';
+import ThemeBtn from '../Main/ThemeBtn';
 import { useRecoilValue } from 'recoil';
 import { themeColor, darkModeToggle } from '../../atoms/atoms';
 
@@ -35,60 +35,78 @@ const FooterContainer = styled.footer<Theme>`
     props.themeMode
       ? props.themeColorObject.darkNavAndFooter
       : props.themeColorObject.lightNavAndFooter};
+  border-top: ${props =>
+    props.themeMode
+      ? `solid ${props.themeColorObject.darkLine} 1px`
+      : `solid ${props.themeColorObject.lightLine} 1px`};
+`;
+
+const ContentWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 60rem;
+  height: inherit;
 `;
 
 const EmailAndNameBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.88rem;
-  margin-bottom: 2.69rem;
+  width: 12rem;
 `;
 
 const ProjectName = styled.span`
+  margin-top: 2rem;
   font-size: 1.5rem;
   font-weight: bold;
-  padding-top: 1rem;
 `;
 
 const ProjectEmail = styled.span`
-  font-size: 0.88rem;
-  font-weight: bold;
+  margin: 0.5rem 0 1.2rem;
+  font-size: 0.8rem;
 `;
 
 const CreaterContainer = styled.div`
   display: flex;
-  gap: 4.5rem;
-  margin-right: 8.13rem;
-  margin-left: 9.38rem;
-  margin-bottom: 3rem;
+  justify-content: space-between;
+  width: 25rem;
+  height: inherit;
+  padding-left: 3rem;
 `;
 
 const CreaterBox = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  width: 4rem;
+  height: 3.2rem;
+  margin-top: 2rem;
 `;
 
 const Creater = styled.span`
+  display: flex;
+  justify-content: center;
   font-size: 1.25rem;
   font-weight: bold;
 `;
 
 const CreaterIconsBox = styled.div`
   display: flex;
-  gap: 0.25rem;
+  justify-content: space-between;
+  margin: 0 0.25rem;
+  opacity: 0.9;
 `;
 
 const LinkBtnList = styled.div`
   display: flex;
-  width: 6.88rem;
+  justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-right: 9.88rem;
+  width: 16rem;
+  height: 4rem;
+  padding-top: 2rem;
 `;
 
 const LinkBtn = styled.span<Theme>`
+  padding-right: 2rem;
   font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
@@ -157,48 +175,50 @@ function Footer() {
         themeMode={themeMode}
         themeColorObject={themeColorObject}
       >
-        <EmailAndNameBox>
-          <ProjectName>SWAP</ProjectName>
-          <ProjectEmail>Email: noreplyswap@email.org</ProjectEmail>
-          <ThemeBtn />
-        </EmailAndNameBox>
-        <CreaterContainer>
-          {userData.map(el => {
-            return (
-              <div key={`unique${el.name}`}>
-                <CreaterBox>
-                  <Creater>{el.name}</Creater>
-                  <CreaterIconsBox>
-                    <BsGithub
-                      style={{ fontSize: '1rem', cursor: 'pointer' }}
-                      onClick={() => window.open(`${el.githubUrl}`, '_blank')}
-                    />
-                    <FaBloggerB
-                      style={{ fontSize: '1rem', cursor: 'pointer' }}
-                      onClick={() => window.open(`${el.blogUrl}`, '_blank')}
-                    />
-                  </CreaterIconsBox>
-                </CreaterBox>
-              </div>
-            );
-          })}
-        </CreaterContainer>
-        <LinkBtnList>
-          {routeList.map(el => {
-            return (
-              <div key={`unique${el.id}`}>
-                <Link to="/" style={linkStyle}>
-                  <LinkBtn
-                    themeMode={themeMode}
-                    themeColorObject={themeColorObject}
-                  >
-                    {el.name}
-                  </LinkBtn>
-                </Link>
-              </div>
-            );
-          })}
-        </LinkBtnList>
+        <ContentWrap>
+          <EmailAndNameBox>
+            <ProjectName>SWAP</ProjectName>
+            <ProjectEmail>Email: noreplyswap@email.org</ProjectEmail>
+            <ThemeBtn />
+          </EmailAndNameBox>
+          <CreaterContainer>
+            {userData.map(el => {
+              return (
+                <div key={`unique${el.name}`}>
+                  <CreaterBox>
+                    <Creater>{el.name}</Creater>
+                    <CreaterIconsBox>
+                      <BsGithub
+                        style={{ fontSize: '1.2rem', cursor: 'pointer' }}
+                        onClick={() => window.open(`${el.githubUrl}`, '_blank')}
+                      />
+                      <FaBloggerB
+                        style={{ fontSize: '1.2rem', cursor: 'pointer' }}
+                        onClick={() => window.open(`${el.blogUrl}`, '_blank')}
+                      />
+                    </CreaterIconsBox>
+                  </CreaterBox>
+                </div>
+              );
+            })}
+          </CreaterContainer>
+          <LinkBtnList>
+            {routeList.map(el => {
+              return (
+                <div key={`unique${el.id}`}>
+                  <Link to="/" style={linkStyle}>
+                    <LinkBtn
+                      themeMode={themeMode}
+                      themeColorObject={themeColorObject}
+                    >
+                      {el.name}
+                    </LinkBtn>
+                  </Link>
+                </div>
+              );
+            })}
+          </LinkBtnList>
+        </ContentWrap>
       </FooterContainer>
     </>
   );

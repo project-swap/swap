@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledProductCardFrame = styled.li`
+interface ProductCardFrameProps {
+  children: React.ReactNode;
+  width?: string;
+  height?: string;
+  border?: string;
+  borderRadius?: string;
+  margin?: string;
+}
+
+const StyledProductCardFrame = styled.li<ProductCardFrameProps>`
   width: ${props => props.width}; // props
   height: ${props => props.height}; // props
   border: ${props => props.border}; // props
@@ -32,7 +41,7 @@ const ProductCardFrame = ({
   border,
   borderRadius,
   margin,
-}) => {
+}: ProductCardFrameProps): React.ReactNode => {
   return (
     <StyledProductCardFrame
       width={width}

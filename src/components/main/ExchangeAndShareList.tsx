@@ -2,25 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import SectionTitle from './SectionTitle';
 import ProductImg from '../common/product_card/ProductImg';
+import { linkStyle } from '../../styles/linkStyle';
 // import SalesTitle from '../common/ProductCard/SalesTitle';
 
 import { useRecoilValue } from 'recoil';
-import { getTest, darkModeToggle } from '../../atoms/atoms';
+import { data, darkModeToggle } from '../../atoms/atoms';
+import { Link } from 'react-router-dom';
 
 interface IExchangeAndShareItem {
   darkMode: boolean;
-}
-
-interface IContent {
-  id: number;
-  title: string;
-  content: string;
-  hash_tag: string[];
-  name: string;
-  date: string;
-  category?: string;
-  productImgUrl?: string;
-  profileImgUrl?: string;
 }
 
 const Container = styled.section`
@@ -50,23 +40,26 @@ const ExchangeAndShareItem = styled.div<IExchangeAndShareItem>`
 const ExchangeAndShareItemCategory = styled.div`
   margin-top: 0.5rem;
   margin-bottom: 0.3rem;
+  text-align: center;
+  font-weight: 600;
+  color: black;
 `;
 
 const ExchangeAndShareList = () => {
-  const data = useRecoilValue(getTest);
+  const postData = useRecoilValue(data);
   const darkMode = useRecoilValue(darkModeToggle);
 
-  const contents = data.map<IContent>(content => {
+  const contents = postData.map(content => {
     return {
-      id: content.id,
+      postId: content.postId,
       title: content.title,
       content: content.content,
       hash_tag: content.hash_tag,
       name: content.name,
       date: content.date,
-      category: '교환',
-      productImgUrl: 'https://url.kr/quav97',
-      profileImgUrl:
+      type: content.type,
+      imgUrl: content.imgUrl[0].url,
+      profileImg:
         'https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg',
     };
   });
@@ -78,23 +71,26 @@ const ExchangeAndShareList = () => {
           titleName={'교환/나눔 물품 리스트'}
           border={''}
           titleMargin={0}
+          href={'/product-list'}
         />
         <ExchangeAndShareListContainer>
           {contents.map((content, index: number) => {
             return index < 6 ? (
-              <ExchangeAndShareItem darkMode={darkMode} key={index}>
-                <ProductImg
-                  url={content.productImgUrl}
-                  width={'6rem'}
-                  height={'5rem'}
-                />
-                <ExchangeAndShareItemContents>
-                  <ExchangeAndShareItemCategory>
-                    {content.category}
-                  </ExchangeAndShareItemCategory>
-                  {/* <SalesTitle marginBottom={'0.4rem'} title={content.title} /> */}
-                </ExchangeAndShareItemContents>
-              </ExchangeAndShareItem>
+              <Link to={`/detail/${content.postId}`} style={linkStyle}>
+                <ExchangeAndShareItem darkMode={darkMode} key={index}>
+                  <ProductImg
+                    url={content.imgUrl}
+                    width={'6rem'}
+                    height={'5rem'}
+                  />
+                  <ExchangeAndShareItemContents>
+                    <ExchangeAndShareItemCategory>
+                      {content.type}
+                    </ExchangeAndShareItemCategory>
+                    {/* <SalesTitle marginBottom={'0.4rem'} title={content.title} /> */}
+                  </ExchangeAndShareItemContents>
+                </ExchangeAndShareItem>
+              </Link>
             ) : null;
           })}
         </ExchangeAndShareListContainer>

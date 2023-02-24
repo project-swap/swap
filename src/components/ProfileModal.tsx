@@ -2,12 +2,12 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { IoMdCloudUpload } from 'react-icons/io';
-import { ChildrenProps } from '../utils/utils';
 // import {
 //   getStorage,
 //   ref,
 //   uploadBytesResumable,
 //   getDownloadURL,
+//   deleteObject,
 // } from 'firebase/storage';
 
 const Form = styled.form`
@@ -35,11 +35,6 @@ const ProfileEdit = styled.span`
   bottom: 2rem;
 `;
 
-interface ModalCloseProps extends ChildrenProps {
-  width: number;
-  height: number;
-  onClick?: () => void;
-}
 const Modal = styled.section`
   width: 30rem;
   height: 24rem;
@@ -131,61 +126,61 @@ const PreviewInnerImage = styled.div`
   display: none;
 `;
 
-const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
+interface CloseProps {
+  closeEvent: () => void;
+}
+
+const ProfileModal = ({ closeEvent }: CloseProps) => {
   const [attachment, setAttachment] = useState<string | ArrayBuffer | null>(
     null,
   );
   const fileRef = useRef<HTMLDivElement | null>(null);
+  const [file, setFile] = useState<FileList | null>();
 
-  // const storage = getStorage();
-  // const uniqueKey = new Date().getTime();
+  const storage = getStorage();
+  const uniqueKey = new Date().getTime();
 
-  // const saveToFirebaseStorage = (file: File) => {
-  //   const newName = file.name
-  //     .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
-  //     .split(' ')
-  //     .join('');
+  const saveToFirebaseStorage = (file: File) => {
+    const newName = file.name
+      .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
+      .split(' ')
+      .join('');
 
-  //   const metaData = {
-  //     contentType: file.type,
-  //   };
+    const metaData = {
+      contentType: file.type,
+    };
 
-  //   const storageRef = ref(storage, `images/${newName + uniqueKey}`);
+    const storageRef = ref(storage, `images/${newName + uniqueKey}`);
 
-  //   const uploadTask = uploadBytesResumable(storageRef, file, metaData);
-  //   uploadTask.on(
-  //     'state_changed',
-  //     snapshot => {
-  //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //     },
-  //     () => {
-  //       getDownloadURL(uploadTask.snapshot.ref).then(downloadurl => {
-  //         console.log(`완료:${downloadurl}`);
-  //       });
-  //     },
-  //   );
-  // };
+    const uploadTask = uploadBytesResumable(storageRef, file, metaData);
+    uploadTask.on(
+      'state_changed',
+      snapshot => {
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(downloadurl => {
+          console.log(`완료:${downloadurl}`);
+        });
+      },
+    );
+  };
 
-  // const deleteFile = (file: File) => {
-  //   console.log(file.name);
-  //   const newName = file.name
-  //     .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
-  //     .split(' ')
-  //     .join('');
+  const deleteFile = (file: any) => {
+    const newName = file.name
+      .replace(/[~`!#$%^&*+=\-[\]\\';,/{}()|\\":<>?]/g, '')
+      .split(' ')
+      .join('');
 
-  //   const desertRef = ref(storage, `images/${newName + uniqueKey}`);
-  //   console.log(
-  //     '🚀 ~ file: ProfileModal.tsx:179 ~ deleteFile ~ desertRef',
-  //     desertRef,
-  //   );
-  //   deleteObject(desertRef)
-  //     .then(() => {
-  //       console.log(`delete success`);
-  //     })
-  //     .catch(error => {
-  //       console.log(`delete ${error}`);
-  //     });
-  // };
+    const desertRef = ref(storage, `images/${newName + uniqueKey}`);
+    deleteObject(desertRef)
+      .then(() => {
+        console.log(`delete success`);
+      })
+      .catch(error => {
+        console.log(`delete ${error}`);
+      });
+  };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -193,6 +188,7 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
       target: { files },
     } = event;
 
+    setFile(files);
     if (!files) return null;
     const theFile = files[0];
     const reader = new FileReader();
@@ -205,7 +201,7 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
     };
 
     reader.readAsDataURL(theFile);
-    // saveToFirebaseStorage(theFile);
+    saveToFirebaseStorage(theFile);
   };
 
   const handleFileButtonClick = (
@@ -218,8 +214,8 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
   return (
     <Modal>
       <ProfileEdit>프로필 사진 변경</ProfileEdit>
-      <IoClose className="hover" onClick={onClick} />
-      {children}
+      {/*여기 onClick 다시 확인.*/}
+      <IoClose className="hover" onClick={closeEvent} />
       <ProfileDivider />
       <PreviewOuterImage src={attachment?.toString()} />
       <PreviewImageContainer>
@@ -241,8 +237,12 @@ const ProfileModal = ({ children, onClick }: ModalCloseProps) => {
             accept="image/*" //이미지 파일만 허용
           />
         </ImageMessageContainer>
-        <button onClick={handleFileButtonClick}>Upload</button>
-        {/* <button onClick={deleteFile}>Delete</button> */}
+        <div style={{ display: 'flex' }}>
+          <button onClick={handleFileButtonClick}>Upload</button>
+          <button type="button" onClick={() => deleteFile(file)}>
+            Delete
+          </button>
+        </div>
       </Form>
     </Modal>
   );

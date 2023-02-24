@@ -1,9 +1,7 @@
 import React from 'react';
 import SideBar from '../../components/SideBar';
-import ContentChildren from '../../components/ContentChildren';
 import MainContainer from '../../components/common/MainContainer';
 import styled from 'styled-components';
-import ReportHistoryChildren from '../../components/ReportHistoryChildren';
 
 const SwapContainer = styled.div`
   display: flex;
@@ -20,18 +18,30 @@ export const Title = styled.h3`
   top: -3rem;
   right: 8rem;
 `;
+const ExchangeContainer = styled.main`
+  display: flex;
+  width: 90%;
+  position: relative;
+  justify-content: space-evenly;
+  top: 3rem;
+`;
+
+const Content = styled.h4`
+  margin: 12rem auto;
+  opacity: 0.4;
+`;
 
 const ReportHistory = () => {
   return (
     <SwapContainer>
       <SideBar />
       <MainContainer>
-        <ReportHistoryChildren>
+        <ExchangeContainer>
           <Title>신고내역</Title>
-        </ReportHistoryChildren>
-        <ContentChildren>
+        </ExchangeContainer>
+        <Content>
           <span>신고 목록이 없습니다.</span>
-        </ContentChildren>
+        </Content>
       </MainContainer>
     </SwapContainer>
   );

@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { getTest } from '../../atoms/atoms';
+import { filterData } from '../../atoms/atoms';
 import ProductImg from '../common/product_card/ProductImg';
 import ProfileImg from '../common/product_card/ProfileImg';
 import SalesTitle from '../common/product_card/SalesTitle';
 import SellerName from '../common/product_card/SellerName';
 import PostingTime from '../common/product_card/PostingTime';
 import ArticlePreview from '../common/product_card/ArticlePreview';
+import { useNavigate } from 'react-router';
 
 const SalesProductCardFrame = styled.li`
   width: 23%;
@@ -39,19 +40,20 @@ const SalesProductInfo = styled.div`
 `;
 
 const SalesProductCard = () => {
-  const data = useRecoilValue(getTest);
+  const filteredData = useRecoilValue(filterData);
 
-  const contents = data.map(content => {
+  const navigate = useNavigate();
+
+  const contents = filteredData.map(content => {
     return {
-      key: content.id,
+      key: content.postId,
       title: content.title,
       content: content.content,
-      hash: content.hash_tag,
       name: content.name,
       date: content.date,
-      productImgUrl: 'https://url.kr/quav97',
-      profileImgUrl:
-        'https://dimg.donga.com/wps/NEWS/IMAGE/2003/06/12/6896662.1.jpg',
+      convertDate: content.convertDate,
+      productImgUrl: content.imgUrl[0].url,
+      profileImgUrl: content.profileImg,
     };
   });
 
@@ -59,7 +61,12 @@ const SalesProductCard = () => {
     <>
       {contents.map(content => {
         return (
-          <SalesProductCardFrame key={content.key}>
+          <SalesProductCardFrame
+            key={content.key}
+            onClick={() => {
+              navigate(`/detail/${content.key}`);
+            }}
+          >
             <ProductImg url={content.productImgUrl} />
             <SalesProductInfo>
               <SummaryInfo>
@@ -67,7 +74,10 @@ const SalesProductCard = () => {
                 <div>
                   <SalesTitle title={content.title} />
                   <SellerName name={content.name} />
-                  <PostingTime date={content.date} />
+                  <PostingTime
+                    convertDate={content.convertDate}
+                    date={content.date}
+                  />
                 </div>
               </SummaryInfo>
               <ArticlePreview content={content.content} />

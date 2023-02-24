@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import { ChildrenProps } from '../utils/utils';
 
 const Container = styled.main`
   display: flex;
@@ -10,8 +9,8 @@ const Container = styled.main`
   top: 3rem;
 `;
 
-const BookMarkContainerChildren = ({ children }: ChildrenProps) => {
-  return <Container>{children}</Container>;
+const BookMarkContainerChildren = () => {
+  return <Container></Container>;
 };
 
 export default BookMarkContainerChildren;
