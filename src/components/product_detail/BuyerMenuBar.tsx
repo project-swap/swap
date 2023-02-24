@@ -1,6 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { getAuth } from 'firebase/auth';
+import { Link } from 'react-router-dom';
+
+interface DataProps {
+  uid?: string | undefined;
+  postId?: string | undefined;
+}
 
 const StyledBuyerMenuBar = styled.div`
   display: flex;
@@ -29,15 +36,30 @@ const StyledBookmarkBtn = styled(StyledBtn)`
 const StyledChattingBtn = styled(StyledBtn)`
   font-size: 1.5rem;
   border-bottom-right-radius: 0.4rem;
+  width: 100%;
 `;
 
-const BuyerMenuBar = () => {
+const BuyerMenuBar = ({ uid, postId }: DataProps) => {
+  const auth = getAuth().currentUser;
+  console.log(postId);
+  console.log(`${auth?.uid}-${uid}`);
   return (
     <StyledBuyerMenuBar>
       <StyledBookmarkBtn>
         <AiOutlineHeart />
       </StyledBookmarkBtn>
-      <StyledChattingBtn>채팅하기</StyledChattingBtn>
+      {uid === auth?.uid ? (
+        <>
+          <StyledChattingBtn>수정하기</StyledChattingBtn>
+        </>
+      ) : (
+        <Link
+          to={`/chat-user/${auth?.uid}-${uid}`}
+          style={{ width: '100%', height: '100%' }}
+        >
+          <StyledChattingBtn>채팅하기</StyledChattingBtn>
+        </Link>
+      )}
     </StyledBuyerMenuBar>
   );
 };

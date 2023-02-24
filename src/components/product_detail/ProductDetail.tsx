@@ -49,11 +49,11 @@ const ProductDetail = () => {
   const productData = useRecoilValue(data);
   const { postId } = useParams();
 
-  const currentDatArr = productData.filter(
+  const currentDataArr = productData.filter(
     item => item.postId === String(postId),
   );
 
-  const currentData = currentDatArr[0];
+  const currentData = currentDataArr[0];
 
   const increaseImgIndex = () => {
     if (imageIndex === currentData.imgUrl.length - 1) {
@@ -100,7 +100,7 @@ const ProductDetail = () => {
           content={currentData.content}
           hash_tag={currentData.hash_tag}
         />
-        <BuyerMenuBar />
+        <BuyerMenuBar uid={currentData.uid} postId={currentData.postId} />
       </StyledContentField>
     </ProductDetailComponent>
   );
