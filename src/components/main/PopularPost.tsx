@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { getTest, themeColor, darkModeToggle } from '../../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 import SectionTitle from './SectionTitle';
+import { Link } from 'react-router-dom';
+import { linkStyle } from '../../styles/linkStyle';
 
 interface Theme {
   themeMode: boolean;
@@ -61,26 +63,32 @@ const PopularPostList = () => {
             if (index < 7) {
               if (index === 6)
                 return (
-                  <PopularPostItemBox
-                    themeMode={themeMode}
-                    themeColorObject={themeColorObject}
-                    key={el.postId}
-                    style={{ borderBottom: 'none' }}
-                  >
-                    <PopularPostItemId>{el.date}</PopularPostItemId>
-                    <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
-                  </PopularPostItemBox>
+                  <Link to={`/detail/${el.postId}`} style={linkStyle}>
+                    <PopularPostItemBox
+                      themeMode={themeMode}
+                      themeColorObject={themeColorObject}
+                      key={el.postId}
+                      style={{ borderBottom: 'none' }}
+                    >
+                      <PopularPostItemId>{el.date}</PopularPostItemId>
+
+                      <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
+                    </PopularPostItemBox>
+                  </Link>
                 );
               else
                 return (
-                  <PopularPostItemBox
-                    themeMode={themeMode}
-                    themeColorObject={themeColorObject}
-                    key={el.postId}
-                  >
-                    <PopularPostItemId>{el.date}</PopularPostItemId>
-                    <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
-                  </PopularPostItemBox>
+                  <Link to={`/detail/${el.postId}`} style={linkStyle}>
+                    <PopularPostItemBox
+                      themeMode={themeMode}
+                      themeColorObject={themeColorObject}
+                      key={el.postId}
+                    >
+                      <PopularPostItemId>{el.date}</PopularPostItemId>
+
+                      <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
+                    </PopularPostItemBox>
+                  </Link>
                 );
             }
           })}
