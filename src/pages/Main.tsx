@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { themeColor, darkModeToggle } from '../atoms/atoms';
 
 // import Components
-import SectionContainer from '../components/Main/SectionContainer';
+import SectionContainer from '../components/main/SectionContainer';
 
 // components import
 import NavBar from '../components/common/NavBar';
