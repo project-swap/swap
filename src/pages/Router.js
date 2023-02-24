@@ -30,6 +30,7 @@ import DetailPage from './DetailPage';
 import Follow from './Follow';
 import UserChattingList from './UserChattingList';
 import ExchangeHistory from './my_page/ExchangeHistory';
+import WIP from './WIP';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -62,6 +63,7 @@ const Router = () => {
                 <Route path="/exchangehistory" element={<ExchangeHistory />} />
                 <Route path="/report" element={<ReportHistory />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/WIP" element={<WIP />} />
                 <Route path="/test" element={<Test />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
