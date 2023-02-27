@@ -51,7 +51,7 @@ const Modal = styled.section`
   background-color: #fff;
   border: 0.1rem solid #000;
   border-radius: 0.5rem;
-  z-index: 1;
+  z-index: 9999;
   position: fixed;
 `;
 
@@ -227,7 +227,6 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
       <Modal>
         <ModalContainer>
           <ProfileEdit>프로필 사진 변경</ProfileEdit>
-          {/*여기 onClick 다시 확인.*/}
           <CloseButton onClick={closeEvent} />
         </ModalContainer>
         <Separator />
