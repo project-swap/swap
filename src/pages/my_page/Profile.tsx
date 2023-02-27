@@ -20,10 +20,9 @@ export const PageWrap = styled.div`
 `;
 
 const Info = styled.section`
-  margin-top: 2rem;
-  margin-left: 1rem;
+  margin: 2rem 0 0 1rem;
   flex-direction: column;
-  line-height: 1.5rem;
+  line-height: 2rem;
   h2 {
     font-weight: 600;
   }
@@ -100,14 +99,16 @@ const Line = styled.div`
 
 const Label = styled.label`
   display: flex;
-  justify-content: start;
+  margin-bottom: 1rem;
   font-weight: 600;
 `;
 
 const StyleContainer = styled.div`
-  display: flex;
   input {
     display: flex;
+    height: 3rem;
+    padding-left: 1rem;
+    margin: 0.5rem 0;
   }
   position: relative;
 `;
@@ -120,8 +121,8 @@ const Button = styled.button`
   height: 2rem;
   cursor: pointer;
   position: absolute;
-  right: 15rem;
-  top: 0.7rem;
+  right: 14.5rem;
+  top: 1.2rem;
   &:hover {
     opacity: 0.7;
   }
@@ -135,12 +136,9 @@ const Form = styled.form`
 const ErrorMessage = styled.p`
   font-weight: bold;
   color: red;
-  margin: -2rem 0 1rem 10rem;
-`;
-
-const SuccessMessage = styled.p`
-  font-weight: bold;
-  color: green;
+  display: flex;
+  height: 2rem;
+  align-items: center;
 `;
 
 const NickNameInput = styled.div`
@@ -155,7 +153,6 @@ const UserInformationForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  row-gap: 1rem;
 `;
 
 interface NickNameProps {
@@ -165,14 +162,17 @@ interface NickNameProps {
 const Profile = () => {
   const [isOpen, setIsOpen] = useRecoilState(profileImage);
   const userObj = sessionUserData();
+
+  const { providerId } = userObj.providerData[0];
+
   const [nickName, setNickName] = useState(userObj.displayName);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitted },
+    formState: { errors },
     setValue,
-  } = useForm<NickNameProps>({ mode: 'onChange' }); // mode: 'onChange' => 사용자에게 실시간으로 피드백 제공
+  } = useForm<NickNameProps>({ mode: 'onChange' });
 
   const onValid = async ({ nickName }: NickNameProps) => {
     const auth = getAuth();
@@ -226,6 +226,7 @@ const Profile = () => {
                 <StyleContainer>
                   <input
                     type="text"
+                    autoComplete="off"
                     {...register('nickName', {
                       required: true,
                       minLength: 2,
@@ -233,29 +234,29 @@ const Profile = () => {
                       pattern: /([0-9a-zA-Z가-힣\x20])/i, //초성 미포함
                     })}
                   />
-                  {errors.nickName?.type === 'pattern' ? (
-                    <ErrorMessage>초성은 불가능합니다.</ErrorMessage>
+                  {errors ? (
+                    <ErrorMessage>
+                      {(() => {
+                        switch (errors.nickName?.type) {
+                          case 'minLength':
+                            return '최소 2글자 이상 입력해주세요.';
+                          case 'maxLength':
+                            return '닉네임은 최대 5글자입니다.';
+                          case 'pattern':
+                            return '초성은 불가능합니다.';
+                          default:
+                            return null;
+                        }
+                      })()}
+                    </ErrorMessage>
                   ) : null}
                   <Button type="submit">수정</Button>
                 </StyleContainer>
-                {errors ? (
-                  <ErrorMessage>
-                    {errors.nickName?.type === 'minLength' ? (
-                      <span>최소 2글자 이상 입력해야 합니다.</span>
-                    ) : (
-                      errors.nickName?.type === 'maxLength' && (
-                        <span>닉네임은 최대 5글자입니다.</span>
-                      )
-                    )}
-                  </ErrorMessage>
-                ) : isSubmitted ? (
-                  <SuccessMessage>성공적으로 수정했습니다!</SuccessMessage>
-                ) : null}
                 <Label htmlFor="email">이메일</Label>
                 <StyleContainer>
                   <input
                     type="email"
-                    defaultValue="noreply@naver.com"
+                    defaultValue={userObj.email || 'noreply@naver.com'}
                     disabled
                   />
                 </StyleContainer>
@@ -265,7 +266,7 @@ const Profile = () => {
                 </StyleContainer>
                 <Label htmlFor="social">소셜</Label>
                 <StyleContainer>
-                  <input type="text" defaultValue="구글 가입 회원" disabled />
+                  <input type="text" defaultValue={providerId} disabled />
                 </StyleContainer>
               </UserInformationForm>
             </Form>
