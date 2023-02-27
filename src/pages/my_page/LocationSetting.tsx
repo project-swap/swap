@@ -81,12 +81,11 @@ const LocationSetting = () => {
               <h3>자취방[main]</h3>
               <h3>서울특별시 강남구 논현동</h3>
             </CheckBox>
-            <CheckBox>
-              <AiOutlinePlusCircle className="icon" size={30} />
-            </CheckBox>
-            <CheckBox>
-              <AiOutlinePlusCircle className="icon" size={30} />
-            </CheckBox>
+            {new Array(2).fill(1).map((_, i) => (
+              <CheckBox key={i}>
+                <AiOutlinePlusCircle className="icon" size={30} />
+              </CheckBox>
+            ))}
           </CheckBoxContainer>
         </MainContainer>
       </LocationContainer>
