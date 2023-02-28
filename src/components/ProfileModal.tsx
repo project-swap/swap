@@ -208,7 +208,47 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
       });
   };
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const readImageFile = (file: File): Promise<string | null> => {
+    return new Promise<string | null>(async resolve => {
+      // 파일을 읽어들이고 base64로 변환하는 코드
+      const reader = new FileReader();
+      reader.onload = (onLoadEvent: ProgressEvent<FileReader>) => {
+        const { currentTarget } = onLoadEvent;
+        // currentTarget이 FileReader에 들어있는지 확인
+        // 그렇지 않으면 resolve를 null 값으로 처리하여 이행
+        if (currentTarget instanceof FileReader) {
+          const { result } = currentTarget;
+          resolve((result as string) || null);
+        } else resolve(null);
+      };
+      reader.readAsDataURL(file);
+
+      // 파일 읽기 작업이 완료될때까지 기다리기
+      try {
+        await new Promise<void>(resolve => {
+          reader.onloadend = () => {
+            resolve();
+          };
+        });
+      } catch (error) {
+        resolve(null);
+      }
+    });
+  };
+
+  const uploadImageToFirebase = (file: File) => {
+    saveToFirebaseStorage(file);
+  };
+
+  const handleFileUpload = async (file: File) => {
+    const result = await readImageFile(file);
+    if (result !== null) {
+      setAttachment(result);
+      uploadImageToFirebase(file);
+    }
+  };
+
+  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const {
       target: { files },
@@ -217,17 +257,8 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
     setFile(files);
     if (!files) return null;
     const theFile = files[0];
-    const reader = new FileReader();
-    reader.onload = (onLoadEvent: ProgressEvent<FileReader>) => {
-      const { currentTarget } = onLoadEvent;
-      if (currentTarget instanceof FileReader) {
-        const { result } = currentTarget;
-        if (result !== null) setAttachment(result);
-      }
-    };
 
-    reader.readAsDataURL(theFile);
-    saveToFirebaseStorage(theFile);
+    await handleFileUpload(theFile);
 
     // 파일을 올리면 해당 파일 이름이 보이도록 함
     const fileName = theFile.name;
