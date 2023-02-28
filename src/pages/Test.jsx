@@ -34,6 +34,7 @@ const Title = styled.h2`
 const Test = () => {
   const userData = useRecoilValue(userInfo);
   const [loading, setLoading] = useState(false);
+  console.log(userData);
   useEffect(() => {
     if (userData) {
       setLoading(true);
