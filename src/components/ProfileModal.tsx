@@ -29,9 +29,9 @@ const Form = styled.form`
 const ImageMessageContainer = styled.section`
   width: 110%;
   height: 5rem;
-  margin-top: 1rem;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const ProfileEdit = styled.span`
@@ -87,10 +87,14 @@ const PreviewImgPositionWrap = styled.div`
 
 const Label = styled.label`
   .cloud {
-    z-index: 1;
-    width: 1.5rem;
-    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    width: 200%;
+    height: 70%;
     cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
   }
 `;
 
@@ -137,6 +141,16 @@ const Separator = styled.div`
   display: block;
   margin: 1rem auto;
 `;
+
+const ClickButton = styled.button`
+  margin-right: 0.5rem;
+`;
+
+const ButtonContainer = styled.div``;
+
+const ImageUploadMessageContainer = styled.div`
+  display: flex;
+`;
 interface CloseProps {
   closeEvent: () => void;
 }
@@ -145,6 +159,7 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
   const [attachment, setAttachment] = useState<string | ArrayBuffer | null>(
     null,
   );
+
   const fileRef = useRef<HTMLDivElement | null>(null);
   const [file, setFile] = useState<FileList | null>();
 
@@ -213,6 +228,14 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
 
     reader.readAsDataURL(theFile);
     saveToFirebaseStorage(theFile);
+
+    // 파일을 올리면 해당 파일 이름이 보이도록 함
+    const fileName = theFile.name;
+    const input = document.getElementById(
+      'image-message-input',
+    ) as HTMLInputElement;
+
+    if (input) input.placeholder = fileName;
   };
 
   const handleFileButtonClick = (
@@ -242,21 +265,17 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
           </PreviewImgPositionWrap>
           <Form>
             <ImageMessageContainer>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  gap: '1rem',
-                }}
-              >
+              <ImageUploadMessageContainer>
                 <ImageMessageInput
+                  id="image-message-input"
                   type="text"
                   placeholder="이미지를 업로드하세요."
+                  disabled
                 />
                 <Label htmlFor="file-input">
                   <IoMdCloudUpload className="cloud" />
                 </Label>
-              </div>
+              </ImageUploadMessageContainer>
 
               <ImageInputUpload
                 onChange={onChange}
@@ -266,21 +285,12 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
               />
             </ImageMessageContainer>
 
-            <div>
-              <button
-                onClick={handleFileButtonClick}
-                style={{ marginRight: '0.5rem' }}
-              >
-                Upload
-              </button>
-              <button
-                style={{ marginLeft: '0.5rem' }}
-                type="button"
-                onClick={() => deleteFile(file)}
-              >
+            <ButtonContainer>
+              <ClickButton onClick={handleFileButtonClick}>Upload</ClickButton>
+              <ClickButton type="button" onClick={() => deleteFile(file)}>
                 Delete
-              </button>
-            </div>
+              </ClickButton>
+            </ButtonContainer>
           </Form>
         </ProfileWrap>
       </Modal>
