@@ -176,8 +176,9 @@ const Profile = () => {
 
   const onValid = async ({ nickName }: NickNameProps) => {
     const auth = getAuth();
-    if (auth.currentUser) {
-      await updateProfile(auth.currentUser, {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      await updateProfile(currentUser, {
         displayName: nickName,
       });
       setNickName(nickName);
@@ -266,7 +267,13 @@ const Profile = () => {
                 </StyleContainer>
                 <Label htmlFor="social">소셜</Label>
                 <StyleContainer>
-                  <input type="text" defaultValue={providerId} disabled />
+                  <input
+                    type="text"
+                    defaultValue={
+                      providerId === 'google.com' ? '구글' : '깃허브'
+                    }
+                    disabled
+                  />
                 </StyleContainer>
               </UserInformationForm>
             </Form>
