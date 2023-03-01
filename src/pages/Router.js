@@ -18,7 +18,6 @@ import SignUp from './SignUp';
 import Search from './Search';
 import Register from './Register';
 import SalesProduct from './SalesProduct';
-import Mypage from './my_page/Mypage';
 import Loader from './Loader';
 import UserChatting from './UserChatting';
 import ReportHistory from './my_page/ReportHistory';
@@ -30,6 +29,7 @@ import DetailPage from './DetailPage';
 import Follow from './Follow';
 import UserChattingList from './UserChattingList';
 import ExchangeHistory from './my_page/ExchangeHistory';
+import WIP from './WIP';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -47,7 +47,6 @@ const Router = () => {
             <Suspense fallback={<Loader />}>
               <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/mypage" element={<Mypage />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />
@@ -62,6 +61,7 @@ const Router = () => {
                 <Route path="/exchangehistory" element={<ExchangeHistory />} />
                 <Route path="/report" element={<ReportHistory />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/WIP" element={<WIP />} />
                 <Route path="/test" element={<Test />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

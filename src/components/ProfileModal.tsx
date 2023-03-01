@@ -11,6 +11,13 @@ import {
 } from 'firebase/storage';
 
 import BackgroundBlur from './BackgroundBlur';
+// import {
+//   getStorage,
+//   ref,
+//   uploadBytesResumable,
+//   getDownloadURL,
+//   deleteObject,
+// } from 'firebase/storage';
 
 const Form = styled.form`
   display: flex;
@@ -22,14 +29,15 @@ const Form = styled.form`
 const ImageMessageContainer = styled.section`
   width: 110%;
   height: 5rem;
-  margin-top: 1rem;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const ProfileEdit = styled.span`
   display: flex;
-  right: 10rem;
+  align-items: center;
+  justify-content: center;
   font-weight: 600;
   font-size: 1rem;
 `;
@@ -37,25 +45,14 @@ const ProfileEdit = styled.span`
 const Modal = styled.section`
   width: 30rem;
   height: 24rem;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #fff;
   border: 0.1rem solid #000;
   border-radius: 0.5rem;
-  z-index: 1;
-  .hover {
-    position: relative;
-    bottom: 3.5rem;
-    left: 14rem;
-    color: #000;
-    font-size: 2rem;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.4;
-    }
-  }
+  z-index: 9999;
+  position: fixed;
 `;
 
 const ProfileWrap = styled.div`
@@ -90,10 +87,14 @@ const PreviewImgPositionWrap = styled.div`
 
 const Label = styled.label`
   .cloud {
-    z-index: 1;
-    width: 1.5rem;
-    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    width: 200%;
+    height: 70%;
     cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
   }
 `;
 
@@ -118,6 +119,38 @@ const PreviewInnerImage = styled.div`
   display: none;
 `;
 
+const ModalContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2rem 0;
+`;
+
+const CloseButton = styled(IoClose)`
+  cursor: pointer;
+  &:hover {
+    opacity: 0.3;
+  }
+  font-size: x-large;
+`;
+
+const Separator = styled.div`
+  width: 80%;
+  height: 1px;
+  background-color: #000;
+  display: block;
+  margin: 1rem auto;
+`;
+
+const ClickButton = styled.button`
+  margin-right: 0.5rem;
+`;
+
+const ButtonContainer = styled.div``;
+
+const ImageUploadMessageContainer = styled.div`
+  display: flex;
+`;
 interface CloseProps {
   closeEvent: () => void;
 }
@@ -126,6 +159,7 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
   const [attachment, setAttachment] = useState<string | ArrayBuffer | null>(
     null,
   );
+
   const fileRef = useRef<HTMLDivElement | null>(null);
   const [file, setFile] = useState<FileList | null>();
 
@@ -174,7 +208,47 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
       });
   };
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const readImageFile = (file: File): Promise<string | null> => {
+    return new Promise<string | null>(resolve => {
+      // 파일을 읽어들이고 base64로 변환하는 코드
+      const reader = new FileReader();
+      reader.onload = (onLoadEvent: ProgressEvent<FileReader>) => {
+        const { currentTarget } = onLoadEvent;
+        // currentTarget이 FileReader에 들어있는지 확인
+        // 그렇지 않으면 resolve를 null 값으로 처리하여 이행
+        if (currentTarget instanceof FileReader) {
+          const { result } = currentTarget;
+          resolve((result as string) || null);
+        } else resolve(null);
+      };
+      reader.readAsDataURL(file);
+
+      // 파일 읽기 작업이 완료될때까지 기다리기
+      try {
+        new Promise<void>(resolve => {
+          reader.onloadend = () => {
+            resolve();
+          };
+        });
+      } catch (error) {
+        resolve(null);
+      }
+    });
+  };
+
+  const uploadImageToFirebase = (file: File) => {
+    saveToFirebaseStorage(file);
+  };
+
+  const handleFileUpload = async (file: File) => {
+    const result = await readImageFile(file);
+    if (result !== null) {
+      setAttachment(result);
+      uploadImageToFirebase(file);
+    }
+  };
+
+  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const {
       target: { files },
@@ -183,17 +257,16 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
     setFile(files);
     if (!files) return null;
     const theFile = files[0];
-    const reader = new FileReader();
-    reader.onload = (onLoadEvent: ProgressEvent<FileReader>) => {
-      const { currentTarget } = onLoadEvent;
-      if (currentTarget instanceof FileReader) {
-        const { result } = currentTarget;
-        if (result !== null) setAttachment(result);
-      }
-    };
 
-    reader.readAsDataURL(theFile);
-    saveToFirebaseStorage(theFile);
+    await handleFileUpload(theFile);
+
+    // 파일을 올리면 해당 파일 이름이 보이도록 함
+    const fileName = theFile.name;
+    const input = document.getElementById(
+      'image-message-input',
+    ) as HTMLInputElement;
+
+    if (input) input.placeholder = fileName;
   };
 
   const handleFileButtonClick = (
@@ -206,11 +279,11 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
   return (
     <>
       <Modal>
-        <>
+        <ModalContainer>
           <ProfileEdit>프로필 사진 변경</ProfileEdit>
-          {/*여기 onClick 다시 확인.*/}
-          <IoClose className="hover" onClick={closeEvent} />
-        </>
+          <CloseButton onClick={closeEvent} />
+        </ModalContainer>
+        <Separator />
         <ProfileWrap>
           <PreviewImgPositionWrap>
             <PreviewOuterImage src={attachment?.toString()} />
@@ -223,13 +296,18 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
           </PreviewImgPositionWrap>
           <Form>
             <ImageMessageContainer>
-              <ImageMessageInput
-                type="text"
-                placeholder="이미지를 업로드하세요."
-              />
-              <Label htmlFor="file-input">
-                <IoMdCloudUpload className="cloud" />
-              </Label>
+              <ImageUploadMessageContainer>
+                <ImageMessageInput
+                  id="image-message-input"
+                  type="text"
+                  placeholder="이미지를 업로드하세요."
+                  disabled
+                />
+                <Label htmlFor="file-input">
+                  <IoMdCloudUpload className="cloud" />
+                </Label>
+              </ImageUploadMessageContainer>
+
               <ImageInputUpload
                 onChange={onChange}
                 id="file-input"
@@ -237,15 +315,17 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
                 accept="image/*" //이미지 파일만 허용
               />
             </ImageMessageContainer>
-            <div style={{ display: 'flex' }}>
-              <button onClick={handleFileButtonClick}>Upload</button>
-              <button type="button" onClick={() => deleteFile(file)}>
+
+            <ButtonContainer>
+              <ClickButton onClick={handleFileButtonClick}>Upload</ClickButton>
+              <ClickButton type="button" onClick={() => deleteFile(file)}>
                 Delete
-              </button>
-            </div>
+              </ClickButton>
+            </ButtonContainer>
           </Form>
         </ProfileWrap>
       </Modal>
+
       <BackgroundBlur />
     </>
   );

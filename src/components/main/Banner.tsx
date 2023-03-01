@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SectionTitle from './SectionTitle';
+import banner_04 from '../../assets/banner/banner_04.jpg';
 
 const Container = styled.section`
   display: flex;
@@ -10,10 +11,13 @@ const Container = styled.section`
 `;
 
 const BannerImg = styled.div`
-  width: 12.75rem;
-  height: 8.5rem;
-  background-color: pink;
+  width: 13rem;
+  height: 12rem;
   margin-right: 1rem;
+  img {
+    width: inherit;
+    height: inherit;
+  }
 `;
 
 const Banner = () => {
@@ -25,7 +29,9 @@ const Banner = () => {
           border={'none'}
           titleMargin={3.5}
         />
-        <BannerImg />
+        <BannerImg>
+          <img src={banner_04} alt="우리 swap, 푸르게 푸르게" />
+        </BannerImg>
       </Container>
     </>
   );

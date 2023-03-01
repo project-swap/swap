@@ -13,25 +13,29 @@ import { GoLocation } from 'react-icons/go';
 import { ImSearch } from 'react-icons/im';
 import { BsPerson, BsChatLeftDots, BsBell } from 'react-icons/bs';
 
-interface IProps {
+interface Theme {
   themeMode: boolean;
   themeColorObject: {
     darkMain: string;
     darkNavAndFooter: string;
     darkLine: string;
     darkFont: string;
+    lightMain: string;
+    lightNavAndFooter: string;
     lightLine: string;
     lightFont: string;
   };
 }
 
-const NavContainer = styled.nav<IProps>`
+const NavContainer = styled.nav<Theme>`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   background-color: ${props =>
-    props.themeMode ? props.themeColorObject.darkNavAndFooter : 'white'};
+    props.themeMode
+      ? props.themeColorObject.darkNavAndFooter
+      : props.themeColorObject.lightNavAndFooter};
   border-bottom: ${props =>
     props.themeMode
       ? `solid ${props.themeColorObject.darkLine} 1px`
@@ -49,7 +53,8 @@ const MainNavBar = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 60rem;
-  height: 5rem;
+  height: 5.5rem;
+  padding-bottom: 1rem;
 `;
 const MainLogo = styled.div`
   width: 3rem;
@@ -62,7 +67,7 @@ const MainLinkBtnContainer = styled.div`
   justify-content: space-between;
   width: 10rem;
 `;
-const MainLinkBtn = styled.div<IProps>`
+const MainLinkBtn = styled.div<Theme>`
   font-size: 0.875rem;
   text-decoration: none;
   color: ${props =>
@@ -70,7 +75,7 @@ const MainLinkBtn = styled.div<IProps>`
       ? props.themeColorObject.darkFont
       : props.themeColorObject.lightFont};
 `;
-const LocationBox = styled.div<IProps>`
+const LocationBox = styled.div<Theme>`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -87,7 +92,7 @@ const TopBtnContainer = styled.div`
   align-items: center;
   gap: 1.875rem;
 `;
-const TopLinkBtn = styled.div<IProps>`
+const TopLinkBtn = styled.div<Theme>`
   font-size: 0.625rem;
   color: ${props =>
     props.themeMode
@@ -170,6 +175,14 @@ const NavBar = () => {
                   </span>
                 </Link>
               )}
+              {loginState ? (
+                <Link
+                  to="/profile"
+                  style={{ ...{ marginLeft: '1.75rem' }, ...linkStyle }}
+                >
+                  <span>프로필</span>
+                </Link>
+              ) : null}
             </TopLinkBtn>
           </TopBtnContainer>
         </TopNavBar>
@@ -178,15 +191,15 @@ const NavBar = () => {
             <MainLogo />
           </Link>
           <MainLinkBtnContainer>
-            <MainLinkBtn
-              themeMode={themeMode}
-              themeColorObject={themeColorObject}
-            >
-              <Link to="/product-list" style={linkStyle}>
+            <Link to="/product-list" style={linkStyle}>
+              <MainLinkBtn
+                themeMode={themeMode}
+                themeColorObject={themeColorObject}
+              >
                 교환/나눔
-              </Link>
-            </MainLinkBtn>
-            <Link to="/" style={linkStyle}>
+              </MainLinkBtn>
+            </Link>
+            <Link to="/WIP" style={linkStyle}>
               <MainLinkBtn
                 themeMode={themeMode}
                 themeColorObject={themeColorObject}

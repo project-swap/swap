@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import SectionTitle from './SectionTitle';
 import ProductImg from '../common/product_card/ProductImg';
+import { linkStyle } from '../../styles/linkStyle';
 // import SalesTitle from '../common/ProductCard/SalesTitle';
 
 import { useRecoilValue } from 'recoil';
 import { data, darkModeToggle } from '../../atoms/atoms';
+import { Link } from 'react-router-dom';
 
 interface IExchangeAndShareItem {
   darkMode: boolean;
@@ -38,13 +40,16 @@ const ExchangeAndShareItem = styled.div<IExchangeAndShareItem>`
 const ExchangeAndShareItemCategory = styled.div`
   margin-top: 0.5rem;
   margin-bottom: 0.3rem;
+  text-align: center;
+  font-weight: 600;
+  color: black;
 `;
 
 const ExchangeAndShareList = () => {
-  const firestoreData = useRecoilValue(data);
+  const postData = useRecoilValue(data);
   const darkMode = useRecoilValue(darkModeToggle);
 
-  const contents = firestoreData.map(content => {
+  const contents = postData.map(content => {
     return {
       postId: content.postId,
       title: content.title,
@@ -66,23 +71,26 @@ const ExchangeAndShareList = () => {
           titleName={'교환/나눔 물품 리스트'}
           border={''}
           titleMargin={0}
+          href={'/product-list'}
         />
         <ExchangeAndShareListContainer>
           {contents.map((content, index: number) => {
             return index < 6 ? (
-              <ExchangeAndShareItem darkMode={darkMode} key={index}>
-                <ProductImg
-                  url={content.imgUrl}
-                  width={'6rem'}
-                  height={'5rem'}
-                />
-                <ExchangeAndShareItemContents>
-                  <ExchangeAndShareItemCategory>
-                    {content.type}
-                  </ExchangeAndShareItemCategory>
-                  {/* <SalesTitle marginBottom={'0.4rem'} title={content.title} /> */}
-                </ExchangeAndShareItemContents>
-              </ExchangeAndShareItem>
+              <Link to={`/detail/${content.postId}`} style={linkStyle}>
+                <ExchangeAndShareItem darkMode={darkMode} key={index}>
+                  <ProductImg
+                    url={content.imgUrl}
+                    width={'6rem'}
+                    height={'5rem'}
+                  />
+                  <ExchangeAndShareItemContents>
+                    <ExchangeAndShareItemCategory>
+                      {content.type}
+                    </ExchangeAndShareItemCategory>
+                    {/* <SalesTitle marginBottom={'0.4rem'} title={content.title} /> */}
+                  </ExchangeAndShareItemContents>
+                </ExchangeAndShareItem>
+              </Link>
             ) : null;
           })}
         </ExchangeAndShareListContainer>

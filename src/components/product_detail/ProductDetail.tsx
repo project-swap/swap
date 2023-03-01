@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getTest } from '../../atoms/atoms';
+import { data } from '../../atoms/atoms';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import ProductDetailComponent from './ProductDetailComponent';
 import ProductImgList from './ProductImgList';
@@ -11,6 +11,7 @@ import PostInfo from './PostInfo';
 import SellerInfo from './SellerInfo';
 import Content from './Content';
 import BuyerMenuBar from './BuyerMenuBar';
+import Type from './Type';
 
 const StyledContentField = styled.div`
   display: flex;
@@ -21,6 +22,9 @@ const StyledContentField = styled.div`
 const StyledTitleField = styled.div`
   padding: 1.5rem 3.12rem;
   border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const StyledBtnBox = styled.div`
@@ -42,13 +46,17 @@ const StyledBtn = styled.button`
 
 const ProductDetail = () => {
   const [imageIndex, setImageIndex] = useState(0);
-  const data = useRecoilValue(getTest);
+  const productData = useRecoilValue(data);
   const { postId } = useParams();
 
-  const currentData = data.filter(item => item.postId === String(postId));
+  const currentDataArr = productData.filter(
+    item => item.postId === String(postId),
+  );
+
+  const currentData = currentDataArr[0];
 
   const increaseImgIndex = () => {
-    if (imageIndex === currentData[0].imgUrl.length - 1) {
+    if (imageIndex === currentData.imgUrl.length - 1) {
       setImageIndex(0);
     } else {
       setImageIndex(imageIndex + 1);
@@ -59,13 +67,13 @@ const ProductDetail = () => {
     if (imageIndex > 0) {
       setImageIndex(imageIndex - 1);
     } else {
-      setImageIndex(currentData[0].imgUrl.length - 1);
+      setImageIndex(currentData.imgUrl.length - 1);
     }
   };
 
   return (
     <ProductDetailComponent>
-      <ProductImgList url={currentData[0].imgUrl[imageIndex].url}>
+      <ProductImgList url={currentData.imgUrl[imageIndex].url}>
         <StyledBtnBox>
           <StyledBtn onClick={decreaseImgIndex}>
             <AiOutlineArrowLeft />
@@ -78,21 +86,21 @@ const ProductDetail = () => {
 
       <StyledContentField>
         <StyledTitleField>
-          <Title title={currentData[0].title} />
-          <PostInfo
-            convertDate={currentData[0].convertDate}
-            date={currentData[0].date}
-          />
+          <div>
+            <Title title={currentData.title} />
+            <PostInfo
+              convertDate={currentData.convertDate}
+              date={currentData.date}
+            />
+          </div>
+          <Type type={currentData.type} />
         </StyledTitleField>
-        <SellerInfo
-          name={currentData[0].name}
-          url={currentData[0].profileImg}
-        />
+        <SellerInfo name={currentData.name} url={currentData.profileImg} />
         <Content
-          content={currentData[0].content}
-          hash_tag={currentData[0].hash_tag}
+          content={currentData.content}
+          hash_tag={currentData.hash_tag}
         />
-        <BuyerMenuBar />
+        <BuyerMenuBar uid={currentData.uid} postId={currentData.postId} />
       </StyledContentField>
     </ProductDetailComponent>
   );

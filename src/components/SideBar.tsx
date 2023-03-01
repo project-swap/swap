@@ -31,26 +31,24 @@ const SideMenu = styled.section`
   }
 `;
 
+const linkAndText = [
+  { link: '/profile', text: '프로필' },
+  { link: '/locationsetting', text: '위치설정' },
+  { link: '/exchangehistory', text: '교환목록' },
+  { link: '/bookmark', text: '북마크' },
+  { link: '/report', text: '신고내역' },
+];
+
 const SideBar = () => {
   return (
     <SideMain>
       <h2>마이페이지</h2>
       <SideMenu>
-        <Link to="/profile" style={linkStyle}>
-          <h3 className="text">프로필</h3>
-        </Link>
-        <Link to="/locationsetting" style={linkStyle}>
-          <h3 className="text">위치설정</h3>
-        </Link>
-        <Link to="/exchangehistory" style={linkStyle}>
-          <h3 className="text">교환목록</h3>
-        </Link>
-        <Link to="/bookmark" style={linkStyle}>
-          <h3 className="text">북마크</h3>
-        </Link>
-        <Link to="/report" style={linkStyle}>
-          <h3>신고내역</h3>
-        </Link>
+        {linkAndText.map(el => (
+          <Link key={el.link} to={el.link} style={linkStyle}>
+            <h3>{el.text}</h3>
+          </Link>
+        ))}
       </SideMenu>
     </SideMain>
   );

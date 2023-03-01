@@ -4,11 +4,15 @@ import NavBar from '../common/NavBar';
 import ModalBox from '../ModalBox';
 import SocialBtn from './SocialBtn';
 import Footer from '../common/Footer';
+
 import { EntireAreaWrap } from '../common/PublicStyle';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { linkStyle } from '../../styles/linkStyle';
 import { BsGithub } from 'react-icons/bs';
+
+import { useRecoilValue } from 'recoil';
+import { themeColor, darkModeToggle } from '../../atoms/atoms';
 
 interface ILoginOrSignUpProps {
   title: string;
@@ -38,11 +42,19 @@ const LinkToReverse = styled.div`
 `;
 
 const LoginOrSignUp = ({ title, link }: ILoginOrSignUpProps) => {
+  const themeMode = useRecoilValue(darkModeToggle);
+  const themeColorObject = useRecoilValue(themeColor);
+
   return (
-    <EntireAreaWrap>
+    <EntireAreaWrap themeMode={themeMode} themeColorObject={themeColorObject}>
       <NavBar />
       <LoginOrSignUpPage>
-        <ModalBox width={'30'} height={'24'}>
+        <ModalBox
+          width={'30'}
+          height={'24'}
+          themeMode={themeMode}
+          themeColorObject={themeColorObject}
+        >
           <Title>{title}</Title>
           <SocialBtn
             background={'#fff'}
