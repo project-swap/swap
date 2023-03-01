@@ -3,11 +3,15 @@ import SideBar from '../../components/SideBar';
 import MainContainer from '../../components/common/MainContainer';
 import styled from 'styled-components';
 import NavBar from '../../components/common/NavBar';
+import { PageWrap } from './Profile';
 
 const SwapContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: -40rem auto;
+  justify-content: center;
+  align-items: center;
+  width: 70rem;
+  margin-top: 2rem;
+  border: 1px solid black;
 `;
 
 export const Title = styled.h3`
@@ -25,7 +29,7 @@ const Content = styled.h4`
 
 const ReportHistory = () => {
   return (
-    <>
+    <PageWrap>
       <NavBar />
       <SwapContainer>
         <SideBar />
@@ -36,7 +40,7 @@ const ReportHistory = () => {
           </Content>
         </MainContainer>
       </SwapContainer>
-    </>
+    </PageWrap>
   );
 };
 

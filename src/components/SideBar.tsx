@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { linkStyle } from '../styles/linkStyle';
 
-const SideMain = styled.main`
+const SideMain = styled.div`
   display: flex;
   background-color: #eaecef;
-  border: 1px solid black;
+  border-right: 1px solid black;
   width: 20rem;
   height: 43rem;
-  margin-left: 19.5rem;
-  position: relative;
-  top: 45rem;
+  flex-direction: column;
+  align-items: baseline;
   h2 {
     font-weight: 600;
     font-size: 1.5rem;
@@ -20,10 +19,6 @@ const SideMain = styled.main`
 `;
 
 const SideMenu = styled.section`
-  flex-direction: column;
-  margin-top: 7rem;
-  align-items: center;
-  position: absolute;
   width: 8rem;
   right: 10rem;
   line-height: 4rem;
@@ -36,26 +31,24 @@ const SideMenu = styled.section`
   }
 `;
 
+const linkAndText = [
+  { link: '/profile', text: '프로필' },
+  { link: '/locationsetting', text: '위치설정' },
+  { link: '/exchangehistory', text: '교환목록' },
+  { link: '/bookmark', text: '북마크' },
+  { link: '/report', text: '신고내역' },
+];
+
 const SideBar = () => {
   return (
     <SideMain>
       <h2>마이페이지</h2>
       <SideMenu>
-        <Link to="/profile" style={linkStyle}>
-          <h3 className="text">프로필</h3>
-        </Link>
-        <Link to="/locationsetting" style={linkStyle}>
-          <h3 className="text">위치설정</h3>
-        </Link>
-        <Link to="/exchangehistory" style={linkStyle}>
-          <h3 className="text">교환목록</h3>
-        </Link>
-        <Link to="/bookmark" style={linkStyle}>
-          <h3 className="text">북마크</h3>
-        </Link>
-        <Link to="/report" style={linkStyle}>
-          <h3>신고내역</h3>
-        </Link>
+        {linkAndText.map(el => (
+          <Link key={el.link} to={el.link} style={linkStyle}>
+            <h3>{el.text}</h3>
+          </Link>
+        ))}
       </SideMenu>
     </SideMain>
   );
