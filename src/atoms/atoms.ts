@@ -79,6 +79,11 @@ export const profileImage = atom({
   default: true,
 });
 
+export const ImgUrlArrState = atom<{ url: string; id: string }[]>({
+  key: 'ImgUrlArrState',
+  default: [],
+});
+
 export const userInfo = atom({
   key: 'userInfo',
   default: [],
