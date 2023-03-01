@@ -11,13 +11,6 @@ import {
 } from 'firebase/storage';
 
 import BackgroundBlur from './BackgroundBlur';
-// import {
-//   getStorage,
-//   ref,
-//   uploadBytesResumable,
-//   getDownloadURL,
-//   deleteObject,
-// } from 'firebase/storage';
 
 const Form = styled.form`
   display: flex;
@@ -209,7 +202,7 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
   };
 
   const readImageFile = (file: File): Promise<string | null> => {
-    return new Promise<string | null>(async resolve => {
+    return new Promise<string | null>(resolve => {
       // 파일을 읽어들이고 base64로 변환하는 코드
       const reader = new FileReader();
       reader.onload = (onLoadEvent: ProgressEvent<FileReader>) => {
@@ -225,7 +218,7 @@ const ProfileModal = ({ closeEvent }: CloseProps) => {
 
       // 파일 읽기 작업이 완료될때까지 기다리기
       try {
-        await new Promise<void>(resolve => {
+        new Promise<void>(resolve => {
           reader.onloadend = () => {
             resolve();
           };
