@@ -105,7 +105,7 @@ const RegisterProductImageUploadGroup = () => {
     const id = Date.now() / imgUpload.name.length;
     const imageRef = ref(storage, `images/${imgUpload.name}_${id}`);
 
-    uploadBytes(imageRef, imgUpload as any).then(snapshot => {
+    uploadBytes(imageRef, imgUpload as File).then(snapshot => {
       getDownloadURL(snapshot.ref).then(url => {
         setImgUrl(prev => [
           ...prev,

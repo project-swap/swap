@@ -11,13 +11,6 @@ import {
 } from 'firebase/storage';
 
 import BackgroundBlur from './BackgroundBlur';
-// import {
-//   getStorage,
-//   ref,
-//   uploadBytesResumable,
-//   getDownloadURL,
-//   deleteObject,
-// } from 'firebase/storage';
 
 const Form = styled.form`
   display: flex;
