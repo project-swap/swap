@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import MainContainer from '../../components/common/MainContainer';
 import SideBar from '../../components/SideBar';
@@ -82,7 +82,8 @@ const ProfileContainer = styled.section`
 const InputContainer = styled.section`
   position: relative;
   top: 2rem;
-  margin-left: 5rem;
+  display: flex;
+  justify-content: center;
   input {
     display: flex;
     justify-content: center;
@@ -93,7 +94,7 @@ const InputContainer = styled.section`
 
 const Line = styled.div`
   border: 1px solid black;
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
 `;
 
@@ -121,7 +122,7 @@ const Button = styled.button`
   height: 2rem;
   cursor: pointer;
   position: absolute;
-  right: 14.5rem;
+  left: 27rem;
   top: 1.2rem;
   &:hover {
     opacity: 0.7;
@@ -185,7 +186,7 @@ const Profile = () => {
     }
   };
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = event;
@@ -231,7 +232,7 @@ const Profile = () => {
                     {...register('nickName', {
                       required: true,
                       minLength: 2,
-                      maxLength: 5,
+                      maxLength: 12,
                       pattern: /([0-9a-zA-Z가-힣\x20])/i, //초성 미포함
                     })}
                   />
@@ -242,7 +243,7 @@ const Profile = () => {
                           case 'minLength':
                             return '최소 2글자 이상 입력해주세요.';
                           case 'maxLength':
-                            return '닉네임은 최대 5글자입니다.';
+                            return '닉네임은 최대 12글자입니다.';
                           case 'pattern':
                             return '초성은 불가능합니다.';
                           default:
