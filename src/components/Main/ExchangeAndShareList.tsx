@@ -5,7 +5,7 @@ import ProductImg from '../common/product_card/ProductImg';
 // import SalesTitle from '../common/ProductCard/SalesTitle';
 
 import { useRecoilValue } from 'recoil';
-import { getTest, darkModeToggle } from '../../atoms/atoms';
+import { data, darkModeToggle } from '../../atoms/atoms';
 
 interface IExchangeAndShareItem {
   darkMode: boolean;
@@ -41,10 +41,10 @@ const ExchangeAndShareItemCategory = styled.div`
 `;
 
 const ExchangeAndShareList = () => {
-  const data = useRecoilValue(getTest);
+  const firestoreData = useRecoilValue(data);
   const darkMode = useRecoilValue(darkModeToggle);
 
-  const contents = data.map(content => {
+  const contents = firestoreData.map(content => {
     return {
       postId: content.postId,
       title: content.title,

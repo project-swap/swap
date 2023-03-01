@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getTest } from '../../atoms/atoms';
+import { data } from '../../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 import SectionTitle from './SectionTitle';
 
@@ -41,7 +41,7 @@ interface HashTag {
 }
 
 const PopularHashTag = () => {
-  const mockData: DataTypes[] = useRecoilValue(getTest);
+  const firestoreData: DataTypes[] = useRecoilValue(data);
   const arrangeHashtag = (dataObj: DataTypes[]) => {
     const hashTagList: string[][] = dataObj.map((el: DataTypes) => el.hash_tag);
     const hashTagObj: HashTag = {};
@@ -65,7 +65,7 @@ const PopularHashTag = () => {
           titleMargin={2.56}
         />
         <PopularHashTagList>
-          {arrangeHashtag(mockData).map((el, index) => {
+          {arrangeHashtag(firestoreData).map((el, index) => {
             if (index < 5) {
               return (
                 <PopularHashTagItem key={el[0]}>

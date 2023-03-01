@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getTest, themeColor, darkModeToggle } from '../../atoms/atoms';
+import { data, themeColor, darkModeToggle } from '../../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 import SectionTitle from './SectionTitle';
 
@@ -45,7 +45,7 @@ const PopularPostItemTitle = styled.span`
 `;
 
 const PopularPostList = () => {
-  const mockData = useRecoilValue(getTest);
+  const firestoreData = useRecoilValue(data);
   const themeMode = useRecoilValue(darkModeToggle);
   const themeColorObject = useRecoilValue(themeColor);
   return (
@@ -57,7 +57,7 @@ const PopularPostList = () => {
           titleMargin={5}
         />
         <PopularPostListContainer>
-          {mockData.map((el, index: number) => {
+          {firestoreData.map((el, index: number) => {
             if (index < 7) {
               if (index === 6)
                 return (
