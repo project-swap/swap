@@ -6,11 +6,9 @@ import profile from '../../assets/logo/android-icon-144x144.png';
 import { useForm } from 'react-hook-form';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
-import { useRecoilState } from 'recoil';
-import { profileImage } from '../../atoms/atoms';
-import ProfileModal from '../../components/ProfileModal';
 import { getAuth, updateProfile } from 'firebase/auth';
 import NavBar, { sessionUserData } from '../../components/common/NavBar';
+import ProfileImageModal from './../../components/ProfileImageModal';
 
 export const PageWrap = styled.div`
   display: flex;
@@ -161,7 +159,7 @@ interface NickNameProps {
 }
 
 const Profile = () => {
-  const [isOpen, setIsOpen] = useRecoilState(profileImage);
+  const [isOpen, setIsOpen] = useState(true);
   const userObj = sessionUserData();
 
   const { providerId } = userObj.providerData[0];
@@ -209,7 +207,7 @@ const Profile = () => {
             {isOpen ? (
               <AiOutlinePlusCircle className="plus" onClick={handleIconClick} />
             ) : (
-              <ProfileModal closeEvent={handleIconClick} />
+              <ProfileImageModal closeEvent={handleIconClick} />
             )}
             <Info>
               <NickNameInput onChange={onChange}>{nickName}</NickNameInput>
