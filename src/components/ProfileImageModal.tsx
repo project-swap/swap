@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
-import { IoMdCloudUpload } from 'react-icons/io';
 import BackgroundBlur from './BackgroundBlur';
 import {
   deleteObject,
@@ -13,6 +12,8 @@ import {
 import { useRecoilState } from 'recoil';
 
 import { ImgUrlArrState } from './../atoms/atoms';
+import { FileTypes } from './register_product/RegisterProductImageUploadGroup';
+import ImageInput from './my_page/ImageInput';
 
 const Form = styled.form`
   display: flex;
@@ -42,10 +43,6 @@ const Modal = styled.section`
   position: fixed;
 `;
 
-const ImageUploadMessageContainer = styled.div`
-  display: flex;
-`;
-
 const ImageMessageContainer = styled.section`
   width: 110%;
   height: 5rem;
@@ -53,26 +50,6 @@ const ImageMessageContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-const ImageMessageInput = styled.input`
-  width: 100%;
-  height: 60%;
-  &::placeholder {
-    opacity: 0.6;
-  }
-`;
-
-const Label = styled.label`
-  .cloud {
-    display: flex;
-    align-items: center;
-    width: 200%;
-    height: 70%;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.5;
-    }
-  }
 `;
 
 const ImageInputUpload = styled.input`
@@ -141,27 +118,19 @@ const ButtonContainer = styled.div`
   display: flex;
   width: 6rem;
   justify-content: space-between;
-  button {
-    border-radius: 0.8rem;
-    background-color: #999;
-    &:hover {
-      cursor: pointer;
-      opacity: 0.7;
-    }
+`;
+
+const Button = styled.button`
+  border-radius: 0.8rem;
+  background-color: #999;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.7;
   }
 `;
 
 interface CloseProps {
   closeEvent: () => void;
-}
-
-interface FileTypes {
-  name: string;
-  lastModified: number;
-  lastModifiedDate?: string[];
-  size: number;
-  type: string;
-  webkitRelativePath: string;
 }
 
 const ProfileImageModal = ({ closeEvent }: CloseProps) => {
@@ -194,7 +163,7 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
     setImgUrl(copyListItems);
   };
 
-  const handleUpload = () => {
+  const uploadImageToStorage = () => {
     if (imgUpload === null) return;
 
     const id = Date.now() / imgUpload.name.length;
@@ -211,10 +180,43 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
     });
   };
 
+  const handleImageUpload = (files: File) => {
+    setImgUpload(files);
+    setImgName(files.name);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const id = Date.now() / files.name.length;
+      const imgUrlObj = {
+        url: URL.createObjectURL(files),
+        id: `images/${files.name}_${id}`,
+      };
+      setImgUrl(prevImgUrl => [...prevImgUrl, imgUrlObj]);
+    };
+    reader.readAsDataURL(files);
+  };
+
+  const handleDeleteButtonClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    if (confirm('사진을 삭제하시겠습니까?')) {
+      handleDelete(event);
+      setImgUpload(null);
+      setImgName('');
+    }
+  };
+
+  const handleImageInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (event.currentTarget.files !== null) {
+      const files = event.currentTarget.files[0];
+      handleImageUpload(files);
+    }
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!imgUpload) return;
-    handleUpload();
+    uploadImageToStorage();
   };
 
   const handleDelete = (event: React.MouseEvent<HTMLElement>) => {
@@ -224,7 +226,7 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
   };
 
   useEffect(() => {
-    if (imgUpload !== null) handleUpload();
+    if (imgUpload !== null) uploadImageToStorage();
   }, [setImgUrl]);
 
   return (
@@ -254,58 +256,19 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
         </ProfileWrap>
         <Form onSubmit={handleSubmit}>
           <ImageMessageContainer>
-            <ImageUploadMessageContainer>
-              <ImageMessageInput
-                id="image-message-input"
-                type="text"
-                placeholder={imgName || '이미지를 업로드하세요.'}
-                disabled
-              />
-              <Label htmlFor="file-input">
-                <IoMdCloudUpload className="cloud" />
-              </Label>
-            </ImageUploadMessageContainer>
-
+            <ImageInput imgName={imgName} />
             <ImageInputUpload
               id="file-input"
               type="file"
               accept="image/*" //이미지 파일만 허용
               required
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                if (event.currentTarget.files !== null) {
-                  const files = event.currentTarget.files[0];
-                  setImgUpload(files);
-                  setImgName(files.name);
-                  const reader = new FileReader();
-                  reader.onload = e => {
-                    const id = Date.now() / files.name.length;
-                    setImgUrl([
-                      {
-                        url: e.target?.result as string,
-                        id: `images/${files.name}_${id}`,
-                      },
-                    ]);
-                  };
-                  reader.readAsDataURL(files);
-                }
-              }}
+              onChange={handleImageInputChange}
             />
-
             <ButtonContainer>
-              <button
-                onClick={event => {
-                  event.preventDefault();
-                  if (confirm('사진을 삭제하시겠습니까?')) {
-                    handleDelete(event);
-                    setImgUpload(null);
-                    setImgName('');
-                  }
-                }}
-                id={imgUrl[0]?.id}
-              >
+              <Button onClick={handleDeleteButtonClick} id={imgUrl[0]?.id}>
                 삭제
-              </button>
-              <button type="submit">저장</button>
+              </Button>
+              <Button type="submit">저장</Button>
             </ButtonContainer>
           </ImageMessageContainer>
         </Form>
