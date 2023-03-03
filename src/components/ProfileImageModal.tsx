@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { IoClose } from 'react-icons/io5';
 import { IoMdCloudUpload } from 'react-icons/io';
 import BackgroundBlur from './BackgroundBlur';
-
 import {
   deleteObject,
   getDownloadURL,
@@ -57,7 +56,7 @@ const ImageMessageContainer = styled.section`
 `;
 const ImageMessageInput = styled.input`
   width: 100%;
-  height: 50%;
+  height: 60%;
   &::placeholder {
     opacity: 0.6;
   }
@@ -84,19 +83,29 @@ const ProfileWrap = styled.div`
   width: 8rem;
   height: 8rem;
   margin: 0 auto;
-`;
-
-const PreviewImgPositionWrap = styled.div<{ url: string }>`
   position: relative;
 `;
 
+const PreviewImgPositionWrap = styled.div<{ url: string }>`
+  &::before {
+    content: '';
+    background-image: url(${props => props.url});
+    background-size: cover;
+    opacity: 0.5;
+    position: absolute;
+    inset: 0;
+  }
+`;
+
 const PreviewOuterImage = styled.div<{ url?: string }>`
-  width: 8rem;
-  height: 8rem;
+  width: 7.9rem;
+  height: 7.9rem;
   background-image: url(${props => props.url});
   background-size: cover;
   background-position: center;
   position: absolute;
+  border-radius: 4rem;
+  border: 1px solid black;
 `;
 
 const ModalContainer = styled.div`
@@ -130,7 +139,16 @@ const Separator = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: center;
+  width: 6rem;
+  justify-content: space-between;
+  button {
+    border-radius: 0.8rem;
+    background-color: #999;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+  }
 `;
 
 interface CloseProps {
@@ -155,15 +173,15 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
   const [imgUpload, setImgUpload] = useState<FileTypes | null>(null);
   const [imgUrl, setImgUrl] = useRecoilState(ImgUrlArrState);
 
-  const takeItem = (index: number) => {
+  const startDrag = (index: number) => {
     itemBeDragged.current = index;
   };
 
-  const enterItemInLocationBeDragged = (index: number) => {
+  const setDropLocation = (index: number) => {
     locationBeDragged.current = index;
   };
 
-  const drop = () => {
+  const handleDrop = () => {
     const copyListItems = [...imgUrl];
     const itemBeDraggedContent = copyListItems[itemBeDragged.current];
 
@@ -176,7 +194,7 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
     setImgUrl(copyListItems);
   };
 
-  const upload = () => {
+  const handleUpload = () => {
     if (imgUpload === null) return;
 
     const id = Date.now() / imgUpload.name.length;
@@ -186,7 +204,7 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
       getDownloadURL(snapshot.ref).then(url => {
         setImgUrl(prev => [
           ...prev,
-          { url: url, id: `images/${imgUpload.name}_${id}` },
+          { url, id: `images/${imgUpload.name}_${id}` },
         ]);
         setImgUpload(null); // 이미지 업로드 후에는 imgUpload 상태를 null로 초기화
       });
@@ -196,18 +214,18 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!imgUpload) return;
-    upload();
+    handleUpload();
   };
 
-  const deleteImg = (event: React.MouseEvent<HTMLElement>) => {
+  const handleDelete = (event: React.MouseEvent<HTMLElement>) => {
     const deleteRef = ref(storage, event.currentTarget.id);
     deleteObject(deleteRef);
     setImgUrl(imgUrl.filter(obj => obj.id !== event.currentTarget.id));
   };
 
   useEffect(() => {
-    if (imgUpload !== null) upload();
-  }, [imgUpload, setImgUrl]);
+    if (imgUpload !== null) handleUpload();
+  }, [setImgUrl]);
 
   return (
     <>
@@ -224,9 +242,9 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
                 key={item.url}
                 url={item.url}
                 onDragOver={event => event.preventDefault()}
-                onDragStart={() => takeItem(index)}
-                onDragEnter={() => enterItemInLocationBeDragged(index)}
-                onDragEnd={drop}
+                onDragStart={() => startDrag(index)}
+                onDragEnter={() => setDropLocation(index)}
+                onDragEnd={handleDrop}
                 draggable
               >
                 <PreviewOuterImage url={item.url} />
@@ -255,8 +273,20 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
               required
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 if (event.currentTarget.files !== null) {
-                  setImgUpload(event.currentTarget.files[0]);
-                  setImgName(event.currentTarget.files[0].name);
+                  const files = event.currentTarget.files[0];
+                  setImgUpload(files);
+                  setImgName(files.name);
+                  const reader = new FileReader();
+                  reader.onload = e => {
+                    const id = Date.now() / files.name.length;
+                    setImgUrl([
+                      {
+                        url: e.target?.result as string,
+                        id: `images/${files.name}_${id}`,
+                      },
+                    ]);
+                  };
+                  reader.readAsDataURL(files);
                 }
               }}
             />
@@ -266,7 +296,7 @@ const ProfileImageModal = ({ closeEvent }: CloseProps) => {
                 onClick={event => {
                   event.preventDefault();
                   if (confirm('사진을 삭제하시겠습니까?')) {
-                    deleteImg(event);
+                    handleDelete(event);
                     setImgUpload(null);
                     setImgName('');
                   }
