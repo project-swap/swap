@@ -166,6 +166,19 @@ const Profile = () => {
 
   const [nickName, setNickName] = useState(userObj.displayName);
 
+  const getErrorMessage = (errorType: string | undefined) => {
+    switch (errorType) {
+      case 'minLength':
+        return '최소 2글자 이상 입력해주세요.';
+      case 'maxLength':
+        return '닉네임은 최대 12글자입니다.';
+      case 'pattern':
+        return '초성은 불가능합니다.';
+      default:
+        return null;
+    }
+  };
+
   const {
     register,
     handleSubmit,
@@ -236,18 +249,7 @@ const Profile = () => {
                   />
                   {errors ? (
                     <ErrorMessage>
-                      {(() => {
-                        switch (errors.nickName?.type) {
-                          case 'minLength':
-                            return '최소 2글자 이상 입력해주세요.';
-                          case 'maxLength':
-                            return '닉네임은 최대 12글자입니다.';
-                          case 'pattern':
-                            return '초성은 불가능합니다.';
-                          default:
-                            return null;
-                        }
-                      })()}
+                      {getErrorMessage(errors.nickName?.type)}
                     </ErrorMessage>
                   ) : null}
                   <Button type="submit">수정</Button>
