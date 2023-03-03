@@ -4,6 +4,7 @@ import ImageUpload from './ImageUpload';
 
 const ImageUploadMessageContainer = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const ImageMessageInput = styled.input`
@@ -14,7 +15,7 @@ const ImageMessageInput = styled.input`
   }
 `;
 
-const ImageInput = ({ imgName = '' }: { imgName: string }) => {
+const ImageNameInput = ({ imgName = '' }: { imgName: string }) => {
   return (
     <ImageUploadMessageContainer>
       <ImageMessageInput
@@ -28,4 +29,4 @@ const ImageInput = ({ imgName = '' }: { imgName: string }) => {
   );
 };
 
-export default ImageInput;
+export default ImageNameInput;
