@@ -1,10 +1,8 @@
 import { atom, selector } from 'recoil';
-import isApi from '../apis/api';
-import _ from 'lodash';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase';
 
-interface DataTypes {
+export interface DataTypes {
   postId: string;
   title: string;
   content: string;
@@ -18,20 +16,16 @@ interface DataTypes {
   profileImg: string;
 }
 
-export const getTest = selector({
-  key: 'get/firestore',
-  get: async () => {
-    const dataArr: DataTypes[] = [];
-    await isApi().then(dbData => {
-      const docs = dbData.docs;
-      docs.forEach(doc => {
-        const returnDoc = _.cloneDeep(doc.data()) as DataTypes;
-        dataArr.push(returnDoc);
-      });
-    });
-    return dataArr;
-  },
-});
+interface ThemeColor {
+  darkMain: string;
+  darkNavAndFooter: string;
+  darkLine: string;
+  darkFont: string;
+  lightMain: string;
+  lightNavAndFooter: string;
+  lightLine: string;
+  lightFont: string;
+}
 
 export const data = selector({
   key: 'defaultData',
@@ -45,28 +39,16 @@ export const data = selector({
       const returnDoc = item.data() as DataTypes;
       dataArr.push(returnDoc);
     });
-
     return dataArr;
   },
 });
-
-interface Test {
-  darkMain: string;
-  darkNavAndFooter: string;
-  darkLine: string;
-  darkFont: string;
-  lightMain: string;
-  lightNavAndFooter: string;
-  lightLine: string;
-  lightFont: string;
-}
 
 export const darkModeToggle = atom({
   key: 'darkMode',
   default: false,
 });
 
-export const themeColor = atom<Test>({
+export const themeColor = atom<ThemeColor>({
   key: 'themeColor',
   default: {
     darkMain: '#0D1117',
@@ -85,9 +67,16 @@ export const getMessage = atom<string[]>({
   default: [],
 });
 
+// Delete Atom state
 export const hashArrState = atom<string[]>({
   key: 'hashArrState',
   default: [],
+});
+
+// Delete Atom state
+export const profileImage = atom({
+  key: 'profileImage',
+  default: true,
 });
 
 export const ImgUrlArrState = atom<{ url: string; id: string }[]>({
@@ -98,11 +87,6 @@ export const ImgUrlArrState = atom<{ url: string; id: string }[]>({
 export const userInfo = atom({
   key: 'userInfo',
   default: [],
-});
-
-export const profileImage = atom({
-  key: 'profileImage',
-  default: true,
 });
 
 export const filterData = atom({

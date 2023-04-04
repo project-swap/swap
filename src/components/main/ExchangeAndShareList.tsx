@@ -76,8 +76,12 @@ const ExchangeAndShareList = () => {
         <ExchangeAndShareListContainer>
           {contents.map((content, index: number) => {
             return index < 6 ? (
-              <Link to={`/detail/${content.postId}`} style={linkStyle}>
-                <ExchangeAndShareItem darkMode={darkMode} key={index}>
+              <Link
+                key={index}
+                to={`/detail/${content.postId}`}
+                style={linkStyle}
+              >
+                <ExchangeAndShareItem darkMode={darkMode}>
                   <ProductImg
                     url={content.imgUrl}
                     width={'6rem'}

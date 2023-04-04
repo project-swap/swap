@@ -6,10 +6,6 @@ const MainContainerComponent = styled.div`
   background-color: #eaecef;
   width: 50rem;
   height: 43rem;
-  margin: 10rem auto;
-  margin-top: 2rem;
-  margin-right: 16rem;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
 `;

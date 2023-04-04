@@ -18,7 +18,6 @@ import SignUp from './SignUp';
 import Search from './Search';
 import Register from './Register';
 import SalesProduct from './SalesProduct';
-import Mypage from './my_page/Mypage';
 import Loader from './Loader';
 import UserChatting from './UserChatting';
 import ReportHistory from './my_page/ReportHistory';
@@ -48,7 +47,6 @@ const Router = () => {
             <Suspense fallback={<Loader />}>
               <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/mypage" element={<Mypage />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />

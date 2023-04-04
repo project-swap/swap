@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getTest } from '../../atoms/atoms';
+import { data } from '../../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 import SectionTitle from './SectionTitle';
 
@@ -22,31 +22,37 @@ const PopularHashTagItem = styled.li`
   cursor: pointer;
 `;
 
-interface FirestoreObj {
-  content: string;
-  data: string;
-  hash_tag: string[];
-  id: number;
-  name: string;
+interface DataTypes {
+  postId: string;
   title: string;
+  content: string;
+  hash_tag: string[];
+  name: string;
+  date: string;
+  type: string;
+  imgUrl: { url: string; id: string }[];
+  uid: string;
+  convertDate: string;
+  profileImg: string;
 }
 
-// any 타입 수정 해야함
+interface HashTag {
+  [hashtag: string]: number;
+}
+
 const PopularHashTag = () => {
-  const mockData: object[] = useRecoilValue(getTest);
-  const arrangeHashtag = (dataObj: any) => {
-    const hashTagList: any[] = dataObj.map((el: FirestoreObj) => el.hash_tag);
-    const hashTagObj: any = {};
+  const firestoreData: DataTypes[] = useRecoilValue(data);
+  const arrangeHashtag = (dataObj: DataTypes[]) => {
+    const hashTagList: string[][] = dataObj.map((el: DataTypes) => el.hash_tag);
+    const hashTagObj: HashTag = {};
     hashTagList.map(items => {
       items.map((el: string) => {
         hashTagObj[el] = (hashTagObj[el] || 0) + 1;
       });
     });
-    const hashTagSortList = Object.entries(hashTagObj).sort(
-      (a: [string, any], b: [string, any]) => {
-        return b[1] - a[1];
-      },
-    );
+    const hashTagSortList = Object.entries(hashTagObj).sort((a, b) => {
+      return b[1] - a[1];
+    });
     return hashTagSortList;
   };
 
@@ -59,7 +65,7 @@ const PopularHashTag = () => {
           titleMargin={2.56}
         />
         <PopularHashTagList>
-          {arrangeHashtag(mockData).map((el, index) => {
+          {arrangeHashtag(firestoreData).map((el, index) => {
             if (index < 5) {
               return (
                 <PopularHashTagItem key={el[0]}>

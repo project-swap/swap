@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getTest, themeColor, darkModeToggle } from '../../atoms/atoms';
+import { data, themeColor, darkModeToggle } from '../../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 import SectionTitle from './SectionTitle';
-import { Link } from 'react-router-dom';
-import { linkStyle } from '../../styles/linkStyle';
 
 interface Theme {
   themeMode: boolean;
@@ -47,7 +45,7 @@ const PopularPostItemTitle = styled.span`
 `;
 
 const PopularPostList = () => {
-  const mockData = useRecoilValue(getTest);
+  const firestoreData = useRecoilValue(data);
   const themeMode = useRecoilValue(darkModeToggle);
   const themeColorObject = useRecoilValue(themeColor);
   return (
@@ -59,36 +57,30 @@ const PopularPostList = () => {
           titleMargin={5}
         />
         <PopularPostListContainer>
-          {mockData.map((el, index: number) => {
+          {firestoreData.map((el, index: number) => {
             if (index < 7) {
               if (index === 6)
                 return (
-                  <Link to={`/detail/${el.postId}`} style={linkStyle}>
-                    <PopularPostItemBox
-                      themeMode={themeMode}
-                      themeColorObject={themeColorObject}
-                      key={el.postId}
-                      style={{ borderBottom: 'none' }}
-                    >
-                      <PopularPostItemId>{el.date}</PopularPostItemId>
-
-                      <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
-                    </PopularPostItemBox>
-                  </Link>
+                  <PopularPostItemBox
+                    themeMode={themeMode}
+                    themeColorObject={themeColorObject}
+                    key={el.postId}
+                    style={{ borderBottom: 'none' }}
+                  >
+                    <PopularPostItemId>{index + 1}</PopularPostItemId>
+                    <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
+                  </PopularPostItemBox>
                 );
               else
                 return (
-                  <Link to={`/detail/${el.postId}`} style={linkStyle}>
-                    <PopularPostItemBox
-                      themeMode={themeMode}
-                      themeColorObject={themeColorObject}
-                      key={el.postId}
-                    >
-                      <PopularPostItemId>{el.date}</PopularPostItemId>
-
-                      <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
-                    </PopularPostItemBox>
-                  </Link>
+                  <PopularPostItemBox
+                    themeMode={themeMode}
+                    themeColorObject={themeColorObject}
+                    key={el.postId}
+                  >
+                    <PopularPostItemId>{index + 1}</PopularPostItemId>
+                    <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
+                  </PopularPostItemBox>
                 );
             }
           })}

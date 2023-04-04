@@ -5,11 +5,14 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import SideBar from '../../components/SideBar';
 import MainContainer from '../../components/common/MainContainer';
 import NavBar from '../../components/common/NavBar';
+import { PageWrap } from './Profile';
 
 const LocationContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: -40rem auto;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  border: 1px solid black;
 `;
 
 const Title = styled.h3`
@@ -66,7 +69,7 @@ const CheckBoxContainer = styled.div`
 
 const LocationSetting = () => {
   return (
-    <>
+    <PageWrap>
       <NavBar />
       <LocationContainer>
         <SideBar />
@@ -78,16 +81,15 @@ const LocationSetting = () => {
               <h3>자취방[main]</h3>
               <h3>서울특별시 강남구 논현동</h3>
             </CheckBox>
-            <CheckBox>
-              <AiOutlinePlusCircle className="icon" size={30} />
-            </CheckBox>
-            <CheckBox>
-              <AiOutlinePlusCircle className="icon" size={30} />
-            </CheckBox>
+            {new Array(2).fill(1).map((_, i) => (
+              <CheckBox key={i}>
+                <AiOutlinePlusCircle className="icon" size={30} />
+              </CheckBox>
+            ))}
           </CheckBoxContainer>
         </MainContainer>
       </LocationContainer>
-    </>
+    </PageWrap>
   );
 };
 
