@@ -16,7 +16,7 @@ import { useRecoilState } from 'recoil';
 import { ImgUrlArrState } from '../../atoms/atoms';
 import { CgClose } from 'react-icons/cg';
 
-interface FileTypes {
+export interface FileTypes {
   name: string;
   lastModified: number;
   lastModifiedDate?: string[];

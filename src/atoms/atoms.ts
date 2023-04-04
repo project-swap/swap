@@ -2,7 +2,7 @@ import { atom, selector } from 'recoil';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase';
 
-interface DataTypes {
+export interface DataTypes {
   postId: string;
   title: string;
   content: string;
