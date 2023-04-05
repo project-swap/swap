@@ -59,7 +59,9 @@ const SocialBtn = ({ background, color, icon, name }: ISocialBtn) => {
             navigate(-1);
           })
           .catch(error => {
-            console.log(error);
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
           });
       })
       .catch(error => {
