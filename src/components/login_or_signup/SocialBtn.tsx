@@ -61,7 +61,8 @@ const SocialBtn = ({ background, color, icon, name }: ISocialBtn) => {
           .catch(error => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
+            console.log(errorCode);
+            console.log(errorMessage);
           });
       })
       .catch(error => {
