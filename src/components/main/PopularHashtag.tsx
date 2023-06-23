@@ -63,6 +63,7 @@ const PopularHashTag = () => {
           titleName={'인기 해시태그'}
           border={'none'}
           titleMargin={2.56}
+          href={'/product-list'}
         />
         <PopularHashTagList>
           {arrangeHashtag(firestoreData).map((el, index) => {

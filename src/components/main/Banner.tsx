@@ -28,6 +28,7 @@ const Banner = () => {
           titleName={'캠패인 배너'}
           border={'none'}
           titleMargin={3.5}
+          href={'/WIP'}
         />
         <BannerImg>
           <img src={banner_04} alt="우리 swap, 푸르게 푸르게" />

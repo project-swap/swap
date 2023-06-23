@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { data, themeColor, darkModeToggle } from '../../atoms/atoms';
 import { useRecoilValue } from 'recoil';
 import SectionTitle from './SectionTitle';
+import { Link } from 'react-router-dom';
+import { linkStyle } from '../../styles/linkStyle';
 
 interface Theme {
   themeMode: boolean;
@@ -55,6 +57,7 @@ const PopularPostList = () => {
           titleName={'인기 게시글 탐색'}
           border={'none'}
           titleMargin={5}
+          href={'/product-list'}
         />
         <PopularPostListContainer>
           {firestoreData.map((el, index: number) => {
@@ -68,7 +71,12 @@ const PopularPostList = () => {
                     style={{ borderBottom: 'none' }}
                   >
                     <PopularPostItemId>{index + 1}</PopularPostItemId>
-                    <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
+                    <Link
+                      to={`/detail/${el.postId}`}
+                      onClick={() => console.log(el.postId)}
+                    >
+                      <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
+                    </Link>
                   </PopularPostItemBox>
                 );
               else
@@ -79,7 +87,13 @@ const PopularPostList = () => {
                     key={el.postId}
                   >
                     <PopularPostItemId>{index + 1}</PopularPostItemId>
-                    <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
+                    <Link
+                      style={linkStyle}
+                      to={`/detail/${el.postId}`}
+                      onClick={() => console.log(el.postId)}
+                    >
+                      <PopularPostItemTitle>{el.title}</PopularPostItemTitle>
+                    </Link>
                   </PopularPostItemBox>
                 );
             }
